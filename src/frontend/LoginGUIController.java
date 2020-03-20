@@ -13,7 +13,9 @@ import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.control.Button;
 import javafx.scene.control.Hyperlink;
+import javafx.scene.image.Image;
 import javafx.scene.input.MouseEvent;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
@@ -27,15 +29,17 @@ public class LoginGUIController extends Application {
 
 	@FXML
 	private Hyperlink hlinkCreateAccount;
-
 	@FXML
 	private JFXTextField txtUsername;
-
 	@FXML
 	private JFXPasswordField txtPassword;
-
 	@FXML
 	private JFXButton btnLogin;
+	@FXML
+	private Button btnMinimize;
+	@FXML
+	private Button btnClose;
+
 
 	private double xoffset = 0;
 	private double yoffset = 0;
@@ -45,7 +49,8 @@ public class LoginGUIController extends Application {
 
 		Parent rootLogin = FXMLLoader.load(LoginGUIController.class.getResource("../frontend/loginGUI.fxml"));
 		Scene sceneLogin = new Scene(rootLogin);
-
+		
+		stageLogin.getIcons().add(new Image(LoginGUIController.class.getResourceAsStream("../frontend/images/bg_home_link.png")));
 		stageLogin.setScene(sceneLogin);
 		stageLogin.setResizable(false);
 		stageLogin.setAlwaysOnTop(true);
@@ -110,7 +115,22 @@ public class LoginGUIController extends Application {
 			}
 		});
 		/***************************************************************/
-
 	}
 
+
+	@FXML
+	void closeWindow(ActionEvent event) {
+		 Stage stage = (Stage) btnClose.getScene().getWindow();
+		 stage.close();
+	}
+
+	@FXML
+	void minimizeWindow(ActionEvent event) {
+		 Stage stage = (Stage) btnClose.getScene().getWindow();
+		 stage.setIconified(true);
+	}
+
+
 }
+
+
