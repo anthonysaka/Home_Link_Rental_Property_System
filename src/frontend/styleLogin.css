@@ -1,0 +1,10 @@
+#btnClose {
+	-fx-graphic: url('closeIcon1.png');
+	-fx-background-color:  #F5F5F5;
+}
+
+#btnMinimize{
+	-fx-graphic: url('minusIcon.png');
+	-fx-background-color:  #F5F5F5;
+}
+
