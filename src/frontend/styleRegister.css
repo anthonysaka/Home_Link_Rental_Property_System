@@ -1,4 +1,10 @@
+
 .Button :hover {
     -fx-background-color: #e53935;
     -fx-background-radius: 90;
 }
+
+#btnClose {
+	-fx-graphic: url('closeIcon.png');
+	-fx-background-color: #F5F5F5;
+	}
