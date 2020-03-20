@@ -1,0 +1,119 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import com.jfoenix.controls.JFXButton?>
+<?import com.jfoenix.controls.JFXPasswordField?>
+<?import com.jfoenix.controls.JFXTextField?>
+<?import de.jensd.fx.glyphs.materialdesignicons.MaterialDesignIconView?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.Cursor?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
+
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="510.0" prefWidth="750.0" style="-fx-background-color: F5F5F5;" stylesheets="@styleRegister.css" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1">
+   <children>
+      <Text layoutX="121.0" layoutY="61.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Create your Home Link Account" AnchorPane.leftAnchor="121.0" AnchorPane.rightAnchor="120.5439453125" AnchorPane.topAnchor="24.310546875">
+         <font>
+            <Font name="System Bold" size="34.0" />
+         </font>
+      </Text>
+      <VBox layoutX="110.0" layoutY="108.0" prefHeight="285.0" prefWidth="531.0" AnchorPane.bottomAnchor="107.0" AnchorPane.leftAnchor="110.0" AnchorPane.topAnchor="108.0">
+         <children>
+            <HBox alignment="CENTER_LEFT" prefHeight="45.0" prefWidth="440.0">
+               <children>
+                  <MaterialDesignIconView glyphName="ACCOUNT_BOX" glyphStyle="-fx" size="2.5em" />
+                  <JFXTextField focusColor="#e53935" maxWidth="527.0" minWidth="500.0" prefHeight="40.0" prefWidth="525.0" promptText="Name" style="-fx-background-color: F5F5F5;" unFocusColor="#ffc107">
+                     <font>
+                        <Font size="18.0" />
+                     </font>
+                     <HBox.margin>
+                        <Insets left="5.0" />
+                     </HBox.margin>
+                  </JFXTextField>
+               </children>
+            </HBox>
+            <HBox alignment="CENTER_LEFT" layoutX="10.0" layoutY="10.0" prefHeight="45.0" prefWidth="440.0">
+               <children>
+                  <MaterialDesignIconView glyphName="ACCOUNT_BOX_OUTLINE" size="2.5em" />
+                  <JFXTextField focusColor="#e53935" maxWidth="515.0" minWidth="500.0" prefHeight="40.0" prefWidth="515.0" promptText="Lastname" style="-fx-background-color: F5F5F5;" unFocusColor="#ffc107">
+                     <font>
+                        <Font size="18.0" />
+                     </font>
+                     <HBox.margin>
+                        <Insets left="5.0" />
+                     </HBox.margin>
+                  </JFXTextField>
+               </children>
+            </HBox>
+            <HBox alignment="CENTER_LEFT" prefHeight="45.0" prefWidth="440.0">
+               <children>
+                  <MaterialDesignIconView glyphName="ACCOUNT" size="2.5em" />
+                  <JFXTextField focusColor="#e53935" maxWidth="525.0" minWidth="500.0" prefHeight="40.0" prefWidth="525.0" promptText="Username" style="-fx-background-color: F5F5F5;" unFocusColor="#ffc107">
+                     <font>
+                        <Font size="18.0" />
+                     </font>
+                     <HBox.margin>
+                        <Insets left="5.0" />
+                     </HBox.margin>
+                  </JFXTextField>
+               </children>
+            </HBox>
+            <HBox alignment="CENTER_LEFT" prefHeight="45.0" prefWidth="440.0">
+               <children>
+                  <MaterialDesignIconView glyphName="EMAIL" size="2.5em" />
+                  <JFXTextField focusColor="#e53935" maxWidth="514.0" minWidth="500.0" prefHeight="40.0" prefWidth="525.0" promptText="Email Address" style="-fx-background-color: F5F5F5;" unFocusColor="#ffc107">
+                     <font>
+                        <Font size="18.0" />
+                     </font>
+                     <HBox.margin>
+                        <Insets left="5.0" />
+                     </HBox.margin>
+                  </JFXTextField>
+               </children>
+            </HBox>
+            <HBox alignment="CENTER_LEFT" prefHeight="45.0" prefWidth="440.0">
+               <children>
+                  <MaterialDesignIconView glyphName="LOCK_OPEN" size="2.5em" />
+                  <JFXPasswordField focusColor="#e53935" maxWidth="493.0" minWidth="500.0" prefHeight="37.0" prefWidth="500.0" promptText="Password" unFocusColor="#ffc107">
+                     <font>
+                        <Font size="18.0" />
+                     </font>
+                     <HBox.margin>
+                        <Insets left="5.0" />
+                     </HBox.margin>
+                  </JFXPasswordField>
+               </children>
+            </HBox>
+            <HBox alignment="CENTER_LEFT" prefHeight="45.0" prefWidth="440.0">
+               <children>
+                  <MaterialDesignIconView glyphName="LOCK" size="2.5em" />
+                  <JFXPasswordField focusColor="#e53935" maxWidth="493.0" minWidth="500.0" prefHeight="37.0" prefWidth="500.0" promptText="Confirm Password" unFocusColor="#ffc107">
+                     <font>
+                        <Font size="18.0" />
+                     </font>
+                     <HBox.margin>
+                        <Insets left="5.0" />
+                     </HBox.margin>
+                  </JFXPasswordField>
+               </children>
+            </HBox>
+         </children>
+      </VBox>
+      <JFXButton contentDisplay="CENTER" layoutX="270.0" layoutY="409.0" prefHeight="39.0" prefWidth="210.0" style="-fx-background-color: #ffc107; -fx-background-radius: 90;" styleClass="Button" text="Sign Up">
+         <font>
+            <Font name="System Bold" size="18.0" />
+         </font>
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor>
+      </JFXButton>
+      <Text layoutX="125.0" layoutY="479.0" strokeType="OUTSIDE" strokeWidth="0.0" text="By licking the Sign Up button, you agree to our Terms &amp; Conditions, and Privacy Policy.">
+         <font>
+            <Font size="13.0" />
+         </font>
+      </Text>
+   </children>
+</AnchorPane>

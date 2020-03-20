@@ -1,0 +1,4 @@
+.Button :hover {
+    -fx-background-color: #e53935;
+    -fx-background-radius: 90;
+}
