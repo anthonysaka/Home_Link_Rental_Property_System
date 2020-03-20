@@ -12,8 +12,7 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="510.0" prefWidth="750.0" style="-fx-background-color: F5F5F5;" stylesheets="@styleRegister.css" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="510.0" prefWidth="750.0" style="-fx-background-color: F5F5F5;" stylesheets="@styleRegister.css" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="frontend.RegisterGUIController">
    <children>
       <Text layoutX="121.0" layoutY="61.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Create your Home Link Account" AnchorPane.leftAnchor="121.0" AnchorPane.rightAnchor="120.5439453125" AnchorPane.topAnchor="24.310546875">
          <font>
@@ -24,7 +23,7 @@
          <children>
             <HBox alignment="CENTER_LEFT" prefHeight="45.0" prefWidth="440.0">
                <children>
-                  <MaterialDesignIconView glyphName="ACCOUNT_BOX" glyphStyle="-fx" size="2.5em" />
+                  <MaterialDesignIconView glyphName="ACCOUNT_BOX" size="2.5em" />
                   <JFXTextField focusColor="#e53935" maxWidth="527.0" minWidth="500.0" prefHeight="40.0" prefWidth="525.0" promptText="Name" style="-fx-background-color: F5F5F5;" unFocusColor="#ffc107">
                      <font>
                         <Font size="18.0" />
@@ -102,7 +101,7 @@
             </HBox>
          </children>
       </VBox>
-      <JFXButton contentDisplay="CENTER" layoutX="270.0" layoutY="409.0" prefHeight="39.0" prefWidth="210.0" style="-fx-background-color: #ffc107; -fx-background-radius: 90;" styleClass="Button" text="Sign Up">
+      <JFXButton fx:id="btnSignUp" contentDisplay="CENTER" layoutX="270.0" layoutY="409.0" onAction="#setRegister" prefHeight="39.0" prefWidth="210.0" style="-fx-background-color: #ffc107; -fx-background-radius: 90;" styleClass="Button" text="Sign Up">
          <font>
             <Font name="System Bold" size="18.0" />
          </font>
@@ -110,7 +109,7 @@
             <Cursor fx:constant="HAND" />
          </cursor>
       </JFXButton>
-      <Text layoutX="125.0" layoutY="479.0" strokeType="OUTSIDE" strokeWidth="0.0" text="By licking the Sign Up button, you agree to our Terms &amp; Conditions, and Privacy Policy.">
+      <Text layoutX="125.0" layoutY="479.0" strokeType="OUTSIDE" strokeWidth="0.0" text="By clicking the Sign Up button, you agree to our Terms &amp; Conditions, and Privacy Policy.">
          <font>
             <Font size="13.0" />
          </font>
