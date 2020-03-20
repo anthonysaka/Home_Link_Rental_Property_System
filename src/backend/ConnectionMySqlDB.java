@@ -1,9 +1,12 @@
-
 package backend;
 
 import java.sql.DriverManager;
 import java.sql.SQLException;
 
+/**
+ * @developed_by Anthony Sakamoto
+ *
+ */
 public class ConnectionMySqlDB {
 	
 
