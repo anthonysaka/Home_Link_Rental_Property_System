@@ -23,7 +23,7 @@
          <GaussianBlur radius="3.7" />
       </effect>
    </ImageView>
-   <AnchorPane layoutY="42.0" prefHeight="678.0" prefWidth="430.0" style="-fx-background-color: rgba(0,0,0,0.75);" AnchorPane.bottomAnchor="15.0" AnchorPane.leftAnchor="15.0" AnchorPane.topAnchor="15.0">
+   <AnchorPane layoutY="42.0" prefHeight="678.0" prefWidth="430.0" style="-fx-background-color: rgba(0,0,0,0.75);" AnchorPane.bottomAnchor="8.0" AnchorPane.leftAnchor="10.0" AnchorPane.topAnchor="8.0">
       <Label alignment="CENTER" contentDisplay="CENTER" layoutX="129.0" layoutY="39.0" nodeOrientation="LEFT_TO_RIGHT" prefWidth="230.0" text="WELCOME" textAlignment="CENTER" textFill="WHITE" AnchorPane.leftAnchor="100.0" AnchorPane.rightAnchor="100.0">
          <font>
             <Font name="System Bold" size="30.0" />
