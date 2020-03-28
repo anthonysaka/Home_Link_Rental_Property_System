@@ -52,7 +52,7 @@
             <HBox alignment="CENTER_LEFT" prefHeight="100.0" prefWidth="200.0">
                <children>
                   <MaterialDesignIconView glyphName="GENDER_MALE_FEMALE" size="2.5em" />
-                  <JFXComboBox prefHeight="31.0" prefWidth="195.0" promptText="Gender">
+                  <JFXComboBox fx:id="cbxGender" prefHeight="31.0" prefWidth="195.0" promptText="Gender">
                      <HBox.margin>
                         <Insets left="5.0" />
                      </HBox.margin>
@@ -62,7 +62,7 @@
                         <Insets left="60.0" />
                      </HBox.margin>
                   </MaterialDesignIconView>
-                  <JFXComboBox prefHeight="31.0" prefWidth="195.0" promptText="Category">
+                  <JFXComboBox fx:id="cbxCategoryAccount" prefHeight="31.0" prefWidth="195.0" promptText="Category">
                      <HBox.margin>
                         <Insets left="5.0" />
                      </HBox.margin>
