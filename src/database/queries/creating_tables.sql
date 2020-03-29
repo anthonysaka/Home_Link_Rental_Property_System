@@ -1,4 +1,5 @@
 USE home_link_db;
+select * from t_user;
 CREATE TABLE t_user(
     -- ATTRIBUTES --
 	id					INT NOT NULL AUTO_INCREMENT,
@@ -10,8 +11,8 @@ CREATE TABLE t_user(
 	gender				VARCHAR(15) NULL,
 	country_location_id INT NULL,
 	telephone_number 	VARCHAR(20) NULL,
-	`type`				INT NOT NULL,
-	`status` 			INT NOT NULL DEFAULT(1),
+	`type`				VARCHAR(15) NOT NULL,
+	`status` 			VARCHAR(15) NOT NULL DEFAULT(1),
 	created_date 		DATETIME NOT NULL DEFAULT(current_date()),
      -- DECLARATION CONSTRAINS --
     PRIMARY KEY (id),

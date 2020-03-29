@@ -1,5 +1,6 @@
 package backend;
 
+import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
 
@@ -15,22 +16,24 @@ public class ConnectionMySqlDB {
 	private final String password_db = "nose@MySql99";
 	private final String url_db = "jdbc:mysql://localhost:3306/" + name_db;
 
-	private ConnectionMySqlDB connection = null;
+	private Connection connect = null;
 
 	/* Method to get database connection */
-	public ConnectionMySqlDB getConnectionMySqlDB()
+	public Connection getConnectionMySqlDB()
 	{
 		try {
-			connection = (ConnectionMySqlDB) DriverManager.getConnection(this.url_db, this.user_db, this.password_db);
-			if (connection != null) {
-				System.out.println("[success] Connected to the database: "+name_db);
+			//Class.forName("com.mysql.jdbc.Driver");
+			connect = DriverManager.getConnection(url_db, user_db, password_db);
+			if (connect != null) {
+				System.out.println("[success] Connected to the database: "+ name_db);
 			}
 		} catch (SQLException e) {
 			System.out.println("[failed] An error occurred. Database Connection Failed!");
 			e.printStackTrace();
 		}
-		return connection; //Return an instance of database connection
+		return connect; //Return an instance of database connection
 	}
+	
 
 
 }

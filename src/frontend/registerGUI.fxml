@@ -26,7 +26,7 @@
             <HBox alignment="CENTER_LEFT" prefHeight="45.0" prefWidth="440.0">
                <children>
                   <MaterialDesignIconView glyphName="ACCOUNT_BOX" size="2.5em" />
-                  <JFXTextField focusColor="#e53935" maxWidth="527.0" minWidth="500.0" prefHeight="40.0" prefWidth="525.0" promptText="Name" style="-fx-background-color: F5F5F5;" unFocusColor="#ffc107">
+                  <JFXTextField fx:id="txtName" focusColor="#e53935" maxWidth="527.0" minWidth="500.0" prefHeight="40.0" prefWidth="525.0" promptText="Name" style="-fx-background-color: F5F5F5;" unFocusColor="#ffc107">
                      <font>
                         <Font size="18.0" />
                      </font>
@@ -39,7 +39,7 @@
             <HBox alignment="CENTER_LEFT" layoutX="10.0" layoutY="10.0" prefHeight="45.0" prefWidth="440.0">
                <children>
                   <MaterialDesignIconView glyphName="ACCOUNT_BOX_OUTLINE" size="2.5em" />
-                  <JFXTextField focusColor="#e53935" maxWidth="515.0" minWidth="500.0" prefHeight="40.0" prefWidth="515.0" promptText="Lastname" style="-fx-background-color: F5F5F5;" unFocusColor="#ffc107">
+                  <JFXTextField fx:id="txtLastname" focusColor="#e53935" maxWidth="515.0" minWidth="500.0" prefHeight="40.0" prefWidth="515.0" promptText="Lastname" style="-fx-background-color: F5F5F5;" unFocusColor="#ffc107">
                      <font>
                         <Font size="18.0" />
                      </font>
@@ -72,7 +72,7 @@
             <HBox alignment="CENTER_LEFT" prefHeight="45.0" prefWidth="440.0">
                <children>
                   <MaterialDesignIconView glyphName="ACCOUNT" size="2.5em" />
-                  <JFXTextField focusColor="#e53935" maxWidth="525.0" minWidth="500.0" prefHeight="40.0" prefWidth="525.0" promptText="Username" style="-fx-background-color: F5F5F5;" unFocusColor="#ffc107">
+                  <JFXTextField fx:id="txtUsername" focusColor="#e53935" maxWidth="525.0" minWidth="500.0" prefHeight="40.0" prefWidth="525.0" promptText="Username" style="-fx-background-color: F5F5F5;" unFocusColor="#ffc107">
                      <font>
                         <Font size="18.0" />
                      </font>
@@ -85,7 +85,7 @@
             <HBox alignment="CENTER_LEFT" prefHeight="45.0" prefWidth="440.0">
                <children>
                   <MaterialDesignIconView glyphName="EMAIL" size="2.5em" />
-                  <JFXTextField focusColor="#e53935" maxWidth="514.0" minWidth="500.0" prefHeight="40.0" prefWidth="525.0" promptText="Email Address" style="-fx-background-color: F5F5F5;" unFocusColor="#ffc107">
+                  <JFXTextField fx:id="txtEmail" focusColor="#e53935" maxWidth="514.0" minWidth="500.0" prefHeight="40.0" prefWidth="525.0" promptText="Email Address" style="-fx-background-color: F5F5F5;" unFocusColor="#ffc107">
                      <font>
                         <Font size="18.0" />
                      </font>
@@ -98,7 +98,7 @@
             <HBox alignment="CENTER_LEFT" prefHeight="45.0" prefWidth="440.0">
                <children>
                   <MaterialDesignIconView glyphName="LOCK_OPEN" size="2.5em" />
-                  <JFXPasswordField focusColor="#e53935" maxWidth="493.0" minWidth="500.0" prefHeight="37.0" prefWidth="500.0" promptText="Password" unFocusColor="#ffc107">
+                  <JFXPasswordField fx:id="txtPassword" focusColor="#e53935" maxWidth="493.0" minWidth="500.0" prefHeight="37.0" prefWidth="500.0" promptText="Password" unFocusColor="#ffc107">
                      <font>
                         <Font size="18.0" />
                      </font>
@@ -111,7 +111,7 @@
             <HBox alignment="CENTER_LEFT" prefHeight="45.0" prefWidth="440.0">
                <children>
                   <MaterialDesignIconView glyphName="LOCK" size="2.5em" />
-                  <JFXPasswordField focusColor="#e53935" maxWidth="493.0" minWidth="500.0" prefHeight="37.0" prefWidth="500.0" promptText="Confirm Password" unFocusColor="#ffc107">
+                  <JFXPasswordField fx:id="txtConfirmPass" focusColor="#e53935" maxWidth="493.0" minWidth="500.0" prefHeight="37.0" prefWidth="500.0" promptText="Confirm Password" unFocusColor="#ffc107">
                      <font>
                         <Font size="18.0" />
                      </font>
