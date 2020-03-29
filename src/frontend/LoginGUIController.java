@@ -53,7 +53,7 @@ public class LoginGUIController extends Application {
 		stageLogin.getIcons().add(new Image(LoginGUIController.class.getResourceAsStream("../frontend/images/bg_home_link.png")));
 		stageLogin.setScene(sceneLogin);
 		stageLogin.setResizable(false);
-		stageLogin.setAlwaysOnTop(true);
+		//stageLogin.setAlwaysOnTop(true);
 		stageLogin.initStyle(StageStyle.TRANSPARENT);
 		stageLogin.show();
 
@@ -75,7 +75,6 @@ public class LoginGUIController extends Application {
 			}
 		});
 		/***************************************************************/
-
 	}
 
 	/********
@@ -92,9 +91,9 @@ public class LoginGUIController extends Application {
 
 		stageRegister.setScene(sceneRegister);
 		stageRegister.setResizable(false);
-		stageRegister.setAlwaysOnTop(true);
+		//stageRegister.setAlwaysOnTop(true);
 		stageRegister.initStyle(StageStyle.TRANSPARENT);
-		stageRegister.initModality(Modality.APPLICATION_MODAL);
+	//	stageRegister.initModality(Modality.APPLICATION_MODAL);
 		stageRegister.show();
 
 		/*******

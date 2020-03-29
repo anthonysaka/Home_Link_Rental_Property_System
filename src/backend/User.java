@@ -8,21 +8,33 @@ public class User {
 	/**
 	 * This class, represent user table on database
 	 */
-
+	
 	private int id;
-	private String username;
-	private String email;
-	private String password;
 	private String name;
 	private String lastname;
 	private String gender;
+	private String type;
+	private String username;
+	private String email;
+	private String password;
+	private String status;
 	private int country_location_id;
 	private String telephone_number;
-	private int type_id;
-	private int status_id;
 	private String created_date;
+	
 
-
+	public User(String name, String lastname, String gender, String type, String username, String email, String password,
+			String created_date) {
+		super();
+		this.name = name;
+		this.lastname = lastname;
+		this.gender = gender;
+		this.type = type;
+		this.username = username;
+		this.email = email;
+		this.password = password;
+		this.created_date = created_date;
+	}
 	/*** Gets and Sets ***/
 
 	public int getId() {
@@ -52,11 +64,11 @@ public class User {
 	public String getTelephone_number() {
 		return telephone_number;
 	}
-	public int getType_id() {
-		return type_id;
+	public String getType() {
+		return type;
 	}
-	public int getStatus_id() {
-		return status_id;
+	public String getStatus() {
+		return status;
 	}
 	public String getCreated_date() {
 		return created_date;
@@ -88,11 +100,11 @@ public class User {
 	public void setTelephone_number(String telephone_number) {
 		this.telephone_number = telephone_number;
 	}
-	public void setType_id(int type_id) {
-		this.type_id = type_id;
+	public void settype(String type) {
+		this.type = type;
 	}
-	public void setStatus_id(int status_id) {
-		this.status_id = status_id;
+	public void setstatus(String status) {
+		this.status = status;
 	}
 	public void setCreated_date(String created_date) {
 		this.created_date = created_date;
