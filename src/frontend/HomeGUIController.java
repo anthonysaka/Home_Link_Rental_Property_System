@@ -61,7 +61,7 @@ public class HomeGUIController extends Application {
 				stageLogin.setY(event.getScreenY() + yoffset);
 			}
 		});
-		/***************************************************************/
+		/******************* ********************************************/
 
 	}
     
