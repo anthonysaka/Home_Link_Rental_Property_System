@@ -2,7 +2,13 @@
 
 <?import com.jfoenix.controls.JFXButton?>
 <?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.ScrollPane?>
+<?import javafx.scene.control.Spinner?>
 <?import javafx.scene.control.TextField?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.Pane?>
@@ -10,8 +16,8 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<AnchorPane maxHeight="720.0" maxWidth="1280.0" prefHeight="720.0" prefWidth="1280.0" stylesheets="@styleHome.css" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1">
-   <HBox layoutX="202.0" prefHeight="100.0" prefWidth="1080.0">
+<AnchorPane maxHeight="720.0" maxWidth="1280.0" prefHeight="720.0" prefWidth="1280.0" stylesheets="@styleHome.css" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="frontend.HomeGUIController">
+   <HBox layoutX="188.0" prefHeight="100.0" prefWidth="1000.0">
       <AnchorPane prefHeight="100.0" prefWidth="250.0">
          <TextField layoutX="25.0" layoutY="35.0" prefHeight="30.0" prefWidth="200.0" promptText="Anywhere" style="-fx-background-color: #e0e0e0;" />
          <Text layoutX="92.0" layoutY="25.0" strokeType="OUTSIDE" strokeWidth="0.0" text="WHERE">
@@ -37,12 +43,18 @@
          </Text>
       </AnchorPane>
       <AnchorPane prefHeight="100.0" prefWidth="250.0">
-         <TextField layoutX="32.0" layoutY="35.0" prefHeight="30.0" prefWidth="200.0" promptText="Amount" style="-fx-background-color: #e0e0e0;" />
-         <Text layoutX="93.0" layoutY="25.0" strokeType="OUTSIDE" strokeWidth="0.0" text="GUEST">
+         <Spinner fx:id="SpinnerAdults" layoutX="125.0" layoutY="8.0" prefHeight="31.0" prefWidth="79.0" />
+         <Text layoutX="14.0" layoutY="28.0" strokeType="OUTSIDE" strokeWidth="0.0" text="ADULTS">
             <font>
                <Font name="Consolas Bold" size="16.0" />
             </font>
          </Text>
+         <Text layoutX="14.0" layoutY="71.0" strokeType="OUTSIDE" strokeWidth="0.0" text="CHILDRENS">
+            <font>
+               <Font name="Consolas Bold" size="16.0" />
+            </font>
+         </Text>
+         <Spinner fx:id="SpinnerChildrens" layoutX="125.0" layoutY="51.0" prefHeight="31.0" prefWidth="79.0" />
       </AnchorPane>
    </HBox>
    <VBox layoutY="-1.0" prefHeight="720.0" prefWidth="200.0" style="-fx-background-color: #fafafa;">
@@ -84,5 +96,36 @@
          </VBox>
       </AnchorPane>
    </VBox>
-   <Pane layoutX="200.0" layoutY="100.0" prefHeight="620.0" prefWidth="1080.0" style="-fx-background-color: black;" />
+   <Pane layoutX="200.0" layoutY="100.0" prefHeight="620.0" prefWidth="1080.0" style="-fx-background-color: black;">
+      <children>
+         <ScrollPane prefHeight="620.0" prefWidth="1080.0">
+            <content>
+               <VBox>
+                  <children>
+                     <AnchorPane prefHeight="200.0" prefWidth="1080.0" style="-fx-background-color: black;" />
+                     <AnchorPane prefHeight="200.0" prefWidth="1080.0">
+                        <children>
+                           <AnchorPane prefHeight="200.0" prefWidth="342.0" style="-fx-background-color: gray;" />
+                           <Label alignment="CENTER" layoutX="356.0" layoutY="14.0" prefHeight="31.0" prefWidth="91.0" style="-fx-background-color: gray;" text="Anfitrión" />
+                           <Label alignment="CENTER" layoutX="447.0" layoutY="45.0" prefHeight="38.0" prefWidth="390.0" style="-fx-background-color: gray;" text="BREVE DESCRIPCIÓN DEL LUGAR" />
+                           <Label alignment="CENTER" layoutX="447.0" layoutY="100.0" prefHeight="65.0" prefWidth="390.0" style="-fx-background-color: gray;" text="caracteristicas como: capacidad, baños, habitaciones, etc" />
+                           <Label alignment="CENTER" layoutX="920.0" layoutY="14.0" prefHeight="31.0" prefWidth="127.0" style="-fx-background-color: gray;" text="Estrellas (calidad)" />
+                           <Label alignment="CENTER" layoutX="922.0" layoutY="117.0" prefHeight="31.0" prefWidth="125.0" style="-fx-background-color: gray;" text="Precio x Noche" />
+                           <Label alignment="CENTER" layoutX="956.0" layoutY="150.0" prefHeight="31.0" prefWidth="91.0" style="-fx-background-color: gray;" text="Total" />
+                        </children>
+                     </AnchorPane>
+                     <AnchorPane prefHeight="200.0" prefWidth="1080.0" style="-fx-background-color: black;" />
+                     <AnchorPane prefHeight="200.0" prefWidth="1080.0" />
+                  </children>
+               </VBox>
+            </content>
+         </ScrollPane>
+      </children>
+   </Pane>
+   <Button layoutX="1195.0" layoutY="17.0" mnemonicParsing="false" prefHeight="58.0" prefWidth="65.0" />
+   <ImageView layoutX="1212.0" layoutY="30.0">
+      <image>
+         <Image url="@../../../../Desktop/zoom.png" />
+      </image>
+   </ImageView>
 </AnchorPane>
