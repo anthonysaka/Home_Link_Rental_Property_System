@@ -31,7 +31,7 @@ public class User extends ConnectionMySqlDB{
 	private String telephone_number;
 	private String created_date;
 	private ArrayList<Tarjetas> tarjetas = new ArrayList<Tarjetas>();;
-	private ArrayList<Publicaciones> publicaciones = new ArrayList<Publicaciones>();;
+	private ArrayList<PublicacionesParaVisualizar> publicaciones = new ArrayList<PublicacionesParaVisualizar>();;
 	private ArrayList<Reserva> reservas = new ArrayList<Reserva>();;
 	
 	public User(String name, String lastname, String gender, String type, String username, String email,
@@ -157,11 +157,11 @@ public class User extends ConnectionMySqlDB{
 		this.tarjetas = tarjetas;
 	}
 
-	public ArrayList<Publicaciones> getPublicaciones() {
+	public ArrayList<PublicacionesParaVisualizar> getPublicaciones() {
 		return publicaciones;
 	}
 
-	public void setPublicaciones(ArrayList<Publicaciones> publicaciones) {
+	public void setPublicaciones(ArrayList<PublicacionesParaVisualizar> publicaciones) {
 		this.publicaciones = publicaciones;
 	}
 	

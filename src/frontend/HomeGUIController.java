@@ -9,7 +9,8 @@ import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXComboBox;
 import com.jfoenix.controls.JFXListView;
 
-import backend.Publicaciones;
+import backend.Propiedad;
+import backend.PublicacionesParaVisualizar;
 import javafx.application.Application;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -35,14 +36,15 @@ public class HomeGUIController extends Application implements Initializable {
     @FXML
     private JFXButton btnSearch;
     @FXML
-    private JFXListView<Publicaciones> publicationListView;
+    private JFXListView<PublicacionesParaVisualizar> publicationListView;
     @FXML
     private JFXComboBox<String> locationPropCbx;
     
     private double xoffset = 0;
 	private double yoffset = 0;
     
-	ObservableList<Publicaciones> listPublication = FXCollections.observableArrayList();
+	ObservableList<PublicacionesParaVisualizar> listPublicationVisual = FXCollections.observableArrayList();
+	ObservableList<String> listwheretemporal = FXCollections.observableArrayList("Puerto plata, RD", "Santiago, RD"); //prueba temporal
 	
 	public void start(Stage stageLogin) throws Exception {
 
@@ -74,7 +76,6 @@ public class HomeGUIController extends Application implements Initializable {
 			}
 		});
 		/******************* ********************************************/
-
 	}
 	
 	/*******************/
@@ -83,12 +84,11 @@ public class HomeGUIController extends Application implements Initializable {
 	//	Publication_sql_query pusql = new Publication_sql_query();
 	//	pusql.loadPublication(address_to_search)
 	//	publicationListView.setItems(listPublication);
-		
+	//	locationPropCbx.setItems(value);;
+		//locationPropCbx.setItems(listwheretemporarl);
 	}
 	
-	/**
-	 * @throws SQLException ******************/
-	
+	/******* @throws SQLException ******************/
 	@FXML
     void searchPublication(ActionEvent event) throws SQLException {
 		//Publication_sql_query pusql = new Publication_sql_query();
@@ -96,13 +96,15 @@ public class HomeGUIController extends Application implements Initializable {
 		ResultSet resultBD;
 		
 		if (!ubicacionPropiedadABuscar.isEmpty()) {
-			resultBD = Publicaciones.loadPublication(ubicacionPropiedadABuscar);
+			resultBD = PublicacionesParaVisualizar.loadPublication(ubicacionPropiedadABuscar);
 			
 			while (resultBD.next()) {
-			//	listPublication.add(resultBD.get))
-				
+				listPublicationVisual.add(new PublicacionesParaVisualizar(resultBD.getString("type_property"), resultBD.getString("address"), 
+						resultBD.getString("feedbacks"), resultBD.getString("characteristic"), resultBD.getString("Dueño"),
+						resultBD.getString("publication_date"), resultBD.getFloat("price")));
 			}
 		}	
+		publicationListView.setItems(listPublicationVisual);
     }
     
     public void Spinners() {

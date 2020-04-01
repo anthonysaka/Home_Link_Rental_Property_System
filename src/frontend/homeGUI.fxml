@@ -24,7 +24,7 @@
                <Font name="Consolas Bold" size="16.0" />
             </font>
          </Text>
-         <JFXComboBox focusColor="#e53935" layoutX="11.0" layoutY="35.0" prefHeight="30.0" prefWidth="230.0" promptText="Where" unFocusColor="BLACK" />
+         <JFXComboBox  layoutX="11.0" layoutY="35.0" prefHeight="30.0" prefWidth="230.0" promptText="Where"  />
       </AnchorPane>
       <AnchorPane prefHeight="100.0" prefWidth="250.0" HBox.hgrow="ALWAYS">
          <Text layoutX="90.0" layoutY="26.0" strokeType="OUTSIDE" strokeWidth="0.0" text="CHECK-IN">
