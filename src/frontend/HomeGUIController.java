@@ -1,6 +1,7 @@
 package frontend;
 
 import java.net.URL;
+import java.sql.ResultSet;
 import java.util.ResourceBundle;
 
 import com.jfoenix.controls.JFXButton;
@@ -92,6 +93,7 @@ public class HomeGUIController extends Application implements Initializable {
     void searchPublication(ActionEvent event) {
 		Publication_sql_query pusql = new Publication_sql_query();
 		String ubicacionPropiedadABuscar = locationPropCbx.getSelectionModel().getSelectedItem().toString();
+		ResultSet resultBD;
 		
 		if (!ubicacionPropiedadABuscar.isEmpty()) {
 			pusql.loadPublication(ubicacionPropiedadABuscar);
