@@ -10,6 +10,11 @@ BEGIN
 END##
 DELIMITER ;
 
-select * from t_user;
+DELIMITER ##
+CREATE PROCEDURE sp_search_publication_by_dir(in pa_direccion VARCHAR(30))
+BEGIN
+	SELECT * FROM t_property WHERE address = pa_direccion;
+END##
+DELIMITER ;
 
 

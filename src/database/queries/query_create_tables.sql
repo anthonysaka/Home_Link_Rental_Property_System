@@ -28,18 +28,18 @@ CREATE TABLE t_country (
     PRIMARY KEY (id)
 );
 
-CREATE TABLE t_owner(
-id_owner INT NOT NULL AUTO_INCREMENT,
-type_owner VARCHAR(15) NOT NULL,
+CREATE TABLE t_property(
+id_property INT NOT NULL AUTO_INCREMENT,
+type_property VARCHAR(15) NOT NULL,
 address VARCHAR(30) NOT NULL,
-status_owner VARCHAR(15) NOT NULL,
+status_property VARCHAR(15) NOT NULL,
 feedbacks VARCHAR(100) NULL,
 price FLOAT NOT NULL,
 characteristic VARCHAR(100) NOT NULL,
-id_user_owner INT NOT NULL,
+id_user_property INT NOT NULL,
 
-PRIMARY KEY (id_owner),
-FOREIGN KEY (id_user_owner) REFERENCES t_user(id)
+PRIMARY KEY (id_property),
+FOREIGN KEY (id_user_property) REFERENCES t_user(id)
 );
 
 CREATE TABLE t_card(
@@ -59,12 +59,27 @@ adult_guest INT NOT NULL,
 start_date DATETIME NOT NULL DEFAULT(current_date()),
 end_date DATETIME NOT NULL,
 id_user INT NOT NULL,
-id_owner INT NOT NULL,
+id_property INT NOT NULL,
 id_card INT NOT NULL,
 
 PRIMARY KEY (num_reservation),
 FOREIGN KEY (id_user) REFERENCES t_user(id),
-FOREIGN KEY (id_owner) REFERENCES t_owner(id_owner),
+FOREIGN KEY (id_property) REFERENCES t_property(id_property),
 FOREIGN KEY (id_card) REFERENCES t_card(id_card)
+);
+
+CREATE TABLE t_publication (
+    -- ATTRIBUTES --
+    id_publication INT NOT NULL AUTO_INCREMENT,
+    publicaction_date date ,
+    status_publication varchar(15),
+    id_user_publication  int,
+    id_user_adm int,
+    id_property int,
+    -- DECLARATION CONSTRAINS --
+    PRIMARY KEY (id_publication),
+
+    FOREIGN KEY (id_user_publication) REFERENCES t_user(id),
+    FOREIGN KEY (id_property) REFERENCES t_property(id_property)
 );
 

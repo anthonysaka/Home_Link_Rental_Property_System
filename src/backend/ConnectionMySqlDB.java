@@ -11,15 +11,15 @@ import java.sql.SQLException;
 public class ConnectionMySqlDB {
 
 	/*** Attributes - Variables ***/ 
-	private final String name_db = "home_link_db";
-	private final String user_db = "root";
-	private final String password_db = "nose@MySql99";
-	private final String url_db = "jdbc:mysql://localhost:3306/" + name_db;
+	private final static String name_db = "home_link_db";
+	private final static String user_db = "root";
+	private final static String password_db = "nose@MySql99";
+	private final static String url_db = "jdbc:mysql://localhost:3306/" + name_db;
 
-	private Connection connect = null;
+	private static Connection connect = null;
 
 	/* Method to get database connection */
-	public Connection getConnectionMySqlDB()
+	public static Connection getConnectionMySqlDB()
 	{
 		try {
 			//Class.forName("com.mysql.jdbc.Driver");

@@ -16,39 +16,34 @@
 /*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
 
 --
--- Table structure for table `t_user`
+-- Table structure for table `t_owner`
 --
 
-DROP TABLE IF EXISTS `t_user`;
+DROP TABLE IF EXISTS `t_owner`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!50503 SET character_set_client = utf8mb4 */;
-CREATE TABLE `t_user` (
-  `id` int NOT NULL AUTO_INCREMENT,
-  `username` varchar(15) NOT NULL,
-  `email` varchar(50) NOT NULL,
-  `password` varchar(25) NOT NULL,
-  `name` varchar(20) NOT NULL,
-  `lastname` varchar(30) NOT NULL,
-  `gender` varchar(15) DEFAULT NULL,
-  `country_location_id` int DEFAULT NULL,
-  `telephone_number` varchar(20) DEFAULT NULL,
-  `type` varchar(15) NOT NULL,
-  `status` varchar(15) NOT NULL DEFAULT (1),
-  `created_date` datetime NOT NULL DEFAULT (curdate()),
-  PRIMARY KEY (`id`),
-  UNIQUE KEY `username` (`username`),
-  KEY `country_location_id` (`country_location_id`),
-  CONSTRAINT `t_user_ibfk_1` FOREIGN KEY (`country_location_id`) REFERENCES `t_country` (`id`)
+CREATE TABLE `t_owner` (
+  `id_owner` int NOT NULL AUTO_INCREMENT,
+  `type_owner` varchar(15) NOT NULL,
+  `address` varchar(30) NOT NULL,
+  `status_owner` varchar(15) NOT NULL,
+  `feedbacks` varchar(100) DEFAULT NULL,
+  `price` float NOT NULL,
+  `characteristic` varchar(100) NOT NULL,
+  `id_user_owner` int NOT NULL,
+  PRIMARY KEY (`id_owner`),
+  KEY `id_user_owner` (`id_user_owner`),
+  CONSTRAINT `t_owner_ibfk_1` FOREIGN KEY (`id_user_owner`) REFERENCES `t_user` (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
--- Dumping data for table `t_user`
+-- Dumping data for table `t_owner`
 --
 
-LOCK TABLES `t_user` WRITE;
-/*!40000 ALTER TABLE `t_user` DISABLE KEYS */;
-/*!40000 ALTER TABLE `t_user` ENABLE KEYS */;
+LOCK TABLES `t_owner` WRITE;
+/*!40000 ALTER TABLE `t_owner` DISABLE KEYS */;
+/*!40000 ALTER TABLE `t_owner` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
 
@@ -60,4 +55,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2020-03-31 23:15:06
+-- Dump completed on 2020-03-31 23:15:09

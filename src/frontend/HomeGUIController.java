@@ -1,9 +1,21 @@
 package frontend;
 
+import java.net.URL;
+import java.util.ResourceBundle;
+
+import com.jfoenix.controls.JFXButton;
+import com.jfoenix.controls.JFXComboBox;
+import com.jfoenix.controls.JFXListView;
+
+import backend.Publication_sql_query;
 import javafx.application.Application;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
+import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
+import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.ScrollPane;
@@ -14,24 +26,24 @@ import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 
-public class HomeGUIController extends Application {
+public class HomeGUIController extends Application implements Initializable {
 
     @FXML
     private Spinner<?> SpinnerAdults;
-
     @FXML
     private Spinner<?> SpinnerChildrens;
-
     @FXML
-    private ScrollPane FoundPanel;
-
+    private JFXButton btnSearch;
     @FXML
-    private AnchorPane PreviewPanel;
+    private JFXListView<Publication> publicationListView;
+    @FXML
+    private JFXComboBox<String> locationPropCbx;
     
     private double xoffset = 0;
 	private double yoffset = 0;
     
-    
+	ObservableList<Publication> listPublication = FXCollections.observableArrayList();
+	
 	public void start(Stage stageLogin) throws Exception {
 
 		Parent rootLogin = FXMLLoader.load(LoginGUIController.class.getResource("../frontend/homeGUI.fxml"));
@@ -43,7 +55,7 @@ public class HomeGUIController extends Application {
 		stageLogin.setAlwaysOnTop(true);
 		stageLogin.initStyle(StageStyle.TRANSPARENT);
 		stageLogin.show();
-
+		
 		/*******
 		 * EventHandler to Move Undecorated Window (Stage) Adapted from: StackOverflow
 		 ******/
@@ -64,6 +76,28 @@ public class HomeGUIController extends Application {
 		/******************* ********************************************/
 
 	}
+	
+	/*******************/
+	@Override
+	public void initialize(URL location, ResourceBundle resources) {
+	//	Publication_sql_query pusql = new Publication_sql_query();
+	//	pusql.loadPublication(address_to_search)
+	//	publicationListView.setItems(listPublication);
+		
+	}
+	
+	/********************/
+	
+	@FXML
+    void searchPublication(ActionEvent event) {
+		Publication_sql_query pusql = new Publication_sql_query();
+		String ubicacionPropiedadABuscar = locationPropCbx.getSelectionModel().getSelectedItem().toString();
+		
+		if (!ubicacionPropiedadABuscar.isEmpty()) {
+			pusql.loadPublication(ubicacionPropiedadABuscar);
+		}
+			
+    }
     
     public void Spinners() {
     	
@@ -71,5 +105,7 @@ public class HomeGUIController extends Application {
     	SpinnerChildrens.increment(1);
     	
     }
+
+
 
 }

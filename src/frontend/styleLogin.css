@@ -8,3 +8,7 @@
 	-fx-background-color:  #F5F5F5;
 }
 
+.Button:hover {
+	-fx-background-radius: 90;
+    -fx-background-color: #e53935;
+}

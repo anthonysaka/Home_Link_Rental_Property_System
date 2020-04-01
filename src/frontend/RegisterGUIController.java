@@ -2,7 +2,6 @@ package frontend;
 
 import java.net.URL;
 import java.time.LocalDate;
-import java.time.LocalDateTime;
 import java.util.ResourceBundle;
 
 import com.jfoenix.controls.JFXButton;
@@ -11,18 +10,12 @@ import com.jfoenix.controls.JFXPasswordField;
 import com.jfoenix.controls.JFXTextField;
 
 import backend.User;
-import backend.User_sql_query;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
-import javafx.scene.control.Alert;
-import javafx.scene.control.Alert.AlertType;
 import javafx.scene.control.Button;
-import javafx.scene.control.Dialog;
-import javafx.scene.layout.AnchorPane;
-import javafx.stage.Modality;
 import javafx.stage.Stage;
 
 /**
@@ -64,8 +57,7 @@ public class RegisterGUIController implements Initializable {
 
 	@FXML
 	void setRegister(ActionEvent event) {
-		User_sql_query userQuery = new User_sql_query();
-
+		//User_sql_query userQuery = new User_sql_query();
 		String name = txtName.getText();
 		String lastname = txtLastname.getText();
 		String gender = cbxGender.getSelectionModel().getSelectedItem().toString();
@@ -79,7 +71,7 @@ public class RegisterGUIController implements Initializable {
 		if (confiPass.equals(password)) {
 			User nUser = new User(name, lastname, gender, typeAccount, username, email, password, today.toString());
 			
-			if (userQuery.create_add_user(nUser)) {
+			if (User.create_add_user(nUser)) {
 			System.out.println("con exito");
 			}else {
 				System.out.println("sin exito");

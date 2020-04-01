@@ -1,14 +1,14 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import com.jfoenix.controls.JFXButton?>
+<?import com.jfoenix.controls.JFXComboBox?>
+<?import com.jfoenix.controls.JFXDatePicker?>
+<?import com.jfoenix.controls.JFXListView?>
 <?import javafx.geometry.Insets?>
-<?import javafx.scene.control.Button?>
+<?import javafx.scene.Cursor?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.ScrollPane?>
 <?import javafx.scene.control.Spinner?>
-<?import javafx.scene.control.TextField?>
-<?import javafx.scene.image.Image?>
-<?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.Pane?>
@@ -17,49 +17,70 @@
 <?import javafx.scene.text.Text?>
 
 <AnchorPane maxHeight="720.0" maxWidth="1280.0" prefHeight="720.0" prefWidth="1280.0" stylesheets="@styleHome.css" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="frontend.HomeGUIController">
-   <HBox layoutX="188.0" prefHeight="100.0" prefWidth="1000.0">
-      <AnchorPane prefHeight="100.0" prefWidth="250.0">
-         <TextField layoutX="25.0" layoutY="35.0" prefHeight="30.0" prefWidth="200.0" promptText="Anywhere" style="-fx-background-color: #e0e0e0;" />
-         <Text layoutX="92.0" layoutY="25.0" strokeType="OUTSIDE" strokeWidth="0.0" text="WHERE">
+   <HBox alignment="CENTER" layoutX="202.0" prefHeight="80.0" prefWidth="1080.0">
+      <AnchorPane prefHeight="100.0" prefWidth="250.0" HBox.hgrow="ALWAYS">
+         <Text layoutX="103.0" layoutY="26.0" strokeType="OUTSIDE" strokeWidth="0.0" text="WHERE">
             <font>
                <Font name="Consolas Bold" size="16.0" />
             </font>
          </Text>
+         <JFXComboBox focusColor="#e53935" layoutX="11.0" layoutY="35.0" prefHeight="30.0" prefWidth="230.0" promptText="Where" unFocusColor="BLACK" />
       </AnchorPane>
-      <AnchorPane prefHeight="100.0" prefWidth="250.0">
-         <TextField layoutX="32.0" layoutY="35.0" prefHeight="30.0" prefWidth="200.0" promptText="mm/dd/yyy" style="-fx-background-color: #e0e0e0;" />
-         <Text layoutX="93.0" layoutY="25.0" strokeType="OUTSIDE" strokeWidth="0.0" text="CHECK-IN">
+      <AnchorPane prefHeight="100.0" prefWidth="250.0" HBox.hgrow="ALWAYS">
+         <Text layoutX="90.0" layoutY="26.0" strokeType="OUTSIDE" strokeWidth="0.0" text="CHECK-IN">
             <font>
                <Font name="Consolas Bold" size="16.0" />
             </font>
          </Text>
+         <JFXDatePicker defaultColor="#e53935" layoutX="10.0" layoutY="35.0" nodeOrientation="LEFT_TO_RIGHT" prefHeight="30.0" prefWidth="230.0" promptText="MM/DD/YYYY">
+            <padding>
+               <Insets left="5.0" right="5.0" />
+            </padding>
+         </JFXDatePicker>
+         <HBox.margin>
+            <Insets />
+         </HBox.margin>
       </AnchorPane>
-      <AnchorPane prefHeight="73.0" prefWidth="250.0">
-         <TextField layoutX="32.0" layoutY="35.0" prefHeight="30.0" prefWidth="200.0" promptText="mm/dd/yyyy" style="-fx-background-color: #e0e0e0;" />
-         <Text layoutX="88.0" layoutY="25.0" strokeType="OUTSIDE" strokeWidth="0.0" text="CHECK-OUT">
+      <AnchorPane prefHeight="73.0" prefWidth="250.0" HBox.hgrow="ALWAYS">
+         <Text layoutX="85.0" layoutY="26.0" strokeType="OUTSIDE" strokeWidth="0.0" text="CHECK-OUT">
             <font>
                <Font name="Consolas Bold" size="16.0" />
             </font>
          </Text>
+         <JFXDatePicker defaultColor="#e53935" layoutX="10.0" layoutY="35.0" nodeOrientation="LEFT_TO_RIGHT" prefHeight="30.0" prefWidth="230.0" promptText="MM/DD/YYYY" />
       </AnchorPane>
-      <AnchorPane prefHeight="100.0" prefWidth="250.0">
-         <Spinner fx:id="SpinnerAdults" layoutX="125.0" layoutY="8.0" prefHeight="31.0" prefWidth="79.0" />
-         <Text layoutX="14.0" layoutY="28.0" strokeType="OUTSIDE" strokeWidth="0.0" text="ADULTS">
+      <AnchorPane prefHeight="100.0" prefWidth="250.0" HBox.hgrow="ALWAYS">
+         <Spinner fx:id="SpinnerAdults" layoutX="125.0" layoutY="8.0" nodeOrientation="LEFT_TO_RIGHT" prefHeight="25.0" prefWidth="79.0" AnchorPane.topAnchor="5.0" />
+         <Text layoutX="46.0" layoutY="26.0" strokeType="OUTSIDE" strokeWidth="0.0" text="ADULTS">
             <font>
                <Font name="Consolas Bold" size="16.0" />
             </font>
          </Text>
-         <Text layoutX="14.0" layoutY="71.0" strokeType="OUTSIDE" strokeWidth="0.0" text="CHILDRENS">
+         <Text layoutX="32.0" layoutY="63.0" strokeType="OUTSIDE" strokeWidth="0.0" text="CHILDRENS">
             <font>
                <Font name="Consolas Bold" size="16.0" />
             </font>
          </Text>
-         <Spinner fx:id="SpinnerChildrens" layoutX="125.0" layoutY="51.0" prefHeight="31.0" prefWidth="79.0" />
+         <Spinner fx:id="SpinnerChildrens" layoutX="125.0" layoutY="51.0" nodeOrientation="LEFT_TO_RIGHT" prefHeight="25.0" prefWidth="79.0" AnchorPane.bottomAnchor="5.0" />
       </AnchorPane>
+      <JFXButton fx:id="btnSearch" contentDisplay="CENTER" onAction="#searchPublication" prefHeight="39.0" prefWidth="156.0" styleClass="Button" text="Search">
+         <font>
+            <Font name="System Bold" size="18.0" />
+         </font>
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor>
+         <HBox.margin>
+            <Insets right="10.0" />
+         </HBox.margin>
+      </JFXButton>
    </HBox>
    <VBox layoutY="-1.0" prefHeight="720.0" prefWidth="200.0" style="-fx-background-color: #fafafa;">
-      <HBox prefHeight="100.0" prefWidth="200.0" />
-      <AnchorPane prefHeight="620.0" prefWidth="200.0">
+      <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0">
+         <children>
+            <Label text="LOGO HERE" />
+         </children></HBox>
+      <AnchorPane prefHeight="620.0" prefWidth="200.0" VBox.vgrow="ALWAYS">
          <VBox alignment="CENTER" layoutY="76.0" prefHeight="168.0" prefWidth="200.0">
             <JFXButton prefHeight="40.0" prefWidth="200.0" styleClass="Button" text="OPCION #">
                <VBox.margin>
@@ -68,6 +89,9 @@
                <font>
                   <Font name="Consolas Bold" size="16.0" />
                </font>
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor>
             </JFXButton>
             <JFXButton prefHeight="40.0" prefWidth="200.0" styleClass="Button" text="OPCION #">
                <VBox.margin>
@@ -76,6 +100,9 @@
                <font>
                   <Font name="Consolas Bold" size="16.0" />
                </font>
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor>
             </JFXButton>
             <JFXButton prefHeight="40.0" prefWidth="200.0" styleClass="Button" text="OPCION #">
                <VBox.margin>
@@ -84,6 +111,9 @@
                <font>
                   <Font name="Consolas Bold" size="16.0" />
                </font>
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor>
             </JFXButton>
             <JFXButton layoutX="10.0" layoutY="109.0" prefHeight="40.0" prefWidth="200.0" styleClass="Button" text="OPCION #">
                <VBox.margin>
@@ -92,40 +122,24 @@
                <font>
                   <Font name="Consolas Bold" size="16.0" />
                </font>
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor>
             </JFXButton>
          </VBox>
+         <VBox.margin>
+            <Insets />
+         </VBox.margin>
       </AnchorPane>
    </VBox>
-   <Pane layoutX="200.0" layoutY="100.0" prefHeight="620.0" prefWidth="1080.0" style="-fx-background-color: black;">
+   <Pane layoutX="200.0" layoutY="110.0" prefHeight="610.0" prefWidth="1080.0" style="-fx-background-color: black;">
       <children>
-         <ScrollPane prefHeight="620.0" prefWidth="1080.0">
+         <ScrollPane layoutX="1.0" layoutY="1.0" prefHeight="610.0" prefWidth="1080.0">
             <content>
-               <VBox>
-                  <children>
-                     <AnchorPane prefHeight="200.0" prefWidth="1080.0" style="-fx-background-color: black;" />
-                     <AnchorPane prefHeight="200.0" prefWidth="1080.0">
-                        <children>
-                           <AnchorPane prefHeight="200.0" prefWidth="342.0" style="-fx-background-color: gray;" />
-                           <Label alignment="CENTER" layoutX="356.0" layoutY="14.0" prefHeight="31.0" prefWidth="91.0" style="-fx-background-color: gray;" text="Anfitrión" />
-                           <Label alignment="CENTER" layoutX="447.0" layoutY="45.0" prefHeight="38.0" prefWidth="390.0" style="-fx-background-color: gray;" text="BREVE DESCRIPCIÓN DEL LUGAR" />
-                           <Label alignment="CENTER" layoutX="447.0" layoutY="100.0" prefHeight="65.0" prefWidth="390.0" style="-fx-background-color: gray;" text="caracteristicas como: capacidad, baños, habitaciones, etc" />
-                           <Label alignment="CENTER" layoutX="920.0" layoutY="14.0" prefHeight="31.0" prefWidth="127.0" style="-fx-background-color: gray;" text="Estrellas (calidad)" />
-                           <Label alignment="CENTER" layoutX="922.0" layoutY="117.0" prefHeight="31.0" prefWidth="125.0" style="-fx-background-color: gray;" text="Precio x Noche" />
-                           <Label alignment="CENTER" layoutX="956.0" layoutY="150.0" prefHeight="31.0" prefWidth="91.0" style="-fx-background-color: gray;" text="Total" />
-                        </children>
-                     </AnchorPane>
-                     <AnchorPane prefHeight="200.0" prefWidth="1080.0" style="-fx-background-color: black;" />
-                     <AnchorPane prefHeight="200.0" prefWidth="1080.0" />
-                  </children>
-               </VBox>
+               <JFXListView fx:id="publicationListView" prefHeight="610.0" prefWidth="1080.0" />
             </content>
          </ScrollPane>
       </children>
    </Pane>
-   <Button layoutX="1195.0" layoutY="17.0" mnemonicParsing="false" prefHeight="58.0" prefWidth="65.0" />
-   <ImageView layoutX="1212.0" layoutY="30.0">
-      <image>
-         <Image url="@../../../../Desktop/zoom.png" />
-      </image>
-   </ImageView>
+   <AnchorPane layoutX="202.0" layoutY="80.0" prefHeight="25.0" prefWidth="1080.0" style="-fx-background-color: gray;" AnchorPane.leftAnchor="198.0" AnchorPane.rightAnchor="2.0" />
 </AnchorPane>

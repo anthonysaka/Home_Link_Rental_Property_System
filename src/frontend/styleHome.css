@@ -1,9 +1,9 @@
 
+#btnSearch {
+	-fx-background-radius: 90;
+}
 
-/* Home__Left Menu */
-.Button :hover {
-    -fx-border-color: #b71c1c;
-    -fx-border-width: 0px 0px 0px 5px;
+.Button:hover {
     -fx-background-color: #e53935;
 }
 
