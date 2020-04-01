@@ -1,5 +1,7 @@
 package backend;
 
+import java.util.ArrayList;
+
 /**
  * @developed_by Anthony Sakamoto
  *
@@ -21,11 +23,14 @@ public class User {
 	private int country_location_id;
 	private String telephone_number;
 	private String created_date;
+	private ArrayList<Tarjetas> tarjetas;
+	private ArrayList<Publicaciones> publicaciones;
+	private ArrayList<Reserva> reservas;
 	
-
-	public User(String name, String lastname, String gender, String type, String username, String email, String password,
-			String created_date) {
+	public User(String name, String lastname, String gender, String type, String username, String email,
+			String password,String created_date) {
 		super();
+		this.id = id;
 		this.name = name;
 		this.lastname = lastname;
 		this.gender = gender;
@@ -33,84 +38,137 @@ public class User {
 		this.username = username;
 		this.email = email;
 		this.password = password;
+		this.status = status;
+		this.country_location_id = country_location_id;
+		this.telephone_number = telephone_number;
 		this.created_date = created_date;
+		new ArrayList<Tarjetas>();
+		new ArrayList<Publicaciones>();
+		new ArrayList<Reserva>();
 	}
-	/*** Gets and Sets ***/
 
 	public int getId() {
 		return id;
 	}
-	public String getUsername() {
-		return username;
-	}
-	public String getEmail() {
-		return email;
-	}
-	public String getPassword() {
-		return password;
-	}
-	public String getName() {
-		return name;
-	}
-	public String getLastname() {
-		return lastname;
-	}
-	public String getGender() {
-		return gender;
-	}
-	public int getCountry_location_id() {
-		return country_location_id;
-	}
-	public String getTelephone_number() {
-		return telephone_number;
-	}
-	public String getType() {
-		return type;
-	}
-	public String getStatus() {
-		return status;
-	}
-	public String getCreated_date() {
-		return created_date;
-	}
+
 	public void setId(int id) {
 		this.id = id;
 	}
-	public void setUsername(String username) {
-		this.username = username;
+
+	public String getName() {
+		return name;
 	}
-	public void setEmail(String email) {
-		this.email = email;
-	}
-	public void setPassword(String password) {
-		this.password = password;
-	}
+
 	public void setName(String name) {
 		this.name = name;
 	}
+
+	public String getLastname() {
+		return lastname;
+	}
+
 	public void setLastname(String lastname) {
 		this.lastname = lastname;
 	}
+
+	public String getGender() {
+		return gender;
+	}
+
 	public void setGender(String gender) {
 		this.gender = gender;
 	}
+
+	public String getType() {
+		return type;
+	}
+
+	public void setType(String type) {
+		this.type = type;
+	}
+
+	public String getUsername() {
+		return username;
+	}
+
+	public void setUsername(String username) {
+		this.username = username;
+	}
+
+	public String getEmail() {
+		return email;
+	}
+
+	public void setEmail(String email) {
+		this.email = email;
+	}
+
+	public String getPassword() {
+		return password;
+	}
+
+	public void setPassword(String password) {
+		this.password = password;
+	}
+
+	public String getStatus() {
+		return status;
+	}
+
+	public void setStatus(String status) {
+		this.status = status;
+	}
+
+	public int getCountry_location_id() {
+		return country_location_id;
+	}
+
 	public void setCountry_location_id(int country_location_id) {
 		this.country_location_id = country_location_id;
 	}
+
+	public String getTelephone_number() {
+		return telephone_number;
+	}
+
 	public void setTelephone_number(String telephone_number) {
 		this.telephone_number = telephone_number;
 	}
-	public void settype(String type) {
-		this.type = type;
+
+	public String getCreated_date() {
+		return created_date;
 	}
-	public void setstatus(String status) {
-		this.status = status;
-	}
+
 	public void setCreated_date(String created_date) {
 		this.created_date = created_date;
 	}
 
+	public ArrayList<Tarjetas> getTarjetas() {
+		return tarjetas;
+	}
 
+	public void setTarjetas(ArrayList<Tarjetas> tarjetas) {
+		this.tarjetas = tarjetas;
+	}
+
+	public ArrayList<Publicaciones> getPublicaciones() {
+		return publicaciones;
+	}
+
+	public void setPublicaciones(ArrayList<Publicaciones> publicaciones) {
+		this.publicaciones = publicaciones;
+	}
+	
+	public ArrayList<Reserva> getReserva() {
+		return reservas;
+	}
+
+	public void setReserva(ArrayList<Reserva> reservas) {
+		this.reservas = reservas;
+	}
+	
+
+	
 
 
 }
