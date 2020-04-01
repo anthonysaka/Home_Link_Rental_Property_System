@@ -3,24 +3,21 @@ package backend;
 public class Reserva {
 	
 	private int idReserva; 
+	private int idPropiedad;
+	private int idUsuario;
 	private int huespedes;
 	private String fechaInicio;
 	private String fechaFin;
-	private String idUsuario;
-	private String idTarjeta;
-	private String idPropiedad;
 	
 	
-	public Reserva(int idReserva, int huespedes, String fechaInicio, String fechaFin, String metodoPago,
-			String idUsuario, String idTarjeta, String idPropiedad) {
+	public Reserva(int idReserva, int idPropiedad, int idUsuario, int huespedes, String fechaInicio, String fechaFin) {
 		super();
 		this.idReserva = idReserva;
+		this.idPropiedad = idPropiedad;
+		this.idUsuario = idUsuario;
 		this.huespedes = huespedes;
 		this.fechaInicio = fechaInicio;
 		this.fechaFin = fechaFin;
-		this.idUsuario = idUsuario;
-		this.idTarjeta = idTarjeta;
-		this.idPropiedad = idPropiedad;
 	}
 
 
@@ -31,6 +28,26 @@ public class Reserva {
 
 	public void setIdReserva(int idReserva) {
 		this.idReserva = idReserva;
+	}
+
+
+	public int getIdPropiedad() {
+		return idPropiedad;
+	}
+
+
+	public void setIdPropiedad(int idPropiedad) {
+		this.idPropiedad = idPropiedad;
+	}
+
+
+	public int getIdUsuario() {
+		return idUsuario;
+	}
+
+
+	public void setIdUsuario(int idUsuario) {
+		this.idUsuario = idUsuario;
 	}
 
 
@@ -62,43 +79,14 @@ public class Reserva {
 	public void setFechaFin(String fechaFin) {
 		this.fechaFin = fechaFin;
 	}
-
-
-	public String getIdUsuario() {
-		return idUsuario;
-	}
-
-
-	public void setIdUsuario(String idUsuario) {
-		this.idUsuario = idUsuario;
-	}
-
-
-	public String getIdTarjeta() {
-		return idTarjeta;
-	}
-
-
-	public void setIdTarjeta(String idTarjeta) {
-		this.idTarjeta = idTarjeta;
-	}
-
-
-	public String getIdFactura() {
-		return idPropiedad;
-	}
-
-
-	public void setIdFactura(String idFactura) {
-		this.idPropiedad = idFactura;
-	}
 	
-	
-	
-	
-	
-	
-	
-	
+
+
 
 }
+	
+	
+	
+	
+	
+	

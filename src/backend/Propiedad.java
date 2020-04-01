@@ -1,17 +1,16 @@
 package backend;
 
-public class Propiedad {
+public class Propiedad extends ConnectionMySqlDB {
 	
-	private int idPropiedad;
-	private String tipo;
-	private String direccion;
-	private String estatus;
-	private String feedbacks;
-	private float precio;
-	private String caracteristicas;
-	private int idUserOwner;
+		private int idPropiedad;
+		private String tipo;
+		private String direccion;
+		private String estatus;
+		private String feedbacks;
+		private String caracteristicas;
+		private int idUserOwner;
 	
-	public Propiedad(int idPropiedad, String tipo, String direccion, String estatus, String feedbacks, float precio,
+	public Propiedad(int idPropiedad, String tipo, String direccion, String estatus, String feedbacks,
 			String caracteristicas, int idUserOwner) {
 		super();
 		this.idPropiedad = idPropiedad;
@@ -19,7 +18,6 @@ public class Propiedad {
 		this.direccion = direccion;
 		this.estatus = estatus;
 		this.feedbacks = feedbacks;
-		this.precio = precio;
 		this.caracteristicas = caracteristicas;
 		this.idUserOwner = idUserOwner;
 	}
@@ -62,14 +60,6 @@ public class Propiedad {
 
 	public void setFeedbacks(String feedbacks) {
 		this.feedbacks = feedbacks;
-	}
-
-	public float getPrecio() {
-		return precio;
-	}
-
-	public void setPrecio(float precio) {
-		this.precio = precio;
 	}
 
 	public String getCaracteristicas() {

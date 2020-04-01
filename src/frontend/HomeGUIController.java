@@ -2,13 +2,14 @@ package frontend;
 
 import java.net.URL;
 import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.ResourceBundle;
 
 import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXComboBox;
 import com.jfoenix.controls.JFXListView;
 
-import backend.Publication_sql_query;
+import backend.Publicaciones;
 import javafx.application.Application;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -19,11 +20,9 @@ import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.control.ScrollPane;
 import javafx.scene.control.Spinner;
 import javafx.scene.image.Image;
 import javafx.scene.input.MouseEvent;
-import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 
@@ -36,14 +35,14 @@ public class HomeGUIController extends Application implements Initializable {
     @FXML
     private JFXButton btnSearch;
     @FXML
-    private JFXListView<Publication> publicationListView;
+    private JFXListView<Publicaciones> publicationListView;
     @FXML
     private JFXComboBox<String> locationPropCbx;
     
     private double xoffset = 0;
 	private double yoffset = 0;
     
-	ObservableList<Publication> listPublication = FXCollections.observableArrayList();
+	ObservableList<Publicaciones> listPublication = FXCollections.observableArrayList();
 	
 	public void start(Stage stageLogin) throws Exception {
 
@@ -87,18 +86,23 @@ public class HomeGUIController extends Application implements Initializable {
 		
 	}
 	
-	/********************/
+	/**
+	 * @throws SQLException ******************/
 	
 	@FXML
-    void searchPublication(ActionEvent event) {
-		Publication_sql_query pusql = new Publication_sql_query();
+    void searchPublication(ActionEvent event) throws SQLException {
+		//Publication_sql_query pusql = new Publication_sql_query();
 		String ubicacionPropiedadABuscar = locationPropCbx.getSelectionModel().getSelectedItem().toString();
 		ResultSet resultBD;
 		
 		if (!ubicacionPropiedadABuscar.isEmpty()) {
-			pusql.loadPublication(ubicacionPropiedadABuscar);
-		}
+			resultBD = Publicaciones.loadPublication(ubicacionPropiedadABuscar);
 			
+			while (resultBD.next()) {
+			//	listPublication.add(resultBD.get))
+				
+			}
+		}	
     }
     
     public void Spinners() {
