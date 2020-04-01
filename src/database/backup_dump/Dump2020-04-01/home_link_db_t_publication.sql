@@ -24,16 +24,14 @@ DROP TABLE IF EXISTS `t_publication`;
 /*!50503 SET character_set_client = utf8mb4 */;
 CREATE TABLE `t_publication` (
   `id_publication` int NOT NULL AUTO_INCREMENT,
-  `publicaction_date` date DEFAULT NULL,
-  `status_publication` varchar(15) DEFAULT NULL,
-  `id_user_publication` int DEFAULT NULL,
-  `id_user_adm` int DEFAULT NULL,
-  `id_property` int DEFAULT NULL,
+  `publicaction_date` date NOT NULL,
+  `status_publication` varchar(15) NOT NULL,
+  `id_user_adm` int NOT NULL,
+  `id_property` int NOT NULL,
+  `price` decimal(10,2) NOT NULL,
   PRIMARY KEY (`id_publication`),
-  KEY `id_user_publication` (`id_user_publication`),
   KEY `id_property` (`id_property`),
-  CONSTRAINT `t_publication_ibfk_1` FOREIGN KEY (`id_user_publication`) REFERENCES `t_user` (`id`),
-  CONSTRAINT `t_publication_ibfk_2` FOREIGN KEY (`id_property`) REFERENCES `t_property` (`id_property`)
+  CONSTRAINT `t_publication_ibfk_1` FOREIGN KEY (`id_property`) REFERENCES `t_property` (`id_property`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -55,4 +53,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2020-04-01  0:14:21
+-- Dump completed on 2020-04-01  2:34:06

@@ -39,7 +39,7 @@ CREATE TABLE `t_user` (
   UNIQUE KEY `username` (`username`),
   KEY `country_location_id` (`country_location_id`),
   CONSTRAINT `t_user_ibfk_1` FOREIGN KEY (`country_location_id`) REFERENCES `t_country` (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -48,6 +48,7 @@ CREATE TABLE `t_user` (
 
 LOCK TABLES `t_user` WRITE;
 /*!40000 ALTER TABLE `t_user` DISABLE KEYS */;
+INSERT INTO `t_user` VALUES (1,'Juanjo','juan1@gmail.com','123','Juan','Rodriguez','Masculino',1,'809-912-6262','Usuario','1','2020-04-01 00:00:00');
 /*!40000 ALTER TABLE `t_user` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -60,4 +61,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2020-04-01  2:34:06
+-- Dump completed on 2020-04-01  3:18:31

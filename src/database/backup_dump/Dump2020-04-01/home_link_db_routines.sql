@@ -50,9 +50,14 @@ DELIMITER ;
 /*!50003 SET @saved_sql_mode       = @@sql_mode */ ;
 /*!50003 SET sql_mode              = 'STRICT_TRANS_TABLES,NO_ENGINE_SUBSTITUTION' */ ;
 DELIMITER ;;
-CREATE DEFINER=`root`@`localhost` PROCEDURE `sp_search_publication_by_dir`(in pa_direccion VARCHAR(30))
+CREATE DEFINER=`root`@`localhost` PROCEDURE `sp_search_publication_by_dir`(IN pa_direccion VARCHAR(30))
 BEGIN
-	SELECT * FROM t_property WHERE address = pa_direccion;
+	SELECT t_property.type_property, t_property.address, t_property.status_property, t_property.feedbacks,
+			t_property.characteristic, t_user.username AS `Dueño`, t_publication.price, t_publication.publicaction_date
+    FROM t_property 
+	INNER JOIN t_user ON t_property.id_user_property = t_user.id
+    INNER JOIN t_publication ON t_property.id_property = t_publication.id_property
+    WHERE address = pa_direccion AND status_property = "Disponible";
 END ;;
 DELIMITER ;
 /*!50003 SET sql_mode              = @saved_sql_mode */ ;
@@ -69,4 +74,4 @@ DELIMITER ;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2020-04-01  0:14:22
+-- Dump completed on 2020-04-01  2:34:07

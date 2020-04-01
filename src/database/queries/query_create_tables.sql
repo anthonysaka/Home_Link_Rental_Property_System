@@ -34,7 +34,6 @@ type_property VARCHAR(15) NOT NULL,
 address VARCHAR(30) NOT NULL,
 status_property VARCHAR(15) NOT NULL,
 feedbacks VARCHAR(100) NULL,
-price FLOAT NOT NULL,
 characteristic VARCHAR(100) NOT NULL,
 id_user_property INT NOT NULL,
 
@@ -71,15 +70,14 @@ FOREIGN KEY (id_card) REFERENCES t_card(id_card)
 CREATE TABLE t_publication (
     -- ATTRIBUTES --
     id_publication INT NOT NULL AUTO_INCREMENT,
-    publicaction_date date ,
-    status_publication varchar(15),
-    id_user_publication  int,
-    id_user_adm int,
-    id_property int,
+    publicaction_date date NOT NULL ,
+    status_publication varchar(15) NOT NULL,
+    id_user_adm int NOT NULL,
+    id_property int NOT NULL,
+    price NUMERIC (10,2) NOT NULL,
     -- DECLARATION CONSTRAINS --
     PRIMARY KEY (id_publication),
-
-    FOREIGN KEY (id_user_publication) REFERENCES t_user(id),
+    
     FOREIGN KEY (id_property) REFERENCES t_property(id_property)
 );
 
