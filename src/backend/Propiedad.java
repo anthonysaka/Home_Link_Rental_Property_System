@@ -10,10 +10,10 @@ public class Propiedad extends ConnectionMySqlDB {
 		private String caracteristicas;
 		private int idUserOwner;
 	
-	public Propiedad(int idPropiedad, String tipo, String direccion, String estatus, String feedbacks,
+	public Propiedad( String tipo, String direccion, String estatus, String feedbacks,
 			String caracteristicas, int idUserOwner) {
 		super();
-		this.idPropiedad = idPropiedad;
+		//this.idPropiedad = idPropiedad;
 		this.tipo = tipo;
 		this.direccion = direccion;
 		this.estatus = estatus;

@@ -1,4 +1,3 @@
-USE home_link_db;
 
 DELIMITER ##
 CREATE PROCEDURE sp_createUser (in pa_username VARCHAR(15), in pa_email VARCHAR(50), in pa_password VARCHAR(25),
@@ -11,9 +10,14 @@ END##
 DELIMITER ;
 
 DELIMITER ##
-CREATE PROCEDURE sp_search_publication_by_dir(in pa_direccion VARCHAR(30))
+CREATE PROCEDURE sp_search_publication_by_dir(IN pa_direccion VARCHAR(30))
 BEGIN
-	SELECT * FROM t_property WHERE address = pa_direccion;
+	SELECT t_property.type_property, t_property.address, t_property.feedbacks,
+			t_property.characteristic, t_user.username AS `Dueño`, t_publication.price, t_publication.publicaction_date
+    FROM t_property 
+	INNER JOIN t_user ON t_property.id_user_property = t_user.id
+    INNER JOIN t_publication ON t_property.id_property = t_publication.id_property
+    WHERE address = pa_direccion AND status_property = "Disponible";
 END##
 DELIMITER ;
 

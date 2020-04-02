@@ -28,7 +28,6 @@ CREATE TABLE `t_property` (
   `address` varchar(30) NOT NULL,
   `status_property` varchar(15) NOT NULL,
   `feedbacks` varchar(100) DEFAULT NULL,
-  `price` float NOT NULL,
   `characteristic` varchar(100) NOT NULL,
   `id_user_property` int NOT NULL,
   PRIMARY KEY (`id_property`),
@@ -55,4 +54,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2020-04-01  0:14:22
+-- Dump completed on 2020-04-01  2:34:07

@@ -6,13 +6,18 @@ public class HomeLink_Controller {
 
 	private ArrayList<User> usuarios;
 	private ArrayList<Propiedad> propiedades;
-	private ArrayList<Publicaciones> publicaciones;
+	private ArrayList<PublicacionesParaVisualizar> publicaciones;
 	private ArrayList<Reserva> reservas;
 	
 	public HomeLink_Controller() {
 		super();
+
 		new ArrayList<User>();
-		new ArrayList<Publicaciones>();
+		new ArrayList<Publicacion>();
+
+		new ArrayList<Tarjetas>();
+		new ArrayList<PublicacionesParaVisualizar>();
+
 		new ArrayList<Reserva>();
 		new ArrayList<Propiedad>();
 	}
@@ -33,11 +38,11 @@ public class HomeLink_Controller {
 		this.propiedades = propiedades;
 	}
 
-	public ArrayList<Publicaciones> getPublicaciones() {
+	public ArrayList<PublicacionesParaVisualizar> getPublicaciones() {
 		return publicaciones;
 	}
 
-	public void setPublicaciones(ArrayList<Publicaciones> publicaciones) {
+	public void setPublicaciones(ArrayList<PublicacionesParaVisualizar> publicaciones) {
 		this.publicaciones = publicaciones;
 	}
 

@@ -49,6 +49,7 @@ public class RegisterGUIController implements Initializable {
 	ObservableList<String> listTypeAccount = FXCollections.observableArrayList("Personal","Empresa");
 
 	/*** METHODS ***/
+	
 	@FXML
 	void closeWindow(ActionEvent event) {
 		Stage stage = (Stage) btnClose.getScene().getWindow();
@@ -70,7 +71,6 @@ public class RegisterGUIController implements Initializable {
 
 		if (confiPass.equals(password)) {
 			User nUser = new User(name, lastname, gender, typeAccount, username, email, password, today.toString());
-			
 			if (User.create_add_user(nUser)) {
 			System.out.println("con exito");
 			}else {
