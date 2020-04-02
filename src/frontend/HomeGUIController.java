@@ -1,15 +1,19 @@
 package frontend;
 
 import java.net.URL;
+import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.ResourceBundle;
 
 import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXComboBox;
 import com.jfoenix.controls.JFXListCell;
 import com.jfoenix.controls.JFXListView;
+import com.mysql.cj.jdbc.CallableStatement;
 
+import backend.ConnectionMySqlDB;
 import backend.PublicacionesParaVisualizar;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -34,7 +38,7 @@ public class HomeGUIController extends ListView<PublicacionesParaVisualizar> imp
 	private JFXComboBox<String> cbxLocation;
 
 	ObservableList<PublicacionesParaVisualizar> listPublicationVisual = FXCollections.observableArrayList();
-	ObservableList<String> list = FXCollections.observableArrayList("Puerto plata, RD");
+	ObservableList<String> list = FXCollections.observableArrayList(ConnectionMySqlDB.llenarCombo());
 
 
 
@@ -70,6 +74,9 @@ public class HomeGUIController extends ListView<PublicacionesParaVisualizar> imp
 	public void initialize(URL location, ResourceBundle resources) {
 		// TODO Auto-generated method stub
 		cbxLocation.setItems(list); //temporal
+		
+		
+		
 
 		/**** Propiedades del List View de las publicaciones ****/
 		publicationListView.setExpanded(true);
@@ -101,7 +108,11 @@ public class HomeGUIController extends ListView<PublicacionesParaVisualizar> imp
 		 * *********************************************************************/
 
 	}
+	
+	
 
 	/************************* FIN *******************/
 
 }
+
+
