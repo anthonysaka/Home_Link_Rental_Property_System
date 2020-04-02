@@ -98,7 +98,6 @@ public class PublicacionesParaVisualizar extends ConnectionMySqlDB {
 			mySqlStatement = (CallableStatement) myConnection.prepareCall("{CALL sp_search_publication_by_dir(?)}");
 			mySqlStatement.setString("pa_direccion", address_to_search);
 			ResultSet rs = mySqlStatement.executeQuery();
-			myConnection.close();
 			System.out.println("Busquedad con exito!");
 			return rs;
 			

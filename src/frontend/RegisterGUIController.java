@@ -49,6 +49,7 @@ public class RegisterGUIController implements Initializable {
 	ObservableList<String> listTypeAccount = FXCollections.observableArrayList("Personal","Empresa");
 
 	/*** METHODS ***/
+	
 	@FXML
 	void closeWindow(ActionEvent event) {
 		Stage stage = (Stage) btnClose.getScene().getWindow();
