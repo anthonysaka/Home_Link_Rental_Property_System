@@ -11,7 +11,7 @@ public class HomeLink_Controller {
 	
 	public HomeLink_Controller() {
 		super();
-		new ArrayList<Tarjetas>();
+		new ArrayList<User>();
 		new ArrayList<Publicaciones>();
 		new ArrayList<Reserva>();
 		new ArrayList<Propiedad>();

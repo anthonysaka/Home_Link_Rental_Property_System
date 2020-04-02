@@ -13,7 +13,7 @@ import java.util.ArrayList;
  * @developed_by Anthony Sakamoto
  *
  */
-public class User extends ConnectionMySqlDB{
+public class User extends ConnectionMySqlDB {
 	/**
 	 * This class, represent user table on database
 	 */
@@ -205,6 +205,8 @@ public class User extends ConnectionMySqlDB{
 			}
 		}
 /**********************************************/
+		
+
 
 	
 
