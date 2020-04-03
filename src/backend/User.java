@@ -180,12 +180,9 @@ public class User extends ConnectionMySqlDB {
 
 	public static boolean insertarTarjetas(Tarjetas tarjeta) {
 
-		Connection myConnection = getConnectionMySqlDB();		
-		tarjetas.add(tarjeta);
-		//conectar();
 		CallableStatement mySqlStatement = null ; // call stored procedure
 		try {
-			
+			Connection myConnection = getConnectionMySqlDB();	
 			mySqlStatement = (CallableStatement) myConnection.prepareCall("{CALL sp_insert_card(?,?,?,?)}");
 
 			mySqlStatement.setString("pa_numCard", tarjeta.getNumeroTarjeta());
