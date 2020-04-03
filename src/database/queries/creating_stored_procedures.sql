@@ -21,4 +21,12 @@ BEGIN
 END##
 DELIMITER ;
 
+DELIMITER $$
+CREATE PROCEDURE `sp_insert_card`(in pa_numCard varchar(16), in pa_cardOwner varchar(20), in pa_expirationDate date, in pa_cvv int )
+BEGIN
+INSERT INTO t_card (num_card, card_owner, expiration_date)
+VALUES (pa_numCard, pa_cardOwner, pa_expiration_date ,pa_cvv);
+END$$
+DELIMITER ;
+
 
