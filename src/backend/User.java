@@ -179,10 +179,12 @@ public class User extends ConnectionMySqlDB {
 	
 
 	public static boolean insertarTarjetas(Tarjetas tarjeta) {
-		
-		Connection myConnection = getConnectionMySqlDB();		
+
 		CallableStatement mySqlStatement = null ; // call stored procedure
 		try {
+
+
+			Connection myConnection = getConnectionMySqlDB();	
 			mySqlStatement = (CallableStatement) myConnection.prepareCall("{CALL sp_insert_card(?,?,?,?)}");
 			mySqlStatement.setString("pa_numCard", tarjeta.getNumeroTarjeta());
 			mySqlStatement.setString("pa_cardOwner", tarjeta.getRepresentante());
