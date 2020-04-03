@@ -174,7 +174,7 @@ public class User extends ConnectionMySqlDB {
 		this.reservas = reservas;
 	}
 
-/*****************************************************************************************************************************************************************************/
+/*******************************************************************   METHODS    **********************************************************************************************************/
 	
 	
 
@@ -182,13 +182,14 @@ public class User extends ConnectionMySqlDB {
 
 		CallableStatement mySqlStatement = null ; // call stored procedure
 		try {
+
+
 			Connection myConnection = getConnectionMySqlDB();	
 			mySqlStatement = (CallableStatement) myConnection.prepareCall("{CALL sp_insert_card(?,?,?,?)}");
-
 			mySqlStatement.setString("pa_numCard", tarjeta.getNumeroTarjeta());
 			mySqlStatement.setString("pa_cardOwner", tarjeta.getRepresentante());
 			mySqlStatement.setString("pa_expirationDate", tarjeta.getFechaVencimiento());
-			mySqlStatement.setString("pa_cvv", String.valueOf(tarjeta.getCVV()));
+			mySqlStatement.setInt("pa_cvv",tarjeta.getCVV());
 			mySqlStatement.executeQuery();
 			myConnection.close();
 			System.out.println("Su tarjeta ha sido guardada!");
@@ -198,12 +199,5 @@ public class User extends ConnectionMySqlDB {
 			e.printStackTrace();
 			return false;
 		}
-
 	}
-
-
-
-
-
-
 }
