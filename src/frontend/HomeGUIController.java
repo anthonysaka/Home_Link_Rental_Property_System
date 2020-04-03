@@ -107,7 +107,7 @@ public class HomeGUIController extends ListView<PublicacionesParaVisualizar> imp
 		});
 	
 
-		/***
+		/**
 		 * **********************************************************************/
 		/*	publicationListView.setCellFactory(new Callback<JFXListView<PublicacionesParaVisualizar>, ListCell<PublicacionesParaVisualizar>>() {	
 			public ListCell<PublicacionesParaVisualizar> call(JFXListView<PublicacionesParaVisualizar> param) {
