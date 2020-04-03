@@ -8,7 +8,7 @@ public class Tarjetas {
 	private String fechaVencimiento;
 	private int CVV;
 	
-	public Tarjetas(int idTarjeta, String numeroTarjeta, String representante, String fechaVencimiento, int cVV) {
+	public Tarjetas(String numeroTarjeta, String representante, String fechaVencimiento, int cVV) {
 		super();
 		this.idTarjeta = idTarjeta;
 		this.numeroTarjeta = numeroTarjeta;

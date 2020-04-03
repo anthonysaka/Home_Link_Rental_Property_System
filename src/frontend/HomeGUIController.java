@@ -4,6 +4,7 @@ import java.net.URL;
 import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.ResourceBundle;
 
 import com.jfoenix.controls.JFXButton;
@@ -43,10 +44,9 @@ public class HomeGUIController extends ListView<PublicacionesParaVisualizar> imp
 
 
 	ObservableList<PublicacionesParaVisualizar> listPublicationVisual = FXCollections.observableArrayList();
-	ObservableList<String> list = FXCollections.observableArrayList("Puerto plata, RD");
+	ObservableList<String> list = FXCollections.observableArrayList(ConnectionMySqlDB.llenarCombo());
 	
 	ImageView img = new ImageView();
-	
 
 
 
@@ -82,6 +82,9 @@ public class HomeGUIController extends ListView<PublicacionesParaVisualizar> imp
 	public void initialize(URL location, ResourceBundle resources) {
 		// TODO Auto-generated method stub
 		cbxLocation.setItems(list); //temporal
+		
+		
+		
 
 		/**** Propiedades del List View de las publicaciones ****/
 		publicationListView.setExpanded(true);
@@ -134,8 +137,10 @@ public class HomeGUIController extends ListView<PublicacionesParaVisualizar> imp
 			return null;
 		}
 	}
-	
+
 
 	/************************* FIN *******************/
 
 }
+
+
