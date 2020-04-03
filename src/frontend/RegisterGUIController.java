@@ -9,6 +9,7 @@ import com.jfoenix.controls.JFXComboBox;
 import com.jfoenix.controls.JFXPasswordField;
 import com.jfoenix.controls.JFXTextField;
 
+import backend.HomeLink_Controller;
 import backend.User;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -71,7 +72,7 @@ public class RegisterGUIController implements Initializable {
 
 		if (confiPass.equals(password)) {
 			User nUser = new User(name, lastname, gender, typeAccount, username, email, password, today.toString());
-			if (User.create_add_user(nUser)) {
+			if (HomeLink_Controller.create_add_user(nUser)) {
 			System.out.println("con exito");
 			}else {
 				System.out.println("sin exito");
