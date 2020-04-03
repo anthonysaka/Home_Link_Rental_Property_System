@@ -20,9 +20,9 @@ public class ConnectionMySqlDB {
 	/*** Attributes - Variables ***/ 
 
 	/*********************************************************/
-	static Connection conexion = null;
-	static Statement sentencia;
-	static ResultSet resultado;
+	public static Connection conexion = null;
+	public static Statement sentencia;
+	public static ResultSet resultado;
 
 
 	/*********************************************************/

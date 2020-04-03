@@ -41,7 +41,6 @@ public class HomeGUIController extends ListView<PublicacionesParaVisualizar> imp
 	ObservableList<String> list = FXCollections.observableArrayList(ConnectionMySqlDB.llenarCombo());
 
 
-
 	/******* @throws SQLException ******************/
 	@FXML
 	void searchPublication(ActionEvent event) throws SQLException {

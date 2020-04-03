@@ -17,7 +17,7 @@ public class User extends ConnectionMySqlDB {
 	/**
 	 * This class, represent user table on database
 	 */
-	
+
 	private int id;
 	private String name;
 	private String lastname;
@@ -30,10 +30,10 @@ public class User extends ConnectionMySqlDB {
 	private int country_location_id;
 	private String telephone_number;
 	private String created_date;
-	private ArrayList<Tarjetas> tarjetas = new ArrayList<Tarjetas>();;
+	private static ArrayList<Tarjetas> tarjetas;
 	private ArrayList<PublicacionesParaVisualizar> publicaciones = new ArrayList<PublicacionesParaVisualizar>();;
 	private ArrayList<Reserva> reservas = new ArrayList<Reserva>();;
-	
+
 	public User(String name, String lastname, String gender, String type, String username, String email,
 			String password,String created_date) {
 		super();
@@ -49,6 +49,7 @@ public class User extends ConnectionMySqlDB {
 		this.country_location_id = country_location_id;
 		this.telephone_number = telephone_number;
 		this.created_date = created_date;
+		this.tarjetas = new ArrayList<Tarjetas>();
 	}
 
 	public int getId() {
@@ -164,7 +165,7 @@ public class User extends ConnectionMySqlDB {
 	public void setPublicaciones(ArrayList<PublicacionesParaVisualizar> publicaciones) {
 		this.publicaciones = publicaciones;
 	}
-	
+
 	public ArrayList<Reserva> getReserva() {
 		return reservas;
 	}
@@ -172,43 +173,68 @@ public class User extends ConnectionMySqlDB {
 	public void setReserva(ArrayList<Reserva> reservas) {
 		this.reservas = reservas;
 	}
-	
-/********************************************/
+
+	/********************************************/
 	// Method to create user. Send parameters to Database.
-		public static boolean create_add_user(User pUser) {
-			
-			
-			CallableStatement mySqlStatement = null ; // call stored procedure
-			
-			try {
-				Connection myConnection = getConnectionMySqlDB();
-				mySqlStatement = (CallableStatement) myConnection.prepareCall("{CALL sp_createUser(?,?,?,?,?,?,?,?,?)}");
-				
-				mySqlStatement.setString("pa_username", pUser.getUsername());
-				mySqlStatement.setString("pa_email", pUser.getEmail());
-				mySqlStatement.setString("pa_password", pUser.getPassword());
-				mySqlStatement.setString("pa_name", pUser.getName());
-				mySqlStatement.setString("pa_lastname", pUser.getLastname());
-				mySqlStatement.setString("pa_gender", pUser.getGender());
-				mySqlStatement.setString("pa_type", pUser.getType());
-				mySqlStatement.setString("pa_status", pUser.getStatus());
-				mySqlStatement.setString("pa_created_date", pUser.getCreated_date());
-				mySqlStatement.executeQuery();
-				myConnection.close();
-				System.out.println("User creado con exito!");
-				return true;
-				
-			} catch (SQLException e) {
-				System.out.println("User no creado con exito!");
-				e.printStackTrace();
-				return false;
-			}
+	public static boolean create_add_user(User pUser) {
+
+
+		CallableStatement mySqlStatement = null ; // call stored procedure
+
+		try {
+			Connection myConnection = getConnectionMySqlDB();
+			mySqlStatement = (CallableStatement) myConnection.prepareCall("{CALL sp_createUser(?,?,?,?,?,?,?,?,?)}");
+
+			mySqlStatement.setString("pa_username", pUser.getUsername());
+			mySqlStatement.setString("pa_email", pUser.getEmail());
+			mySqlStatement.setString("pa_password", pUser.getPassword());
+			mySqlStatement.setString("pa_name", pUser.getName());
+			mySqlStatement.setString("pa_lastname", pUser.getLastname());
+			mySqlStatement.setString("pa_gender", pUser.getGender());
+			mySqlStatement.setString("pa_type", pUser.getType());
+			mySqlStatement.setString("pa_status", pUser.getStatus());
+			mySqlStatement.setString("pa_created_date", pUser.getCreated_date());
+			mySqlStatement.executeQuery();
+			myConnection.close();
+			System.out.println("User creado con exito!");
+			return true;
+
+		} catch (SQLException e) {
+			System.out.println("User no creado con exito!");
+			e.printStackTrace();
+			return false;
 		}
-/**********************************************/
+	}
+	/**********************************************/
+
+	public static boolean insertarTarjetas(Tarjetas tarjeta) {
 		
+		Connection myConnection = getConnectionMySqlDB();		
+		tarjetas.add(tarjeta);
+		conectar();
+    	CallableStatement mySqlStatement = null ; // call stored procedure
+    	try {
+			mySqlStatement = (CallableStatement) myConnection.prepareCall("{CALL sp_insert_card(?,?,?,?)}");
+
+			mySqlStatement.setString("pa_numCard", tarjeta.getNumeroTarjeta());
+			mySqlStatement.setString("pa_cardOwner", tarjeta.getRepresentante());
+			mySqlStatement.setString("pa_expirationDate", tarjeta.getFechaVencimiento());
+			mySqlStatement.setString("pa_cvv", String.valueOf(tarjeta.getCVV()));
+			mySqlStatement.executeQuery();
+			myConnection.close();
+			System.out.println("Su tarjeta ha sido guardada!");
+			return true;
+		} catch (SQLException e) {
+			System.out.println("Error al guardar su tarjeta!");
+			e.printStackTrace();
+			return false;
+		}
+
+	}
 
 
-	
+
+
 
 
 }
