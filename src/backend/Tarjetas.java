@@ -10,7 +10,7 @@ public class Tarjetas {
 	
 	public Tarjetas(String numeroTarjeta, String representante, String fechaVencimiento, int cVV) {
 		super();
-		this.idTarjeta = idTarjeta;
+		//this.idTarjeta = idTarjeta;
 		this.numeroTarjeta = numeroTarjeta;
 		this.representante = representante;
 		this.fechaVencimiento = fechaVencimiento;
