@@ -81,3 +81,13 @@ CREATE TABLE t_publication (
     FOREIGN KEY (id_property) REFERENCES t_property(id_property)
 );
 
+CREATE TABLE t_image_prueba (
+    -- ATTRIBUTES --
+    id_image INT NOT NULL AUTO_INCREMENT,
+    image LONGBLOB NOT NULL,
+    
+    PRIMARY key (id_image)
+    );
+select * from t_image_prueba
+
+
