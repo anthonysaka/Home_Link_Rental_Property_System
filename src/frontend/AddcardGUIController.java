@@ -34,11 +34,12 @@ public class AddcardGUIController extends ConnectionMySqlDB{
     private Button btnCancel;
 
     @FXML
+    
     void saveCard(ActionEvent event) {
     	
     	String cardNumber = txtcardNumber.getText();
 		String cardName = txtcardName.getText();
-		String cardDate = txtcardDate.getText();
+		String cardDate = txtcardDate.getText() + "00";
 		int cardCvv =  Integer.valueOf(txtcardCvv.getText()) ;
 		Tarjetas card = new Tarjetas(cardNumber, cardName, cardDate, cardCvv);	
 		
