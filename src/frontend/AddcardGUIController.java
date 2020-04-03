@@ -40,17 +40,10 @@ public class AddcardGUIController extends ConnectionMySqlDB{
     	String cardNumber = txtcardNumber.getText();
 		String cardName = txtcardName.getText();
 		String cardDate = txtcardDate.getText() + "00";
-		int cardCvv =  Integer.valueOf(txtcardCvv.getText()) ;
-		Tarjetas card = new Tarjetas(cardNumber, cardName, cardDate, cardCvv);	
-		
-		User.insertarTarjetas(card);
-		
-		
+		int cardCvv =  Integer.valueOf(txtcardCvv.getText());
+		Tarjetas card = new Tarjetas(cardNumber, cardName, cardDate, cardCvv);		
+		User.insertarTarjetas(card);	
     }
-    
-   
-    
-
 }
 
 
