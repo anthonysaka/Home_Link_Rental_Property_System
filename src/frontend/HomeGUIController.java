@@ -65,6 +65,10 @@ public class HomeGUIController extends ListView<PublicacionesParaVisualizar> imp
 	private double yoffset = 0;
 
 
+	
+	
+	
+	
 	ObservableList<PublicacionesParaVisualizar> listPublicationVisual = FXCollections.observableArrayList();
 
 	ObservableList<String> list = FXCollections.observableArrayList(llenarCombo());
