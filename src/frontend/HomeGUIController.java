@@ -27,10 +27,14 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.embed.swing.SwingFXUtils;
 import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.geometry.HPos;
 import javafx.geometry.VPos;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.ContentDisplay;
 import javafx.scene.control.Label;
 import javafx.scene.control.ListCell;
@@ -38,6 +42,7 @@ import javafx.scene.control.ListView;
 import javafx.scene.control.Spinner;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.ColumnConstraints;
 import javafx.scene.layout.GridPane;
@@ -46,6 +51,8 @@ import javafx.scene.layout.Pane;
 import javafx.scene.layout.Priority;
 import javafx.scene.layout.Region;
 import javafx.scene.layout.RowConstraints;
+import javafx.stage.Stage;
+import javafx.stage.StageStyle;
 
 public class HomeGUIController extends ListView<PublicacionesParaVisualizar> implements Initializable {
 
@@ -59,6 +66,9 @@ public class HomeGUIController extends ListView<PublicacionesParaVisualizar> imp
 	private JFXListView<PublicacionesParaVisualizar> publicationListView;
 	@FXML
 	private JFXComboBox<String> cbxLocation;
+	
+	private double xoffset = 0;
+	private double yoffset = 0;
 
 
 	ObservableList<PublicacionesParaVisualizar> listPublicationVisual = FXCollections.observableArrayList();
@@ -81,6 +91,9 @@ public class HomeGUIController extends ListView<PublicacionesParaVisualizar> imp
 
 	/** Initialization of Home Stage Here. Add all that you want start on begin. **/
 	@Override
+	
+	
+	
 	public void initialize(URL location, ResourceBundle resources) {
 		gridView.setHgap(6); 
 		gridView.setVgap(6);
@@ -105,10 +118,7 @@ public class HomeGUIController extends ListView<PublicacionesParaVisualizar> imp
 		AnchorPane.setBottomAnchor(gridView, 0d); 
 		AnchorPane.setRightAnchor(gridView, 0d);
 		paneView.getChildren().add(gridView);
-
-
 		cbxLocation.setItems(list); //temporal
-
 		/**** Propiedades del List View de las publicaciones ****/
 		publicationListView.setExpanded(true);
 		publicationListView.depthProperty().set(1);
@@ -182,6 +192,75 @@ public class HomeGUIController extends ListView<PublicacionesParaVisualizar> imp
 			return null;
 		}
 	}
+	
+	@FXML
+    void addProperty(ActionEvent event) throws IOException {
+		Parent rootRegister = FXMLLoader.load(getClass().getResource("../frontend/AddPropertyGUIController.fxml"));
+		Stage stageRegister = new Stage();
+		Scene sceneRegister = new Scene(rootRegister);
+
+		stageRegister.setScene(sceneRegister);
+		stageRegister.setResizable(false);
+		//stageRegister.setAlwaysOnTop(true);
+		stageRegister.initStyle(StageStyle.TRANSPARENT);
+		//	stageRegister.initModality(Modality.APPLICATION_MODAL);
+		stageRegister.show();
+
+		/*******
+		 * EventHandler to Move Undecorated Window (Stage) Adapted from: StackOverflow
+		 ******/
+		rootRegister.setOnMousePressed(new EventHandler<MouseEvent>() {
+			@Override
+			public void handle(MouseEvent event) {
+				xoffset = stageRegister.getX() - event.getScreenX();
+				yoffset = stageRegister.getY() - event.getScreenY();
+			}
+		});
+		rootRegister.setOnMouseDragged(new EventHandler<MouseEvent>() {
+			@Override
+			public void handle(MouseEvent event) {
+				stageRegister.setX(event.getScreenX() + xoffset);
+				stageRegister.setY(event.getScreenY() + yoffset);
+			}
+		});
+		
+
+    }
+
+    @FXML
+    void addCard(ActionEvent event) throws IOException {
+    	
+    	Parent rootRegister = FXMLLoader.load(getClass().getResource("../frontend/AddCardGUI.fxml"));
+		Stage stageRegister = new Stage();
+		Scene sceneRegister = new Scene(rootRegister);
+
+		stageRegister.setScene(sceneRegister);
+		stageRegister.setResizable(false);
+		//stageRegister.setAlwaysOnTop(true);
+		stageRegister.initStyle(StageStyle.TRANSPARENT);
+		//	stageRegister.initModality(Modality.APPLICATION_MODAL);
+		stageRegister.show();
+
+		/*******
+		 * EventHandler to Move Undecorated Window (Stage) Adapted from: StackOverflow
+		 ******/
+		rootRegister.setOnMousePressed(new EventHandler<MouseEvent>() {
+			@Override
+			public void handle(MouseEvent event) {
+				xoffset = stageRegister.getX() - event.getScreenX();
+				yoffset = stageRegister.getY() - event.getScreenY();
+			}
+		});
+		rootRegister.setOnMouseDragged(new EventHandler<MouseEvent>() {
+			@Override
+			public void handle(MouseEvent event) {
+				stageRegister.setX(event.getScreenX() + xoffset);
+				stageRegister.setY(event.getScreenY() + yoffset);
+			}
+		});
+		
+
+    }
 
 
 	/************************* FIN *******************/

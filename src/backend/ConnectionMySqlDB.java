@@ -51,7 +51,7 @@ public class ConnectionMySqlDB {
 	public static void conectar(){
 		String ruta="jdbc:mysql://localhost:3306/" + name_db;
 		String user="root";
-		String pass="nose@MySql99";
+		String pass="soloyo123";
 		try {
 			//Class.forName("com.mysql.jdbc.Driver");
 			conexion=DriverManager.getConnection(ruta,user,pass); 
