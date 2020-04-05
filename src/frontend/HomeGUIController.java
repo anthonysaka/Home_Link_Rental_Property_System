@@ -66,6 +66,7 @@ public class HomeGUIController extends ListView<PublicacionesParaVisualizar> imp
 
 
 	ObservableList<PublicacionesParaVisualizar> listPublicationVisual = FXCollections.observableArrayList();
+
 	ObservableList<String> list = FXCollections.observableArrayList(llenarCombo());
 	
 
