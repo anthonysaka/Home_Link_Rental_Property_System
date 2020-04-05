@@ -19,13 +19,15 @@ public class PublicacionesParaVisualizar extends ConnectionMySqlDB {
 	private String caracterisitcas;
 	private String usernamePublicador;
 	private String fechaPublicacion;
+	private String titulo;
 	private float precio;
 	private Image imagePreviewHouse;
 	
 	
-	public PublicacionesParaVisualizar(String tipo, String direccion, String feedback, String caracterisitcas,
+	public PublicacionesParaVisualizar(String titulo, String tipo, String direccion, String feedback, String caracterisitcas,
 			String usernamePublicador, String fechaPublicacion, float precio, Image preImaHouse) {
 		super();
+		this.setTitulo(titulo);
 		this.tipo = tipo;
 		this.direccion = direccion;
 		this.feedback = feedback;
@@ -99,12 +101,7 @@ public class PublicacionesParaVisualizar extends ConnectionMySqlDB {
 		this.imagePreviewHouse = imagePreviewHouse;
 	}
 
-
-
-	
-
-
-	/*********************************************/
+	/********************************************/
 	public static ResultSet loadPublication(String address_to_search)
 	{
 		CallableStatement mySqlStatement = null ; // call stored procedure
@@ -121,6 +118,14 @@ public class PublicacionesParaVisualizar extends ConnectionMySqlDB {
 			e.printStackTrace();
 			return null;
 		}
+	}
+
+	public String getTitulo() {
+		return titulo;
+	}
+
+	public void setTitulo(String titulo) {
+		this.titulo = titulo;
 	}
 
 	

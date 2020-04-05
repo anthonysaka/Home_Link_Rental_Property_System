@@ -6,6 +6,8 @@ import java.sql.SQLException;
 
 import com.mysql.cj.jdbc.CallableStatement;
 
+import frontend.LoginGUIController;
+
 import java.util.ArrayList;
 
 
@@ -18,12 +20,12 @@ public class User extends ConnectionMySqlDB {
 	 * This class, represent user table on database
 	 */
 
-	private int id;
+	private static int id;
 	private String name;
 	private String lastname;
 	private String gender;
 	private String type;
-	private String username;
+	private static String username;
 	private String email;
 	private String password;
 	private String status;
@@ -35,6 +37,8 @@ public class User extends ConnectionMySqlDB {
 	private ArrayList<Publicacion> publicacionesBDD = new ArrayList<Publicacion>();
 	
 	private ArrayList<Reserva> reservas = new ArrayList<Reserva>();
+	private ArrayList<Propiedad> propiedades;
+	private static User user1;
 
 	public User(String name, String lastname, String gender, String type, String username, String email,
 			String password,String created_date) {
@@ -52,6 +56,7 @@ public class User extends ConnectionMySqlDB {
 		this.telephone_number = telephone_number;
 		this.created_date = created_date;
 		this.tarjetas = new ArrayList<Tarjetas>();
+		this.propiedades = new ArrayList<Propiedad>();
 	}
 
 	public int getId() {
@@ -60,6 +65,7 @@ public class User extends ConnectionMySqlDB {
 
 	public void setId(int id) {
 		this.id = id;
+		
 	}
 
 	public String getName() {
@@ -176,17 +182,33 @@ public class User extends ConnectionMySqlDB {
 		this.reservas = reservas;
 	}
 
-/*******************************************************************   METHODS    **********************************************************************************************************/
-	
-	public static boolean insertarTarjetas(Tarjetas tarjeta) {
+public ArrayList<Reserva> getReservas() {
+		return reservas;
+	}
 
+	public void setReservas(ArrayList<Reserva> reservas) {
+		this.reservas = reservas;
+	}
+
+	public ArrayList<Propiedad> getPropiedades() {
+		return propiedades;
+	}
+
+	public void setPropiedades(ArrayList<Propiedad> propiedades) {
+		this.propiedades = propiedades;
+	}
+
+/*******************************************************************   METHODS    **********************************************************************************************************/
+  
+	public static boolean insertarTarjetas(Tarjetas tarjeta) {
+	
 		CallableStatement mySqlStatement = null ; // call stored procedure
 		try {
-
-
 			Connection myConnection = getConnectionMySqlDB();	
-			mySqlStatement = (CallableStatement) myConnection.prepareCall("{CALL sp_insert_card(?,?,?,?)}");
+			
+			mySqlStatement = (CallableStatement) myConnection.prepareCall("{CALL sp_insert_card(?,?,?,?,?)}");
 			mySqlStatement.setString("pa_numCard", tarjeta.getNumeroTarjeta());
+			mySqlStatement.setString("pa_username", User.username);
 			mySqlStatement.setString("pa_cardOwner", tarjeta.getRepresentante());
 			mySqlStatement.setString("pa_expirationDate", tarjeta.getFechaVencimiento());
 			mySqlStatement.setInt("pa_cvv",tarjeta.getCVV());
@@ -196,6 +218,33 @@ public class User extends ConnectionMySqlDB {
 			return true;
 		} catch (SQLException e) {
 			System.out.println("Error al guardar su tarjeta!");
+			e.printStackTrace();
+			return false;
+		}
+		
+		
+	}
+	
+	
+	public static boolean insertarPropiedades(Propiedad property) {
+		
+		System.out.println("EL ID ES:"+LoginGUIController.x);
+		
+		CallableStatement mySqlStatement = null ; // call stored procedure
+		try {
+			Connection myConnection = getConnectionMySqlDB();	
+			mySqlStatement = (CallableStatement) myConnection.prepareCall("{CALL sp_insertProperty(?,?,?,?,?)}");
+			mySqlStatement.setString("pa_typeProperty", property.getTipo());
+			mySqlStatement.setString("pa_address", property.getDireccion());
+			mySqlStatement.setString("pa_status", property.getEstatus());
+			mySqlStatement.setString("pa_characteristic",property.getCaracteristicas());
+			mySqlStatement.setInt("pa_userID", LoginGUIController.x);
+			mySqlStatement.executeQuery();
+			myConnection.close();
+			System.out.println("Su propiedad ha sido guardada!");
+			return true;
+		} catch (SQLException e) {
+			System.out.println("Error al guardar su propiedad!");
 			e.printStackTrace();
 			return false;
 		}

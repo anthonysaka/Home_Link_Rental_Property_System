@@ -93,7 +93,7 @@
                   <Cursor fx:constant="HAND" />
                </cursor>
             </JFXButton>
-            <JFXButton prefHeight="40.0" prefWidth="200.0" styleClass="Button" text="OPCION #">
+            <JFXButton fx:id="btnaddCard" onAction="#addCard" prefHeight="40.0" prefWidth="200.0" styleClass="Button" text="Add Card">
                <VBox.margin>
                   <Insets top="6.0" />
                </VBox.margin>
@@ -104,7 +104,7 @@
                   <Cursor fx:constant="HAND" />
                </cursor>
             </JFXButton>
-            <JFXButton prefHeight="40.0" prefWidth="200.0" styleClass="Button" text="OPCION #">
+            <JFXButton fx:id="btnaddProperty" onAction="#addProperty" prefHeight="40.0" prefWidth="200.0" styleClass="Button" text="Add Property">
                <VBox.margin>
                   <Insets top="6.0" />
                </VBox.margin>
