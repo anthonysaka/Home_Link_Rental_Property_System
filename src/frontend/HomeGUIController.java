@@ -64,11 +64,6 @@ public class HomeGUIController extends ListView<PublicacionesParaVisualizar> imp
 	private double xoffset = 0;
 	private double yoffset = 0;
 
-
-	
-	
-	
-	
 	ObservableList<PublicacionesParaVisualizar> listPublicationVisual = FXCollections.observableArrayList();
 
 	ObservableList<String> list = FXCollections.observableArrayList(llenarCombo());
@@ -93,7 +88,7 @@ public class HomeGUIController extends ListView<PublicacionesParaVisualizar> imp
 
 
 	/******* @throws SQLException 
-	 * @throws IOException ******************/
+	 * @throws IOException ***************************************************************/
 	@FXML
 	void searchPublication(ActionEvent event) throws SQLException, IOException {
 		String ubicacionPropiedadABuscar = cbxLocation.getSelectionModel().getSelectedItem().toString();
