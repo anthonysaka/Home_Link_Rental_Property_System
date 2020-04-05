@@ -1,11 +1,16 @@
 package frontend;
 
 import java.io.IOException;
+import java.sql.Connection;
+import java.sql.SQLException;
+
 import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXPasswordField;
 import com.jfoenix.controls.JFXTextField;
+import com.mysql.cj.jdbc.CallableStatement;
 import com.sun.org.apache.xpath.internal.objects.XObject;
 
+import backend.ConnectionMySqlDB;
 import javafx.application.Application;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
@@ -49,7 +54,7 @@ public class LoginGUIController extends Application {
 
 		Parent rootLogin = FXMLLoader.load(LoginGUIController.class.getResource("../frontend/loginGUI.fxml"));
 		Scene sceneLogin = new Scene(rootLogin);
-		
+
 		stageLogin.getIcons().add(new Image(LoginGUIController.class.getResourceAsStream("../frontend/images/bg_home_link.png")));
 		stageLogin.setScene(sceneLogin);
 		stageLogin.setResizable(false);
@@ -93,7 +98,7 @@ public class LoginGUIController extends Application {
 		stageRegister.setResizable(false);
 		//stageRegister.setAlwaysOnTop(true);
 		stageRegister.initStyle(StageStyle.TRANSPARENT);
-	//	stageRegister.initModality(Modality.APPLICATION_MODAL);
+		//	stageRegister.initModality(Modality.APPLICATION_MODAL);
 		stageRegister.show();
 
 		/*******
@@ -116,17 +121,51 @@ public class LoginGUIController extends Application {
 		/***************************************************************/
 	}
 
+	@FXML
+	boolean loginIn(ActionEvent event) throws IOException { //SAKA AQUI AYUDA
+		/*
+		Parent rootRegister = FXMLLoader.load(getClass().getResource("../frontend/HomeGUIController.fxml"));
+		Stage stageRegister = new Stage();
+		Scene sceneRegister = new Scene(rootRegister);
+		stageRegister.setScene(sceneRegister);
+		stageRegister.setResizable(false);
+		//stageRegister.setAlwaysOnTop(true);
+		stageRegister.initStyle(StageStyle.TRANSPARENT);
+	//	stageRegister.initModality(Modality.APPLICATION_MODAL);
+		stageRegister.show();
+		 */
+		CallableStatement mySqlStatement = null ; // call stored procedure
+		try {
+			Connection myConnection = ConnectionMySqlDB.getConnectionMySqlDB();
+			mySqlStatement = (CallableStatement) myConnection.prepareCall("{CALL sp_loginIn(?,?)}");
+			mySqlStatement.setString("pa_username", txtUsername.getText());
+			mySqlStatement.setString("pa_password", txtPassword.getText());
+			ConnectionMySqlDB.resultado = mySqlStatement.executeQuery();
+			if (ConnectionMySqlDB.resultado.first()) {
+				System.out.println("Iniciando sesion... Sesion iniciada con Exito!");	
+			} else {
+				System.out.println("Hubo un error, por favor verifique su User y Password");	
+			}
+			myConnection.close();
+			return true;
+		} catch (SQLException e) {
+			System.out.println("Hubo un error con la base de datos");
+			e.printStackTrace();
+			return false;
+		}
+	}
+
 
 	@FXML
 	void closeWindow(ActionEvent event) {
-		 Stage stage = (Stage) btnClose.getScene().getWindow();
-		 stage.close();
+		Stage stage = (Stage) btnClose.getScene().getWindow();
+		stage.close();
 	}
 
 	@FXML
 	void minimizeWindow(ActionEvent event) {
-		 Stage stage = (Stage) btnClose.getScene().getWindow();
-		 stage.setIconified(true);
+		Stage stage = (Stage) btnClose.getScene().getWindow();
+		stage.setIconified(true);
 	}
 
 

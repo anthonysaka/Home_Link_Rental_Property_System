@@ -57,7 +57,7 @@ public class HomeGUIController extends ListView<PublicacionesParaVisualizar> imp
 		String ubicacionPropiedadABuscar = cbxLocation.getSelectionModel().getSelectedItem().toString();
 		ResultSet resultBD;
 
-
+		
 		if (!ubicacionPropiedadABuscar.isEmpty()) {
 			resultBD = PublicacionesParaVisualizar.loadPublication(ubicacionPropiedadABuscar);
 			// Esto llena als publicaciones para visualizar.
