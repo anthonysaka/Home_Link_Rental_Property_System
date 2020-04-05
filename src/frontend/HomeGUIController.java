@@ -64,33 +64,6 @@ public class HomeGUIController extends ListView<PublicacionesParaVisualizar> imp
 	ObservableList<PublicacionesParaVisualizar> listPublicationVisual = FXCollections.observableArrayList();
 	ObservableList<String> list = FXCollections.observableArrayList(ConnectionMySqlDB.llenarCombo());
 
-
-
-	/******* @throws SQLException ******************/
-	@FXML
-	void searchPublication(ActionEvent event) throws SQLException {
-		//Publication_sql_query pusql = new Publication_sql_query();
-		String ubicacionPropiedadABuscar = cbxLocation.getSelectionModel().getSelectedItem().toString();
-		ResultSet resultBD;
-
-		
-		if (!ubicacionPropiedadABuscar.isEmpty()) {
-			resultBD = PublicacionesParaVisualizar.loadPublication(ubicacionPropiedadABuscar);
-			// Esto llena als publicaciones para visualizar.
-			while (resultBD.next()) {
-				listPublicationVisual.add(new PublicacionesParaVisualizar(resultBD.getString("type_property"), resultBD.getString("address"), 
-						resultBD.getString("feedbacks"), resultBD.getString("characteristic"), resultBD.getString("Dueño"),
-						resultBD.getString("publicaction_date"), resultBD.getFloat("price")));
-			}
-		
-			publicationListView.setItems(listPublicationVisual);
-			resultBD.close();
-
-		}	
-
-	}
-
-
 	
 
 	ImageView imgView = new ImageView();
