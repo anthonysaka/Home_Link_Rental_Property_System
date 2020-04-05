@@ -64,7 +64,6 @@ public class HomeGUIController extends ListView<PublicacionesParaVisualizar> imp
 	ObservableList<PublicacionesParaVisualizar> listPublicationVisual = FXCollections.observableArrayList();
 	ObservableList<String> list = FXCollections.observableArrayList(ConnectionMySqlDB.llenarCombo());
 
-<<<<<<< HEAD
 
 
 	/******* @throws SQLException ******************/
@@ -93,7 +92,7 @@ public class HomeGUIController extends ListView<PublicacionesParaVisualizar> imp
 
 
 	
-=======
+
 	ImageView imgView = new ImageView();
 	Label lblTitulo = new Label("  ANADIR COLUMNA TITULO EN LA BASE DE DATOS  ");
 	Label lblTipo = new Label();
@@ -105,7 +104,7 @@ public class HomeGUIController extends ListView<PublicacionesParaVisualizar> imp
 	Label lblPrecio = new Label();
 	GridPane gridView = new GridPane();
 	AnchorPane paneView = new AnchorPane();
->>>>>>> branch 'master' of https://github.com/anthonysaka/Home_Link_Rental_Property_System.git
+
 
 	/** Initialization of Home Stage Here. Add all that you want start on begin. **/
 	@Override
