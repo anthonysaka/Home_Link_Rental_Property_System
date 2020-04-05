@@ -85,7 +85,7 @@ public class LoginGUIController extends Application {
 	@FXML
 	public void openRegisterForm(ActionEvent event) throws IOException {
 
-		Parent rootRegister = FXMLLoader.load(getClass().getResource("../frontend/AddcardGUIController.fxml"));
+		Parent rootRegister = FXMLLoader.load(getClass().getResource("../frontend/homeGUI.fxml"));
 		Stage stageRegister = new Stage();
 		Scene sceneRegister = new Scene(rootRegister);
 

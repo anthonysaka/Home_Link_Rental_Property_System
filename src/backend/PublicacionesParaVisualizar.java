@@ -1,10 +1,15 @@
 package backend;
 
+
 import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
 import com.mysql.cj.jdbc.CallableStatement;
+
+import javafx.scene.image.Image;
+
+
 
 public class PublicacionesParaVisualizar extends ConnectionMySqlDB {
 	
@@ -15,10 +20,11 @@ public class PublicacionesParaVisualizar extends ConnectionMySqlDB {
 	private String usernamePublicador;
 	private String fechaPublicacion;
 	private float precio;
+	private Image imagePreviewHouse;
 	
 	
 	public PublicacionesParaVisualizar(String tipo, String direccion, String feedback, String caracterisitcas,
-			String usernamePublicador, String fechaPublicacion, float precio) {
+			String usernamePublicador, String fechaPublicacion, float precio, Image preImaHouse) {
 		super();
 		this.tipo = tipo;
 		this.direccion = direccion;
@@ -27,6 +33,7 @@ public class PublicacionesParaVisualizar extends ConnectionMySqlDB {
 		this.usernamePublicador = usernamePublicador;
 		this.fechaPublicacion = fechaPublicacion;
 		this.precio = precio;
+		this.imagePreviewHouse = preImaHouse;
 	}
 
 	public String getTipo() {
@@ -84,9 +91,17 @@ public class PublicacionesParaVisualizar extends ConnectionMySqlDB {
 	public void setPrecio(float precio) {
 		this.precio = precio;
 	}
+	public Image getImagePreviewHouse() {
+		return imagePreviewHouse;
+	}
+
+	public void setImagePreviewHouse(Image imagePreviewHouse) {
+		this.imagePreviewHouse = imagePreviewHouse;
+	}
 
 
 
+	
 
 
 	/*********************************************/
@@ -107,6 +122,7 @@ public class PublicacionesParaVisualizar extends ConnectionMySqlDB {
 			return null;
 		}
 	}
+
 	
 	
 	/********************************************/
