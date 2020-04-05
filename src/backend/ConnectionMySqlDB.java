@@ -1,5 +1,5 @@
 package backend;
-/*
+
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
@@ -7,7 +7,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 
 import com.mysql.cj.xdevapi.Statement;
- */
+ 
 import java.sql.*;
 import java.util.ArrayList;
 
@@ -26,7 +26,11 @@ public class ConnectionMySqlDB {
 
 	private final static String name_db = "home_link_db";
 	private final static String user_db = "root";
-	private final static String password_db = "nose@MySql99";
+	//private final static String password_db = "nose@MySql99";
+
+
+	private final static String password_db = "soloyo123";
+	
 
 	private final static String url_db = "jdbc:mysql://localhost:3306/" + name_db;
 	private static Connection connect = null;
