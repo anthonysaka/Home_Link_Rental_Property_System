@@ -102,10 +102,20 @@ CREATE TABLE t_imagenes (
 			AND t_imagenes.descripcion LIKE '%preview%';
             
 select * from t_imagenes;
-
+select * from t_user;
 select * from t_publication;
-
 select * from t_property;
 
+UPDATE t_publication 
+SET titulo_publicacion = "La real casa en POP"
+WHERE id_publication = 1;
+
+ALTER TABLE t_property MODIFY type_property varchar(30);
+select * from t_card;
+ALTER TABLE t_card CHANGE COLUMN card_owner user_owner varchar (15) NOT NULL;
+alter table t_card add FOREIGN KEY (user_owner) REFERENCES t_user(username);
+ALTER TABLE t_publication CHANGE COLUMN publicaction_date publication_date datetime NOT NULL DEFAULT(current_date());
+Alter table t_imagenes drop id_publication
+alter table t_publication add foreign key (id_imagen_preview) references t_imagenes(id_image)
 
 

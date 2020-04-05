@@ -21,9 +21,6 @@ public class ConnectionMySqlDB {
 
 	/*********************************************************/
 	public static Connection conexion = null;
-	public static Statement sentencia;
-	public static ResultSet resultado;
-
 
 	/*********************************************************/
 
@@ -49,46 +46,4 @@ public class ConnectionMySqlDB {
 		}
 		return connect; //Return an instance of database connection
 	}
-
-	public static void conectar(){
-		String ruta="jdbc:mysql://localhost:3306/" + name_db;
-		String user="root";
-		String pass="nose@MySql99";
-		try {
-			//Class.forName("com.mysql.jdbc.Driver");
-			conexion=DriverManager.getConnection(ruta,user,pass); 
-			sentencia= conexion.createStatement();
-			System.out.println("Conectado");
-		} catch (Exception e) {
-			System.out.println("No conectado");
-		}
-	}
-
-	public static ArrayList<String> llenarCombo(){
-
-		conectar();
-
-		ArrayList<String> lista = new ArrayList<String>();
-
-		String Query = "SELECT * FROM t_property";
-
-		try {
-			resultado = sentencia.executeQuery(Query);
-			System.out.println("Correcto");
-		} catch (Exception e) {
-			System.out.println("No Correcto");
-
-		}
-		try {
-			while(resultado.next()){
-				lista.add(resultado.getString("Address"));
-			}
-		} catch (Exception e) {
-		}
-
-		return lista;
-	}
-
-
-
 }

@@ -58,6 +58,7 @@ public class User extends ConnectionMySqlDB {
 
 	public void setId(int id) {
 		this.id = id;
+		
 	}
 
 	public String getName() {
@@ -182,8 +183,6 @@ public class User extends ConnectionMySqlDB {
 
 		CallableStatement mySqlStatement = null ; // call stored procedure
 		try {
-
-
 			Connection myConnection = getConnectionMySqlDB();	
 			mySqlStatement = (CallableStatement) myConnection.prepareCall("{CALL sp_insert_card(?,?,?,?)}");
 			mySqlStatement.setString("pa_numCard", tarjeta.getNumeroTarjeta());

@@ -9,6 +9,7 @@ import java.net.URL;
 import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.ResourceBundle;
 
@@ -30,6 +31,7 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.geometry.HPos;
+import javafx.geometry.Insets;
 import javafx.geometry.VPos;
 import javafx.scene.control.ContentDisplay;
 import javafx.scene.control.Label;
@@ -46,6 +48,7 @@ import javafx.scene.layout.Pane;
 import javafx.scene.layout.Priority;
 import javafx.scene.layout.Region;
 import javafx.scene.layout.RowConstraints;
+import javafx.util.Callback;
 
 public class HomeGUIController extends ListView<PublicacionesParaVisualizar> implements Initializable {
 
@@ -62,74 +65,20 @@ public class HomeGUIController extends ListView<PublicacionesParaVisualizar> imp
 
 
 	ObservableList<PublicacionesParaVisualizar> listPublicationVisual = FXCollections.observableArrayList();
-	ObservableList<String> list = FXCollections.observableArrayList(ConnectionMySqlDB.llenarCombo());
+	ObservableList<String> list = FXCollections.observableArrayList(llenarCombo());
+	
 
-	ImageView imgView = new ImageView();
-	Label lblTitulo = new Label("  ANADIR COLUMNA TITULO EN LA BASE DE DATOS  ");
-	Label lblTipo = new Label();
-	Label lblDir = new Label();
-	Label lblFeedBack = new Label();
-	Label lblCaract = new Label();
-	Label lblUsernPubli = new Label();
-	Label lblFechaPubli = new Label();
-	Label lblPrecio = new Label();
-	GridPane gridView = new GridPane();
-	AnchorPane paneView = new AnchorPane();
 
 	/** Initialization of Home Stage Here. Add all that you want start on begin. **/
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
-		gridView.setHgap(6); 
-		gridView.setVgap(6);
-		gridView.setGridLinesVisible(true);
-		
-		imgView.setFitWidth(300);
-		imgView.setFitHeight(150);
-		imgView.setPreserveRatio(true);
-		
-		lblTitulo.setStyle("-fx-font-weight: bold; -fx-font-size: 1.5em;");
-		lblTipo.setStyle("-fx-font-weight: bold; -fx-font-size: 1.5em;");
-		lblCaract.setStyle("-fx-font-weight: bold; -fx-font-size: 1.5em;");
-		
-		gridView.add(imgView, 0, 0, 1, 3);
-		gridView.add(lblTitulo, 1, 2);
-	//	gridView.add(lblCaract, columnIndex, rowIndex);
-		
-
-
-		AnchorPane.setTopAnchor(gridView, 0d); 
-		AnchorPane.setLeftAnchor(gridView, 0d); 
-		AnchorPane.setBottomAnchor(gridView, 0d); 
-		AnchorPane.setRightAnchor(gridView, 0d);
-		paneView.getChildren().add(gridView);
-
-
-		cbxLocation.setItems(list); //temporal
-
-		/**** Propiedades del List View de las publicaciones ****/
-		publicationListView.setExpanded(true);
-		publicationListView.depthProperty().set(1);
-
-		/********************************************************/
-		publicationListView.setCellFactory(param -> new ListCell<PublicacionesParaVisualizar>() {
-			public void updateItem(PublicacionesParaVisualizar item, boolean empty) {
-				super.updateItem(item, empty);
-				setGraphic(null);
-				setText(null);
-				setContentDisplay(ContentDisplay.LEFT); 
-				if (!empty && item != null) {
-					imgView.setImage(item.getImagePreviewHouse());
-					lblTipo.setText(item.getTipo());
-					lblCaract.setText(item.getCaracterisitcas());
-					lblDir.setText(item.getDireccion());
-					//final String text = String.format("%s %s %s %s %s %s %f", item.getTipo(), item.getDireccion(), item.getFeedback(), item.getCaracterisitcas(),
-					//		item.getUsernamePublicador(), item.getFechaPublicacion(), item.getPrecio());
-					//setText(text);
-					setText(null);
-					//setGraphic(imgView);
-					setGraphic(paneView);
-					setContentDisplay(ContentDisplay.GRAPHIC_ONLY);
-				}
+		cbxLocation.setItems(list);
+		publicationListView.setCellFactory(new Callback<ListView<PublicacionesParaVisualizar>, ListCell<PublicacionesParaVisualizar>>() {
+			
+			@Override
+			public ListCell<PublicacionesParaVisualizar> call(ListView<PublicacionesParaVisualizar> panListView) {
+				// TODO Auto-generated method stub
+				return new CustomListCell();
 			}
 		});
 	}
@@ -139,7 +88,6 @@ public class HomeGUIController extends ListView<PublicacionesParaVisualizar> imp
 	 * @throws IOException ******************/
 	@FXML
 	void searchPublication(ActionEvent event) throws SQLException, IOException {
-		//Publication_sql_query pusql = new Publication_sql_query();
 		String ubicacionPropiedadABuscar = cbxLocation.getSelectionModel().getSelectedItem().toString();
 		ResultSet resultBD;
 
@@ -152,11 +100,10 @@ public class HomeGUIController extends ListView<PublicacionesParaVisualizar> imp
 				ByteArrayInputStream bis = new ByteArrayInputStream(f51);
 				BufferedImage read = ImageIO.read(bis);
 				Image imgs = SwingFXUtils.toFXImage(read, null);
-				listPublicationVisual.add(new PublicacionesParaVisualizar(resultBD.getString("type_property"), resultBD.getString("address"), 
+				listPublicationVisual.add(new PublicacionesParaVisualizar(resultBD.getString("titulo_publicacion"), resultBD.getString("type_property"), resultBD.getString("address"), 
 						resultBD.getString("feedbacks"), resultBD.getString("characteristic"), resultBD.getString("Dueño"),
-						resultBD.getString("publicaction_date"), resultBD.getFloat("price"), imgs));
+						resultBD.getString("publication_date"), resultBD.getFloat("price"), imgs));
 			}
-
 			publicationListView.setItems(listPublicationVisual);
 			resultBD.close();
 		}	
@@ -180,6 +127,105 @@ public class HomeGUIController extends ListView<PublicacionesParaVisualizar> imp
 		}
 	}
 
+	public static ArrayList<String> llenarCombo()
+	{
+		Statement sentencia = null;
+		ResultSet resultado = null;
+		ArrayList<String> lista = new ArrayList<String>();
+		String Query = "SELECT DISTINCT address FROM t_property";
+		try {
+			Connection myConnection = ConnectionMySqlDB.getConnectionMySqlDB();
+			sentencia = myConnection.createStatement();
+			resultado = sentencia.executeQuery(Query);
+			System.out.println("Correcto");
+		} catch (Exception e) {
+			System.out.println("No Correcto");
+		}
+		try {
+			while(resultado.next()){
+				lista.add(resultado.getString("address"));
+			}
+		} catch (Exception e) {
+		}
+		return lista;
+	}
+
+	
+	private class CustomListCell extends ListCell<PublicacionesParaVisualizar> {
+		ImageView imgView = new ImageView();
+		ImageView iconStar = new ImageView(new Image("/frontend/starIcon.png"));
+		Label lblTitulo = new Label();
+		Label lblTipo = new Label();
+		//Label lblDir = new Label();
+		Label lblFeedBack = new Label();
+		Label lblCaract = new Label();
+		//Label lblUsernPubli = new Label();
+	//	Label lblFechaPubli = new Label();
+		Label lblPrecio = new Label();
+		GridPane gridView = new GridPane();
+		AnchorPane paneView = new AnchorPane();
+		
+		public CustomListCell() {
+			gridView.setHgap(6); 
+			gridView.setVgap(6);
+			//gridView.setGridLinesVisible(true);
+			GridPane.setHgrow(gridView,Priority.ALWAYS);
+			GridPane.setVgrow(gridView,Priority.ALWAYS);
+			imgView.setFitWidth(300);
+			imgView.setFitHeight(200);
+			imgView.setPreserveRatio(true);
+			lblTipo.setStyle("-fx-font-family: Franklin Gothic Medium; -fx-font-size: 1.2em; -fx-text-fill: GRAY; -fx-font-style: italic;");
+			lblTitulo.setStyle("-fx-font-family: Franklin Gothic Medium; -fx-font-weight: bold;"
+					+ " -fx-font-size: 1.5em; -fx-text-fill: BLACK;");
+			lblCaract.setStyle("-fx-font-family: Franklin Gothic Medium;-fx-font-size: 1.2em; -fx-text-fill: GRAY;");
+			lblPrecio.setStyle("-fx-font-family: Franklin Gothic Medium; -fx-font-weight: bold; "
+					+ "-fx-font-size: 1.2em; -fx-text-fill: BLACK;");
+			lblFeedBack.setStyle("-fx-font-family: Franklin Gothic Medium; -fx-font-size: 1.0em; -fx-text-fill: black; -fx-font-style: normal;");
+			gridView.add(imgView, 0, 0, 1, 5);
+			gridView.add(lblTipo, 1, 1);
+			gridView.add(lblTitulo, 1, 2, 1, 1);
+			gridView.add(lblCaract, 1, 3, 2,1);
+			gridView.add(lblPrecio, 2, 4);
+			gridView.add(iconStar, 2, 1);
+			gridView.add(lblFeedBack, 2, 1);
+			GridPane.setMargin(lblTitulo, new Insets(0, 0, 0, 10));
+			GridPane.setMargin(lblTipo, new Insets(0, 0, 0, 10));
+			GridPane.setMargin(lblCaract, new Insets(0, 0, 0, 10));
+			GridPane.setMargin(iconStar, new Insets(0, 0, 0, 95));
+			GridPane.setMargin(lblFeedBack, new Insets(0, 0, 0, 120));
+			GridPane.setMargin(lblPrecio, new Insets(0, 0, 0, 120));
+			AnchorPane.setTopAnchor(gridView, 0d); 
+			AnchorPane.setLeftAnchor(gridView, 0d); 
+			AnchorPane.setBottomAnchor(gridView, 0d); 
+			AnchorPane.setRightAnchor(gridView, 0d);
+			paneView.getChildren().add(gridView);
+		}
+		/********************************************************/
+		
+			public void updateItem(PublicacionesParaVisualizar item, boolean empty) {
+				super.updateItem(item, empty);
+				setContentDisplay(ContentDisplay.LEFT); 
+				if (!empty && item != null) {
+					imgView.setImage(item.getImagePreviewHouse());
+					lblTipo.setText(item.getTipo());
+					lblTitulo.setText(item.getTitulo());
+					lblCaract.setText(item.getCaracterisitcas());
+					lblPrecio.setText(String.valueOf(item.getPrecio()));
+					lblFeedBack.setText(item.getFeedback());
+					setGraphic(paneView);
+					setContentDisplay(ContentDisplay.GRAPHIC_ONLY);
+				}else {
+					setText(null);
+					setGraphic(null);
+				}
+			}
+		
+	
+	
+}
+	
+	
+	
 
 	/************************* FIN *******************/
 
