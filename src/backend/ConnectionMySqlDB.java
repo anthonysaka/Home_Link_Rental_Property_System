@@ -29,7 +29,12 @@ public class ConnectionMySqlDB {
 
 	private final static String name_db = "home_link_db";
 	private final static String user_db = "root";
+<<<<<<< HEAD
 	private final static String password_db = "soloyo123";
+=======
+	private final static String password_db = "nose@MySql99";
+	
+>>>>>>> branch 'master' of https://github.com/anthonysaka/Home_Link_Rental_Property_System.git
 	private final static String url_db = "jdbc:mysql://localhost:3306/" + name_db;
 
 	private static Connection connect = null;
@@ -38,7 +43,6 @@ public class ConnectionMySqlDB {
 	public static Connection getConnectionMySqlDB()
 	{
 		try {
-			//Class.forName("com.mysql.jdbc.Driver");
 			connect = DriverManager.getConnection(url_db, user_db, password_db);
 			if (connect != null) {
 				System.out.println("[success] Connected to the database: "+ name_db);
@@ -53,9 +57,9 @@ public class ConnectionMySqlDB {
 	public static void conectar(){
 		String ruta="jdbc:mysql://localhost:3306/" + name_db;
 		String user="root";
-		String pass="soloyo123";
+		String pass="nose@MySql99";
 		try {
-			Class.forName("com.mysql.jdbc.Driver");
+			//Class.forName("com.mysql.jdbc.Driver");
 			conexion=DriverManager.getConnection(ruta,user,pass); 
 			sentencia= conexion.createStatement();
 			System.out.println("Conectado");

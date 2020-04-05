@@ -12,21 +12,18 @@ DELIMITER ;
 DELIMITER ##
 CREATE PROCEDURE sp_search_publication_by_dir(IN pa_direccion VARCHAR(30))
 BEGIN
-	SELECT t_property.type_property, t_property.address, t_property.feedbacks,
-			t_property.characteristic, t_user.username AS `Dueño`, t_publication.price, t_publication.publicaction_date
+		SELECT t_property.type_property, t_property.address, t_property.status_property, t_property.feedbacks,
+			t_property.characteristic, t_user.username AS `Dueño`, t_publication.price, t_publication.publicaction_date,
+            t_imagenes.image
     FROM t_property 
 	INNER JOIN t_user ON t_property.id_user_property = t_user.id
     INNER JOIN t_publication ON t_property.id_property = t_publication.id_property
-    WHERE address = pa_direccion AND status_property = "Disponible";
+    INNER JOIN t_imagenes ON t_publication.id_publication = t_imagenes.id_publication
+    WHERE address = 'Puerto plata, RD' AND status_property = "Disponible" 
+			AND t_imagenes.descripcion LIKE '%preview%';
+
 END##
 DELIMITER ;
-
-DELIMITER $$
-CREATE PROCEDURE `sp_insert_card`(in pa_numCard varchar(16), in pa_cardOwner varchar(20), in pa_expirationDate date, in pa_cvv int )
-BEGIN
-INSERT INTO t_card (num_card, card_owner, expiration_date)
-VALUES (pa_numCard, pa_cardOwner, pa_expiration_date ,pa_cvv);
-END$$
-DELIMITER ;
+ 
 
 
