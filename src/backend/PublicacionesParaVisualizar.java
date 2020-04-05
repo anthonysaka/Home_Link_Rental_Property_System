@@ -101,7 +101,7 @@ public class PublicacionesParaVisualizar extends ConnectionMySqlDB {
 		this.imagePreviewHouse = imagePreviewHouse;
 	}
 
-	/*********************************************/
+	/********************************************/
 	public static ResultSet loadPublication(String address_to_search)
 	{
 		CallableStatement mySqlStatement = null ; // call stored procedure

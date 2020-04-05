@@ -68,7 +68,6 @@ public class HomeGUIController extends ListView<PublicacionesParaVisualizar> imp
 	ObservableList<String> list = FXCollections.observableArrayList(llenarCombo());
 	
 
-
 	/** Initialization of Home Stage Here. Add all that you want start on begin. **/
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {

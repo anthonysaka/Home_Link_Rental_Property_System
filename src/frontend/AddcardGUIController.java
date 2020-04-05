@@ -3,6 +3,8 @@ package frontend;
 import java.sql.SQLException;
 import java.util.ArrayList;
 
+import javax.swing.JOptionPane;
+
 import com.jfoenix.controls.JFXTextField;
 import com.mysql.cj.jdbc.CallableStatement;
 
@@ -12,6 +14,7 @@ import backend.User;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
+import javafx.stage.Stage;
 
 public class AddcardGUIController extends ConnectionMySqlDB{
 
@@ -42,8 +45,24 @@ public class AddcardGUIController extends ConnectionMySqlDB{
 		String cardDate = txtcardDate.getText() + "00";
 		int cardCvv =  Integer.valueOf(txtcardCvv.getText());
 		Tarjetas card = new Tarjetas(cardNumber, cardName, cardDate, cardCvv);		
-		User.insertarTarjetas(card);	
+		
+		if(cardNumber.length() == 16)
+		{
+			User.insertarTarjetas(card);	
+			JOptionPane.showMessageDialog(null,"Correcto","Registrado correctamente",JOptionPane.INFORMATION_MESSAGE);
+			 Stage stage = (Stage) btnCancel.getScene().getWindow();
+			 stage.close();
+		}
+		
     }
+
+    @FXML
+    void closeWindow(ActionEvent event) {
+    	 Stage stage = (Stage) btnCancel.getScene().getWindow();
+		 stage.close();
+    }
+    
+    
 }
 
 
