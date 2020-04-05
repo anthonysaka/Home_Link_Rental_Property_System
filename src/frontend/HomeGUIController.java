@@ -64,36 +64,7 @@ public class HomeGUIController extends ListView<PublicacionesParaVisualizar> imp
 	ObservableList<PublicacionesParaVisualizar> listPublicationVisual = FXCollections.observableArrayList();
 	ObservableList<String> list = FXCollections.observableArrayList(ConnectionMySqlDB.llenarCombo());
 
-<<<<<<< HEAD
 
-
-	/******* @throws SQLException ******************/
-	@FXML
-	void searchPublication(ActionEvent event) throws SQLException {
-		//Publication_sql_query pusql = new Publication_sql_query();
-		String ubicacionPropiedadABuscar = cbxLocation.getSelectionModel().getSelectedItem().toString();
-		ResultSet resultBD;
-
-		
-		if (!ubicacionPropiedadABuscar.isEmpty()) {
-			resultBD = PublicacionesParaVisualizar.loadPublication(ubicacionPropiedadABuscar);
-			// Esto llena als publicaciones para visualizar.
-			while (resultBD.next()) {
-				listPublicationVisual.add(new PublicacionesParaVisualizar(resultBD.getString("type_property"), resultBD.getString("address"), 
-						resultBD.getString("feedbacks"), resultBD.getString("characteristic"), resultBD.getString("Dueño"),
-						resultBD.getString("publicaction_date"), resultBD.getFloat("price")));
-			}
-		
-			publicationListView.setItems(listPublicationVisual);
-			resultBD.close();
-
-		}	
-
-	}
-
-
-	
-=======
 	ImageView imgView = new ImageView();
 	Label lblTitulo = new Label("  ANADIR COLUMNA TITULO EN LA BASE DE DATOS  ");
 	Label lblTipo = new Label();
@@ -105,7 +76,6 @@ public class HomeGUIController extends ListView<PublicacionesParaVisualizar> imp
 	Label lblPrecio = new Label();
 	GridPane gridView = new GridPane();
 	AnchorPane paneView = new AnchorPane();
->>>>>>> branch 'master' of https://github.com/anthonysaka/Home_Link_Rental_Property_System.git
 
 	/** Initialization of Home Stage Here. Add all that you want start on begin. **/
 	@Override

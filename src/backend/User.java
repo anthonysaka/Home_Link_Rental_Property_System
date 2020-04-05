@@ -32,6 +32,8 @@ public class User extends ConnectionMySqlDB {
 	private String created_date;
 	private static ArrayList<Tarjetas> tarjetas;
 	private ArrayList<PublicacionesParaVisualizar> publicaciones = new ArrayList<PublicacionesParaVisualizar>();
+	private ArrayList<Publicacion> publicacionesBDD = new ArrayList<Publicacion>();
+	
 	private ArrayList<Reserva> reservas = new ArrayList<Reserva>();
 
 	public User(String name, String lastname, String gender, String type, String username, String email,
@@ -176,8 +178,6 @@ public class User extends ConnectionMySqlDB {
 
 /*******************************************************************   METHODS    **********************************************************************************************************/
 	
-	
-
 	public static boolean insertarTarjetas(Tarjetas tarjeta) {
 
 		CallableStatement mySqlStatement = null ; // call stored procedure
@@ -200,4 +200,30 @@ public class User extends ConnectionMySqlDB {
 			return false;
 		}
 	}
+
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+	
+	public static boolean insertarPublicaciones(Publicacion publication) {
+		CallableStatement mySqlStatement = null ; // call stored procedure
+		
+		try {
+			Connection myConnection = getConnectionMySqlDB();	
+			mySqlStatement = (CallableStatement) myConnection.prepareCall("{CALL sp_insert_publicacion(?,?)}");
+						
+			mySqlStatement.setInt("pa_idPropiedad", publication.getIdPropiedad() ); //se seleccionara de un cbx
+			mySqlStatement.setFloat("pa_precio", publication.getPrecio());
+			mySqlStatement.executeQuery();
+			myConnection.close();
+			System.out.println("Su publicacion ha sido guardada!");
+			return true;
+		} catch (SQLException e) {
+			System.out.println("Error al insertar su publicacion!");
+			e.printStackTrace();
+			return false;
+		}		
+		
+	}
+/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+	
 }

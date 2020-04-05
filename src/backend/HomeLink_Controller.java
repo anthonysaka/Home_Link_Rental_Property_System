@@ -58,6 +58,7 @@ public class HomeLink_Controller extends ConnectionMySqlDB {
 		this.reservas = reservas;
 	}
 	
+	
 	// Method to create user. Send parameters to Database.
 		public static boolean create_add_user(User pUser) {
 
@@ -88,6 +89,12 @@ public class HomeLink_Controller extends ConnectionMySqlDB {
 				return false;
 			}
 		}
+		
+		
+		
+		
+		///////////METODO BUSCA ID_AMD
 	
+		
 
 }

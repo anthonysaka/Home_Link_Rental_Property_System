@@ -43,10 +43,11 @@ public class AddcardGUIController extends ConnectionMySqlDB{
     	String cardNumber = txtcardNumber.getText();
 		String cardName = txtcardName.getText();
 		String cardDate = txtcardDate.getText() + "00";
-		int cardCvv =  Integer.valueOf(txtcardCvv.getText());
+		String cardCvvTexto = txtcardCvv.getText();
+		int cardCvv =  Integer.valueOf(cardCvvTexto);
 		Tarjetas card = new Tarjetas(cardNumber, cardName, cardDate, cardCvv);		
 		
-		if(cardNumber.length() == 16)
+		if(cardNumber.length() == 16 && cardName.length() <=20 && cardDate.length() ==6 && cardCvv ==3)
 		{
 			User.insertarTarjetas(card);	
 			JOptionPane.showMessageDialog(null,"Correcto","Registrado correctamente",JOptionPane.INFORMATION_MESSAGE);
@@ -54,13 +55,34 @@ public class AddcardGUIController extends ConnectionMySqlDB{
 			 stage.close();
 		}
 		
+		else if(cardNumber.isEmpty() || cardName.isEmpty() || cardDate.isEmpty() || cardCvvTexto.isEmpty()) {
+			JOptionPane.showMessageDialog(null,"Advertencia","Complete todos los campos",JOptionPane.WARNING_MESSAGE);
+			 Stage stage = (Stage) btnCancel.getScene().getWindow();
+			 stage.close();
+		}
+		
+		else {
+			txtcardNumber.setText("");
+			txtcardNumber.setText("");
+			txtcardName.setText("");
+			txtcardDate.setText("");
+			txtcardCvv.setText("");
+			JOptionPane.showMessageDialog(null,"Error","Registrado incorrecto",JOptionPane.ERROR_MESSAGE);
+			Stage stage = (Stage) btnCancel.getScene().getWindow();
+			 stage.close();
+
+		}
+		
     }
 
     @FXML
-    void closeWindow(ActionEvent event) {
-    	 Stage stage = (Stage) btnCancel.getScene().getWindow();
+    void close(ActionEvent event) {
+    	Stage stage = (Stage) btnCancel.getScene().getWindow();
 		 stage.close();
+
     }
+    
+    
     
     
 }
