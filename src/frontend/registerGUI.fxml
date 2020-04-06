@@ -16,7 +16,7 @@
 
 <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="540.0" prefWidth="750.0" style="-fx-background-color: F5F5F5;" stylesheets="@styleRegister.css" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="frontend.RegisterGUIController">
    <children>
-      <Text layoutX="121.0" layoutY="78.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Create your Home Link Account" AnchorPane.leftAnchor="121.0" AnchorPane.rightAnchor="120.5439453125" AnchorPane.topAnchor="41.310546875">
+      <Text layoutX="121.0" layoutY="80.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Create your Home Link Account" AnchorPane.leftAnchor="121.0" AnchorPane.rightAnchor="120.5439453125" AnchorPane.topAnchor="43.310546875">
          <font>
             <Font name="System Bold" size="34.0" />
          </font>
@@ -136,6 +136,10 @@
             <Font size="13.0" />
          </font>
       </Text>
-      <Button fx:id="btnClose" layoutX="699.0" layoutY="7.0" mnemonicParsing="false" onAction="#closeWindow" prefHeight="31.0" prefWidth="44.0" style="-fx-background-color: transparent;" />
+      <AnchorPane nodeOrientation="RIGHT_TO_LEFT" prefHeight="30.0" prefWidth="750.0" style="-fx-background-color: #0E0F11;">
+         <children>
+            <Button fx:id="btnClose" mnemonicParsing="false" onAction="#closeWindow" prefHeight="31.0" prefWidth="44.0" style="-fx-background-color: transparent;" />
+         </children>
+      </AnchorPane>
    </children>
 </AnchorPane>

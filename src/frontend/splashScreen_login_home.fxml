@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import com.jfoenix.controls.JFXSpinner?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
+
+<AnchorPane fx:id="splashAnchorPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" nodeOrientation="LEFT_TO_RIGHT" prefHeight="720.0" prefWidth="1280.0" style="-fx-border-color: #DAA506; -fx-border-width: 2; -fx-background-color: black;" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="frontend.SpashLoginHomeGUIController">
+   <children>
+      <ImageView fitHeight="357.0" fitWidth="390.0" layoutX="462.0" layoutY="182.0" opacity="0.9" preserveRatio="true" AnchorPane.bottomAnchor="181.0" AnchorPane.leftAnchor="462.0" AnchorPane.rightAnchor="461.0" AnchorPane.topAnchor="182.0">
+         <image>
+            <Image url="@images/bg_home_link.png" />
+         </image>
+      </ImageView>
+      <JFXSpinner layoutX="433.0" layoutY="163.0" prefHeight="378.0" prefWidth="414.0" radius="210.0" startingAngle="180.0" />
+      <Text fx:id="lblload" fill="WHITE" layoutX="469.0" layoutY="649.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Iniciando, espere un momento por favor.">
+         <font>
+            <Font name="System Bold" size="18.0" />
+         </font>
+      </Text>
+   </children>
+</AnchorPane>
