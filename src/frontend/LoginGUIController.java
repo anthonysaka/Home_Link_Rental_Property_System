@@ -96,7 +96,7 @@ public class LoginGUIController extends Application {
 	@FXML
 	public void openRegisterForm(ActionEvent event) throws IOException {
 
-		Parent rootRegister = FXMLLoader.load(getClass().getResource("../frontend/AddPropertyGUIController.fxml"));
+		Parent rootRegister = FXMLLoader.load(getClass().getResource("../frontend/registerGUI.fxml"));
 		Stage stageRegister = new Stage();
 		Scene sceneRegister = new Scene(rootRegister);
 
@@ -148,8 +148,11 @@ public class LoginGUIController extends Application {
 				loggedUser.setId(Integer.valueOf(resulter.getString("id")));
 				
 				System.out.println("Iniciando sesion... Sesion iniciada con Exito!");
+				
+				Stage stage = (Stage) btnClose.getScene().getWindow();
+				stage.close();
 
-				Parent rootRegister = FXMLLoader.load(getClass().getResource("../frontend/homeGUI.fxml"));
+				Parent rootRegister = FXMLLoader.load(getClass().getResource("../frontend/splashScreen_login_home.fxml"));
 				Stage stageRegister = new Stage();
 				Scene sceneRegister = new Scene(rootRegister);
 				
@@ -159,6 +162,7 @@ public class LoginGUIController extends Application {
 				stageRegister.initStyle(StageStyle.TRANSPARENT);
 				//	stageRegister.initModality(Modality.APPLICATION_MODAL);
 				stageRegister.show();
+				
 
 				/*******
 				 * EventHandler to Move Undecorated Window (Stage) Adapted from: StackOverflow
@@ -201,8 +205,9 @@ public class LoginGUIController extends Application {
 
 	@FXML
 	void closeWindow(ActionEvent event) {
-		Stage stage = (Stage) btnClose.getScene().getWindow();
-		stage.close();
+		//Stage stage = (Stage) btnClose.getScene().getWindow();
+		//stage.close();
+		System.exit(0);
 	}
 
 	@FXML

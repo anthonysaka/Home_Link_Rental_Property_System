@@ -36,6 +36,7 @@ import javafx.scene.control.Label;
 import javafx.scene.control.ListCell;
 import javafx.scene.control.ListView;
 import javafx.scene.control.Spinner;
+import javafx.scene.control.SpinnerValueFactory;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
@@ -51,9 +52,7 @@ import javafx.util.Callback;
 public class HomeGUIController extends ListView<PublicacionesParaVisualizar> implements Initializable {
 
 	@FXML
-	private Spinner<?> SpinnerAdults;
-	@FXML
-	private Spinner<?> SpinnerChildrens;
+	private Spinner<Integer> spinnerGuest;
 	@FXML
 	private JFXButton btnSearch;
 	@FXML
@@ -66,15 +65,15 @@ public class HomeGUIController extends ListView<PublicacionesParaVisualizar> imp
 
 
 	ObservableList<PublicacionesParaVisualizar> listPublicationVisual = FXCollections.observableArrayList();
-
 	ObservableList<String> list = FXCollections.observableArrayList(llenarCombo());
-	
+	SpinnerValueFactory<Integer> valueSpinGuest = new SpinnerValueFactory.IntegerSpinnerValueFactory(1, 20, 1);
 
 	/** Initialization of Home Stage Here. Add all that you want start on begin. **/
 	@Override
 	
 	public void initialize(URL location, ResourceBundle resources) {
-
+		spinnerGuest.setValueFactory(valueSpinGuest);
+		spinnerGuest.getStyleClass().add(Spinner.STYLE_CLASS_SPLIT_ARROWS_HORIZONTAL);
 		cbxLocation.setItems(list);
 		publicationListView.setCellFactory(new Callback<ListView<PublicacionesParaVisualizar>, ListCell<PublicacionesParaVisualizar>>() {
 			
