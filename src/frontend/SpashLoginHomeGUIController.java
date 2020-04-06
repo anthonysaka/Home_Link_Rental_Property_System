@@ -36,6 +36,8 @@ public class SpashLoginHomeGUIController implements Initializable{
 				stageHome.initStyle(StageStyle.TRANSPARENT);
 				//splashAnchorPane.getChildren().removeAll(); para cambiar de fxml en el mismo pane
 				//splashAnchorPane.getChildren().setAll(rootHome);
+				Stage stage = (Stage) splashAnchorPane.getScene().getWindow();
+				stage.close();
 				stageHome.show();
 			} catch (IOException e1) {
 				// TODO Auto-generated catch block

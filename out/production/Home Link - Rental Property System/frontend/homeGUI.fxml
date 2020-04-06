@@ -85,7 +85,7 @@
             </ImageView>
          </children></HBox>
       <AnchorPane prefHeight="620.0" prefWidth="200.0" VBox.vgrow="ALWAYS">
-         <VBox alignment="CENTER" layoutY="76.0" prefHeight="168.0" prefWidth="200.0">
+         <VBox alignment="CENTER" layoutX="8.0" layoutY="76.0" prefHeight="168.0" prefWidth="200.0">
             <JFXButton prefHeight="40.0" prefWidth="200.0" styleClass="Button" text="OPCION #" textFill="#ddd9d9">
                <VBox.margin>
                   <Insets />
