@@ -20,6 +20,7 @@ import com.mysql.cj.jdbc.CallableStatement;
 
 import backend.ConnectionMySqlDB;
 import backend.PublicacionesParaVisualizar;
+import backend.User;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.embed.swing.SwingFXUtils;
@@ -62,6 +63,8 @@ public class HomeGUIController extends ListView<PublicacionesParaVisualizar> imp
 	
 	private double xoffset = 0;
 	private double yoffset = 0;
+	
+	public static  User usuarioActual = LoginGUIController.loggedUser;
 
 
 	ObservableList<PublicacionesParaVisualizar> listPublicationVisual = FXCollections.observableArrayList();

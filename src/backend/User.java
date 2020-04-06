@@ -6,6 +6,7 @@ import java.sql.SQLException;
 
 import com.mysql.cj.jdbc.CallableStatement;
 
+import frontend.HomeGUIController;
 import frontend.LoginGUIController;
 
 import java.util.ArrayList;
@@ -38,7 +39,7 @@ public class User extends ConnectionMySqlDB {
 	
 	private ArrayList<Reserva> reservas = new ArrayList<Reserva>();
 	private ArrayList<Propiedad> propiedades;
-	private static User user1;
+	
 
 	public User(String name, String lastname, String gender, String type, String username, String email,
 			String password,String created_date) {
@@ -208,8 +209,9 @@ public ArrayList<Reserva> getReservas() {
 			
 			mySqlStatement = (CallableStatement) myConnection.prepareCall("{CALL sp_insert_card(?,?,?,?,?)}");
 			mySqlStatement.setString("pa_numCard", tarjeta.getNumeroTarjeta());
-			mySqlStatement.setString("pa_username", User.username);
-			mySqlStatement.setString("pa_cardOwner", tarjeta.getRepresentante());
+			mySqlStatement.setString("pa_userOwner", HomeGUIController.usuarioActual.getUsername());
+			System.out.println("PASO AQUÍ");
+			mySqlStatement.setString("pa_representante", tarjeta.getRepresentante());
 			mySqlStatement.setString("pa_expirationDate", tarjeta.getFechaVencimiento());
 			mySqlStatement.setInt("pa_cvv",tarjeta.getCVV());
 			mySqlStatement.executeQuery();
@@ -228,7 +230,6 @@ public ArrayList<Reserva> getReservas() {
 	
 	public static boolean insertarPropiedades(Propiedad property) {
 		
-		System.out.println("EL ID ES:"+LoginGUIController.x);
 		
 		CallableStatement mySqlStatement = null ; // call stored procedure
 		try {

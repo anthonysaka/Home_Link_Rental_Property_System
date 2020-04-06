@@ -149,6 +149,8 @@ public class LoginGUIController extends Application {
 				
 				System.out.println("Iniciando sesion... Sesion iniciada con Exito!");
 				
+				HomeGUIController.usuarioActual = loggedUser;
+				
 				Stage stage = (Stage) btnClose.getScene().getWindow();
 				stage.close();
 
