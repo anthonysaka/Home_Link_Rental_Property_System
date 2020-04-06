@@ -79,10 +79,8 @@ public class HomeGUIController extends ListView<PublicacionesParaVisualizar> imp
 		spinnerGuest.getStyleClass().add(Spinner.STYLE_CLASS_SPLIT_ARROWS_HORIZONTAL);
 		cbxLocation.setItems(list);
 		publicationListView.setCellFactory(new Callback<ListView<PublicacionesParaVisualizar>, ListCell<PublicacionesParaVisualizar>>() {
-			
 			@Override
 			public ListCell<PublicacionesParaVisualizar> call(ListView<PublicacionesParaVisualizar> panListView) {
-				// TODO Auto-generated method stub
 				return new CustomListCell();
 
 			}
@@ -294,9 +292,6 @@ public class HomeGUIController extends ListView<PublicacionesParaVisualizar> imp
 					setGraphic(null);
 				}
 			}
-		
-	
-	
 }
 	
 	
