@@ -131,7 +131,6 @@ public class HomeGUIController extends ListView<PublicacionesParaVisualizar> imp
 	}
 	
 	
-	
 	@FXML
     void addProperty(ActionEvent event) throws IOException {
 		Parent rootRegister = FXMLLoader.load(getClass().getResource("../frontend/AddPropertyGUIController.fxml"));
