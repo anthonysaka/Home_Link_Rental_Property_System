@@ -20,6 +20,7 @@ import com.mysql.cj.jdbc.CallableStatement;
 
 import backend.ConnectionMySqlDB;
 import backend.PublicacionesParaVisualizar;
+import backend.User;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.embed.swing.SwingFXUtils;
@@ -36,6 +37,7 @@ import javafx.scene.control.Label;
 import javafx.scene.control.ListCell;
 import javafx.scene.control.ListView;
 import javafx.scene.control.Spinner;
+import javafx.scene.control.SpinnerValueFactory;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
@@ -51,35 +53,35 @@ import javafx.util.Callback;
 public class HomeGUIController extends ListView<PublicacionesParaVisualizar> implements Initializable {
 
 	@FXML
-	private Spinner<?> SpinnerAdults;
-	@FXML
-	private Spinner<?> SpinnerChildrens;
+	private Spinner<Integer> spinnerGuest;
 	@FXML
 	private JFXButton btnSearch;
 	@FXML
 	private JFXListView<PublicacionesParaVisualizar> publicationListView;
 	@FXML
 	private JFXComboBox<String> cbxLocation;
-	
+
 	private double xoffset = 0;
 	private double yoffset = 0;
 
-	ObservableList<PublicacionesParaVisualizar> listPublicationVisual = FXCollections.observableArrayList();
 
+	public static  User usuarioActual = LoginGUIController.loggedUser;
+
+
+	ObservableList<PublicacionesParaVisualizar> listPublicationVisual = FXCollections.observableArrayList();
 	ObservableList<String> list = FXCollections.observableArrayList(llenarCombo());
-	
+	SpinnerValueFactory<Integer> valueSpinGuest = new SpinnerValueFactory.IntegerSpinnerValueFactory(1, 20, 1);
 
 	/** Initialization of Home Stage Here. Add all that you want start on begin. **/
 	@Override
-	
-	public void initialize(URL location, ResourceBundle resources) {
 
+	public void initialize(URL location, ResourceBundle resources) {
+		spinnerGuest.setValueFactory(valueSpinGuest);
+		spinnerGuest.getStyleClass().add(Spinner.STYLE_CLASS_SPLIT_ARROWS_HORIZONTAL);
 		cbxLocation.setItems(list);
 		publicationListView.setCellFactory(new Callback<ListView<PublicacionesParaVisualizar>, ListCell<PublicacionesParaVisualizar>>() {
-			
 			@Override
 			public ListCell<PublicacionesParaVisualizar> call(ListView<PublicacionesParaVisualizar> panListView) {
-				// TODO Auto-generated method stub
 				return new CustomListCell();
 
 			}
@@ -129,10 +131,9 @@ public class HomeGUIController extends ListView<PublicacionesParaVisualizar> imp
 			return null;
 		}
 	}
-	
-	
+
 	@FXML
-    void addProperty(ActionEvent event) throws IOException {
+	void addProperty(ActionEvent event) throws IOException {
 		Parent rootRegister = FXMLLoader.load(getClass().getResource("../frontend/AddPropertyGUIController.fxml"));
 		Stage stageRegister = new Stage();
 		Scene sceneRegister = new Scene(rootRegister);
@@ -161,14 +162,14 @@ public class HomeGUIController extends ListView<PublicacionesParaVisualizar> imp
 				stageRegister.setY(event.getScreenY() + yoffset);
 			}
 		});
-		
 
-    }
 
-    @FXML
-    void addCard(ActionEvent event) throws IOException {
-    	
-    	Parent rootRegister = FXMLLoader.load(getClass().getResource("../frontend/AddCardGUI.fxml"));
+	}
+
+	@FXML
+	void addCard(ActionEvent event) throws IOException {
+
+		Parent rootRegister = FXMLLoader.load(getClass().getResource("../frontend/AddCardGUI.fxml"));
 		Stage stageRegister = new Stage();
 		Scene sceneRegister = new Scene(rootRegister);
 
@@ -196,9 +197,9 @@ public class HomeGUIController extends ListView<PublicacionesParaVisualizar> imp
 				stageRegister.setY(event.getScreenY() + yoffset);
 			}
 		});
-		
 
-    }
+
+	}
 
 	public static ArrayList<String> llenarCombo()
 	{
@@ -223,7 +224,7 @@ public class HomeGUIController extends ListView<PublicacionesParaVisualizar> imp
 		return lista;
 	}
 
-	
+
 	private class CustomListCell extends ListCell<PublicacionesParaVisualizar> {
 		ImageView imgView = new ImageView();
 		ImageView iconStar = new ImageView(new Image("/frontend/starIcon.png"));
@@ -233,11 +234,11 @@ public class HomeGUIController extends ListView<PublicacionesParaVisualizar> imp
 		Label lblFeedBack = new Label();
 		Label lblCaract = new Label();
 		//Label lblUsernPubli = new Label();
-	//	Label lblFechaPubli = new Label();
+		//	Label lblFechaPubli = new Label();
 		Label lblPrecio = new Label();
 		GridPane gridView = new GridPane();
 		AnchorPane paneView = new AnchorPane();
-		
+
 		public CustomListCell() {
 			gridView.setHgap(6); 
 			gridView.setVgap(6);
@@ -274,31 +275,64 @@ public class HomeGUIController extends ListView<PublicacionesParaVisualizar> imp
 			paneView.getChildren().add(gridView);
 		}
 		/********************************************************/
-		
-			public void updateItem(PublicacionesParaVisualizar item, boolean empty) {
-				super.updateItem(item, empty);
-				setContentDisplay(ContentDisplay.LEFT); 
-				if (!empty && item != null) {
-					imgView.setImage(item.getImagePreviewHouse());
-					lblTipo.setText(item.getTipo());
-					lblTitulo.setText(item.getTitulo());
-					lblCaract.setText(item.getCaracterisitcas());
-					lblPrecio.setText(String.valueOf(item.getPrecio()));
-					lblFeedBack.setText(item.getFeedback());
-					setGraphic(paneView);
-					setContentDisplay(ContentDisplay.GRAPHIC_ONLY);
-				}else {
-					setText(null);
-					setGraphic(null);
-				}
+
+		public void updateItem(PublicacionesParaVisualizar item, boolean empty) {
+			super.updateItem(item, empty);
+			setContentDisplay(ContentDisplay.LEFT); 
+			if (!empty && item != null) {
+				imgView.setImage(item.getImagePreviewHouse());
+				lblTipo.setText(item.getTipo());
+				lblTitulo.setText(item.getTitulo());
+				lblCaract.setText(item.getCaracterisitcas());
+				lblPrecio.setText(String.valueOf(item.getPrecio()));
+				lblFeedBack.setText(item.getFeedback());
+				setGraphic(paneView);
+				setContentDisplay(ContentDisplay.GRAPHIC_ONLY);
+			}else {
+				setText(null);
+				setGraphic(null);
 			}
+		}
+	}
+	
+	@FXML
+    void publish(ActionEvent event) throws IOException {
 		
-	
-	
-}
-	
-	
-	
+		Parent rootRegister = FXMLLoader.load(getClass().getResource("../frontend/publicationGUI.fxml"));
+		Stage stageRegister = new Stage();
+		Scene sceneRegister = new Scene(rootRegister);
+
+		stageRegister.setScene(sceneRegister);
+		stageRegister.setResizable(false);
+		//stageRegister.setAlwaysOnTop(true);
+		stageRegister.initStyle(StageStyle.TRANSPARENT);
+		//	stageRegister.initModality(Modality.APPLICATION_MODAL);
+		stageRegister.show();
+
+		/*******
+		 * EventHandler to Move Undecorated Window (Stage) Adapted from: StackOverflow
+		 ******/
+		rootRegister.setOnMousePressed(new EventHandler<MouseEvent>() {
+			@Override
+			public void handle(MouseEvent event) {
+				xoffset = stageRegister.getX() - event.getScreenX();
+				yoffset = stageRegister.getY() - event.getScreenY();
+			}
+		});
+		rootRegister.setOnMouseDragged(new EventHandler<MouseEvent>() {
+			@Override
+			public void handle(MouseEvent event) {
+				stageRegister.setX(event.getScreenX() + xoffset);
+				stageRegister.setY(event.getScreenY() + yoffset);
+			}
+		});
+
+    }
+
+
+
+
+
 
 	/************************* FIN *******************/
 

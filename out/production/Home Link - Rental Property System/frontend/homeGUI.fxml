@@ -6,9 +6,10 @@
 <?import com.jfoenix.controls.JFXListView?>
 <?import javafx.geometry.Insets?>
 <?import javafx.scene.Cursor?>
-<?import javafx.scene.control.Label?>
 <?import javafx.scene.control.ScrollPane?>
 <?import javafx.scene.control.Spinner?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.Pane?>
@@ -17,22 +18,22 @@
 <?import javafx.scene.text.Text?>
 
 <AnchorPane maxHeight="720.0" maxWidth="1280.0" prefHeight="720.0" prefWidth="1280.0" stylesheets="@styleHome.css" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="frontend.HomeGUIController">
-   <HBox alignment="CENTER" layoutX="202.0" prefHeight="80.0" prefWidth="1080.0">
-      <AnchorPane prefHeight="100.0" prefWidth="250.0" HBox.hgrow="ALWAYS">
-         <Text layoutX="103.0" layoutY="26.0" strokeType="OUTSIDE" strokeWidth="0.0" text="WHERE">
+   <HBox alignment="CENTER" layoutX="214.0" prefHeight="80.0" prefWidth="1068.0" style="-fx-background-color: #0E0F11;">
+      <AnchorPane prefHeight="100.0" prefWidth="250.0" style="-fx-background-color: #0E0F11;" HBox.hgrow="ALWAYS">
+         <Text fill="WHITE" layoutX="91.0" layoutY="34.0" strokeType="OUTSIDE" strokeWidth="0.0" text="LUGAR">
             <font>
                <Font name="Consolas Bold" size="16.0" />
             </font>
          </Text>
-         <JFXComboBox fx:id="cbxLocation" layoutX="14.0" layoutY="30.0" prefHeight="31.0" prefWidth="200.0" />
+         <JFXComboBox fx:id="cbxLocation" layoutX="14.0" layoutY="40.0" prefHeight="31.0" prefWidth="200.0" />
       </AnchorPane>
-      <AnchorPane prefHeight="100.0" prefWidth="250.0" HBox.hgrow="ALWAYS">
-         <Text layoutX="90.0" layoutY="26.0" strokeType="OUTSIDE" strokeWidth="0.0" text="CHECK-IN">
+      <AnchorPane prefHeight="100.0" prefWidth="250.0" style="-fx-background-color: #0E0F11;" HBox.hgrow="ALWAYS">
+         <Text fill="WHITE" layoutX="63.0" layoutY="34.0" strokeType="OUTSIDE" strokeWidth="0.0" text="FECHA ENTRADA">
             <font>
                <Font name="Consolas Bold" size="16.0" />
             </font>
          </Text>
-         <JFXDatePicker defaultColor="#e53935" layoutX="10.0" layoutY="35.0" nodeOrientation="LEFT_TO_RIGHT" prefHeight="30.0" prefWidth="230.0" promptText="MM/DD/YYYY">
+         <JFXDatePicker defaultColor="#ffc107" layoutX="10.0" layoutY="39.0" nodeOrientation="LEFT_TO_RIGHT" prefHeight="30.0" prefWidth="230.0" promptText="MM/DD/YYYY">
             <padding>
                <Insets left="5.0" right="5.0" />
             </padding>
@@ -41,29 +42,28 @@
             <Insets />
          </HBox.margin>
       </AnchorPane>
-      <AnchorPane prefHeight="73.0" prefWidth="250.0" HBox.hgrow="ALWAYS">
-         <Text layoutX="85.0" layoutY="26.0" strokeType="OUTSIDE" strokeWidth="0.0" text="CHECK-OUT">
+      <AnchorPane prefHeight="73.0" prefWidth="250.0" style="-fx-background-color: #0E0F11;" HBox.hgrow="ALWAYS">
+         <Text fill="WHITE" layoutX="67.0" layoutY="34.0" strokeType="OUTSIDE" strokeWidth="0.0" text="FECHA SALIDA">
             <font>
                <Font name="Consolas Bold" size="16.0" />
             </font>
          </Text>
-         <JFXDatePicker defaultColor="#e53935" layoutX="10.0" layoutY="35.0" nodeOrientation="LEFT_TO_RIGHT" prefHeight="30.0" prefWidth="230.0" promptText="MM/DD/YYYY" />
+         <JFXDatePicker defaultColor="#ffc107" layoutX="5.0" layoutY="39.0" nodeOrientation="LEFT_TO_RIGHT" prefHeight="30.0" prefWidth="230.0" promptText="MM/DD/YYYY" />
       </AnchorPane>
-      <AnchorPane prefHeight="100.0" prefWidth="250.0" HBox.hgrow="ALWAYS">
-         <Spinner fx:id="SpinnerAdults" layoutX="125.0" layoutY="8.0" nodeOrientation="LEFT_TO_RIGHT" prefHeight="25.0" prefWidth="79.0" AnchorPane.topAnchor="5.0" />
-         <Text layoutX="46.0" layoutY="26.0" strokeType="OUTSIDE" strokeWidth="0.0" text="ADULTS">
+      <AnchorPane prefHeight="100.0" prefWidth="250.0" style="-fx-background-color: #0E0F11;" HBox.hgrow="ALWAYS">
+         <Spinner fx:id="spinnerGuest" layoutX="113.0" layoutY="44.0" nodeOrientation="LEFT_TO_RIGHT" prefHeight="25.0" prefWidth="79.0" AnchorPane.topAnchor="42.0" />
+         <Text fill="WHITE" layoutX="34.0" layoutY="65.0" strokeType="OUTSIDE" strokeWidth="0.0" text="PERSONAS">
             <font>
                <Font name="Consolas Bold" size="16.0" />
             </font>
          </Text>
-         <Text layoutX="32.0" layoutY="63.0" strokeType="OUTSIDE" strokeWidth="0.0" text="CHILDRENS">
+         <Text fill="WHITE" layoutX="32.0" layoutY="63.0" strokeType="OUTSIDE" strokeWidth="0.0">
             <font>
                <Font name="Consolas Bold" size="16.0" />
             </font>
          </Text>
-         <Spinner fx:id="SpinnerChildrens" layoutX="125.0" layoutY="51.0" nodeOrientation="LEFT_TO_RIGHT" prefHeight="25.0" prefWidth="79.0" AnchorPane.bottomAnchor="5.0" />
       </AnchorPane>
-      <JFXButton fx:id="btnSearch" contentDisplay="CENTER" onAction="#searchPublication" prefHeight="39.0" prefWidth="156.0" styleClass="Button" text="Search">
+      <JFXButton fx:id="btnSearch" contentDisplay="CENTER" onAction="#searchPublication" prefHeight="39.0" prefWidth="156.0" style="-fx-background-color: transparent;" styleClass="Button" text="Search">
          <font>
             <Font name="System Bold" size="18.0" />
          </font>
@@ -75,14 +75,18 @@
          </HBox.margin>
       </JFXButton>
    </HBox>
-   <VBox layoutY="-1.0" prefHeight="720.0" prefWidth="200.0" style="-fx-background-color: #fafafa;">
-      <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0">
+   <VBox layoutY="-1.0" prefHeight="720.0" prefWidth="200.0" style="-fx-background-color: black;">
+      <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0" style="-fx-background-color: black;">
          <children>
-            <Label text="LOGO HERE" />
+            <ImageView fitHeight="208.0" fitWidth="215.0">
+               <image>
+                  <Image url="@images/bg_home_link.png" />
+               </image>
+            </ImageView>
          </children></HBox>
       <AnchorPane prefHeight="620.0" prefWidth="200.0" VBox.vgrow="ALWAYS">
-         <VBox alignment="CENTER" layoutY="76.0" prefHeight="168.0" prefWidth="200.0">
-            <JFXButton prefHeight="40.0" prefWidth="200.0" styleClass="Button" text="OPCION #">
+         <VBox alignment="CENTER" layoutX="8.0" layoutY="76.0" prefHeight="168.0" prefWidth="200.0">
+            <JFXButton prefHeight="40.0" prefWidth="200.0" styleClass="Button" text="OPCION #" textFill="#ddd9d9">
                <VBox.margin>
                   <Insets />
                </VBox.margin>
@@ -93,7 +97,7 @@
                   <Cursor fx:constant="HAND" />
                </cursor>
             </JFXButton>
-            <JFXButton fx:id="btnaddCard" onAction="#addCard" prefHeight="40.0" prefWidth="200.0" styleClass="Button" text="Add Card">
+            <JFXButton fx:id="btnaddCard" onAction="#addCard" prefHeight="40.0" prefWidth="200.0" styleClass="Button" text="Add Card" textFill="#ddd9d9">
                <VBox.margin>
                   <Insets top="6.0" />
                </VBox.margin>
@@ -104,7 +108,7 @@
                   <Cursor fx:constant="HAND" />
                </cursor>
             </JFXButton>
-            <JFXButton fx:id="btnaddProperty" onAction="#addProperty" prefHeight="40.0" prefWidth="200.0" styleClass="Button" text="Add Property">
+            <JFXButton fx:id="btnaddProperty" onAction="#addProperty" prefHeight="40.0" prefWidth="200.0" styleClass="Button" text="Add Property" textFill="#ddd9d9">
                <VBox.margin>
                   <Insets top="6.0" />
                </VBox.margin>
@@ -115,7 +119,7 @@
                   <Cursor fx:constant="HAND" />
                </cursor>
             </JFXButton>
-            <JFXButton layoutX="10.0" layoutY="109.0" prefHeight="40.0" prefWidth="200.0" styleClass="Button" text="OPCION #">
+            <JFXButton fx:id="btnaddPublication" layoutX="10.0" layoutY="109.0" onAction="#publish" prefHeight="40.0" prefWidth="200.0" styleClass="Button" text="Publish a Property" textFill="#ddd9d9">
                <VBox.margin>
                   <Insets top="6.0" />
                </VBox.margin>
@@ -132,14 +136,14 @@
          </VBox.margin>
       </AnchorPane>
    </VBox>
-   <Pane layoutX="200.0" layoutY="110.0" prefHeight="610.0" prefWidth="1080.0" style="-fx-background-color: black;">
+   <Pane layoutX="218.0" layoutY="110.0" prefHeight="610.0" prefWidth="1062.0" style="-fx-background-color: black;">
       <children>
-         <ScrollPane layoutX="1.0" layoutY="1.0" prefHeight="610.0" prefWidth="1080.0">
+         <ScrollPane layoutX="1.0" layoutY="1.0" prefHeight="610.0" prefWidth="1062.0">
             <content>
-               <JFXListView fx:id="publicationListView" prefHeight="610.0" prefWidth="1080.0" stylesheets="@styleListViewPublication.css" />
+               <JFXListView fx:id="publicationListView" prefHeight="604.0" prefWidth="1042.0" stylesheets="@styleListViewPublication.css" />
             </content>
          </ScrollPane>
       </children>
    </Pane>
-   <AnchorPane layoutX="202.0" layoutY="80.0" prefHeight="25.0" prefWidth="1080.0" style="-fx-background-color: gray;" AnchorPane.leftAnchor="198.0" AnchorPane.rightAnchor="2.0" />
+   <AnchorPane layoutX="212.0" layoutY="82.0" prefHeight="23.0" prefWidth="1070.0" style="-fx-background-color: black;" AnchorPane.leftAnchor="212.0" />
 </AnchorPane>

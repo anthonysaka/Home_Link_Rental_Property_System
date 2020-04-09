@@ -1,9 +1,23 @@
 
 #btnSearch {
-	-fx-background-radius: 90;
+	-fx-background-radius: 10;
 }
+
+
+
+.Button {
+	-fx-background-radius: 10;
+}
+
 
 .Button:hover {
-    -fx-background-color: #e53935;
+    -fx-background-color: #FFC107;
+    -fx-text-fill: BLACK;
+  
 }
 
+.date-picker > .text-field {
+	-fx-text-fill: white;
+	-fx-alignment:center;
+
+}

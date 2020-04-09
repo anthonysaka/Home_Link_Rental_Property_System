@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import com.jfoenix.controls.JFXButton?>
+<?import javafx.scene.Cursor?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.shape.Line?>
+<?import javafx.scene.text.Font?>
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="691.0" prefWidth="1180.0" style="-fx-background-color: F5F5F5;" stylesheets="@styleRegister.css" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="frontend.ViewPublicationGUI">
+   <children>
+      <AnchorPane layoutY="-3.0" nodeOrientation="RIGHT_TO_LEFT" prefHeight="34.0" prefWidth="1180.0" style="-fx-background-color: #0E0F11;">
+         <children>
+            <Button fx:id="btnClose" mnemonicParsing="false" onAction="#closeWindow" prefHeight="31.0" prefWidth="44.0" style="-fx-background-color: transparent;" />
+         </children>
+      </AnchorPane>
+      <AnchorPane layoutY="31.0" prefHeight="660.0" prefWidth="605.0">
+         <children>
+            <ImageView fx:id="imgView1" fitHeight="395.0" fitWidth="606.0" layoutX="5.0" layoutY="49.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../../../../../Desktop/japan.jpg" />
+               </image>
+            </ImageView>
+            <ImageView fx:id="imgView2" fitHeight="193.0" fitWidth="298.0" layoutX="5.0" layoutY="452.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../../../../../Desktop/punta%20cana.jpg" />
+               </image>
+            </ImageView>
+            <ImageView fx:id="imgView2" fitHeight="203.0" fitWidth="290.0" layoutX="311.0" layoutY="452.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../../../../../Desktop/punta%20cana.jpg" />
+               </image>
+            </ImageView>
+            <Label fx:id="lblTipo" layoutX="200.0" layoutY="14.0" text="TITULO DE LA PUBLICACION" />
+         </children>
+      </AnchorPane>
+      <Pane layoutX="656.0" layoutY="50.0" prefHeight="637.0" prefWidth="484.0">
+         <children>
+            <JFXButton fx:id="btnReservar" contentDisplay="CENTER" layoutX="180.0" layoutY="584.0" prefHeight="39.0" prefWidth="125.0" style="-fx-background-color: #ffc107; -fx-background-radius: 10;" styleClass="Button" text="Reservar">
+               <font>
+                  <Font name="System Bold" size="18.0" />
+               </font>
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor>
+            </JFXButton>
+            <Line endX="355.0" layoutX="115.0" layoutY="41.0" startX="-100.0" />
+            <Line endX="355.0" layoutX="115.0" layoutY="309.0" startX="-100.0" />
+            <Label fx:id="lblDir" layoutX="14.0" layoutY="71.0" text="Label" />
+            <Label fx:id="lblCarac" layoutX="14.0" layoutY="106.0" text="Label" />
+            <Label layoutX="14.0" layoutY="139.0" text="Label" />
+            <Label layoutX="14.0" layoutY="168.0" text="Label" />
+            <Label fx:id="lblPrecio" layoutX="225.0" layoutY="524.0" text="PRECIO">
+               <font>
+                  <Font name="System Bold" size="15.0" />
+               </font>
+            </Label>
+         </children>
+      </Pane>
+   </children>
+</AnchorPane>
