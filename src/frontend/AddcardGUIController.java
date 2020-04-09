@@ -45,8 +45,12 @@ public class AddcardGUIController extends ConnectionMySqlDB{
 		String cardDate = txtcardDate.getText() + "00";
 		String cardCvvTexto = txtcardCvv.getText();
 		int cardCvv =  Integer.valueOf(cardCvvTexto);
-		Tarjetas card = new Tarjetas(cardNumber, cardName, cardDate, cardCvv);		
+		Tarjetas card = new Tarjetas(cardNumber, cardName, cardDate, cardCvv);	
+		User.insertarTarjetas(card);	
+		 Stage stage = (Stage) btnCancel.getScene().getWindow();
+		 stage.close();
 		
+		/*
 		if(cardNumber.length() == 16 && cardName.length() <=20 && cardDate.length() ==6 && cardCvv ==3)
 		{
 			User.insertarTarjetas(card);	
@@ -63,15 +67,13 @@ public class AddcardGUIController extends ConnectionMySqlDB{
 		
 		else {
 			txtcardNumber.setText("");
-			txtcardNumber.setText("");
 			txtcardName.setText("");
 			txtcardDate.setText("");
 			txtcardCvv.setText("");
 			JOptionPane.showMessageDialog(null,"Error","Registrado incorrecto",JOptionPane.ERROR_MESSAGE);
 			Stage stage = (Stage) btnCancel.getScene().getWindow();
-			 stage.close();
 
-		}
+		}*/
 		
     }
 
