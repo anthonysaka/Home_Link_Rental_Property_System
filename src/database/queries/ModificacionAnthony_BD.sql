@@ -146,8 +146,10 @@ BEGIN
 END$$
 DELIMITER ;
 
-
-
+select * from t_user;
+select * from t_property;	
+select * from t_publication;
+select * from t_imagenes;
 
 
 
