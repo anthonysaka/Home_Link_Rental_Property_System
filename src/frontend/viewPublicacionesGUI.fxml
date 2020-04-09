@@ -11,11 +11,11 @@
 <?import javafx.scene.shape.Line?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="691.0" prefWidth="1180.0" style="-fx-background-color: F5F5F5;" stylesheets="@styleRegister.css" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="frontend.ViewPublicationGUI">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="691.0" prefWidth="1180.0" style="-fx-background-color: F5F5F5;" stylesheets="@stylePublicationViewFull.css" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="frontend.ViewPublicationGUI">
    <children>
       <AnchorPane layoutY="-3.0" nodeOrientation="RIGHT_TO_LEFT" prefHeight="34.0" prefWidth="1180.0" style="-fx-background-color: #0E0F11;">
          <children>
-            <Button fx:id="btnClose" mnemonicParsing="false" onAction="#closeWindow" prefHeight="31.0" prefWidth="44.0" style="-fx-background-color: transparent;" />
+            <Button fx:id="btnClose" layoutX="14.0" layoutY="-3.0" mnemonicParsing="false" onAction="#close_app" prefHeight="31.0" prefWidth="44.0" style="-fx-background-color: transparent;" />
          </children>
       </AnchorPane>
       <AnchorPane layoutY="31.0" prefHeight="660.0" prefWidth="605.0">
@@ -35,7 +35,7 @@
                   <Image url="@../../../../../Desktop/punta%20cana.jpg" />
                </image>
             </ImageView>
-            <Label fx:id="lblTipo" layoutX="200.0" layoutY="14.0" text="TITULO DE LA PUBLICACION" />
+            <Label fx:id="lblTitulo" layoutX="152.0" layoutY="14.0" text="TITULO DE LA PUBLICACION" />
          </children>
       </AnchorPane>
       <Pane layoutX="656.0" layoutY="50.0" prefHeight="637.0" prefWidth="484.0">
@@ -50,15 +50,42 @@
             </JFXButton>
             <Line endX="355.0" layoutX="115.0" layoutY="41.0" startX="-100.0" />
             <Line endX="355.0" layoutX="115.0" layoutY="309.0" startX="-100.0" />
-            <Label fx:id="lblDir" layoutX="14.0" layoutY="71.0" text="Label" />
-            <Label fx:id="lblCarac" layoutX="14.0" layoutY="106.0" text="Label" />
-            <Label layoutX="14.0" layoutY="139.0" text="Label" />
-            <Label layoutX="14.0" layoutY="168.0" text="Label" />
-            <Label fx:id="lblPrecio" layoutX="225.0" layoutY="524.0" text="PRECIO">
+            <Label fx:id="lblDir" layoutX="182.0" layoutY="81.0" text="Direccion" />
+            <Label fx:id="lblCarac" layoutX="182.0" layoutY="115.0" text="Caracteristicas" />
+            <Label fx:id="lblTipo" layoutX="182.0" layoutY="148.0" text="Tipo" />
+            <Label fx:id="lblFechaPubli" layoutX="182.0" layoutY="185.0" text="Fecha publicacion" />
+            <Label fx:id="lblPrecio" layoutX="312.0" layoutY="326.0" nodeOrientation="RIGHT_TO_LEFT" text="PRECIO">
                <font>
                   <Font name="System Bold" size="15.0" />
                </font>
             </Label>
+            <Label fx:id="lblTotal" layoutX="15.0" layoutY="532.0" nodeOrientation="LEFT_TO_RIGHT" text="Total:">
+               <font>
+                  <Font name="System Bold" size="15.0" />
+               </font>
+            </Label>
+            <Label fx:id="lblTotal1" layoutX="15.0" layoutY="505.0" nodeOrientation="LEFT_TO_RIGHT" text="Service fee:">
+               <font>
+                  <Font name="System Bold" size="15.0" />
+               </font>
+            </Label>
+            <Label fx:id="lblTotal11" layoutX="15.0" layoutY="478.0" nodeOrientation="LEFT_TO_RIGHT" text="Cleaning fee:">
+               <font>
+                  <Font name="System Bold" size="15.0" />
+               </font>
+            </Label>
+            <Label fx:id="lblTotal12" layoutX="384.0" layoutY="326.0" nodeOrientation="LEFT_TO_RIGHT" text="por noche.">
+               <font>
+                  <Font name="System Bold" size="15.0" />
+               </font>
+            </Label>
+            <Label fx:id="lblUsuarioDue" layoutX="180.0" layoutY="219.0" text="Usuario dueño" />
+            <Label fx:id="lblDir1" layoutX="17.0" layoutY="81.0" text="Dirección:" />
+            <Label fx:id="lblCarac1" layoutX="17.0" layoutY="116.0" text="Caracteristicas:" />
+            <Label fx:id="lblTipo1" layoutX="17.0" layoutY="149.0" text="Tipo:" />
+            <Label fx:id="lblFechaPubli1" layoutX="17.0" layoutY="186.0" text="Fecha publicación:" />
+            <Label fx:id="lblUsuarioDue1" layoutX="15.0" layoutY="220.0" text="Usuario dueño:" />
+            <Label fx:id="lblTitulo1" layoutX="177.0" layoutY="14.0" text="INFORMACION" />
          </children>
       </Pane>
    </children>

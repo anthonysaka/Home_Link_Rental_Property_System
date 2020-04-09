@@ -23,7 +23,47 @@ BEGIN
 
 END##
 DELIMITER ;
+-- --------------------------------
 
+DELIMITER $$
+CREATE DEFINER=`root`@`localhost` PROCEDURE `sp_insert_card`(in pa_numCard varchar(16), in pa_username varchar(15), in pa_cardOwner varchar(20), in pa_expirationDate date, in pa_cvv int)
+BEGIN
 
+INSERT INTO t_card (num_card, card_owner, expiration_date, cvv, user_owner) 
+VALUES (pa_numCard, pa_cardOwner, pa_expirationDate, pa_cvv, pa_username);
 
+END$$
+DELIMITER ;
+
+DELIMITER $$
+CREATE DEFINER=`root`@`localhost` PROCEDURE `sp_insertProperty`(in pa_typeProperty varchar(30), in pa_address varchar(30), pa_status varchar (15), pa_characteristic varchar(100), pa_userID int)
+BEGIN
+
+INSERT INTO t_property (type_property, address, status_property, characteristic, id_user_property)
+VALUES (pa_typeProperty, pa_address, pa_status, pa_characteristic, pa_userID);
+
+END$$
+DELIMITER ;
+
+DELIMITER $$
+CREATE DEFINER=`root`@`localhost` PROCEDURE `sp_loginIn`(in pa_username varchar(15), in pa_password varchar(25))
+BEGIN
+
+SELECT * FROM t_user WHERE username = pa_username and password = pa_password;
+
+END$$
+DELIMITER ;
+
+DELIMITER $$
+CREATE DEFINER=root@localhost PROCEDURE sp_insert_publicacion(in pa_idPropiedad int , in pa_precio float)
+BEGIN
+
+select id AS id_admin
+from t_user
+where t_user.type = 'Admin';
+INSERT INTO t_publication (publication_date, status_publication , id_user_adm , id_property , price) 
+VALUES (curdate() , 'Publicadas' , id_admin , pa_idPropiedad , pa_precio );
+
+END$$
+DELIMITER ;
 

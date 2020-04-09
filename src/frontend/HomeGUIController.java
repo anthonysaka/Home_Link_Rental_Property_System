@@ -20,6 +20,7 @@ import com.mysql.cj.jdbc.CallableStatement;
 
 import backend.ConnectionMySqlDB;
 import backend.PublicacionesParaVisualizar;
+import javafx.beans.value.ChangeListener;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.embed.swing.SwingFXUtils;
@@ -62,6 +63,8 @@ public class HomeGUIController extends ListView<PublicacionesParaVisualizar> imp
 	
 	private double xoffset = 0;
 	private double yoffset = 0;
+	
+	public static PublicacionesParaVisualizar auxlist;
 
 
 	ObservableList<PublicacionesParaVisualizar> listPublicationVisual = FXCollections.observableArrayList();
@@ -83,6 +86,57 @@ public class HomeGUIController extends ListView<PublicacionesParaVisualizar> imp
 			}
 		});
 	}
+	
+    @FXML
+    void clickToViewPublication(MouseEvent event) throws IOException {
+    	auxlist = publicationListView.getSelectionModel().getSelectedItem();
+    	//ViewPublicationGUI ax = new ViewPublicationGUI(auxlist);
+    	Parent rootPubli= FXMLLoader.load(getClass().getResource("../frontend/viewPublicacionesGUI.fxml"));
+		Stage stagePubli= new Stage();
+		Scene scenePubli= new Scene(rootPubli);
+
+		stagePubli.setScene(scenePubli);
+		stagePubli.setResizable(false);
+		//stageRegister.setAlwaysOnTop(true);
+		stagePubli.initStyle(StageStyle.TRANSPARENT);
+		//	stageRegister.initModality(Modality.APPLICATION_MODAL);
+		stagePubli.show();
+
+    }
+
+    @FXML
+    void openAdminView(ActionEvent event) throws IOException {
+    	Parent rootAdmin = FXMLLoader.load(getClass().getResource("../frontend/admin1GUI.fxml"));
+		Stage stageAdmin = new Stage();
+		Scene sceneAdmin = new Scene(rootAdmin);
+
+		stageAdmin.setScene(sceneAdmin);
+		//stageAdmin.setResizable(false);
+		//stageRegister.setAlwaysOnTop(true);
+	//	stageAdmin.initStyle(StageStyle.TRANSPARENT);
+		//	stageRegister.initModality(Modality.APPLICATION_MODAL);
+		stageAdmin.show();
+
+		/*******
+		 * EventHandler to Move Undecorated Window (Stage) Adapted from: StackOverflow
+		 ******/
+		rootAdmin.setOnMousePressed(new EventHandler<MouseEvent>() {
+			@Override
+			public void handle(MouseEvent event) {
+				xoffset = stageAdmin.getX() - event.getScreenX();
+				yoffset = stageAdmin.getY() - event.getScreenY();
+			}
+		});
+		rootAdmin.setOnMouseDragged(new EventHandler<MouseEvent>() {
+			@Override
+			public void handle(MouseEvent event) {
+				stageAdmin.setX(event.getScreenX() + xoffset);
+				stageAdmin.setY(event.getScreenY() + yoffset);
+			}
+		});
+		/***************************************************************/
+    }
+
 
 
 	/******* @throws SQLException 

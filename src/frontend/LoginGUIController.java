@@ -58,7 +58,7 @@ public class LoginGUIController extends Application {
 	@Override
 	public void start(Stage stageLogin) throws Exception {
 
-		Parent rootLogin = FXMLLoader.load(LoginGUIController.class.getResource("../frontend/loginGUI.fxml"));
+		Parent rootLogin = FXMLLoader.load(LoginGUIController.class.getResource("../frontend/homeGUI.fxml")); /** cambie temporal*/
 		Scene sceneLogin = new Scene(rootLogin);
 
 		stageLogin.getIcons().add(new Image(LoginGUIController.class.getResourceAsStream("../frontend/images/bg_home_link.png")));
@@ -152,7 +152,7 @@ public class LoginGUIController extends Application {
 				Stage stage = (Stage) btnClose.getScene().getWindow();
 				stage.close();
 
-				Parent rootRegister = FXMLLoader.load(getClass().getResource("../frontend/splashScreen_login_home.fxml"));
+				Parent rootRegister = FXMLLoader.load(getClass().getResource("../frontend/homeGUI.fxml")); /* cambie temporalmente el loading */
 				Stage stageRegister = new Stage();
 				Scene sceneRegister = new Scene(rootRegister);
 				

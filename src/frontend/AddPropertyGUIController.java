@@ -35,8 +35,6 @@ public class AddPropertyGUIController implements Initializable{
 
 	ObservableList<String> listTypeProperty= FXCollections.observableArrayList("Apartamento", "Villa", "Pent-House", "Hacienda", "Finca");
 	
-	
-
 	@FXML
 	void saveProperty(ActionEvent event) {
 
