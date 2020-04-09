@@ -156,9 +156,9 @@ public class HomeGUIController extends ListView<PublicacionesParaVisualizar> imp
 				ByteArrayInputStream bis = new ByteArrayInputStream(f51);
 				BufferedImage read = ImageIO.read(bis);
 				Image imgs = SwingFXUtils.toFXImage(read, null);
-				listPublicationVisual.add(new PublicacionesParaVisualizar(resultBD.getString("titulo_publicacion"), resultBD.getString("type_property"), resultBD.getString("address"), 
-						resultBD.getString("feedbacks"), resultBD.getString("characteristic"), resultBD.getString("Dueño"),
-						resultBD.getString("publication_date"), resultBD.getFloat("price"), imgs));
+				listPublicationVisual.add(new PublicacionesParaVisualizar(resultBD.getString("titulo"), resultBD.getString("type"), resultBD.getString("address"), 
+						resultBD.getString("rating"), resultBD.getString("characteristic"), resultBD.getString("Dueño"),
+						resultBD.getString("date"), resultBD.getFloat("price"), imgs));
 			}
 			publicationListView.setItems(listPublicationVisual);
 			resultBD.close();

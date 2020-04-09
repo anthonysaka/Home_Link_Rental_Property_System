@@ -58,7 +58,7 @@ public class LoginGUIController extends Application {
 	@Override
 	public void start(Stage stageLogin) throws Exception {
 
-		Parent rootLogin = FXMLLoader.load(LoginGUIController.class.getResource("../frontend/homeGUI.fxml")); /** cambie temporal*/
+		Parent rootLogin = FXMLLoader.load(LoginGUIController.class.getResource("../frontend/loginGUI.fxml")); /** cambie temporal*/
 		Scene sceneLogin = new Scene(rootLogin);
 
 		stageLogin.getIcons().add(new Image(LoginGUIController.class.getResourceAsStream("../frontend/images/bg_home_link.png")));
@@ -142,7 +142,7 @@ public class LoginGUIController extends Application {
 			if (resulter.first()) {
 				
 				loggedUser = new User(resulter.getString("name"), resulter.getString("lastname"), resulter.getString("gender"), resulter.getString("type"), resulter.getString("username"), resulter.getString("email"), resulter.getString("password"), resulter.getString("created_date"));	
-				loggedUser.setCountry_location_id(Integer.valueOf(resulter.getString("country_location_id")));
+				loggedUser.setCountry_location_id(resulter.getInt("country_location_id"));
 				loggedUser.setTelephone_number(resulter.getString("telephone_number"));
 				loggedUser.setStatus(resulter.getString("status"));
 				loggedUser.setId(Integer.valueOf(resulter.getString("id")));
