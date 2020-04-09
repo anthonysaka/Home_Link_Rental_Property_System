@@ -25,7 +25,7 @@ import com.mysql.cj.x.protobuf.MysqlxDatatypes.Array;
 //import com.sun.java.util.jar.pack.Package.File;
 import com.sun.glass.ui.CommonDialogs.FileChooserResult;
 import com.sun.java.swing.plaf.windows.resources.windows;
-
+import com.sun.org.apache.xerces.internal.util.URI;
 
 import backend.ConnectionMySqlDB;
 import javafx.collections.FXCollections;
@@ -89,23 +89,29 @@ public class AddPublicationGUIController implements Initializable{
 	private FileChooser fileChooser;
 	private File file;
 	private Image imagen;
-	private FileInputStream sendImage;
+	FileChooser preview;
+	String path1;
+	String path2;
+	String path3;
+
 
 
 	@FXML
 	void browseImage(ActionEvent event) throws FileNotFoundException {
 
 		FileChooser fc = new FileChooser();
+
 		fc.setInitialDirectory(new File("C:\\Users\\jhan_\\git\\Home_Link_Rental_Property_System\\src"));
 
 		File selectedFile = fc.showOpenDialog(null);
-		
+
 		if(selectedFile != null && (x != 1)){
 
 			imagen = new Image(selectedFile.toURI().toString(), imgview1.getFitWidth(), imgview1.getFitHeight(), true, true);//path, PrefWidth, PrefHeight, PreserveRatio, Smooth
 
 			imgview1.setImage(imagen);
 			x = 1;
+			path1 = selectedFile.getAbsolutePath();
 
 		}
 		else if(selectedFile != null && (y != 1) ){
@@ -114,8 +120,10 @@ public class AddPublicationGUIController implements Initializable{
 			imagen = new Image(selectedFile.toURI().toString(), imgview2.getFitWidth(), imgview2.getFitHeight(), true, true);//path, PrefWidth, PrefHeight, PreserveRatio, Smooth
 
 			imgview2.setImage(imagen);
-		
+
 			y = 1;
+
+			path2 = selectedFile.getAbsolutePath();
 
 		}
 		else if(selectedFile != null && (z != 1) ){
@@ -125,46 +133,61 @@ public class AddPublicationGUIController implements Initializable{
 
 			imgview3.setImage(imagen);
 			z = 1;
+
+			path3 = selectedFile.getAbsolutePath();
 		}
-		
-		
-		
-		
+
+
+
+
 	}
 
 	@FXML
 	void cancel(ActionEvent event) {
 		Stage ventana = (Stage) btnCancelar.getScene().getWindow();
 		ventana.close();
-		 x = 0;
-		 y = 0;
-		 z = 0;
+		x = 0;
+		y = 0;
+		z = 0;
 
-		
+
 	}
 
 	@FXML
-	void savePublication(ActionEvent event) {
+	void savePublication(ActionEvent event) throws FileNotFoundException {
 
 		String titulo = txtTitulo.getText();
 		String precio = txtPrice.getText();
 		String property = cbxProperty.getSelectionModel().getSelectedItem().toString();
 		int userId = HomeGUIController.usuarioActual.getId();
-		String status = "Inactivo";
-		int imagenPreview = 1;
-		int adminId = 0;
+		String status = "0";
+
+
+		InputStream sendImage = new FileInputStream(new File(path1));
+		InputStream sendImage2 = new FileInputStream(new File(path2));
+		InputStream sendImage3 = new FileInputStream(new File(path3));
 		
+		
+
+		enviarImagen(sendImage, "Prueba imagen1");
+		enviarImagen(sendImage2, "Prueba imagen2");
+		enviarImagen(sendImage3, "Prueba imagen3");
+		
+		System.out.println("SE ENVIARON LAS IMAGENES");
+
+	
 		CallableStatement mySqlStatement = null ; // call stored procedure
 		try {
 			Connection myConnection = ConnectionMySqlDB.getConnectionMySqlDB();	
-			
-			mySqlStatement = (CallableStatement) myConnection.prepareCall("{CALL sp_insert_publicacion(?,?,?,?,?,?)}");
+
+			mySqlStatement = (CallableStatement) myConnection.prepareCall("{CALL sp_insert_publicacion(?,?,?,?,?,?,?)}");
 			mySqlStatement.setString("pa_titulo", titulo);
 			mySqlStatement.setString("pa_status", status);
-			mySqlStatement.setString("pa_propertyID", property);
-			mySqlStatement.setString("pa_price", precio);
-			mySqlStatement.setInt("pa_imgIdPrev",imagenPreview);
+			mySqlStatement.setInt("pa_propertyID", Integer.valueOf(property));
+			mySqlStatement.setFloat("pa_price", Float.valueOf(precio));
+			mySqlStatement.setInt("pa_imgIdPrev",10);
 			mySqlStatement.setInt("pa_userID",userId);
+			mySqlStatement.setInt("pa_admin",userId);
 			mySqlStatement.executeQuery();
 			myConnection.close();
 			System.out.println("Su publicación ha sido enviada!");
@@ -176,17 +199,12 @@ public class AddPublicationGUIController implements Initializable{
 		}
 
 	}
-	
-	void enviarImagen() {
-		
-		
-	}
 
 	public static ArrayList<String> llenarCombobox() {
 		Statement sentencia = null;
 		ResultSet resultado = null;
 		ArrayList<String> lista = new ArrayList<String>();
-		String Query = "SELECT DISTINCT id_property id FROM t_property WHERE id_user_property ="+ String.valueOf(HomeGUIController.usuarioActual.getId());
+		String Query = "SELECT DISTINCT id FROM t_property WHERE id_user_owner ="+ String.valueOf(HomeGUIController.usuarioActual.getId());
 		try {
 			Connection myConnection = ConnectionMySqlDB.getConnectionMySqlDB();
 			sentencia = myConnection.createStatement();
@@ -208,9 +226,25 @@ public class AddPublicationGUIController implements Initializable{
 	public void initialize(URL location, ResourceBundle resources) {
 		cbxProperty.setItems(list);
 
+	}
 
+	void enviarImagen(InputStream path, String descripcion) {
+		CallableStatement mySqlStatement1 = null ; // call stored procedure
+		try {
+			Connection myConnection1 = ConnectionMySqlDB.getConnectionMySqlDB();	
 
+			mySqlStatement1 = (CallableStatement) myConnection1.prepareCall("{CALL sp_insertImagenPreview(?,?)}");
+			mySqlStatement1.setString("pa_descripcion", descripcion);
+			mySqlStatement1.setBlob("pa_imagen", path);
+			mySqlStatement1.executeQuery();
+			myConnection1.close();
+			System.out.println("Su Imagen ha sido enviada!");
 
+		} catch (SQLException e) {
+			System.out.println("Error al enviar su Imagen...");
+			e.printStackTrace();
+
+		}
 	}
 
 

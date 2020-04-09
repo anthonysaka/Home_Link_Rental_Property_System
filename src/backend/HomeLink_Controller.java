@@ -76,7 +76,7 @@ public class HomeLink_Controller extends ConnectionMySqlDB {
 				mySqlStatement.setString("pa_lastname", pUser.getLastname());
 				mySqlStatement.setString("pa_gender", pUser.getGender());
 				mySqlStatement.setString("pa_type", pUser.getType());
-				mySqlStatement.setString("pa_status", pUser.getStatus());
+				mySqlStatement.setBoolean("pa_status", true);
 				mySqlStatement.setString("pa_created_date", pUser.getCreated_date());
 				mySqlStatement.executeQuery();
 				myConnection.close();

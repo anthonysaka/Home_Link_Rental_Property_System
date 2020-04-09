@@ -64,7 +64,6 @@ public class LoginGUIController extends Application {
 		stageLogin.getIcons().add(new Image(LoginGUIController.class.getResourceAsStream("../frontend/images/bg_home_link.png")));
 		stageLogin.setScene(sceneLogin);
 		stageLogin.setResizable(false);
-		//stageLogin.setAlwaysOnTop(true);
 		stageLogin.initStyle(StageStyle.TRANSPARENT);
 		stageLogin.show();
 
@@ -144,7 +143,7 @@ public class LoginGUIController extends Application {
 				loggedUser = new User(resulter.getString("name"), resulter.getString("lastname"), resulter.getString("gender"), resulter.getString("type"), resulter.getString("username"), resulter.getString("email"), resulter.getString("password"), resulter.getString("created_date"));	
 				loggedUser.setCountry_location_id(resulter.getInt("country_location_id"));
 				loggedUser.setTelephone_number(resulter.getString("telephone_number"));
-				loggedUser.setStatus(resulter.getString("status"));
+				loggedUser.setStatus(resulter.getBoolean("status"));
 				loggedUser.setId(Integer.valueOf(resulter.getString("id")));
 				
 				System.out.println("Iniciando sesion... Sesion iniciada con Exito!");

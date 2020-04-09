@@ -47,7 +47,7 @@ public class AddPropertyGUIController implements Initializable{
 		String address = txtAddress.getText();
 		String characteristics = txtCharacteristics.getText();
 		String type = cbxpropertyType.getSelectionModel().getSelectedItem().toString();
-		String status = "Inactiva";
+		String status = "0";
 
 		Propiedad property = new Propiedad(type, address, status, characteristics);
 

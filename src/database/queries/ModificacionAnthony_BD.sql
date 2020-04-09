@@ -90,7 +90,7 @@ CREATE TABLE `t_reservation` (
 DELIMITER $$
 CREATE DEFINER=`root`@`localhost` PROCEDURE `sp_createUser`(in pa_username VARCHAR(15), in pa_email VARCHAR(50), in pa_password VARCHAR(25),
 								in pa_name VARCHAR(20), in pa_lastname VARCHAR(30), in pa_gender VARCHAR(15),
-                                in pa_type VARCHAR(15), in pa_status VARCHAR(15), in pa_created_date DATETIME)
+                                in pa_type VARCHAR(15), in pa_status TINYINT, in pa_created_date DATETIME)
 BEGIN
 	INSERT INTO t_user(username,email,`password`,`name`,lastname,gender,`type`,`status`,created_date)
     VALUES(pa_username, pa_email, pa_password, pa_name, pa_lastname, pa_gender, pa_type, pa_status, pa_created_date);
@@ -150,6 +150,7 @@ select * from t_user;
 select * from t_property;	
 select * from t_publication;
 select * from t_imagenes;
+
 
 
 

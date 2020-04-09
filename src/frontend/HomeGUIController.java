@@ -61,10 +61,7 @@ public class HomeGUIController extends ListView<PublicacionesParaVisualizar> imp
 
 	private double xoffset = 0;
 	private double yoffset = 0;
-	
 	public static PublicacionesParaVisualizar auxlist;
-
-
 	public static  User usuarioActual = LoginGUIController.loggedUser;
 
 
@@ -83,7 +80,6 @@ public class HomeGUIController extends ListView<PublicacionesParaVisualizar> imp
 			@Override
 			public ListCell<PublicacionesParaVisualizar> call(ListView<PublicacionesParaVisualizar> panListView) {
 				return new CustomListCell();
-
 			}
 		});
 	}
@@ -137,8 +133,6 @@ public class HomeGUIController extends ListView<PublicacionesParaVisualizar> imp
 		});
 		/***************************************************************/
     }
-
-
 
 	/******* @throws SQLException 
 	 * @throws IOException ***************************************************************/
