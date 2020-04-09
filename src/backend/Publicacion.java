@@ -2,6 +2,7 @@ package backend;
 
 public class Publicacion {
 	private int idPublicacion;
+	private String titulo;
 	private String fechaPublicacion;
 	private String status;
 	private int idPropiedad;
@@ -9,9 +10,10 @@ public class Publicacion {
 	private float precio;
 	
 	
-	public Publicacion(int idPublicacion, String fechaPublicacion, String status, int idPropiedad, float precio) {
+	public Publicacion(int idPublicacion, String titulo, String fechaPublicacion, String status, int idPropiedad, float precio) {
 		super();
 		this.idPublicacion = idPublicacion;
+		this.setTitulo(titulo);
 		this.fechaPublicacion = fechaPublicacion;
 		this.status = status;
 		this.idPropiedad = idPropiedad;
@@ -77,6 +79,16 @@ public class Publicacion {
 
 	public void setPrecio(float precio) {
 		this.precio = precio;
+	}
+
+
+	public String getTitulo() {
+		return titulo;
+	}
+
+
+	public void setTitulo(String titulo) {
+		this.titulo = titulo;
 	}
 	
 	

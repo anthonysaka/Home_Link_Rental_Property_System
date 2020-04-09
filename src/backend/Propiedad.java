@@ -16,9 +16,9 @@ public class Propiedad extends ConnectionMySqlDB {
 		this.tipo = tipo;
 		this.direccion = direccion;
 		this.estatus = estatus;
-		this.feedbacks = feedbacks;
+	//	this.feedbacks = feedbacks;
 		this.caracteristicas = caracteristicas;
-		this.idUserOwner = idUserOwner;
+	//	this.idUserOwner = idUserOwner;
 	}
 
 	public int getIdPropiedad() {

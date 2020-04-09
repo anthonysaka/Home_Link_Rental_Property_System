@@ -1,0 +1,25 @@
+
+#lblTitulo {
+	-fx-font-family: Franklin Gothic Medium; 
+	-fx-font-weight: bold;
+	-fx-font-size: 1.5em; 
+ 	-fx-text-fill: BLACK;
+}
+
+#lblPrecio {
+-fx-font-family: Franklin Gothic Medium; 
+-fx-font-weight: bold;
+-fx-font-size: 1.2em; 
+-fx-text-fill: BLACK;
+}
+
+.label {
+-fx-font-family: Franklin Gothic Medium;
+-fx-font-size: 1.2em; 
+-fx-text-fill: GRAY;
+-fx-list-style-type: circle;
+}
+
+#btnClose {
+-fx-graphic: url('closeIcon1.png');
+}
