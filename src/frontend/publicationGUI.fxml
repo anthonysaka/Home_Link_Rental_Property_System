@@ -13,7 +13,7 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="465.0" prefWidth="1040.0" style="-fx-background-color: F5F5F5;" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="frontend.RegisterGUIController">
+<AnchorPane fx:id="primaryPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="465.0" prefWidth="1040.0" style="-fx-background-color: F5F5F5;" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="frontend.AddPublicationGUIController">
    <children>
       <AnchorPane nodeOrientation="LEFT_TO_RIGHT" prefHeight="40.0" prefWidth="1040.0" style="-fx-background-color: #0E0F11;">
          <children>
@@ -29,7 +29,7 @@
             <HBox alignment="CENTER_LEFT" prefHeight="45.0" prefWidth="440.0">
                <children>
                   <MaterialDesignIconView glyphName="LABEL" size="2.5em" />
-                  <JFXTextField fx:id="txtName" focusColor="#ffc107" maxWidth="527.0" minWidth="490.0" prefHeight="40.0" prefWidth="490.0" promptText="Titulo" style="-fx-background-color: F5F5F5;" unFocusColor="BLACK">
+                  <JFXTextField fx:id="txtTitulo" focusColor="#ffc107" maxWidth="527.0" minWidth="490.0" prefHeight="40.0" prefWidth="490.0" promptText="Titulo" style="-fx-background-color: F5F5F5;" unFocusColor="BLACK">
                      <font>
                         <Font size="18.0" />
                      </font>
@@ -42,7 +42,7 @@
             <HBox alignment="CENTER_LEFT" prefHeight="100.0" prefWidth="200.0">
                <children>
                   <MaterialDesignIconView glyphName="HOME" size="2.5em" />
-                  <JFXComboBox fx:id="cbxGender" focusColor="#ffc107" prefHeight="31.0" prefWidth="235.0" promptText="Propiedad" unFocusColor="BLACK">
+                  <JFXComboBox fx:id="cbxProperty" prefHeight="31.0" prefWidth="235.0" promptText="Propiedad">
                      <HBox.margin>
                         <Insets left="5.0" />
                      </HBox.margin>
@@ -52,7 +52,7 @@
             <HBox alignment="CENTER_LEFT" prefHeight="45.0" prefWidth="440.0">
                <children>
                   <MaterialDesignIconView glyphName="CASH_USD" size="2.5em" />
-                  <JFXTextField fx:id="txtEmail" focusColor="#ffc107" maxWidth="514.0" minWidth="131.0" prefHeight="40.0" prefWidth="131.0" promptText="Precio" style="-fx-background-color: F5F5F5;" unFocusColor="BLACK">
+                  <JFXTextField fx:id="txtPrice" focusColor="#ffc107" maxWidth="514.0" minWidth="131.0" prefHeight="40.0" prefWidth="131.0" promptText="Precio" style="-fx-background-color: F5F5F5;" unFocusColor="BLACK">
                      <font>
                         <Font size="18.0" />
                      </font>
@@ -64,7 +64,7 @@
             </HBox>
          </children>
       </VBox>
-      <JFXButton fx:id="btnSignUp" contentDisplay="CENTER" layoutX="27.0" layoutY="401.0" onAction="#setRegister" prefHeight="39.0" prefWidth="210.0" style="-fx-background-color: #ffc107; -fx-background-radius: 10;" styleClass="Button" text="Publicar" textFill="WHITE">
+      <JFXButton fx:id="btnCancelar" contentDisplay="CENTER" layoutX="27.0" layoutY="401.0" onAction="#cancel" prefHeight="39.0" prefWidth="210.0" style="-fx-background-color: #ffc107; -fx-background-radius: 10;" styleClass="Button" text="Cancelar" textFill="WHITE">
          <font>
             <Font name="System Bold" size="18.0" />
          </font>
@@ -72,16 +72,16 @@
             <Cursor fx:constant="HAND" />
          </cursor>
       </JFXButton>
-      <HBox layoutX="662.0" layoutY="306.0" prefHeight="145.0" prefWidth="182.0" style="-fx-background-color: black;">
+      <HBox layoutX="662.0" layoutY="306.0" prefHeight="145.0" prefWidth="175.0" style="-fx-background-color: black;">
          <children>
-            <ImageView fitHeight="133.0" fitWidth="173.0" pickOnBounds="true" preserveRatio="true">
+            <ImageView fx:id="imgview2" fitHeight="145.0" fitWidth="175.0" pickOnBounds="true" preserveRatio="true">
                <HBox.margin>
                   <Insets right="5.0" />
                </HBox.margin>
             </ImageView>
          </children>
       </HBox>
-      <JFXButton fx:id="btnSignUp1" contentDisplay="CENTER" layoutX="277.0" layoutY="401.0" onAction="#setRegister" prefHeight="39.0" prefWidth="210.0" style="-fx-background-color: #ffc107; -fx-background-radius: 10;" styleClass="Button" text="Publicar" textFill="WHITE">
+      <JFXButton fx:id="btnPublicar" contentDisplay="CENTER" layoutX="277.0" layoutY="401.0" onAction="#savePublication" prefHeight="39.0" prefWidth="210.0" style="-fx-background-color: #ffc107; -fx-background-radius: 10;" styleClass="Button" text="Publicar" textFill="WHITE">
          <font>
             <Font name="System Bold" size="18.0" />
          </font>
@@ -89,19 +89,27 @@
             <Cursor fx:constant="HAND" />
          </cursor>
       </JFXButton>
-      <HBox layoutX="662.0" layoutY="65.0" prefHeight="225.0" prefWidth="364.0" style="-fx-background-color: red;">
+      <HBox layoutX="662.0" layoutY="65.0" prefHeight="225.0" prefWidth="363.0" style="-fx-background-color: red;">
          <children>
-            <ImageView fitHeight="225.0" fitWidth="356.0" pickOnBounds="true" preserveRatio="true" />
+            <ImageView fx:id="imgview1" fitHeight="225.0" fitWidth="363.0" pickOnBounds="true" />
          </children>
       </HBox>
-      <HBox layoutX="848.0" layoutY="306.0" prefHeight="145.0" prefWidth="178.0" style="-fx-background-color: black;">
+      <HBox layoutX="848.0" layoutY="306.0" prefHeight="145.0" prefWidth="175.0" style="-fx-background-color: black;">
          <children>
-            <ImageView fitHeight="133.0" fitWidth="173.0" pickOnBounds="true" preserveRatio="true">
+            <ImageView fx:id="imgview3" fitHeight="145.0" fitWidth="175.0" pickOnBounds="true" preserveRatio="true">
                <HBox.margin>
                   <Insets left="5.0" />
                </HBox.margin>
             </ImageView>
          </children>
       </HBox>
+      <JFXButton fx:id="btnBrowse" contentDisplay="CENTER" layoutX="27.0" layoutY="318.0" onAction="#browseImage" prefHeight="39.0" prefWidth="210.0" style="-fx-background-color: #ffc107; -fx-background-radius: 10;" styleClass="Button" text="Browse" textFill="WHITE">
+         <font>
+            <Font name="System Bold" size="18.0" />
+         </font>
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor>
+      </JFXButton>
    </children>
 </AnchorPane>
