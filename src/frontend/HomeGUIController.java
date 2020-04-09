@@ -11,13 +11,11 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.ResourceBundle;
-
 import javax.imageio.ImageIO;
 import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXComboBox;
 import com.jfoenix.controls.JFXListView;
 import com.mysql.cj.jdbc.CallableStatement;
-
 import backend.ConnectionMySqlDB;
 import backend.PublicacionesParaVisualizar;
 import backend.User;
@@ -63,6 +61,8 @@ public class HomeGUIController extends ListView<PublicacionesParaVisualizar> imp
 
 	private double xoffset = 0;
 	private double yoffset = 0;
+	
+	public static PublicacionesParaVisualizar auxlist;
 
 
 	public static  User usuarioActual = LoginGUIController.loggedUser;
@@ -87,6 +87,57 @@ public class HomeGUIController extends ListView<PublicacionesParaVisualizar> imp
 			}
 		});
 	}
+	
+    @FXML
+    void clickToViewPublication(MouseEvent event) throws IOException {
+    	auxlist = publicationListView.getSelectionModel().getSelectedItem();
+    	//ViewPublicationGUI ax = new ViewPublicationGUI(auxlist);
+    	Parent rootPubli= FXMLLoader.load(getClass().getResource("../frontend/viewPublicacionesGUI.fxml"));
+		Stage stagePubli= new Stage();
+		Scene scenePubli= new Scene(rootPubli);
+
+		stagePubli.setScene(scenePubli);
+		stagePubli.setResizable(false);
+		//stageRegister.setAlwaysOnTop(true);
+		stagePubli.initStyle(StageStyle.TRANSPARENT);
+		//	stageRegister.initModality(Modality.APPLICATION_MODAL);
+		stagePubli.show();
+
+    }
+
+    @FXML
+    void openAdminView(ActionEvent event) throws IOException {
+    	Parent rootAdmin = FXMLLoader.load(getClass().getResource("../frontend/admin1GUI.fxml"));
+		Stage stageAdmin = new Stage();
+		Scene sceneAdmin = new Scene(rootAdmin);
+
+		stageAdmin.setScene(sceneAdmin);
+		//stageAdmin.setResizable(false);
+		//stageRegister.setAlwaysOnTop(true);
+	//	stageAdmin.initStyle(StageStyle.TRANSPARENT);
+		//	stageRegister.initModality(Modality.APPLICATION_MODAL);
+		stageAdmin.show();
+
+		/*******
+		 * EventHandler to Move Undecorated Window (Stage) Adapted from: StackOverflow
+		 ******/
+		rootAdmin.setOnMousePressed(new EventHandler<MouseEvent>() {
+			@Override
+			public void handle(MouseEvent event) {
+				xoffset = stageAdmin.getX() - event.getScreenX();
+				yoffset = stageAdmin.getY() - event.getScreenY();
+			}
+		});
+		rootAdmin.setOnMouseDragged(new EventHandler<MouseEvent>() {
+			@Override
+			public void handle(MouseEvent event) {
+				stageAdmin.setX(event.getScreenX() + xoffset);
+				stageAdmin.setY(event.getScreenY() + yoffset);
+			}
+		});
+		/***************************************************************/
+    }
+
 
 
 	/******* @throws SQLException 
@@ -105,9 +156,9 @@ public class HomeGUIController extends ListView<PublicacionesParaVisualizar> imp
 				ByteArrayInputStream bis = new ByteArrayInputStream(f51);
 				BufferedImage read = ImageIO.read(bis);
 				Image imgs = SwingFXUtils.toFXImage(read, null);
-				listPublicationVisual.add(new PublicacionesParaVisualizar(resultBD.getString("titulo_publicacion"), resultBD.getString("type_property"), resultBD.getString("address"), 
-						resultBD.getString("feedbacks"), resultBD.getString("characteristic"), resultBD.getString("Dueño"),
-						resultBD.getString("publication_date"), resultBD.getFloat("price"), imgs));
+				listPublicationVisual.add(new PublicacionesParaVisualizar(resultBD.getString("titulo"), resultBD.getString("type"), resultBD.getString("address"), 
+						resultBD.getString("rating"), resultBD.getString("characteristic"), resultBD.getString("Dueño"),
+						resultBD.getString("date"), resultBD.getFloat("price"), imgs));
 			}
 			publicationListView.setItems(listPublicationVisual);
 			resultBD.close();
