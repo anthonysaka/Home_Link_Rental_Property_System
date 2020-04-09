@@ -1,10 +1,16 @@
 package frontend;
 
 import java.net.URL;
+import java.sql.Connection;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.sql.Statement;
+import java.util.ArrayList;
 import java.util.ResourceBundle;
 
 import com.jfoenix.controls.JFXComboBox;
 import com.jfoenix.controls.JFXTextField;
+import com.mysql.cj.jdbc.CallableStatement;
 
 import backend.ConnectionMySqlDB;
 import backend.Propiedad;
@@ -60,6 +66,7 @@ public class AddPropertyGUIController implements Initializable{
 		cbxpropertyType.setItems(listTypeProperty);
 		
 	}
+	
 	
 	
 

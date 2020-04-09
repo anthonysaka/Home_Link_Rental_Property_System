@@ -6,6 +6,9 @@ package frontend;
 
 
 import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.InputStream;
 import java.net.URL;
 import java.sql.Connection;
 import java.sql.ResultSet;
@@ -86,20 +89,11 @@ public class AddPublicationGUIController implements Initializable{
 	private FileChooser fileChooser;
 	private File file;
 	private Image imagen;
+	private FileInputStream sendImage;
 
 
 	@FXML
-	void browseImage(ActionEvent event) {
-		
-		
-
-		//Single File Selection
-		//System.out.println("Saka la pegó11");
-		//Stage nombre =  (Stage) btnBrowse.getScene().getWindow();
-
-
-		//System.out.println("Saka la pegó");
-		//file = fileChooser.showOpenDialog((Window) nombre);
+	void browseImage(ActionEvent event) throws FileNotFoundException {
 
 		FileChooser fc = new FileChooser();
 		fc.setInitialDirectory(new File("C:\\Users\\jhan_\\git\\Home_Link_Rental_Property_System\\src"));
@@ -132,6 +126,10 @@ public class AddPublicationGUIController implements Initializable{
 			imgview3.setImage(imagen);
 			z = 1;
 		}
+		
+		
+		
+		
 	}
 
 	@FXML
@@ -153,8 +151,35 @@ public class AddPublicationGUIController implements Initializable{
 		String property = cbxProperty.getSelectionModel().getSelectedItem().toString();
 		int userId = HomeGUIController.usuarioActual.getId();
 		String status = "Inactivo";
+		int imagenPreview = 1;
 		int adminId = 0;
+		
+		CallableStatement mySqlStatement = null ; // call stored procedure
+		try {
+			Connection myConnection = ConnectionMySqlDB.getConnectionMySqlDB();	
+			
+			mySqlStatement = (CallableStatement) myConnection.prepareCall("{CALL sp_insert_publicacion(?,?,?,?,?,?)}");
+			mySqlStatement.setString("pa_titulo", titulo);
+			mySqlStatement.setString("pa_status", status);
+			mySqlStatement.setString("pa_propertyID", property);
+			mySqlStatement.setString("pa_price", precio);
+			mySqlStatement.setInt("pa_imgIdPrev",imagenPreview);
+			mySqlStatement.setInt("pa_userID",userId);
+			mySqlStatement.executeQuery();
+			myConnection.close();
+			System.out.println("Su publicación ha sido enviada!");
 
+		} catch (SQLException e) {
+			System.out.println("Error al enviar su publicación...");
+			e.printStackTrace();
+
+		}
+
+	}
+	
+	void enviarImagen() {
+		
+		
 	}
 
 	public static ArrayList<String> llenarCombobox() {
