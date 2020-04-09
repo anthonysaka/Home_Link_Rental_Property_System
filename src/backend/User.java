@@ -29,7 +29,7 @@ public class User extends ConnectionMySqlDB {
 	private static String username;
 	private String email;
 	private String password;
-	private String status;
+	private Boolean status;
 	private int country_location_id;
 	private String telephone_number;
 	private String created_date;
@@ -125,11 +125,11 @@ public class User extends ConnectionMySqlDB {
 		this.password = password;
 	}
 
-	public String getStatus() {
+	public Boolean getStatus() {
 		return status;
 	}
 
-	public void setStatus(String status) {
+	public void setStatus(Boolean status) {
 		this.status = status;
 	}
 

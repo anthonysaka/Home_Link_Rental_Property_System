@@ -102,13 +102,13 @@ public class AdminGUIController implements Initializable {
 		}
 		try { /* RECORDAR LIMPIAR EL CODIGO DE TODO EL PROYECTO [Mucho codigo repetido]*/
 			while(rs.next()){
-				Integer id = rs.getInt("id_property");
-				String tipo = rs.getString("type_property");
+				Integer id = rs.getInt("id");
+				String tipo = rs.getString("type");
 				String dir = rs.getString("address");
 				String caract = rs.getString("characteristic");
-				String feedback= rs.getString("feedbacks");
-				Integer dueno = rs.getInt("id_user_property");
-				String status = rs.getString("status_property");		
+				String feedback= rs.getString("rating");
+				Integer dueno = rs.getInt("id_user_owner");
+				String status = rs.getString("status");		
 				Propiedad auxPro = new Propiedad(tipo, dir, status, caract);
 				auxPro.setIdPropiedad(id);
 				auxPro.setIdUserOwner(dueno);
