@@ -2,7 +2,7 @@
 * {
     -fx-primary : #000000;
     -fx-secondary : #FFC107;
-    -fx-primarytext : #B2B2B2;
+    -fx-primarytext : #ffffff;
     -fx-blue: #1976D2;
     -fx-red: #FF0000;
     -fx-color-1:#1976D2;
@@ -10,11 +10,99 @@
 
 .root{
     -fx-background-color: derive(-fx-primary, 10%);
+    -fx-font-family: Franklin Gothic Medium; 
 }
+
+/* tab user */
+#lblAmountReserva {
+-fx-font-family: Franklin Gothic Medium; 
+-fx-font-weight: bold;
+-fx-font-size: 1.5em; 
+-fx-text-fill: GREY;
+}
+
+#lblAmountPubli {
+-fx-font-family: Franklin Gothic Medium; 
+-fx-font-weight: bold;
+-fx-font-size: 1.5em; 
+-fx-text-fill: GREY;
+}
+
+#lblFullName {
+-fx-font-family: Franklin Gothic Medium; 
+-fx-font-weight: bold;
+-fx-font-size: 1.5em; 
+-fx-text-fill: GREY;
+}
+
+#btnClose {
+	-fx-graphic: url('closeIcon1.png');
+}
+#btnMinimize{
+	-fx-graphic: url('minusIcon.png');
+}
+
 
 #topBoderPane {
 	-fx-background-color: derive(-fx-primary, 13%);
 }
+
+
+.label {
+-fx-font-family: Franklin Gothic Medium;
+-fx-font-size: 1.2em; 
+-fx-text-fill: GRAY;
+}
+
+/* */
+.text-field {
+	-fx-background-radius: 10;
+	-fx-background-color: derive(-fx-primary, 20%);
+    -fx-font-size : 12pt;
+    -jfx-focus-color: -fx-secondary;
+    -fx-text-fill: derive(-fx-secondary, 30%);
+}
+.jfx-text-field,
+.jfx-combo-box {
+    -fx-border-radius: 10px;
+    -fx-border-color: derive(-fx-primary, 0%);
+}
+.jfx-text-field {
+    -fx-padding: 0.333333em 1em 0.333333em 1em;
+}
+.jfx-combo-box {
+    -fx-padding: 0em 1em 0em 1em;
+}
+.jfx-text-field > .input-line,
+.jfx-combo-box > .input-line {
+    -fx-background-color: transparent;
+    -fx-pref-height: 0px;
+    -fx-translate-y: 0px;
+}
+.jfx-text-field > .input-focused-line,
+.jfx-combo-box > .input-focused-line {
+    -fx-background-color: transparent;
+    -fx-pref-height: 0px;
+}
+
+.button{
+    -fx-text-fill: -fx-primarytext;
+    -fx-font-weight: bold;
+    -fx-font-stroke: -fx-primary;
+    -fx-background-color: -fx-primary;
+   
+    -fx-background-radius: 10;
+    -fx-font-size: 12pt;
+}
+
+.button:hover{
+    -fx-background-color: -fx-secondary;
+    -fx-text-fill: -fx-primary;
+    -fx-font-weight: bold;
+}
+
+
+
 
 /*JFXTabPane CSS Styling*/
 .tab {
@@ -55,15 +143,15 @@
 .table-view .column-header {
     -fx-background-color: transparent;
 }
-/*
+
 .table-view .table-cell{
     -fx-text-fill: white;
 }
 .table-row-cell:focused, .table-cell:focused{
-    -fx-text-fill: -fx-primary;
+    -fx-text-fill: derive(-fx-primary, 10%);
 }
 .table-row-cell{
-    -fx-background-color: -fx-primary;
+    -fx-background-color: derive(-fx-primary, 10%);
     -fx-border-color: transparent;
     -fx-table-cell-border-color: transparent;
 }
@@ -73,14 +161,15 @@
 .table-row-cell:even{
     -fx-background-color: derive(-fx-primary, 10%);
 }
+.table-row-cell:selected .table-cell{
+    -fx-text-fill: -fx-primary;
+}
 .table-row-cell:selected {
     -fx-background-color: -fx-secondary;
     -fx-text-fill: -fx-primary;
     -fx-background-insets: 0;
 }
-.table-row-cell:selected .table-cell{
-    -fx-text-fill: -fx-primary;
-}
+
 .placeholder .label{
     -fx-text-fill: white;
 }
@@ -110,4 +199,3 @@
 {
     -fx-base: -fx-primary;
 }
-*/
