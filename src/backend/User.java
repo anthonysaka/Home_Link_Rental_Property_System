@@ -207,12 +207,15 @@ public class User extends ConnectionMySqlDB {
 
 		CallableStatement mySqlStatement = null ; // call stored procedure
 		try {
+<<<<<<< HEAD
 			Connection myConnection = getConnectionMySqlDB();	
 
+=======
+			Connection myConnection = getConnectionMySqlDB();				
+>>>>>>> branch 'master' of https://github.com/anthonysaka/Home_Link_Rental_Property_System.git
 			mySqlStatement = (CallableStatement) myConnection.prepareCall("{CALL sp_insert_card(?,?,?,?,?)}");
 			mySqlStatement.setString("pa_numCard", tarjeta.getNumeroTarjeta());
 			mySqlStatement.setString("pa_userOwner", HomeGUIController.usuarioActual.getUsername());
-			System.out.println("PASO AQUÍ");
 			mySqlStatement.setString("pa_representante", tarjeta.getRepresentante());
 			mySqlStatement.setString("pa_expirationDate", tarjeta.getFechaVencimiento());
 			mySqlStatement.setInt("pa_cvv",tarjeta.getCVV());

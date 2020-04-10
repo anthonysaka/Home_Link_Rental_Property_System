@@ -1,10 +1,5 @@
 package frontend;
 
-
-
-
-
-
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
@@ -50,33 +45,22 @@ public class AddPublicationGUIController implements Initializable{
 
 	@FXML
 	private AnchorPane primaryPane;
-
-
 	@FXML
 	private JFXTextField txtTitulo;
-
 	@FXML
 	private JFXComboBox<String> cbxProperty;
-
 	@FXML
 	private JFXTextField txtPrice;
-
 	@FXML
 	private JFXButton btnCancelar;
-
 	@FXML
 	private JFXButton btnPublicar;
-
 	@FXML
 	private ImageView imgview2;
-
-
 	@FXML
 	private ImageView imgview1;
-
 	@FXML
 	private ImageView imgview3;
-
 	@FXML
 	private JFXButton btnBrowse;
 
@@ -93,9 +77,7 @@ public class AddPublicationGUIController implements Initializable{
 	String path1;
 	String path2;
 	String path3;
-
-
-
+	
 	@FXML
 	void browseImage(ActionEvent event) throws FileNotFoundException {
 
@@ -160,7 +142,7 @@ public class AddPublicationGUIController implements Initializable{
 		String precio = txtPrice.getText();
 		String property = cbxProperty.getSelectionModel().getSelectedItem().toString();
 		int userId = HomeGUIController.usuarioActual.getId();
-		String status = "0";
+	
 
 
 		InputStream sendImage = new FileInputStream(new File(path1));
@@ -168,26 +150,18 @@ public class AddPublicationGUIController implements Initializable{
 		InputStream sendImage3 = new FileInputStream(new File(path3));
 		
 		
-
-		enviarImagen(sendImage, "Prueba imagen1");
-		enviarImagen(sendImage2, "Prueba imagen2");
-		enviarImagen(sendImage3, "Prueba imagen3");
-		
-		System.out.println("SE ENVIARON LAS IMAGENES");
-
-	
 		CallableStatement mySqlStatement = null ; // call stored procedure
 		try {
 			Connection myConnection = ConnectionMySqlDB.getConnectionMySqlDB();	
 
-			mySqlStatement = (CallableStatement) myConnection.prepareCall("{CALL sp_insert_publicacion(?,?,?,?,?,?,?)}");
+			mySqlStatement = (CallableStatement) myConnection.prepareCall("{CALL sp_insert_publicacion(?,?,?,?)}");
 			mySqlStatement.setString("pa_titulo", titulo);
-			mySqlStatement.setString("pa_status", status);
 			mySqlStatement.setInt("pa_propertyID", Integer.valueOf(property));
 			mySqlStatement.setFloat("pa_price", Float.valueOf(precio));
+
 			mySqlStatement.setInt("pa_imgIdPrev",4);
+
 			mySqlStatement.setInt("pa_userID",userId);
-			mySqlStatement.setInt("pa_admin",userId);
 			mySqlStatement.executeQuery();
 			myConnection.close();
 			System.out.println("Su publicación ha sido enviada!");
@@ -197,6 +171,13 @@ public class AddPublicationGUIController implements Initializable{
 			e.printStackTrace();
 
 		}
+		
+		enviarImagen(sendImage, "Preview", idPublicacion());
+		enviarImagen(sendImage2, "Imagen 2", idPublicacion());
+		enviarImagen(sendImage3, "Imagen 3", idPublicacion());
+		
+		System.out.println("SE ENVIARON LAS IMAGENES");
+
 
 	}
 
@@ -204,7 +185,7 @@ public class AddPublicationGUIController implements Initializable{
 		Statement sentencia = null;
 		ResultSet resultado = null;
 		ArrayList<String> lista = new ArrayList<String>();
-		String Query = "SELECT DISTINCT id FROM t_property WHERE id_user_owner ="+ String.valueOf(HomeGUIController.usuarioActual.getId());
+		String Query = "SELECT DISTINCT id FROM t_property WHERE id_user_owner ="+String.valueOf(HomeGUIController.usuarioActual.getId()+" AND t_property.status = 0");
 		try {
 			Connection myConnection = ConnectionMySqlDB.getConnectionMySqlDB();
 			sentencia = myConnection.createStatement();
@@ -221,6 +202,29 @@ public class AddPublicationGUIController implements Initializable{
 		}
 		return lista;
 	}
+	
+	int idPublicacion() {
+		int x = 0;
+		Statement sentencia = null;
+		ResultSet resultado = null;
+		ArrayList<String> lista = new ArrayList<String>();
+		String Query = "SELECT id ID FROM t_publication ORDER BY id DESC limit 1";
+		try {
+			Connection myConnection = ConnectionMySqlDB.getConnectionMySqlDB();
+			sentencia = myConnection.createStatement();
+			resultado = sentencia.executeQuery(Query);
+			
+			while (resultado.next()) {
+				x = resultado.getInt("id");
+				System.out.println("Id Publicacion Obtenido");
+			}
+			
+		} catch (Exception e) {
+			System.out.println("ID Publicacion no obtenido");
+		}
+		
+		return x;
+	}
 
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
@@ -228,14 +232,15 @@ public class AddPublicationGUIController implements Initializable{
 
 	}
 
-	void enviarImagen(InputStream path, String descripcion) {
+	void enviarImagen(InputStream path, String descripcion, int id) {
 		CallableStatement mySqlStatement1 = null ; // call stored procedure
 		try {
 			Connection myConnection1 = ConnectionMySqlDB.getConnectionMySqlDB();	
 
-			mySqlStatement1 = (CallableStatement) myConnection1.prepareCall("{CALL sp_insertImagenPreview(?,?)}");
+			mySqlStatement1 = (CallableStatement) myConnection1.prepareCall("{CALL sp_insertImagenes(?,?,?)}");
 			mySqlStatement1.setString("pa_descripcion", descripcion);
 			mySqlStatement1.setBlob("pa_imagen", path);
+			mySqlStatement1.setInt("pa_id_publicacion", id);
 			mySqlStatement1.executeQuery();
 			myConnection1.close();
 			System.out.println("Su Imagen ha sido enviada!");

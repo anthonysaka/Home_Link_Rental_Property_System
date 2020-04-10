@@ -7,26 +7,25 @@ import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.stage.Stage;
 
-public class TablePropertyGUIController {
+public class TablePublicationGUIController {
 
     @FXML
-    private JFXButton btnAddProperty;
+    private JFXButton btnAddPublication;
 
     @FXML
-    private JFXButton btnModifyProperty;
+    private JFXButton btnModifyPublication;
+
+    @FXML
+    private JFXButton btnDeletePublication;
 
     @FXML
     private Button btnClose;
 
-    @FXML
-    private JFXButton btnDeleteProperty;
-
-    
-/************************************** METODOS ******************************************/    
+/******************************* METODOS **********************************/  
     @FXML
     void CloseWindow(ActionEvent event) {
     	Stage stage = (Stage) btnClose.getScene().getWindow();
-    	stage.close(); 
+    	stage.close();  
     }
 
 }
