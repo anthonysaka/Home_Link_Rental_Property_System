@@ -21,30 +21,32 @@ public class User extends ConnectionMySqlDB {
 	 * This class, represent user table on database
 	 */
 
-	private static int id;
+	private int id;
 	private String name;
 	private String lastname;
 	private String gender;
 	private String type;
-	private static String username;
+	private String username;
 	private String email;
 	private String password;
 	private Boolean status;
-	private int country_location_id;
+	private String country_location;
 	private String telephone_number;
 	private String created_date;
-	private static ArrayList<Tarjetas> tarjetas;
+	private static ArrayList<Tarjetas> tarjetas = new ArrayList<Tarjetas>();
 	private ArrayList<PublicacionesParaVisualizar> publicaciones = new ArrayList<PublicacionesParaVisualizar>();
 	private ArrayList<Publicacion> publicacionesBDD = new ArrayList<Publicacion>();
-	
 	private ArrayList<Reserva> reservas = new ArrayList<Reserva>();
-	private ArrayList<Propiedad> propiedades;
-	
+	private ArrayList<Propiedad> propiedades = new ArrayList<Propiedad>();
+
+	private int amountReservation = 0;
+	private int amountPublication = 0;
+
 
 	public User(String name, String lastname, String gender, String type, String username, String email,
 			String password,String created_date) {
 		super();
-		this.id = id;
+	//	this.id = id;
 		this.name = name;
 		this.lastname = lastname;
 		this.gender = gender;
@@ -52,12 +54,12 @@ public class User extends ConnectionMySqlDB {
 		this.username = username;
 		this.email = email;
 		this.password = password;
-		this.status = status;
-		this.country_location_id = country_location_id;
-		this.telephone_number = telephone_number;
+	//	this.status = status;
+		//	this.country_location = country_location;
+		//	this.telephone_number = telephone_number;
 		this.created_date = created_date;
-		this.tarjetas = new ArrayList<Tarjetas>();
-		this.propiedades = new ArrayList<Propiedad>();
+	//	this.tarjetas = new ArrayList<Tarjetas>();
+		//this.propiedades = new ArrayList<Propiedad>();
 	}
 
 	public int getId() {
@@ -66,7 +68,7 @@ public class User extends ConnectionMySqlDB {
 
 	public void setId(int id) {
 		this.id = id;
-		
+
 	}
 
 	public String getName() {
@@ -133,12 +135,12 @@ public class User extends ConnectionMySqlDB {
 		this.status = status;
 	}
 
-	public int getCountry_location_id() {
-		return country_location_id;
+	public String getCountry_location() {
+		return country_location;
 	}
 
-	public void setCountry_location_id(int country_location_id) {
-		this.country_location_id = country_location_id;
+	public void setCountry_location(String country_location_id) {
+		this.country_location = country_location_id;
 	}
 
 	public String getTelephone_number() {
@@ -183,7 +185,7 @@ public class User extends ConnectionMySqlDB {
 		this.reservas = reservas;
 	}
 
-public ArrayList<Reserva> getReservas() {
+	public ArrayList<Reserva> getReservas() {
 		return reservas;
 	}
 
@@ -199,14 +201,14 @@ public ArrayList<Reserva> getReservas() {
 		this.propiedades = propiedades;
 	}
 
-/*******************************************************************   METHODS    **********************************************************************************************************/
-  
+	/*******************************************************************   METHODS    **********************************************************************************************************/
+
 	public static boolean insertarTarjetas(Tarjetas tarjeta) {
-	
+
 		CallableStatement mySqlStatement = null ; // call stored procedure
 		try {
 			Connection myConnection = getConnectionMySqlDB();	
-			
+
 			mySqlStatement = (CallableStatement) myConnection.prepareCall("{CALL sp_insert_card(?,?,?,?,?)}");
 			mySqlStatement.setString("pa_numCard", tarjeta.getNumeroTarjeta());
 			mySqlStatement.setString("pa_userOwner", HomeGUIController.usuarioActual.getUsername());
@@ -223,14 +225,14 @@ public ArrayList<Reserva> getReservas() {
 			e.printStackTrace();
 			return false;
 		}
-		
-		
+
+
 	}
-	
-	
+
+
 	public static boolean insertarPropiedades(Propiedad property) {
-		
-		
+
+
 		CallableStatement mySqlStatement = null ; // call stored procedure
 		try {
 			Connection myConnection = getConnectionMySqlDB();	
@@ -251,15 +253,15 @@ public ArrayList<Reserva> getReservas() {
 		}
 	}
 
-/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
-	
+	/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
 	public static boolean insertarPublicaciones(Publicacion publication) {
 		CallableStatement mySqlStatement = null ; // call stored procedure
-		
+
 		try {
 			Connection myConnection = getConnectionMySqlDB();	
 			mySqlStatement = (CallableStatement) myConnection.prepareCall("{CALL sp_insert_publicacion(?,?)}");
-						
+
 			mySqlStatement.setInt("pa_idPropiedad", publication.getIdPropiedad() ); //se seleccionara de un cbx
 			mySqlStatement.setFloat("pa_precio", publication.getPrecio());
 			mySqlStatement.executeQuery();
@@ -271,9 +273,25 @@ public ArrayList<Reserva> getReservas() {
 			e.printStackTrace();
 			return false;
 		}		
-		
-	}
-/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-	
+	}
+	/////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+	public int getAmountReservation() {
+		return amountReservation;
+	}
+
+	public void setAmountReservation(int amountReservation) {
+		this.amountReservation = amountReservation;
+	}
+
+	public int getAmountPublication() {
+		return amountPublication;
+	}
+
+	public void setAmountPublication(int amountPublication) {
+		this.amountPublication = amountPublication;
+	}
+
+
 }
