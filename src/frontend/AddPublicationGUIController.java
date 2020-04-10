@@ -101,7 +101,7 @@ public class AddPublicationGUIController implements Initializable{
 
 		FileChooser fc = new FileChooser();
 
-		fc.setInitialDirectory(new File("C:\\Users\\jhan_\\git\\Home_Link_Rental_Property_System\\src"));
+		fc.setInitialDirectory(new File("C:\\Users\\Anthony"));
 
 		File selectedFile = fc.showOpenDialog(null);
 
@@ -185,7 +185,7 @@ public class AddPublicationGUIController implements Initializable{
 			mySqlStatement.setString("pa_status", status);
 			mySqlStatement.setInt("pa_propertyID", Integer.valueOf(property));
 			mySqlStatement.setFloat("pa_price", Float.valueOf(precio));
-			mySqlStatement.setInt("pa_imgIdPrev",10);
+			mySqlStatement.setInt("pa_imgIdPrev",4);
 			mySqlStatement.setInt("pa_userID",userId);
 			mySqlStatement.setInt("pa_admin",userId);
 			mySqlStatement.executeQuery();

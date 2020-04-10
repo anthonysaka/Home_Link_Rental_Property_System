@@ -61,10 +61,7 @@ public class HomeLink_Controller extends ConnectionMySqlDB {
 	
 	// Method to create user. Send parameters to Database.
 		public static boolean create_add_user(User pUser) {
-
-
 			CallableStatement mySqlStatement = null ; // call stored procedure
-
 			try {
 				Connection myConnection = getConnectionMySqlDB();
 				mySqlStatement = (CallableStatement) myConnection.prepareCall("{CALL sp_createUser(?,?,?,?,?,?,?,?,?)}");
@@ -85,6 +82,25 @@ public class HomeLink_Controller extends ConnectionMySqlDB {
 
 			} catch (SQLException e) {
 				System.out.println("User no creado con exito!");
+				e.printStackTrace();
+				return false;
+			}
+		}
+		
+		public static boolean delete_user(int pId, String pUsername) {
+			CallableStatement mySqlStatement = null ; // call stored procedure
+			try {
+				Connection myConnection = getConnectionMySqlDB();
+				mySqlStatement = (CallableStatement) myConnection.prepareCall("{CALL sp_delete_user(?,?)}");
+
+				mySqlStatement.setString("pa_username", pUsername);
+				mySqlStatement.setInt("pa_id",pId );
+				mySqlStatement.executeQuery();
+				myConnection.close();
+				System.out.println("User eliminado con exito!");
+				return true;
+			} catch (SQLException e) {
+				System.out.println("User no eliminado con exito!");
 				e.printStackTrace();
 				return false;
 			}

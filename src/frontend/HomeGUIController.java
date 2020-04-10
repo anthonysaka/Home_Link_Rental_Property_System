@@ -88,18 +88,23 @@ public class HomeGUIController extends ListView<PublicacionesParaVisualizar> imp
     void clickToViewPublication(MouseEvent event) throws IOException {
     	auxlist = publicationListView.getSelectionModel().getSelectedItem();
     	//ViewPublicationGUI ax = new ViewPublicationGUI(auxlist);
-    	Parent rootPubli= FXMLLoader.load(getClass().getResource("../frontend/viewPublicacionesGUI.fxml"));
-		Stage stagePubli= new Stage();
-		Scene scenePubli= new Scene(rootPubli);
+    	if (auxlist != null) {
+    		Parent rootPubli= FXMLLoader.load(getClass().getResource("../frontend/viewPublicacionesGUI.fxml"));
+    		Stage stagePubli= new Stage();
+    		Scene scenePubli= new Scene(rootPubli);
 
-		stagePubli.setScene(scenePubli);
-		stagePubli.setResizable(false);
-		//stageRegister.setAlwaysOnTop(true);
-		stagePubli.initStyle(StageStyle.TRANSPARENT);
-		//	stageRegister.initModality(Modality.APPLICATION_MODAL);
-		stagePubli.show();
+    		stagePubli.setScene(scenePubli);
+    		stagePubli.setResizable(false);
+    		//stageRegister.setAlwaysOnTop(true);
+    		stagePubli.initStyle(StageStyle.TRANSPARENT);
+    		//	stageRegister.initModality(Modality.APPLICATION_MODAL);
+    		stagePubli.show();
+		}
+    
 
     }
+    
+
 
     @FXML
     void openAdminView(ActionEvent event) throws IOException {

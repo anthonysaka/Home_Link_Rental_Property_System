@@ -150,6 +150,11 @@ select * from t_user;
 select * from t_property;	
 select * from t_publication;
 select * from t_imagenes;
+select * from t_reservation;
+select * from t_country;
+
+select * from vista_general_clientes;
+
 
 
 
