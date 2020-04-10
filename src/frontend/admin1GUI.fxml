@@ -1,87 +1,162 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import com.jfoenix.controls.JFXHamburger?>
+<?import com.jfoenix.controls.JFXButton?>
 <?import com.jfoenix.controls.JFXTabPane?>
+<?import com.jfoenix.controls.JFXTextField?>
+<?import javafx.scene.Cursor?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
 <?import javafx.scene.control.Tab?>
 <?import javafx.scene.control.TableColumn?>
 <?import javafx.scene.control.TableView?>
 <?import javafx.scene.layout.AnchorPane?>
-<?import javafx.scene.layout.BorderPane?>
+<?import javafx.scene.layout.StackPane?>
+<?import javafx.scene.shape.Line?>
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<BorderPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="720.0" prefWidth="1280.0" stylesheets="@styleAdmin.css" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="frontend.AdminGUIController">
-   <bottom>
-      <JFXTabPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="695.0" prefWidth="1279.0" stylesheets="@styleAdmin.css" BorderPane.alignment="CENTER">
-         <tabs>
-            <Tab text="Home">
-              <content>
-                <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
-                     <children>
-                        <JFXHamburger layoutX="14.0" layoutY="14.0" />
-                     </children>
-                  </AnchorPane>
-              </content>
-            </Tab>
-            <Tab text="Autorizar Publicaciones">
-               <content>
-                  <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
-                     <children>
-                        <TableView fx:id="tableAutoriPubli" layoutX="249.0" prefHeight="655.0" prefWidth="1030.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="249.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
-                          <columns>
-                            <TableColumn fx:id="tb_au_publi_col_id" prefWidth="75.0" text="ID" />
-                            <TableColumn fx:id="tb_au_publi_col_titulo" prefWidth="75.0" text="Titulo" />
-                              <TableColumn fx:id="tb_au_publi_col_fecha" prefWidth="75.0" text="Fecha" />
-                              <TableColumn fx:id="tb_au_publi_col_propie" prefWidth="75.0" text="Propiedad" />
-                              <TableColumn fx:id="tb_au_publi_col_precio" prefWidth="75.0" text="Precio" />
-                              <TableColumn fx:id="tb_au_publi_col_status" prefWidth="75.0" text="Status" />
-                          </columns>
-                           <columnResizePolicy>
-                              <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
-                           </columnResizePolicy>
-                        </TableView>
-                     </children>
-                  </AnchorPane>
-               </content>
-            </Tab>
-            <Tab text="Propiedades">
-               <content>
-                  <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
-                     <children>
-                        <TableView fx:id="tableViewProperty" prefHeight="681.0" prefWidth="1280.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
-                           <columns>
-                              <TableColumn fx:id="tb_prop_col_id" prefWidth="75.0" text="ID" />
-                              <TableColumn fx:id="tb_prop_col_type" prefWidth="75.0" text="Tipo" />
-                              <TableColumn fx:id="tb_prop_col_address" prefWidth="75.0" text="Dirección" />
-                              <TableColumn fx:id="tb_prop_col_caract" prefWidth="75.0" text="Características" />
-                              <TableColumn fx:id="tb_prop_col_feed" prefWidth="75.0" text="Feedback" />
-                              <TableColumn fx:id="tb_prop_col_owner" prefWidth="75.0" text="Dueño" />
-                              <TableColumn fx:id="tb_prop_col_status" prefWidth="75.0" text="Status" />
-                           </columns>
-                           <columnResizePolicy>
-                              <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
-                           </columnResizePolicy>
-                        </TableView>
-                     </children>
-                  </AnchorPane>
-               </content>
-            </Tab>
-         </tabs>
-      </JFXTabPane>
-   </bottom>
-   <top>
-      <AnchorPane fx:id="topBoderPane" nodeOrientation="LEFT_TO_RIGHT" prefHeight="25.0" prefWidth="1280.0" BorderPane.alignment="CENTER">
+<StackPane fx:id="rootStackPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="720.0" prefWidth="1280.0" stylesheets="@styleAdmin.css" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="frontend.AdminGUIController">
+   <children>
+      <AnchorPane fx:id="rootAnchorPane" nodeOrientation="LEFT_TO_RIGHT" prefHeight="20.0" prefWidth="1280.0">
          <children>
-            <Text fill="WHITE" layoutX="9.0" layoutY="18.0" strokeType="OUTSIDE" strokeWidth="0.0" text="ADMIN Panel">
+            <Text fill="WHITE" layoutX="8.0" layoutY="27.0" strokeType="OUTSIDE" strokeWidth="0.0" text="ADMIN Panel">
                <font>
                   <Font name="System Bold" size="15.0" />
-               </font></Text>
-            <Text fill="WHITE" layoutX="119.0" layoutY="17.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Usuario loggged">
+               </font>
+            </Text>
+            <Text fx:id="textAdminUserLogged" fill="WHITE" layoutX="118.0" layoutY="26.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Usuario loggged">
                <font>
                   <Font name="System Bold Italic" size="15.0" />
                </font>
             </Text>
+            <Button fx:id="btnClose" layoutX="1236.0" layoutY="1.0" mnemonicParsing="false" onAction="#closeWindow" prefHeight="23.0" prefWidth="28.0" style="-fx-background-color: transparent;" />
+            <Button fx:id="btnMinimize" layoutX="1197.0" layoutY="1.0" mnemonicParsing="false" onAction="#minimizeWindow" prefHeight="39.0" prefWidth="32.0" style="-fx-background-color: transparent;" />
+            <JFXTabPane fx:id="tabpaneAdmin" layoutY="35.0" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="685.0" prefWidth="1282.0" stylesheets="@styleAdmin.css" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="35.0">
+               <tabs>
+                  <Tab text="Home">
+                     <content>
+                        <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                           <children>
+                              <JFXTextField fx:id="txtSearchTabHome" layoutX="420.0" layoutY="19.0" prefHeight="40.0" prefWidth="440.0" promptText="Hi ADMIN!" />
+                           </children>
+                        </AnchorPane>
+                     </content>
+                  </Tab>
+                  <Tab text="Autorizar Publicaciones">
+                     <content>
+                        <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                           <children>
+                              <TableView fx:id="tableAutoriPubli" layoutX="249.0" prefHeight="655.0" prefWidth="1030.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="249.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                                 <columns>
+                                    <TableColumn fx:id="tb_au_publi_col_id" prefWidth="75.0" text="ID" />
+                                    <TableColumn fx:id="tb_au_publi_col_titulo" prefWidth="75.0" text="Titulo" />
+                                    <TableColumn fx:id="tb_au_publi_col_fecha" prefWidth="75.0" text="Fecha" />
+                                    <TableColumn fx:id="tb_au_publi_col_propie" prefWidth="75.0" text="Propiedad" />
+                                    <TableColumn fx:id="tb_au_publi_col_precio" prefWidth="75.0" text="Precio" />
+                                    <TableColumn fx:id="tb_au_publi_col_status" prefWidth="75.0" text="Status" />
+                                 </columns>
+                                 <columnResizePolicy>
+                                    <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
+                                 </columnResizePolicy>
+                              </TableView>
+                           </children>
+                        </AnchorPane>
+                     </content>
+                  </Tab>
+                  <Tab text="Usuarios">
+                     <content>
+                        <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                           <children>
+                              <TableView fx:id="tableUser" layoutX="282.0" onMouseClicked="#clickOnUserTable" prefHeight="655.0" prefWidth="997.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="282.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                                 <columns>
+                                    <TableColumn fx:id="tb_user_col_id" prefWidth="75.0" text="ID" />
+                                    <TableColumn fx:id="tb_user_col_username" prefWidth="75.0" text="Username" />
+                                    <TableColumn fx:id="tb_user_col_nombre" prefWidth="75.0" text="Nombre" />
+                                    <TableColumn fx:id="tb_user_col_apellido" prefWidth="75.0" text="Apellido" />
+                                    <TableColumn fx:id="tb_user_col_sexo" prefWidth="75.0" text="Sexo" />
+                                    <TableColumn fx:id="tb_user_col_pais" prefWidth="75.0" text="Pais" />
+                                    <TableColumn fx:id="tb_user_col_tel" prefWidth="145.0" text="Telefono" />
+                                    <TableColumn fx:id="tb_user_col_email" prefWidth="110.0" text="Email" />
+                                    <TableColumn fx:id="tb_user_col_status" prefWidth="75.0" text="Status" />
+                                    <TableColumn fx:id="tb_user_col_fecha" prefWidth="75.0" text="Fecha" />
+                                 </columns>
+                                 <columnResizePolicy>
+                                    <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
+                                 </columnResizePolicy>
+                              </TableView>
+                              <Line endX="150.0" layoutX="89.0" layoutY="161.0" startX="-60.0" stroke="GREY" />
+                              <Label layoutX="98.0" layoutY="346.0" text="Reservas:" />
+                              <Label layoutX="78.0" layoutY="422.0" text="Publicaciones:" />
+                              <Label layoutX="24.0" layoutY="270.0" text="Username:" />
+                              <Label layoutX="24.0" layoutY="232.0" text="ID:" />
+                              <Label layoutX="73.0" layoutY="127.0" text="INFORMACION" />
+                              <Label fx:id="lblFullName" alignment="CENTER" contentDisplay="CENTER" layoutX="15.0" layoutY="187.0" prefHeight="34.0" prefWidth="238.0" text="FULL NAME" />
+                              <Label fx:id="lblID" alignment="CENTER" layoutX="187.0" layoutY="232.0" text="ID" />
+                              <Label fx:id="lblUsername" alignment="CENTER" layoutX="160.0" layoutY="270.0" text="Username" />
+                              <Label fx:id="lblAmountReserva" alignment="CENTER" layoutX="122.0" layoutY="373.0" prefHeight="34.0" prefWidth="26.0" text="#" />
+                              <Label fx:id="lblAmountPubli" alignment="CENTER" layoutX="121.0" layoutY="449.0" prefHeight="34.0" prefWidth="27.0" text="#" />
+                              <JFXButton fx:id="btnDelUser" layoutX="19.0" layoutY="594.0" onAction="#deleteUser" prefHeight="29.0" prefWidth="115.0" style="-fx-background-color: #ffc107; -fx-background-radius: 10;" styleClass="Button" text="Eliminar">
+                                 <font>
+                                    <Font name="System Bold" size="14.0" />
+                                 </font>
+                                 <cursor>
+                                    <Cursor fx:constant="HAND" />
+                                 </cursor>
+                              </JFXButton>
+                              <JFXButton fx:id="btnRefreshTbUser" layoutX="145.0" layoutY="594.0" onAction="#refreshTbUser" prefHeight="29.0" prefWidth="115.0" style="-fx-background-color: #ffc107; -fx-background-radius: 10;" styleClass="Button" text="Actualizar">
+                                 <font>
+                                    <Font name="System Bold" size="14.0" />
+                                 </font>
+                                 <cursor>
+                                    <Cursor fx:constant="HAND" />
+                                 </cursor>
+                              </JFXButton>
+                              <JFXButton layoutX="19.0" layoutY="552.0" prefHeight="29.0" prefWidth="115.0" style="-fx-background-color: #ffc107; -fx-background-radius: 10;" styleClass="Button" text="n/a">
+                                 <font>
+                                    <Font name="System Bold" size="14.0" />
+                                 </font>
+                                 <cursor>
+                                    <Cursor fx:constant="HAND" />
+                                 </cursor>
+                              </JFXButton>
+                              <JFXButton layoutX="145.0" layoutY="552.0" prefHeight="29.0" prefWidth="115.0" style="-fx-background-color: #ffc107; -fx-background-radius: 10;" styleClass="Button" text="n/a">
+                                 <font>
+                                    <Font name="System Bold" size="14.0" />
+                                 </font>
+                                 <cursor>
+                                    <Cursor fx:constant="HAND" />
+                                 </cursor>
+                              </JFXButton>
+                              <JFXTextField fx:id="txtSearchTabUsuario" layoutX="13.0" layoutY="14.0" maxHeight="28.0" prefHeight="28.0" prefWidth="265.0" promptText="Hi ADMIN, Search!" />
+                           </children>
+                        </AnchorPane>
+                     </content>
+                  </Tab>
+                  <Tab text="Propiedades">
+                     <content>
+                        <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                           <children>
+                              <TableView fx:id="tableViewProperty" prefHeight="681.0" prefWidth="1280.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                                 <columns>
+                                    <TableColumn fx:id="tb_prop_col_id" prefWidth="75.0" text="ID" />
+                                    <TableColumn fx:id="tb_prop_col_type" prefWidth="75.0" text="Tipo" />
+                                    <TableColumn fx:id="tb_prop_col_address" prefWidth="75.0" text="Dirección" />
+                                    <TableColumn fx:id="tb_prop_col_caract" prefWidth="75.0" text="Características" />
+                                    <TableColumn fx:id="tb_prop_col_feed" prefWidth="75.0" text="Feedback" />
+                                    <TableColumn fx:id="tb_prop_col_owner" prefWidth="75.0" text="Dueño" />
+                                    <TableColumn fx:id="tb_prop_col_status" prefWidth="75.0" text="Status" />
+                                 </columns>
+                                 <columnResizePolicy>
+                                    <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
+                                 </columnResizePolicy>
+                              </TableView>
+                           </children>
+                        </AnchorPane>
+                     </content>
+                  </Tab>
+               </tabs>
+            </JFXTabPane>
          </children>
       </AnchorPane>
-   </top>
-</BorderPane>
+   </children>
+</StackPane>
