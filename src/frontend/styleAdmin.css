@@ -89,7 +89,7 @@
     -fx-text-fill: -fx-primarytext;
     -fx-font-weight: bold;
     -fx-font-stroke: -fx-primary;
-    -fx-background-color: -fx-primary;
+    -fx-background-color: -fx-secondary;
    
     -fx-background-radius: 10;
     -fx-font-size: 12pt;

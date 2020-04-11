@@ -1,25 +1,29 @@
 package backend;
 
-import com.jfoenix.controls.JFXButton;
-
 public class Publicacion {
 	private int idPublicacion;
 	private String titulo;
 	private String fechaPublicacion;
-	private String status;
+	private Boolean status;
 	private int idPropiedad;
 	private int idAdministrador;
+	private String usernameAdmin; //se creo despues auxiliar
 	private float precio;
 	private String usernameOwner;
+	private String tiempoexistente;
 	
-	public Publicacion(int idPublicacion, String titulo, String fechaPublicacion, String status, int idPropiedad, float precio, String usernameOwner) {
+	/*** auxiliar para mostrar una vista de la base de datos **/
+	private String dirPropiedadCorrespondiente;
+	private String tipoPropiedadCorrespondiente;
+	
+	public Publicacion(int idPublicacion, String titulo, String fechaPublicacion, Boolean status, int idPropiedad, float precio, String usernameOwner) {
 		super();
 		this.idPublicacion = idPublicacion;
 		this.setTitulo(titulo);
 		this.fechaPublicacion = fechaPublicacion;
 		this.status = status;
 		this.idPropiedad = idPropiedad;
-		//this.idAdministrador = (Integer) null; ??????????????????????????????????????????????????????????
+		this.idAdministrador = 0; //cero significa que nadie la ha autorizado, por default esta asi.
 		this.precio = precio;
 		this.usernameOwner = usernameOwner;
 		
@@ -40,10 +44,10 @@ public class Publicacion {
 	public void setFechaPublicacion(String fechaPublicacion) {
 		this.fechaPublicacion = fechaPublicacion;
 	}
-	public String getStatus() {
+	public Boolean getStatus() {
 		return status;
 	}
-	public void setStatus(String status) {
+	public void setStatus(Boolean status) {
 		this.status = status;
 	}
 	public int getIdPropiedad() {
@@ -75,6 +79,54 @@ public class Publicacion {
 	}
 	public void setUsernameOwner(String usernameOwner) {
 		this.usernameOwner = usernameOwner;
+	}
+
+
+
+	public String getUsernameAdmin() {
+		return usernameAdmin;
+	}
+
+
+
+	public void setUsernameAdmin(String usernameAdmin) {
+		this.usernameAdmin = usernameAdmin;
+	}
+
+
+
+	public String getTiempoexistente() {
+		return tiempoexistente;
+	}
+
+
+
+	public void setTiempoexistente(String tiempoexistente) {
+		this.tiempoexistente = tiempoexistente;
+	}
+
+
+
+	public String getDirPropiedadCorrespondiente() {
+		return dirPropiedadCorrespondiente;
+	}
+
+
+
+	public void setDirPropiedadCorrespondiente(String dirPropiedadCorrespondiente) {
+		this.dirPropiedadCorrespondiente = dirPropiedadCorrespondiente;
+	}
+
+
+
+	public String getTipoPropiedadCorrespondiente() {
+		return tipoPropiedadCorrespondiente;
+	}
+
+
+
+	public void setTipoPropiedadCorrespondiente(String tipoPropiedadCorrespondiente) {
+		this.tipoPropiedadCorrespondiente = tipoPropiedadCorrespondiente;
 	}
 
 

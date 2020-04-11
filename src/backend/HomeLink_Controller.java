@@ -106,6 +106,23 @@ public class HomeLink_Controller extends ConnectionMySqlDB {
 			}
 		}
 		
+		public static boolean delete_publication(int pId) {
+			CallableStatement mySqlStatement = null ; // call stored procedure
+			try {
+				Connection myConnection = getConnectionMySqlDB();
+				mySqlStatement = (CallableStatement) myConnection.prepareCall("{CALL sp_delete_publicacion(?)}");
+				mySqlStatement.setInt("pa_id",pId );
+				mySqlStatement.executeQuery();
+				myConnection.close();
+				System.out.println("Publicacion eliminado con exito!");
+				return true;
+			} catch (SQLException e) {
+				System.out.println("Publicacion no eliminado con exito!");
+				e.printStackTrace();
+				return false;
+			}
+		}
+		
 		
 		
 		

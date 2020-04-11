@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import com.jfoenix.controls.JFXButton?>
+<?import com.jfoenix.controls.JFXTextField?>
+<?import javafx.scene.Cursor?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.StackPane?>
+<?import javafx.scene.shape.Line?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
+
+<StackPane fx:id="rootStackPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="720.0" prefWidth="1280.0" stylesheets="@styleAdmin.css" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="frontend.PublicacionAdminGUIController">
+   <children>
+      <AnchorPane fx:id="rootAnchorPane" minHeight="0.0" minWidth="0.0" prefHeight="696.0" prefWidth="1280.0">
+         <children>
+            <TableView fx:id="tablePubli" layoutX="327.0" layoutY="37.0" onMouseClicked="#clickOnTablePublicaciones" prefHeight="682.0" prefWidth="953.0" AnchorPane.bottomAnchor="1.0" AnchorPane.leftAnchor="327.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="37.0">
+               <columns>
+                  <TableColumn fx:id="tb_publi_col_id" prefWidth="52.0" text="ID" />
+                  <TableColumn fx:id="tb_publi_col_titulo" prefWidth="258.0" text="Titulo" />
+                  <TableColumn fx:id="tb_publi_col_fecha" prefWidth="131.0" text="Fecha" />
+                  <TableColumn fx:id="tb_publi_col_useradmin" prefWidth="127.0" text="User-admin" />
+                  <TableColumn fx:id="tb_publi_col_precio" prefWidth="108.0" text="Precio" />
+                  <TableColumn fx:id="tb_publi_col_status" prefWidth="90.0" text="Status" />
+                  <TableColumn fx:id="tb_publi_tiempo" prefWidth="233.0" text="Tiempo existente" />
+               </columns>
+            </TableView>
+            <Text fx:id="textAdminUserLogged" fill="WHITE" layoutX="122.0" layoutY="26.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Usuario loggged">
+               <font>
+                  <Font name="System Bold Italic" size="15.0" />
+               </font>
+            </Text>
+            <Text fill="WHITE" layoutX="14.0" layoutY="27.0" strokeType="OUTSIDE" strokeWidth="0.0" text="ADMIN Panel">
+               <font>
+                  <Font name="System Bold" size="15.0" />
+               </font>
+            </Text>
+            <Button fx:id="btnMinimize" layoutX="1188.0" mnemonicParsing="false" onAction="#minimizeWindow" prefHeight="39.0" prefWidth="32.0" style="-fx-background-color: transparent;" />
+            <Button fx:id="btnClose" layoutX="1234.0" layoutY="2.0" mnemonicParsing="false" onAction="#closeWindow" prefHeight="23.0" prefWidth="28.0" style="-fx-background-color: transparent;" />
+            <JFXTextField fx:id="txtSearchTabPublicacion" layoutX="22.0" layoutY="69.0" maxHeight="28.0" prefHeight="28.0" prefWidth="265.0" promptText="Hi ADMIN, Search!" />
+            <Line endX="164.0" layoutX="95.0" layoutY="180.0" startX="-73.0" stroke="GREY" />
+            <Label layoutX="29.0" layoutY="153.0" text="INFORMACION PROPIEDAD" />
+            <Label layoutX="14.0" layoutY="198.0" text="- Username propietario:" AnchorPane.leftAnchor="15.0" />
+            <Label layoutX="16.0" layoutY="270.0" text="- Dirección:" AnchorPane.leftAnchor="15.0" />
+            <Label layoutX="21.0" layoutY="347.0" text="- Tipo:" AnchorPane.leftAnchor="15.0" />
+            <Label fx:id="lblUsernamePropietarioPubli" alignment="CENTER" layoutX="46.0" layoutY="233.0" prefHeight="27.0" prefWidth="223.0" AnchorPane.leftAnchor="43.0" />
+            <Label fx:id="lblDirPropiePubli" alignment="CENTER" layoutX="43.0" layoutY="306.0" prefHeight="27.0" prefWidth="223.0" AnchorPane.leftAnchor="43.0" />
+            <Label fx:id="lblTipoPropiePubli" alignment="CENTER" layoutX="29.0" layoutY="378.0" prefHeight="27.0" prefWidth="223.0" AnchorPane.leftAnchor="43.0" />
+            <JFXButton fx:id="btnDelpubli" layoutX="34.0" layoutY="651.0" onAction="#deletePublicacionByAdmin" prefHeight="29.0" prefWidth="115.0" style="-fx-background-color: #ffc107; -fx-background-radius: 10;" styleClass="Button" text="Eliminar">
+               <font>
+                  <Font name="System Bold" size="14.0" />
+               </font>
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor>
+            </JFXButton>
+            <JFXButton fx:id="btnRefreshTbPubli" layoutX="160.0" layoutY="651.0" onAction="#refreshTbUser" prefHeight="29.0" prefWidth="115.0" style="-fx-background-color: #ffc107; -fx-background-radius: 10;" styleClass="Button" text="Actualizar">
+               <font>
+                  <Font name="System Bold" size="14.0" />
+               </font>
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor>
+            </JFXButton>
+            <Label alignment="CENTER" layoutX="43.0" layoutY="448.0" prefHeight="27.0" prefWidth="223.0" text="Nota: esta información es" AnchorPane.leftAnchor="43.0" />
+            <Label alignment="CENTER" layoutX="43.0" layoutY="468.0" prefHeight="27.0" prefWidth="223.0" text="con relacion a la propiedad" AnchorPane.leftAnchor="43.0" />
+            <Label alignment="CENTER" layoutX="43.0" layoutY="488.0" prefHeight="27.0" prefWidth="223.0" text="atada a la publicación." AnchorPane.leftAnchor="43.0" />
+         </children>
+      </AnchorPane>
+   </children>
+</StackPane>

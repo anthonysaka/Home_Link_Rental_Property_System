@@ -324,3 +324,18 @@ FROM t_publication
 INNER JOIN t_user ON t_publication.id_owner = t_user.id
 WHERE t_publication.`status` = 0 AND t_publication.id_user_admin = 0;
 
+select * from vista_general_publicaciones;
+CREATE VIEW 
+vista_general_publicaciones AS
+select t_publication.id ID_Publication, titulo Title, (select t_user.username
+                                                        from t_user
+                                                        where t_user.id = t_publication.id_user_admin) Confirmed_Admin,
+                                                        t_user.username UserName_Owner  , date Date, t_publication.status,price Price, concat(DATEDIFF(NOW(),t_publication.date)," ", 'dias' )  Publication_Days, concat( t_address_property.country_name ,"," ," " ,t_address_property.city, " ",t_address_property.street ) Address_Property, t_property.type Type_Property
+from t_publication
+left join t_property
+ON t_publication.id_property = t_property.id
+left join t_user
+ON t_property.id_user_owner = t_user.id
+left join t_address_property
+ON t_address_property.id_address = t_property.id_address_property
+where id_user_admin !=0 AND t_publication.status = true ;
