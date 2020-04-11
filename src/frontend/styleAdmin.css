@@ -101,9 +101,6 @@
     -fx-font-weight: bold;
 }
 
-
-
-
 /*JFXTabPane CSS Styling*/
 .tab {
 	-fx-background-color: derive(-fx-primary, 10%);

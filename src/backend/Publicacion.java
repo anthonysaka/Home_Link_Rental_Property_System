@@ -1,5 +1,7 @@
 package backend;
 
+import com.jfoenix.controls.JFXButton;
+
 public class Publicacion {
 	private int idPublicacion;
 	private String titulo;
@@ -8,9 +10,9 @@ public class Publicacion {
 	private int idPropiedad;
 	private int idAdministrador;
 	private float precio;
+	private String usernameOwner;
 	
-	
-	public Publicacion(int idPublicacion, String titulo, String fechaPublicacion, String status, int idPropiedad, float precio) {
+	public Publicacion(int idPublicacion, String titulo, String fechaPublicacion, String status, int idPropiedad, float precio, String usernameOwner) {
 		super();
 		this.idPublicacion = idPublicacion;
 		this.setTitulo(titulo);
@@ -19,81 +21,64 @@ public class Publicacion {
 		this.idPropiedad = idPropiedad;
 		//this.idAdministrador = (Integer) null; ??????????????????????????????????????????????????????????
 		this.precio = precio;
+		this.usernameOwner = usernameOwner;
+		
 	}
 
+	
 
 	public int getIdPublicacion() {
 		return idPublicacion;
 	}
 
-
 	public void setIdPublicacion(int idPublicacion) {
 		this.idPublicacion = idPublicacion;
 	}
-
-
 	public String getFechaPublicacion() {
 		return fechaPublicacion;
 	}
-
-
 	public void setFechaPublicacion(String fechaPublicacion) {
 		this.fechaPublicacion = fechaPublicacion;
 	}
-
-
 	public String getStatus() {
 		return status;
 	}
-
-
 	public void setStatus(String status) {
 		this.status = status;
 	}
-
-
 	public int getIdPropiedad() {
 		return idPropiedad;
 	}
-
-
 	public void setIdPropiedad(int idPropiedad) {
 		this.idPropiedad = idPropiedad;
 	}
-
-
 	public int getIdAdministrador() {
 		return idAdministrador;
 	}
-
-
 	public void setIdAdministrador(int idAdministrador) {
 		this.idAdministrador = idAdministrador;
 	}
-
-
 	public float getPrecio() {
 		return precio;
 	}
-
-
 	public void setPrecio(float precio) {
 		this.precio = precio;
 	}
-
-
 	public String getTitulo() {
 		return titulo;
 	}
-
-
 	public void setTitulo(String titulo) {
 		this.titulo = titulo;
 	}
-	
-	
-	
-	
+	public String getUsernameOwner() {
+		return usernameOwner;
+	}
+	public void setUsernameOwner(String usernameOwner) {
+		this.usernameOwner = usernameOwner;
+	}
+
+
+
 	
 	
 

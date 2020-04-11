@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.net.URL;
 import java.sql.Connection;
 import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.Arrays;
 import java.util.ResourceBundle;
@@ -16,6 +17,7 @@ import com.jfoenix.controls.JFXHamburger;
 import com.jfoenix.controls.JFXPopup;
 import com.jfoenix.controls.JFXTextField;
 import com.jfoenix.transitions.hamburger.HamburgerSlideCloseTransition;
+import com.mysql.cj.jdbc.CallableStatement;
 import com.mysql.cj.x.protobuf.MysqlxDatatypes.Array;
 
 import backend.ConnectionMySqlDB;
@@ -107,6 +109,9 @@ public class AdminGUIController implements Initializable {
 	private TableColumn<User, Boolean> tb_user_col_status;
 	@FXML
 	private TableColumn<User, String> tb_user_col_fecha;
+    @FXML
+    private TableColumn<User, String> tb_au_publi_col_usuario;
+ 
 
 	/************************************************/
 	ObservableList<Propiedad> listPropiedad = FXCollections.observableArrayList();
@@ -133,9 +138,12 @@ public class AdminGUIController implements Initializable {
     private Button btnClose;
     @FXML
     private Button btnMinimize;
+    @FXML
+    private JFXButton btnAutorizar;
 
 	/**********************************/
 	public static User auxUserList;
+	public static Publicacion auxPubliList;
     @FXML
     private StackPane rootStackPane;
 	@FXML
@@ -153,8 +161,7 @@ public class AdminGUIController implements Initializable {
 		loadDataPropiedad();
 		loadDataAutorizarPublicaciones();
 		loadDataUser();
-		searchDataUser();
-		
+		searchDataUser();	
 	}
 
 	public void initColumns() {
@@ -173,6 +180,7 @@ public class AdminGUIController implements Initializable {
 		tb_au_publi_col_propie.setCellValueFactory(new PropertyValueFactory<>("idPropiedad"));
 		tb_au_publi_col_precio.setCellValueFactory(new PropertyValueFactory<>("precio"));
 		tb_au_publi_col_status.setCellValueFactory(new PropertyValueFactory<>("status"));
+		tb_au_publi_col_usuario.setCellValueFactory(new PropertyValueFactory<>("usernameOwner"));
 
 		//Init Column User.
 		tb_user_col_id.setCellValueFactory(new PropertyValueFactory<>("id"));
@@ -185,7 +193,6 @@ public class AdminGUIController implements Initializable {
 		tb_user_col_pais.setCellValueFactory(new PropertyValueFactory<>("country_location"));
 		tb_user_col_tel.setCellValueFactory(new PropertyValueFactory<>("telephone_number"));
 		tb_user_col_fecha.setCellValueFactory(new PropertyValueFactory<>("created_date"));
-
 
 	}
 
@@ -224,12 +231,15 @@ public class AdminGUIController implements Initializable {
 	}
 
 	public void loadDataAutorizarPublicaciones() {
-		/* RECORDAR CAMBIAr NOMBRES DE LAS TABLAS, ya que la BD se va a crear 
-		 * completa de nuevo, por mal convencion de nombre y logistica
-		 */
 		Statement sentencia = null;
 		ResultSet rs = null;
-		String Query = "SELECT * FROM t_publication WHERE status = 0";
+		String Query = "SELECT t_publication.id, t_publication.titulo, t_publication.`date`,\r\n" + 
+				"				t_publication.id_property,\r\n" + 
+				"      			  t_publication.price, t_publication.`status`,\r\n" + 
+				"       			 t_user.username\r\n" + 
+				"		FROM t_publication \r\n" + 
+				"		INNER JOIN t_user ON t_publication.id_owner = t_user.id\r\n" + 
+				"		WHERE t_publication.`status` = 0 AND t_publication.id_user_admin = 0";;
 		try {
 			Connection myConnection = ConnectionMySqlDB.getConnectionMySqlDB();
 			sentencia = myConnection.createStatement();
@@ -242,12 +252,12 @@ public class AdminGUIController implements Initializable {
 			while(rs.next()){
 				Integer id = rs.getInt("id");
 				String titulo = rs.getString("titulo");
-				String fecha = rs.getString("publication_date");
-				Integer propiedad = rs.getInt("id_property");
+				String fecha = rs.getString("date");
+				Integer idpropiedad = rs.getInt("id_property");
 				Float precio = rs.getFloat("price");
 				String status = rs.getString("status");
-				Publicacion auxPubli = new Publicacion(id, fecha, titulo, status, propiedad, precio);
-
+				String usernameOwner = rs.getString("username");
+				Publicacion auxPubli = new Publicacion(id, fecha, titulo, status, idpropiedad, precio, usernameOwner);
 				listAutoriPublicaciones.add(auxPubli);
 			}
 		} catch (Exception e) {
@@ -302,7 +312,7 @@ public class AdminGUIController implements Initializable {
 	public void searchDataUser() {
 		FilteredList<User> filterDataUser = new FilteredList<>(listUser, b -> true);
 		
-			textAdminUserLogged.textProperty().addListener((observable, oldValue, newValue) -> {
+			txtSearchTabUsuario.textProperty().addListener((observable, oldValue, newValue) -> {
 				filterDataUser.setPredicate(user -> {
 					if (newValue == null || newValue.isEmpty()) {
 						return true;
@@ -326,6 +336,7 @@ public class AdminGUIController implements Initializable {
 		tableUser.setItems(sortedDataUser);
 		
 	}
+	
 	@FXML
 	public void clickOnUserTable(MouseEvent event) {
 		
@@ -351,14 +362,13 @@ public class AdminGUIController implements Initializable {
 			PopupAlert.showCustomDialog(rootStackPane, rootAnchorPane, Arrays.asList(btnOk),"Usuario eliminado con exito.", null);
 		}
     }
-    
+   
     @FXML
     public void refreshTbUser(ActionEvent event) {
     	listUser.clear();
     	loadDataUser();
     }
     
-
     @FXML
     public void minimizeWindow(ActionEvent event) {
     	Stage stage = (Stage) btnMinimize.getScene().getWindow();
@@ -371,7 +381,32 @@ public class AdminGUIController implements Initializable {
 		stage.close();
     }
 
-    
+    @FXML
+    public void autorizarPublicacion(ActionEvent event) {
+    	auxPubliList = tableAutoriPubli.getSelectionModel().getSelectedItem();
+    	if (auxPubliList != null) {
+    		CallableStatement mySqlStatement = null ; // call stored procedure
+			try {
+				Connection myConnection = ConnectionMySqlDB.getConnectionMySqlDB();
+				mySqlStatement = (CallableStatement) myConnection.prepareCall("{CALL sp_authorize_publication(?,?)}");
+
+				mySqlStatement.setInt("pa_id", auxPubliList.getIdPublicacion());
+				mySqlStatement.setInt("pa_iduseradmin", HomeGUIController.usuarioActual.getId());
+				mySqlStatement.executeQuery();
+				myConnection.close();
+				System.out.println("autorizado con exito!");
+				JFXButton btnOk = new JFXButton("Ok!");
+				PopupAlert.showCustomDialog(rootStackPane, rootAnchorPane, Arrays.asList(btnOk),"Publicación autorizada con exito.", null);
+
+			} catch (SQLException e) {
+				System.out.println("autorizado sin exito!");
+				e.printStackTrace();
+			}
+		}
+    	
+    	listAutoriPublicaciones.clear();
+    	loadDataAutorizarPublicaciones();
+    }
 
 	/************* FIN *****************/
 }
