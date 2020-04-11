@@ -207,6 +207,7 @@ public class User extends ConnectionMySqlDB {
 
 		CallableStatement mySqlStatement = null ; // call stored procedure
 		try {
+
 			Connection myConnection = getConnectionMySqlDB();	
 
 			mySqlStatement = (CallableStatement) myConnection.prepareCall("{CALL sp_insert_card(?,?,?,?,?)}");
