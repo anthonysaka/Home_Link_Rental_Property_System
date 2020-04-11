@@ -205,12 +205,10 @@ public ArrayList<Reserva> getReservas() {
 	
 		CallableStatement mySqlStatement = null ; // call stored procedure
 		try {
-			Connection myConnection = getConnectionMySqlDB();	
-			
+			Connection myConnection = getConnectionMySqlDB();				
 			mySqlStatement = (CallableStatement) myConnection.prepareCall("{CALL sp_insert_card(?,?,?,?,?)}");
 			mySqlStatement.setString("pa_numCard", tarjeta.getNumeroTarjeta());
 			mySqlStatement.setString("pa_userOwner", HomeGUIController.usuarioActual.getUsername());
-			System.out.println("PASO AQUÍ");
 			mySqlStatement.setString("pa_representante", tarjeta.getRepresentante());
 			mySqlStatement.setString("pa_expirationDate", tarjeta.getFechaVencimiento());
 			mySqlStatement.setInt("pa_cvv",tarjeta.getCVV());
