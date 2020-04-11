@@ -207,9 +207,7 @@ public class User extends ConnectionMySqlDB {
 
 		CallableStatement mySqlStatement = null ; // call stored procedure
 		try {
-
 			Connection myConnection = getConnectionMySqlDB();				
-
 			mySqlStatement = (CallableStatement) myConnection.prepareCall("{CALL sp_insert_card(?,?,?,?,?)}");
 			mySqlStatement.setString("pa_numCard", tarjeta.getNumeroTarjeta());
 			mySqlStatement.setString("pa_userOwner", HomeGUIController.usuarioActual.getUsername());
@@ -225,14 +223,10 @@ public class User extends ConnectionMySqlDB {
 			e.printStackTrace();
 			return false;
 		}
-
-
 	}
 
 
 	public static boolean insertarPropiedades(Propiedad property) {
-
-
 		CallableStatement mySqlStatement = null ; // call stored procedure
 		try {
 			Connection myConnection = getConnectionMySqlDB();	
@@ -261,7 +255,6 @@ public class User extends ConnectionMySqlDB {
 		try {
 			Connection myConnection = getConnectionMySqlDB();	
 			mySqlStatement = (CallableStatement) myConnection.prepareCall("{CALL sp_insert_publicacion(?,?)}");
-
 			mySqlStatement.setInt("pa_idPropiedad", publication.getIdPropiedad() ); //se seleccionara de un cbx
 			mySqlStatement.setFloat("pa_precio", publication.getPrecio());
 			mySqlStatement.executeQuery();

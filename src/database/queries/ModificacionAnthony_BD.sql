@@ -146,6 +146,167 @@ BEGIN
 END$$
 DELIMITER ;
 
+DELIMITER $$
+CREATE DEFINER=`root`@`localhost` PROCEDURE `sp_createUser`(in pa_username VARCHAR(15), in pa_email VARCHAR(50), in pa_password VARCHAR(25),
+                                in pa_name VARCHAR(20), in pa_lastname VARCHAR(30), in pa_gender VARCHAR(30),
+                                in pa_type VARCHAR(15), in pa_status TINYINT, in pa_created_date DATETIME)
+BEGIN
+    INSERT INTO t_user(username,email,password,name,lastname,gender,type,status,created_date)
+    VALUES(pa_username, pa_email, pa_password, pa_name, pa_lastname, pa_gender, pa_type, pa_status, pa_created_date);
+END$$
+DELIMITER ;
+
+
+DELIMITER $$
+CREATE DEFINER=`root`@`localhost` PROCEDURE `sp_insert_card`(
+					in pa_numCard varchar(16), 
+                    in pa_userOwner varchar(15), 
+                    in pa_expirationDate date, 
+                    in pa_cvv int, 
+                    in pa_representante varchar(50)
+                    )
+BEGIN
+INSERT INTO t_card (user_owner, num_card, holder_fullname, expiration_date, cvv) 
+VALUES (pa_userOwner, pa_numCard, pa_representante, pa_expirationDate, pa_cvv);
+END$$
+DELIMITER ;
+
+
+DELIMITER $$
+CREATE DEFINER=`root`@`localhost` PROCEDURE `sp_insert_publicacion`(
+						in pa_titulo varchar(50), 
+						in pa_propertyID int, 
+                        in pa_price decimal(10,2),
+						in pa_userID int
+                        )
+BEGIN
+INSERT INTO t_publication (
+					titulo,
+                    id_user_admin,
+                    id_property,
+                    price,
+                    status,
+                    id_owner
+							) 
+VALUES (
+		pa_titulo,
+        0,
+        pa_propertyID,
+        pa_price,
+        0,
+		pa_userID
+);
+
+END$$
+DELIMITER ;
+
+
+
+DELIMITER $$
+CREATE DEFINER=`root`@`localhost` PROCEDURE `sp_insertarCaracteristicas`(
+				in pa_capacidad int,
+                in pa_habitaciones int,
+                in pa_camas int,
+                in pa_bathroom int,
+                in pa_wifi boolean,
+                in pa_AirCond boolean,
+                in pa_kitchen boolean,
+                in pa_pool boolean,
+                in pa_other varchar (150)						
+                        )
+BEGIN
+
+INSERT INTO t_characteristic_property(capacity, room, bed, 
+										bathroom, wifi, air_conditioner,
+                                        kitchen, pool, other)
+VALUES ( pa_capacidad,pa_habitaciones,pa_camas, pa_bathroom, 
+		pa_wifi, pa_AirCond, pa_kitchen, pa_pool, pa_other
+        );
+
+END$$
+DELIMITER ;
+
+
+
+DELIMITER $$
+CREATE DEFINER=`root`@`localhost` PROCEDURE `sp_insertarDireccion`(
+				in pa_pais varchar (50),
+                in pa_ciudad varchar (70),
+                in pa_calle varchar (70)
+					)
+BEGIN
+INSERT INTO t_address_property (country_name, city, street)
+VALUES (pa_pais, pa_ciudad, pa_calle);
+END$$
+DELIMITER ;
+
+
+
+DELIMITER $$
+CREATE DEFINER=`root`@`localhost` PROCEDURE `sp_insertImagenes`(
+							pa_imagen longblob, 
+                            in pa_descripcion varchar(50),
+                            in pa_id_publicacion int)
+BEGIN
+
+INSERT INTO t_imagenes (image, descripcion, id_publicacion)
+VALUES (pa_imagen, pa_descripcion, pa_id_publicacion);
+
+END$$
+DELIMITER ;
+
+
+
+DELIMITER $$
+CREATE DEFINER=`root`@`localhost` PROCEDURE `sp_insertProperty`(
+                in pa_tipo varchar(30),
+                in pa_idDireccion int,
+                in pa_idChar int,
+                in id_user int
+                )
+BEGIN
+INSERT INTO t_property (type, id_address_property, status, rating, id_characteristic, id_user_owner)
+VALUES (pa_tipo, pa_idDireccion, 0, 0.0, pa_idChar, id_user);
+END$$
+DELIMITER ;
+
+
+
+DELIMITER $$
+CREATE DEFINER=`root`@`localhost` PROCEDURE `sp_loginIn`(in pa_username varchar(15), in pa_password varchar(25))
+BEGIN
+SELECT * FROM t_user WHERE username = pa_username and password = pa_password;
+END$$
+DELIMITER ;
+
+ESTE HAY QUE ADAPTARLO LOS DEMÁS ESTAN LISTOS Y PROBADOS
+
+DELIMITER $$
+CREATE DEFINER=`root`@`localhost` PROCEDURE `sp_search_publication_by_dir`(IN pa_direccion VARCHAR(30))
+BEGIN
+    SELECT t_publication.titulo, t_property.type, t_property.address, t_property.status, t_property.rating,
+           t_property.characteristic, t_user.username AS Dueño, t_publication.price, t_publication.date,
+           t_imagenes.image
+    FROM t_property 
+    INNER JOIN t_user ON t_property.id_user_owner = t_user.id
+    INNER JOIN t_publication ON t_property.id = t_publication.id_property
+    INNER JOIN t_imagenes ON t_publication.id_imagen_preview = t_imagenes.id
+    WHERE address = pa_direccion AND t_property.status = 1;
+
+END$$
+DELIMITER ;
+CREATE VIEW 
+vista_general_clientes AS
+select  t_user.id ID_User, username Username, t_user.name Name, lastname Lastname,t_user.country_name Country ,gender Gender, t_user.type,t_user.status,t_user.email Email, telephone_number Telephone_Number, t_user.type User_Type, t_user.created_date Created_Date , count(DISTINCT t_publication.id) Publication_Number , count(DISTINCT t_reservation.num_reservation) Reservation_Number
+from t_user
+left join t_property
+ON t_property.id_user_owner = t_user.id
+left join t_publication
+ON t_user.id = t_publication.id_owner
+left join t_reservation
+ON t_user.id = t_reservation.id_user
+group by t_user.id;
+
 select * from t_user;
 select * from t_property;	
 select * from t_publication;
@@ -155,7 +316,26 @@ select * from t_country;
 
 select * from vista_general_clientes;
 
+SELECT t_publication.id, t_publication.titulo, t_publication.`date`,
+		t_publication.id_property,
+        t_publication.price, t_publication.`status`,
+        t_user.username
+FROM t_publication 
+INNER JOIN t_user ON t_publication.id_owner = t_user.id
+WHERE t_publication.`status` = 0 AND t_publication.id_user_admin = 0;
 
-
-
-
+select * from vista_general_publicaciones;
+CREATE VIEW 
+vista_general_publicaciones AS
+select t_publication.id ID_Publication, titulo Title, (select t_user.username
+                                                        from t_user
+                                                        where t_user.id = t_publication.id_user_admin) Confirmed_Admin,
+                                                        t_user.username UserName_Owner  , date Date, t_publication.status,price Price, concat(DATEDIFF(NOW(),t_publication.date)," ", 'dias' )  Publication_Days, concat( t_address_property.country_name ,"," ," " ,t_address_property.city, " ",t_address_property.street ) Address_Property, t_property.type Type_Property
+from t_publication
+left join t_property
+ON t_publication.id_property = t_property.id
+left join t_user
+ON t_property.id_user_owner = t_user.id
+left join t_address_property
+ON t_address_property.id_address = t_property.id_address_property
+where id_user_admin !=0 AND t_publication.status = true ;

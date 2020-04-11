@@ -86,7 +86,7 @@ public class HomeGUIController extends ListView<PublicacionesParaVisualizar> imp
 	}
 	
     @FXML
-    void clickToViewPublication(MouseEvent event) throws IOException {
+    public void clickToViewPublication(MouseEvent event) throws IOException {
     	auxlist = publicationListView.getSelectionModel().getSelectedItem();
     	//ViewPublicationGUI ax = new ViewPublicationGUI(auxlist);
     	if (auxlist != null) {
@@ -105,19 +105,13 @@ public class HomeGUIController extends ListView<PublicacionesParaVisualizar> imp
 
     }
     
-
-
     @FXML
-    void openAdminView(ActionEvent event) throws IOException {
+    public void openAdminView(ActionEvent event) throws IOException {
     	Parent rootAdmin = FXMLLoader.load(getClass().getResource("../frontend/admin1GUI.fxml"));
 		Stage stageAdmin = new Stage();
 		Scene sceneAdmin = new Scene(rootAdmin);
 
 		stageAdmin.setScene(sceneAdmin);
-		//stageAdmin.setResizable(false);
-		//stageRegister.setAlwaysOnTop(true);
-	//	stageAdmin.initStyle(StageStyle.TRANSPARENT);
-		//	stageRegister.initModality(Modality.APPLICATION_MODAL);
 		stageAdmin.show();
 
 		/*******
@@ -143,7 +137,7 @@ public class HomeGUIController extends ListView<PublicacionesParaVisualizar> imp
 	/******* @throws SQLException 
 	 * @throws IOException ***************************************************************/
 	@FXML
-	void searchPublication(ActionEvent event) throws SQLException, IOException {
+	public void searchPublication(ActionEvent event) throws SQLException, IOException {
 		String ubicacionPropiedadABuscar = cbxLocation.getSelectionModel().getSelectedItem().toString();
 		ResultSet resultBD;
 
@@ -184,8 +178,11 @@ public class HomeGUIController extends ListView<PublicacionesParaVisualizar> imp
 	}
 
 	@FXML
+
 	void addProperty(ActionEvent event) throws IOException {
 		Parent rootRegister = FXMLLoader.load(getClass().getResource("../frontend/tablePropertyGUI.fxml"));
+
+	
 		Stage stageRegister = new Stage();
 		Scene sceneRegister = new Scene(rootRegister);
 
@@ -218,7 +215,7 @@ public class HomeGUIController extends ListView<PublicacionesParaVisualizar> imp
 	}
 
 	@FXML
-	void addCard(ActionEvent event) throws IOException {
+	public void addCard(ActionEvent event) throws IOException {
 
 		Parent rootRegister = FXMLLoader.load(getClass().getResource("../frontend/tableCardGUI.fxml"));
 		Stage stageRegister = new Stage();
@@ -352,7 +349,7 @@ public class HomeGUIController extends ListView<PublicacionesParaVisualizar> imp
 	}
 	
 	@FXML
-    void publish(ActionEvent event) throws IOException {
+    public void publish(ActionEvent event) throws IOException {
 		
 		Parent rootRegister = FXMLLoader.load(getClass().getResource("../frontend/tablePublicationGUI.fxml"));
 		Stage stageRegister = new Stage();

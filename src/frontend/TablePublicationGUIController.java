@@ -110,10 +110,10 @@ public class TablePublicationGUIController implements Initializable {
 				String fecha = rs.getString("date");
 				Integer propiedad = rs.getInt("id_property");
 				Float precio = rs.getFloat("price");
-				String status = rs.getString("status");
-				Publicacion auxPubli = new Publicacion(id, titulo, fecha,  status, propiedad, precio);
+				boolean status = rs.getBoolean("status");
+				Publicacion publi = new Publicacion(id, titulo, fecha, status, propiedad, precio, HomeGUIController.usuarioActual.getUsername());
 
-				listPublicaciones.add(auxPubli);
+				listPublicaciones.add(publi);
 			}
 		} catch (Exception e) {
 		}
