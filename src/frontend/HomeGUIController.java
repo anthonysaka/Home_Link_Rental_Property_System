@@ -17,6 +17,7 @@ import com.jfoenix.controls.JFXComboBox;
 import com.jfoenix.controls.JFXListView;
 import com.mysql.cj.jdbc.CallableStatement;
 import backend.ConnectionMySqlDB;
+import backend.Propiedad;
 import backend.PublicacionesParaVisualizar;
 import backend.User;
 import javafx.collections.FXCollections;
@@ -184,7 +185,7 @@ public class HomeGUIController extends ListView<PublicacionesParaVisualizar> imp
 
 	@FXML
 	void addProperty(ActionEvent event) throws IOException {
-		Parent rootRegister = FXMLLoader.load(getClass().getResource("../frontend/AddPropertyGUIController.fxml"));
+		Parent rootRegister = FXMLLoader.load(getClass().getResource("../frontend/tablePropertyGUI.fxml"));
 		Stage stageRegister = new Stage();
 		Scene sceneRegister = new Scene(rootRegister);
 
@@ -219,7 +220,7 @@ public class HomeGUIController extends ListView<PublicacionesParaVisualizar> imp
 	@FXML
 	void addCard(ActionEvent event) throws IOException {
 
-		Parent rootRegister = FXMLLoader.load(getClass().getResource("../frontend/AddCardGUI.fxml"));
+		Parent rootRegister = FXMLLoader.load(getClass().getResource("../frontend/tableCardGUI.fxml"));
 		Stage stageRegister = new Stage();
 		Scene sceneRegister = new Scene(rootRegister);
 
@@ -253,24 +254,29 @@ public class HomeGUIController extends ListView<PublicacionesParaVisualizar> imp
 
 	public static ArrayList<String> llenarCombo()
 	{
-		Statement sentencia = null;
-		ResultSet resultado = null;
 		ArrayList<String> lista = new ArrayList<String>();
-		String Query = "SELECT DISTINCT address FROM t_property";
+		
+		ResultSet rs = null;
+
+    	CallableStatement mySqlStatement = null ; // call stored procedure
 		try {
-			Connection myConnection = ConnectionMySqlDB.getConnectionMySqlDB();
-			sentencia = myConnection.createStatement();
-			resultado = sentencia.executeQuery(Query);
-			System.out.println("Correcto");
-		} catch (Exception e) {
-			System.out.println("No Correcto");
+			Connection myConnection = ConnectionMySqlDB.getConnectionMySqlDB();	
+			mySqlStatement = (CallableStatement) myConnection.prepareCall("{CALL sp_direccionesPublicadas()}");
+			rs = mySqlStatement.executeQuery();
+			System.out.println("Direcciones cargadas en el rs");
+		
+		} catch (SQLException e) {
+			System.out.println("Error al cargar sus propiedades!");
+			e.printStackTrace();
 		}
-		try {
-			while(resultado.next()){
-				lista.add(resultado.getString("address"));
+		try { /* RECORDAR LIMPIAR EL CODIGO DE TODO EL PROYECTO [Mucho codigo repetido]*/
+			while(rs.next()){
+				lista.add(rs.getString("direccion"));
+				
 			}
 		} catch (Exception e) {
 		}
+		
 		return lista;
 	}
 
@@ -348,7 +354,7 @@ public class HomeGUIController extends ListView<PublicacionesParaVisualizar> imp
 	@FXML
     void publish(ActionEvent event) throws IOException {
 		
-		Parent rootRegister = FXMLLoader.load(getClass().getResource("../frontend/publicationGUI.fxml"));
+		Parent rootRegister = FXMLLoader.load(getClass().getResource("../frontend/tablePublicationGUI.fxml"));
 		Stage stageRegister = new Stage();
 		Scene sceneRegister = new Scene(rootRegister);
 

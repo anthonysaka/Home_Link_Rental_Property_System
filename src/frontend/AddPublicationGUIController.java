@@ -70,8 +70,7 @@ public class AddPublicationGUIController implements Initializable{
 	int y = 0;
 	int z = 0;
 
-	private FileChooser fileChooser;
-	private File file;
+
 	private Image imagen;
 	FileChooser preview;
 	String path1;
@@ -83,7 +82,7 @@ public class AddPublicationGUIController implements Initializable{
 
 		FileChooser fc = new FileChooser();
 
-		fc.setInitialDirectory(new File("C:\\Users\\Anthony"));
+		fc.setInitialDirectory(new File("C:\\Users\\jhan_"));
 
 		File selectedFile = fc.showOpenDialog(null);
 
@@ -158,9 +157,6 @@ public class AddPublicationGUIController implements Initializable{
 			mySqlStatement.setString("pa_titulo", titulo);
 			mySqlStatement.setInt("pa_propertyID", Integer.valueOf(property));
 			mySqlStatement.setFloat("pa_price", Float.valueOf(precio));
-
-			mySqlStatement.setInt("pa_imgIdPrev",4);
-
 			mySqlStatement.setInt("pa_userID",userId);
 			mySqlStatement.executeQuery();
 			myConnection.close();
