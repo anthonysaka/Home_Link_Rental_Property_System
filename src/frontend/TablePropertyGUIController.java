@@ -134,10 +134,10 @@ public class TablePropertyGUIController implements Initializable {
 				String dir = rs.getString("Address_Property");
 				String caract = rs.getString("Characteristic_Property");
 				String feedback= rs.getString("rating");
-				String status = rs.getString("status");
+				boolean status = rs.getBoolean("status");
 				System.out.println("EL ESTATUS ES:"+status);
 				
-				if (!status.equalsIgnoreCase("0")) {
+				if (status == true) {
 					Propiedad auxPro = new Propiedad(tipo, dir, "Publicada", caract);
 					auxPro.setFeedbacks(feedback);
 					listPropiedad.add(auxPro);	

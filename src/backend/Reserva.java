@@ -3,17 +3,22 @@ package backend;
 public class Reserva {
 	
 	private int idReserva; 
-	private int idPropiedad;
+	private int idPublicacion;
 	private int idUsuario;
+	private int idFactura;
 	private int huespedes;
 	private String fechaInicio;
 	private String fechaFin;
+	private float precio;
+	private String tipoPropiedad;
+	private String titulo;
+	
 	
 	
 	public Reserva(int idReserva, int idPropiedad, int idUsuario, int huespedes, String fechaInicio, String fechaFin) {
 		super();
 		this.idReserva = idReserva;
-		this.idPropiedad = idPropiedad;
+		this.idPublicacion = idPropiedad;
 		this.idUsuario = idUsuario;
 		this.huespedes = huespedes;
 		this.fechaInicio = fechaInicio;
@@ -32,12 +37,12 @@ public class Reserva {
 
 
 	public int getIdPropiedad() {
-		return idPropiedad;
+		return idPublicacion;
 	}
 
 
 	public void setIdPropiedad(int idPropiedad) {
-		this.idPropiedad = idPropiedad;
+		this.idPublicacion = idPropiedad;
 	}
 
 
@@ -78,6 +83,46 @@ public class Reserva {
 
 	public void setFechaFin(String fechaFin) {
 		this.fechaFin = fechaFin;
+	}
+
+
+	public float getPrecio() {
+		return precio;
+	}
+
+
+	public void setPrecio(float precio) {
+		this.precio = precio;
+	}
+
+
+	public int getIdFactura() {
+		return idFactura;
+	}
+
+
+	public void setIdFactura(int idFactura) {
+		this.idFactura = idFactura;
+	}
+
+
+	public String getTipoPropiedad() {
+		return tipoPropiedad;
+	}
+
+
+	public void setTipoPropiedad(String tipoPropiedad) {
+		this.tipoPropiedad = tipoPropiedad;
+	}
+
+
+	public String getTitulo() {
+		return titulo;
+	}
+
+
+	public void setTitulo(String titulo) {
+		this.titulo = titulo;
 	}
 	
 

@@ -5,7 +5,7 @@ public class Tarjetas {
 	private int idTarjeta;
 	private String numeroTarjeta;
 	private String representante;
-	private String fechaVencimiento;
+	private String   fechaVencimiento;
 	private int CVV;
 	
 	public Tarjetas(String numeroTarjeta, String representante, String fechaVencimiento, int CVV) {
@@ -14,7 +14,7 @@ public class Tarjetas {
 		this.numeroTarjeta = numeroTarjeta;
 		this.representante = representante;
 		this.fechaVencimiento = fechaVencimiento;
-		this.CVV = CVV;
+		this.CVV =  CVV;
 	}
 
 	public int getIdTarjeta() {

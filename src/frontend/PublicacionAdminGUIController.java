@@ -120,14 +120,29 @@ public class PublicacionAdminGUIController implements Initializable {
 				String userowner = rs.getString("UserName_Owner");
 				String dirPropiedad = rs.getString("Address_Property");
 				String tipoPropiedad = rs.getString("Type_Property");
+				
+				if (status == true) {
+					Publicacion auxPubli = new Publicacion(id, titulo, fecha, "Autorizada",0 , precio, userowner); //0 porque no tenia el idproperty y no me interesa ene ste caso.
+					auxPubli.setTiempoexistente(tiempoexistente);
+					auxPubli.setDirPropiedadCorrespondiente(dirPropiedad);
+					auxPubli.setTipoPropiedadCorrespondiente(tipoPropiedad);
+					auxPubli.setUsernameAdmin(useradmin);
 
-				Publicacion auxPubli = new Publicacion(id, titulo, fecha, status,0 , precio, userowner); //0 porque no tenia el idproperty y no me interesa ene ste caso.
-				auxPubli.setTiempoexistente(tiempoexistente);
-				auxPubli.setDirPropiedadCorrespondiente(dirPropiedad);
-				auxPubli.setTipoPropiedadCorrespondiente(tipoPropiedad);
-				auxPubli.setUsernameAdmin(useradmin);
+					listPublicaciones.add(auxPubli);
+					
+				} else {
+					
+					Publicacion auxPubli = new Publicacion(id, titulo, fecha, "No Autorizada",0 , precio, userowner); //0 porque no tenia el idproperty y no me interesa ene ste caso.
+					auxPubli.setTiempoexistente(tiempoexistente);
+					auxPubli.setDirPropiedadCorrespondiente(dirPropiedad);
+					auxPubli.setTipoPropiedadCorrespondiente(tipoPropiedad);
+					auxPubli.setUsernameAdmin(useradmin);
 
-				listPublicaciones.add(auxPubli);
+					listPublicaciones.add(auxPubli);
+					
+				}
+
+				
 			}
 		} catch (Exception e) {
 		}
