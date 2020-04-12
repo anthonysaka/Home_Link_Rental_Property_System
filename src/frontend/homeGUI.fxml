@@ -18,7 +18,7 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<<<<<<< HEAD
+
 <StackPane fx:id="rootStackPane" stylesheets="@styleAdmin.css" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="frontend.HomeGUIController">
    <children>
       <AnchorPane fx:id="rootAnchorPane" maxHeight="720.0" maxWidth="1280.0" prefHeight="720.0" prefWidth="1280.0" style="-fx-background-color: black;">
@@ -88,7 +88,7 @@
             </HBox>
             <AnchorPane prefHeight="620.0" prefWidth="200.0" VBox.vgrow="ALWAYS">
                <VBox alignment="CENTER" layoutX="8.0" layoutY="5.0" prefHeight="370.0" prefWidth="200.0">
-                  <JFXButton prefHeight="40.0" prefWidth="200.0" styleClass="Button" text="OPCION #" textFill="#ddd9d9">
+                  <JFXButton prefHeight="40.0" prefWidth="200.0" styleClass="Button" text="My Reservations" textFill="#ddd9d9">
                      <VBox.margin>
                         <Insets />
                      </VBox.margin>
@@ -155,9 +155,10 @@
                      <VBox.margin>
                         <Insets top="100.0" />
                      </VBox.margin>
+                    	
                   </JFXButton>
                </VBox>
-=======
+			 <Insets />
 <AnchorPane maxHeight="720.0" maxWidth="1280.0" prefHeight="720.0" prefWidth="1280.0" style="-fx-background-color: black;" stylesheets="@styleAdmin.css" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="frontend.HomeGUIController">
    <HBox alignment="CENTER" layoutX="214.0" prefHeight="80.0" prefWidth="1068.0">
       <AnchorPane prefHeight="100.0" prefWidth="250.0" HBox.hgrow="ALWAYS">
@@ -230,13 +231,14 @@
       <AnchorPane prefHeight="620.0" prefWidth="200.0" VBox.vgrow="ALWAYS">
          <VBox alignment="CENTER" layoutX="8.0" layoutY="5.0" prefHeight="370.0" prefWidth="200.0">
             <JFXButton prefHeight="40.0" prefWidth="200.0" styleClass="Button" text="My Reservations" textFill="#ddd9d9">
->>>>>>> branch 'master' of https://github.com/anthonysaka/Home_Link_Rental_Property_System.git
+
                <VBox.margin>
                   <Insets />
+                  
                </VBox.margin>
-<<<<<<< HEAD
+				
             </AnchorPane>
-=======
+				
                <font>
                   <Font name="Consolas Bold" size="16.0" />
                </font>
@@ -301,7 +303,7 @@
                   <Insets top="100.0" />
                </VBox.margin>
             </JFXButton>
->>>>>>> branch 'master' of https://github.com/anthonysaka/Home_Link_Rental_Property_System.git
+
          </VBox>
          <Pane layoutX="218.0" layoutY="110.0" prefHeight="610.0" prefWidth="1062.0" style="-fx-background-color: black;">
             <children>

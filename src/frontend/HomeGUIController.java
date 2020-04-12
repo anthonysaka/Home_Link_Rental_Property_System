@@ -99,6 +99,7 @@ public class HomeGUIController extends ListView<PublicacionesParaVisualizar> imp
 	ObservableList<PublicacionesParaVisualizar> listPublicationVisual = FXCollections.observableArrayList();
 	ObservableList<String> list = FXCollections.observableArrayList(llenarCombo());
 	SpinnerValueFactory<Integer> valueSpinGuest = new SpinnerValueFactory.IntegerSpinnerValueFactory(1, 20, 1);
+	@FXML JFXButton btnExit;
 
 	/** Initialization of Home Stage Here. Add all that you want start on begin. **/
 	@Override
