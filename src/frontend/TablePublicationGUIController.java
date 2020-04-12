@@ -41,6 +41,9 @@ public class TablePublicationGUIController implements Initializable {
 
     @FXML
     private Button btnClose;
+    
+    @FXML
+    private JFXButton btnBussiness;
 
     @FXML
     private TableView<Publicacion> tablaPublicacion;
@@ -74,7 +77,6 @@ public class TablePublicationGUIController implements Initializable {
 	public void initialize(URL location, ResourceBundle resources) {
 		initColumns();
 		loadDataAutorizarPublicaciones();
-		
 	}
 	
 	public void initColumns() {
@@ -111,15 +113,59 @@ public class TablePublicationGUIController implements Initializable {
 				Integer propiedad = rs.getInt("id_property");
 				Float precio = rs.getFloat("price");
 				boolean status = rs.getBoolean("status");
-				Publicacion publi = new Publicacion(id, titulo, fecha, status, propiedad, precio, HomeGUIController.usuarioActual.getUsername());
+				System.out.println("ESTADO: "+status);
+				if (status == true) {
+					Publicacion publi = new Publicacion(id, titulo, fecha, "Autorizada", propiedad, precio, HomeGUIController.usuarioActual.getUsername());
 
-				listPublicaciones.add(publi);
+					listPublicaciones.add(publi);
+				} else {
+					
+					Publicacion publi = new Publicacion(id, titulo, fecha, "No Autorizada", propiedad, precio, HomeGUIController.usuarioActual.getUsername());
+
+					listPublicaciones.add(publi);
+				}
+				
 			}
 		} catch (Exception e) {
 		}
 
 		tablaPublicacion.getItems().setAll(listPublicaciones);
 	}
+	
+	 @FXML
+	    void openBussiness(ActionEvent event) throws IOException {
+		 
+		 Parent rootRegister = FXMLLoader.load(getClass().getResource("../frontend/TableBussinessGUI.fxml"));
+			Stage stageRegister = new Stage();
+			Scene sceneRegister = new Scene(rootRegister);
+
+			stageRegister.setScene(sceneRegister);
+			stageRegister.setResizable(false);
+			//stageRegister.setAlwaysOnTop(true);
+			stageRegister.initStyle(StageStyle.TRANSPARENT);
+			//	stageRegister.initModality(Modality.APPLICATION_MODAL);
+			stageRegister.show();
+
+			/*******
+			 * EventHandler to Move Undecorated Window (Stage) Adapted from: StackOverflow
+			 ******/
+			rootRegister.setOnMousePressed(new EventHandler<MouseEvent>() {
+				@Override
+				public void handle(MouseEvent event) {
+					xoffset = stageRegister.getX() - event.getScreenX();
+					yoffset = stageRegister.getY() - event.getScreenY();
+				}
+			});
+			rootRegister.setOnMouseDragged(new EventHandler<MouseEvent>() {
+				@Override
+				public void handle(MouseEvent event) {
+					stageRegister.setX(event.getScreenX() + xoffset);
+					stageRegister.setY(event.getScreenY() + yoffset);
+				}
+			});
+
+	    }
+
 	
     @FXML
     void insertPublication(ActionEvent event) throws IOException {

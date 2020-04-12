@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import com.jfoenix.controls.JFXButton?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.layout.AnchorPane?>
+
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="769.0" prefWidth="1138.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="frontend.BussinessTableGUIController">
+   <children>
+      <AnchorPane prefHeight="84.0" prefWidth="1138.0" style="-fx-background-color: Black;">
+         <children>
+            <JFXButton fx:id="btnClose" layoutX="1068.0" layoutY="14.0" onAction="#close" style="-fx-background-color: Red;" text="Close" />
+         </children>
+      </AnchorPane>
+      <TableView fx:id="tableBussiness" layoutY="69.0" prefHeight="701.0" prefWidth="1138.0">
+        <columns>
+          <TableColumn fx:id="columnPropertyId" prefWidth="92.0" text="Property Id" />
+          <TableColumn fx:id="columnPublicationId" prefWidth="584.0" text="Publication Title" />
+            <TableColumn fx:id="columnStartD" prefWidth="151.0" text="Start Date" />
+            <TableColumn fx:id="columnEndD" prefWidth="149.0" text="End Date" />
+            <TableColumn fx:id="columnIncome" prefWidth="161.0" text="Estimated Income " />
+        </columns>
+      </TableView>
+   </children>
+</AnchorPane>

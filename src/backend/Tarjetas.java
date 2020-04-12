@@ -5,7 +5,7 @@ public class Tarjetas {
 	private int idTarjeta;
 	private String numeroTarjeta;
 	private String representante;
-	private String fechaVencimiento;
+	private String   fechaVencimiento;
 	private int CVV;
 	
 	public Tarjetas(String numeroTarjeta, String representante, String fechaVencimiento, int CVV) {

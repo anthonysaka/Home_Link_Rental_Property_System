@@ -30,6 +30,11 @@
                      </font>
                   </JFXButton>
                   <Button fx:id="btnClose" layoutX="1052.0" layoutY="19.0" mnemonicParsing="false" onAction="#CloseWindow" text="Close" />
+                  <JFXButton fx:id="btnModifyPublication1" layoutX="544.0" layoutY="19.0" onAction="#openBussiness" prefHeight="37.0" prefWidth="194.0" text="Bussiness Information" textFill="WHITE">
+                     <font>
+                        <Font name="Consolas Bold" size="16.0" />
+                     </font>
+                  </JFXButton>
                </children>
             </AnchorPane>
          </children>
