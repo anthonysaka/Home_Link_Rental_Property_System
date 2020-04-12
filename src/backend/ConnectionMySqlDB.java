@@ -44,7 +44,7 @@ public class ConnectionMySqlDB {
 			System.out.println("[failed] An error occurred. Database Connection Failed!");
 			e.printStackTrace();
 		}
-		return connect; //Return an instance of database connection
+		return connect; 
 	}
 
 }
