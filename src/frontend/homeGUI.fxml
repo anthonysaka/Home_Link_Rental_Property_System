@@ -88,7 +88,7 @@
          </children></HBox>
       <AnchorPane prefHeight="620.0" prefWidth="200.0" VBox.vgrow="ALWAYS">
          <VBox alignment="CENTER" layoutX="8.0" layoutY="5.0" prefHeight="370.0" prefWidth="200.0">
-            <JFXButton prefHeight="40.0" prefWidth="200.0" styleClass="Button" text="OPCION #" textFill="#ddd9d9">
+            <JFXButton prefHeight="40.0" prefWidth="200.0" styleClass="Button" text="My Reservations" textFill="#ddd9d9">
                <VBox.margin>
                   <Insets />
                </VBox.margin>
@@ -110,7 +110,7 @@
                   <Cursor fx:constant="HAND" />
                </cursor>
             </JFXButton>
-            <JFXButton fx:id="btnaddProperty" onAction="#addProperty" prefHeight="40.0" prefWidth="200.0" styleClass="Button" text="My Propierties" textFill="#ddd9d9">
+            <JFXButton fx:id="btnaddProperty" onAction="#addProperty" prefHeight="40.0" prefWidth="200.0" styleClass="Button" text="My Properties" textFill="#ddd9d9">
                <VBox.margin>
                   <Insets top="6.0" />
                </VBox.margin>

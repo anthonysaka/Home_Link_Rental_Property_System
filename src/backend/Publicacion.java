@@ -4,7 +4,7 @@ public class Publicacion {
 	private int idPublicacion;
 	private String titulo;
 	private String fechaPublicacion;
-	private Boolean status;
+	private String status;
 	private int idPropiedad;
 	private int idAdministrador;
 	private String usernameAdmin; //se creo despues auxiliar
@@ -16,7 +16,7 @@ public class Publicacion {
 	private String dirPropiedadCorrespondiente;
 	private String tipoPropiedadCorrespondiente;
 	
-	public Publicacion(int idPublicacion, String titulo, String fechaPublicacion, Boolean status, int idPropiedad, float precio, String usernameOwner) {
+	public Publicacion(int idPublicacion, String titulo, String fechaPublicacion, String status, int idPropiedad, float precio, String usernameOwner) {
 		super();
 		this.idPublicacion = idPublicacion;
 		this.setTitulo(titulo);
@@ -44,10 +44,10 @@ public class Publicacion {
 	public void setFechaPublicacion(String fechaPublicacion) {
 		this.fechaPublicacion = fechaPublicacion;
 	}
-	public Boolean getStatus() {
+	public String getStatus() {
 		return status;
 	}
-	public void setStatus(Boolean status) {
+	public void setStatus(String status) {
 		this.status = status;
 	}
 	public int getIdPropiedad() {

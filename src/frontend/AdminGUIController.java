@@ -230,7 +230,7 @@ public class AdminGUIController implements Initializable {
 				"       			 t_user.username\r\n" + 
 				"		FROM t_publication \r\n" + 
 				"		INNER JOIN t_user ON t_publication.id_owner = t_user.id\r\n" + 
-				"		WHERE t_publication.`status` = 0 AND t_publication.id_user_admin = 0";;
+				"		WHERE t_publication.`status` = 0 AND t_publication.id_user_admin = 0";
 				try {
 					Connection myConnection = ConnectionMySqlDB.getConnectionMySqlDB();
 					sentencia = myConnection.createStatement();
@@ -248,8 +248,17 @@ public class AdminGUIController implements Initializable {
 						Float precio = rs.getFloat("price");
 						Boolean status = rs.getBoolean("status");
 						String usernameOwner = rs.getString("username");
-						Publicacion auxPubli = new Publicacion(id, fecha, titulo, status, idpropiedad, precio, usernameOwner);
-						listAutoriPublicaciones.add(auxPubli);
+						
+						System.out.println("ADMIN STATUS ES: "+status);
+						
+						if (status == true) {
+							Publicacion auxPubli = new Publicacion(id, fecha, titulo, "Autorizada", idpropiedad, precio, usernameOwner);
+							listAutoriPublicaciones.add(auxPubli);
+						} else {
+							Publicacion auxPubli = new Publicacion(id, fecha, titulo, "No Autorizada", idpropiedad, precio, usernameOwner);
+							listAutoriPublicaciones.add(auxPubli);
+						}
+						
 					}
 				} catch (Exception e) {
 				}
