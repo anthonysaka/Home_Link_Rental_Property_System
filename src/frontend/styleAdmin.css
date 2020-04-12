@@ -48,6 +48,13 @@
 -fx-text-fill: GREY;
 }
 
+#lblCantNoche {
+-fx-font-family: Franklin Gothic Medium; 
+-fx-font-weight: bold;
+-fx-font-size: 1.2em; 
+-fx-text-fill: -fx-primarytext;
+}
+
 #btnClose {
 	-fx-graphic: url('closeIcon1.png');
 }

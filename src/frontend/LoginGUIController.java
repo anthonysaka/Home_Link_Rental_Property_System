@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.Arrays;
 
 import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXPasswordField;
@@ -25,6 +26,8 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Hyperlink;
 import javafx.scene.image.Image;
 import javafx.scene.input.MouseEvent;
+import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.StackPane;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
@@ -47,6 +50,11 @@ public class LoginGUIController extends Application {
 	private Button btnMinimize;
 	@FXML
 	private Button btnClose;
+    @FXML
+    private StackPane rootStackPane;
+
+    @FXML
+    private AnchorPane rootAnchorPane;
 	
 	public static User loggedUser = null;
 	
@@ -60,7 +68,6 @@ public class LoginGUIController extends Application {
 
 		Parent rootLogin = FXMLLoader.load(LoginGUIController.class.getResource("../frontend/loginGUI.fxml")); /** cambie temporal*/
 		Scene sceneLogin = new Scene(rootLogin);
-
 		stageLogin.getIcons().add(new Image(LoginGUIController.class.getResourceAsStream("../frontend/images/bg_home_link.png")));
 		stageLogin.setScene(sceneLogin);
 		stageLogin.setResizable(false);
@@ -100,9 +107,7 @@ public class LoginGUIController extends Application {
 
 		stageRegister.setScene(sceneRegister);
 		stageRegister.setResizable(false);
-		//stageRegister.setAlwaysOnTop(true);
 		stageRegister.initStyle(StageStyle.TRANSPARENT);
-		//	stageRegister.initModality(Modality.APPLICATION_MODAL);
 		stageRegister.show();
 
 		/*******
@@ -140,9 +145,6 @@ public class LoginGUIController extends Application {
 			if (resulter.first()) {
 				
 				loggedUser = new User(resulter.getString("name"), resulter.getString("lastname"), resulter.getString("gender"), resulter.getString("type"), resulter.getString("username"), resulter.getString("email"), resulter.getString("password"), resulter.getString("created_date"));	
-
-				//loggedUser.setCountry_location(resulter.getString("country_location_id")); //arreglar esto
-				//loggedUser.setCountry_location_id(resulter.getInt("country_location_id"));
 				loggedUser.setTelephone_number(resulter.getString("telephone_number"));
 				loggedUser.setStatus(resulter.getBoolean("status"));
 				loggedUser.setId(Integer.valueOf(resulter.getString("id")));
@@ -160,11 +162,8 @@ public class LoginGUIController extends Application {
 				
 				stageRegister.setScene(sceneRegister);
 				stageRegister.setResizable(false);
-				//stageRegister.setAlwaysOnTop(true);
 				stageRegister.initStyle(StageStyle.TRANSPARENT);
-				//	stageRegister.initModality(Modality.APPLICATION_MODAL);
 				stageRegister.show();
-				
 
 				/*******
 				 * EventHandler to Move Undecorated Window (Stage) Adapted from: StackOverflow
@@ -182,33 +181,25 @@ public class LoginGUIController extends Application {
 						stageRegister.setX(event.getScreenX() + xoffset);
 						stageRegister.setY(event.getScreenY() + yoffset);
 					}
-					
-					
-				
 				});
-				x = loggedUser.getId();
-
-				
+				x = loggedUser.getId();		
 			} else {
-				System.out.println("Hubo un error, por favor verifique su User y Password");	
+				JFXButton btnOk = new JFXButton("Ok!");
+				PopupAlert.showCustomDialog(rootStackPane, rootAnchorPane, Arrays.asList(btnOk),"Error!\n" 
+						+ "Hubo un error, por favor verifique su User y Password.", null);
 				myConnection.close();
 				return 0;
 			}
 			
 		} catch (SQLException e) {
 			System.out.println("Hubo un error con la base de datos");
-			e.printStackTrace();
-			
+			e.printStackTrace();		
 		}
-	
 		return x;
 	}
 
-
 	@FXML
 	void closeWindow(ActionEvent event) {
-		//Stage stage = (Stage) btnClose.getScene().getWindow();
-		//stage.close();
 		System.exit(0);
 	}
 

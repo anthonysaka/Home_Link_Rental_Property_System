@@ -12,7 +12,7 @@ import javafx.scene.image.Image;
 
 
 public class PublicacionesParaVisualizar extends ConnectionMySqlDB {
-	
+	private Integer id;
 	private String tipo;
 	private String direccion;
 	private String feedback;
@@ -24,7 +24,7 @@ public class PublicacionesParaVisualizar extends ConnectionMySqlDB {
 	private Image imagePreviewHouse;
 	
 	
-	public PublicacionesParaVisualizar(String titulo, String tipo, String direccion, String feedback, String caracterisitcas,
+	public PublicacionesParaVisualizar(Integer id, String titulo, String tipo, String direccion, String feedback, String caracterisitcas,
 			String usernamePublicador, String fechaPublicacion, float precio, Image preImaHouse) {
 		super();
 		this.setTitulo(titulo);
@@ -36,6 +36,7 @@ public class PublicacionesParaVisualizar extends ConnectionMySqlDB {
 		this.fechaPublicacion = fechaPublicacion;
 		this.precio = precio;
 		this.imagePreviewHouse = preImaHouse;
+		this.setId(id);
 	}
 
 	public String getTipo() {
@@ -102,20 +103,23 @@ public class PublicacionesParaVisualizar extends ConnectionMySqlDB {
 	}
 
 	/********************************************/
-	public static ResultSet loadPublication(String city, String country)
+	public static ResultSet loadPublication(String city, String country, int capacity, String iniDate, String finDate)
 	{
 		CallableStatement mySqlStatement = null ; // call stored procedure
 		try {
 			Connection myConnection = getConnectionMySqlDB();
-			mySqlStatement = (CallableStatement) myConnection.prepareCall("{CALL sp_search_publication_by_dir(?, ?)}");
+			mySqlStatement = (CallableStatement) myConnection.prepareCall("{CALL sp_search_publication_by_dir(?,?,?,?,?)}");
 			mySqlStatement.setString("pa_country", country);
 			mySqlStatement.setString("pa_city", city);
+			mySqlStatement.setInt("pa_capacity", capacity);
+			mySqlStatement.setString("pa_start_date", iniDate);
+			mySqlStatement.setString("pa_end_date", finDate);
 			ResultSet rs = mySqlStatement.executeQuery();
-			System.out.println("Busquedad con exito!");
+			System.out.println("Busqueda con exito!");
 			return rs;
 			
 		} catch (SQLException e) {
-			System.out.println("Busquedad sin exito!");
+			System.out.println("Busqueda sin exito!");
 			e.printStackTrace();
 			return null;
 		}
@@ -127,6 +131,14 @@ public class PublicacionesParaVisualizar extends ConnectionMySqlDB {
 
 	public void setTitulo(String titulo) {
 		this.titulo = titulo;
+	}
+
+	public Integer getId() {
+		return id;
+	}
+
+	public void setId(Integer id) {
+		this.id = id;
 	}
 
 	

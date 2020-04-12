@@ -2,6 +2,7 @@ package frontend;
 
 import java.net.URL;
 import java.time.LocalDate;
+import java.util.Arrays;
 import java.util.ResourceBundle;
 
 import com.jfoenix.controls.JFXButton;
@@ -17,6 +18,8 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
+import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.StackPane;
 import javafx.stage.Stage;
 
 /**
@@ -25,6 +28,11 @@ import javafx.stage.Stage;
  */
 public class RegisterGUIController implements Initializable {
 
+	@FXML
+	private StackPane rootStackPane;
+
+	@FXML
+	private AnchorPane rootAnchorPane;
 	@FXML
 	private JFXTextField txtName;
 	@FXML
@@ -50,7 +58,7 @@ public class RegisterGUIController implements Initializable {
 	ObservableList<String> listTypeAccount = FXCollections.observableArrayList("Personal","Empresa");
 
 	/*** METHODS ***/
-	
+
 	@FXML
 	void closeWindow(ActionEvent event) {
 		Stage stage = (Stage) btnClose.getScene().getWindow();
@@ -73,13 +81,17 @@ public class RegisterGUIController implements Initializable {
 		if (confiPass.equals(password)) {
 			User nUser = new User(name, lastname, gender, typeAccount, username, email, password, today.toString());
 			if (HomeLink_Controller.create_add_user(nUser)) {
-			System.out.println("con exito");
+				System.out.println("con exito");
+				JFXButton btnOk = new JFXButton("Ok!");
+				PopupAlert.showCustomDialog(rootStackPane, rootAnchorPane, Arrays.asList(btnOk),"Usuario registrado con exito.", null);
 			}else {
 				System.out.println("sin exito");
 			}
 		}
 		else {
-		System.out.println("contranse no coinciden");
+			JFXButton btnOk = new JFXButton("Ok!");
+			PopupAlert.showCustomDialog(rootStackPane, rootAnchorPane, Arrays.asList(btnOk),"Contraseñas no coinciden", null);
+			System.out.println("contranse no coinciden");
 		}
 	}
 

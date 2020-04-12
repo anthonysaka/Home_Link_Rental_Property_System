@@ -11,7 +11,11 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.time.DayOfWeek;
 import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+import java.time.temporal.ChronoUnit;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.ResourceBundle;
 import javax.imageio.ImageIO;
 import com.jfoenix.controls.JFXButton;
@@ -50,12 +54,14 @@ import javafx.scene.layout.Background;
 import javafx.scene.layout.BackgroundFill;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.Priority;
+import javafx.scene.layout.StackPane;
 import javafx.scene.paint.Color;
 import javafx.scene.paint.Paint;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 
 import javafx.util.Callback;
+import javafx.util.Duration;
 
 
 public class HomeGUIController extends ListView<PublicacionesParaVisualizar> implements Initializable {
@@ -79,7 +85,16 @@ public class HomeGUIController extends ListView<PublicacionesParaVisualizar> imp
 	private double yoffset = 0;
 	public static PublicacionesParaVisualizar auxlist;
 	public static  User usuarioActual = LoginGUIController.loggedUser;
+	public static String dataIn = null;
+	public static String dataOut = null;
+	public static int cantGuest = 0;
+	public static long cantNoche;
+	
+    @FXML
+    private StackPane rootStackPane;
 
+    @FXML
+    private AnchorPane rootAnchorPane;
 
 	ObservableList<PublicacionesParaVisualizar> listPublicationVisual = FXCollections.observableArrayList();
 	ObservableList<String> list = FXCollections.observableArrayList(llenarCombo());
@@ -101,11 +116,10 @@ public class HomeGUIController extends ListView<PublicacionesParaVisualizar> imp
 			}
 		});
 	}
-
+	
 	@FXML
 	public void clickToViewPublication(MouseEvent event) throws IOException {
 		auxlist = publicationListView.getSelectionModel().getSelectedItem();
-		//ViewPublicationGUI ax = new ViewPublicationGUI(auxlist);
 		if (auxlist != null) {
 			Parent rootPubli= FXMLLoader.load(getClass().getResource("../frontend/viewPublicacionesGUI.fxml"));
 			Stage stagePubli= new Stage();
@@ -113,13 +127,9 @@ public class HomeGUIController extends ListView<PublicacionesParaVisualizar> imp
 
 			stagePubli.setScene(scenePubli);
 			stagePubli.setResizable(false);
-			//stageRegister.setAlwaysOnTop(true);
 			stagePubli.initStyle(StageStyle.TRANSPARENT);
-			//	stageRegister.initModality(Modality.APPLICATION_MODAL);
 			stagePubli.show();
 		}
-
-
 	}
 
 	@FXML
@@ -155,43 +165,37 @@ public class HomeGUIController extends ListView<PublicacionesParaVisualizar> imp
 	 * @throws IOException ***************************************************************/
 	@FXML
 	public void searchPublication(ActionEvent event) throws SQLException, IOException {
-		String ubicacionPropiedadABuscar = cbxLocation.getSelectionModel().getSelectedItem().toString();
-		String [] ubicacionsplitted = ubicacionPropiedadABuscar.split(", ");
+		
+		
+	
 		ResultSet resultBD;
 
-		if (!ubicacionPropiedadABuscar.isEmpty()) {
+		if (cbxLocation.getSelectionModel().getSelectedIndex() != -1 & datapickeCheckIn.getValue()!= null & datapickeCheckOut.getValue() != null & spinnerGuest.getValue() >= 1) {
+			String ubicacionPropiedadABuscar = cbxLocation.getSelectionModel().getSelectedItem().toString();
+			String [] ubicacionsplitted = ubicacionPropiedadABuscar.split(", ");
+			dataIn = datapickeCheckIn.getValue().toString();
+			dataOut = datapickeCheckOut.getValue().toString();
+			cantGuest = spinnerGuest.getValue();
+			cantNoche = ChronoUnit.DAYS.between(datapickeCheckIn.getValue(), datapickeCheckOut.getValue());
+			
 			publicationListView.getItems().clear();
-			resultBD = PublicacionesParaVisualizar.loadPublication(ubicacionsplitted[0], ubicacionsplitted[1] );
+			resultBD = PublicacionesParaVisualizar.loadPublication(ubicacionsplitted[0], ubicacionsplitted[1], cantGuest, dataIn, dataOut);
 			// Esto llena als publicaciones para visualizar.
 			while (resultBD.next()) {
 				byte[]  f51=resultBD.getBytes("image");
 				ByteArrayInputStream bis = new ByteArrayInputStream(f51);
 				BufferedImage read = ImageIO.read(bis);
 				Image imgs = SwingFXUtils.toFXImage(read, null);
-				listPublicationVisual.add(new PublicacionesParaVisualizar(resultBD.getString("titulo"), resultBD.getString("type"), resultBD.getString("address"), 
+				listPublicationVisual.add(new PublicacionesParaVisualizar(resultBD.getInt("id"),resultBD.getString("titulo"), resultBD.getString("type"), resultBD.getString("address"), 
 						resultBD.getString("rating"), resultBD.getString("characteristic"), resultBD.getString("Dueño"),
 						resultBD.getString("date"), resultBD.getFloat("price"), imgs));
 			}
 			publicationListView.setItems(listPublicationVisual);
 			resultBD.close();
-		}	
-	}
-
-	public static ResultSet loadPublication(String address_to_search)
-	{
-		CallableStatement mySqlStatement = null ; // call stored procedure
-		try {
-			Connection myConnection = ConnectionMySqlDB.getConnectionMySqlDB();
-			mySqlStatement = (CallableStatement) myConnection.prepareCall("{CALL sp_search_publication_by_dir(?)}");
-			mySqlStatement.setString("pa_direccion", address_to_search);
-			ResultSet rs = mySqlStatement.executeQuery();
-			System.out.println("Busquedad con exito!");
-			return rs;
-
-		} catch (SQLException e) {
-			System.out.println("Busquedad sin exito!");
-			e.printStackTrace();
-			return null;
+		} else {
+			JFXButton btnOk = new JFXButton("Ok!");
+			PopupAlert.showCustomDialog(rootStackPane, rootAnchorPane, Arrays.asList(btnOk),"Error!\n" 
+					+ "Debe completar todos los campos [Lugar] [Fecha entrada] [Fecha salida].", null);
 		}
 	}
 
@@ -294,7 +298,6 @@ public class HomeGUIController extends ListView<PublicacionesParaVisualizar> imp
 
 		return lista;
 	}
-
 
 	private class CustomListCell extends ListCell<PublicacionesParaVisualizar> {
 		ImageView imgView = new ImageView();

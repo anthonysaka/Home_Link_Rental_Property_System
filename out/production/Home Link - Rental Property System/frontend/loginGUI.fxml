@@ -13,65 +13,73 @@
 <?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.StackPane?>
 <?import javafx.scene.shape.Line?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane id="loginAnchorPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="720.0" prefWidth="1280.0" style="-fx-border-color: black; -fx-border-width: 2;" stylesheets="@styleLogin.css" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="frontend.LoginGUIController">
-   <ImageView blendMode="DARKEN" fitHeight="740.0" fitWidth="1290.0" layoutX="-5.0" layoutY="-15.0" AnchorPane.bottomAnchor="-4.0" AnchorPane.leftAnchor="-6.0" AnchorPane.rightAnchor="-4.0" AnchorPane.topAnchor="-16.0">
-      <Image url="@images/background_luxury_villa.png" />
-      <effect>
-         <GaussianBlur radius="3.7" />
-      </effect>
-   </ImageView>
-   <AnchorPane layoutY="42.0" prefHeight="678.0" prefWidth="430.0" style="-fx-background-color: rgba(0,0,0,0.75);" AnchorPane.bottomAnchor="8.0" AnchorPane.leftAnchor="10.0" AnchorPane.topAnchor="8.0">
-      <Label alignment="CENTER" contentDisplay="CENTER" layoutX="129.0" layoutY="39.0" nodeOrientation="LEFT_TO_RIGHT" prefWidth="230.0" text="WELCOME" textAlignment="CENTER" textFill="WHITE" AnchorPane.leftAnchor="100.0" AnchorPane.rightAnchor="100.0">
-         <font>
-            <Font name="System Bold" size="30.0" />
-         </font>
-      </Label>
-      <Hyperlink fx:id="hlinkCreateAccount" contentDisplay="CENTER" layoutX="78.0" layoutY="554.0" onAction="#openRegisterForm" text="Create account" textFill="#ffc107" underline="true" AnchorPane.bottomAnchor="125.0" AnchorPane.leftAnchor="85.0">
-         <font>
-            <Font size="16.0" />
-         </font></Hyperlink>
-      <Hyperlink contentDisplay="CENTER" layoutX="254.0" layoutY="554.0" text="Guess login" textFill="#ffc107" underline="true" AnchorPane.bottomAnchor="125.0" AnchorPane.rightAnchor="85.0">
-         <font>
-            <Font size="16.0" />
-         </font></Hyperlink>
-      <Line endX="145.79998779296875" layoutX="192.0" layoutY="84.0" startX="-100.0" stroke="#ffc107" strokeLineCap="ROUND" strokeWidth="3.0" AnchorPane.leftAnchor="90.5" AnchorPane.rightAnchor="90.70001220703125" />
-      <JFXTextField fx:id="txtUsername" focusColor="#ffc107" layoutX="70.0" layoutY="212.0" promptText="Username" unFocusColor="WHITE" AnchorPane.leftAnchor="70.0" AnchorPane.rightAnchor="70.0">
-         <font>
-            <Font size="16.0" />
-         </font>
-      </JFXTextField>
-      <JFXPasswordField fx:id="txtPassword" focusColor="#ffc107" layoutX="70.0" layoutY="312.0" promptText="Password" unFocusColor="WHITE" AnchorPane.leftAnchor="70.0" AnchorPane.rightAnchor="70.0">
-         <font>
-            <Font size="16.0" />
-         </font>
-      </JFXPasswordField>
-      <JFXButton fx:id="btnLogin" contentDisplay="CENTER" layoutX="120.0" layoutY="419.0" onAction="#loginIn" prefHeight="39.0" prefWidth="156.0" style="-fx-background-color: #ffc107; -fx-background-radius: 90;" styleClass="Button" text="Login" AnchorPane.leftAnchor="120.0" AnchorPane.rightAnchor="120.0">
-         <font>
-            <Font name="System Bold" size="18.0" />
-         </font>
-         <cursor>
-            <Cursor fx:constant="HAND" />
-         </cursor>
-      </JFXButton>
-   </AnchorPane>
-   <ImageView fitHeight="357.0" fitWidth="390.0" layoutX="678.0" layoutY="182.0" opacity="0.9" preserveRatio="true" AnchorPane.bottomAnchor="181.0" AnchorPane.leftAnchor="678.0" AnchorPane.rightAnchor="245.0" AnchorPane.topAnchor="182.0">
-      <Image url="@images/bg_home_link.png" />
-   </ImageView>
-   <HBox alignment="CENTER_RIGHT" prefHeight="34.0" prefWidth="1280.0" style="-fx-background-color: rgba(0,0,0,0); -fx-opacity: 5;">
-      <children>
-         <Button fx:id="btnMinimize" mnemonicParsing="false" onAction="#minimizeWindow" prefHeight="39.0" prefWidth="32.0" style="-fx-background-color: transparent;">
-            <HBox.margin>
-               <Insets top="5.0" />
-            </HBox.margin>
-         </Button>
-         <Button fx:id="btnClose" mnemonicParsing="false" onAction="#closeWindow" prefHeight="31.0" prefWidth="44.0" style="-fx-background-color: transparent;">
-            <HBox.margin>
-               <Insets top="5.0" />
-            </HBox.margin>
-         </Button>
-      </children>
-   </HBox>
-</AnchorPane>
+
+<StackPane fx:id="rootStackPane" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="frontend.LoginGUIController">
+   <children>
+      <AnchorPane id="loginAnchorPane" fx:id="rootAnchorPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="720.0" prefWidth="1280.0" style="-fx-border-color: black; -fx-border-width: 2;" stylesheets="@styleLogin.css">
+         <ImageView blendMode="DARKEN" fitHeight="740.0" fitWidth="1290.0" layoutX="-5.0" layoutY="-15.0" AnchorPane.bottomAnchor="-4.0" AnchorPane.leftAnchor="-6.0" AnchorPane.rightAnchor="-4.0" AnchorPane.topAnchor="-16.0">
+            <Image url="@images/background_luxury_villa.png" />
+            <effect>
+               <GaussianBlur radius="3.7" />
+            </effect>
+         </ImageView>
+         <AnchorPane layoutY="42.0" prefHeight="678.0" prefWidth="430.0" style="-fx-background-color: rgba(0,0,0,0.75);" AnchorPane.bottomAnchor="8.0" AnchorPane.leftAnchor="10.0" AnchorPane.topAnchor="8.0">
+            <Label alignment="CENTER" contentDisplay="CENTER" layoutX="129.0" layoutY="39.0" nodeOrientation="LEFT_TO_RIGHT" prefWidth="230.0" text="WELCOME" textAlignment="CENTER" textFill="WHITE" AnchorPane.leftAnchor="100.0" AnchorPane.rightAnchor="100.0">
+               <font>
+                  <Font name="System Bold" size="30.0" />
+               </font>
+            </Label>
+            <Hyperlink fx:id="hlinkCreateAccount" contentDisplay="CENTER" layoutX="78.0" layoutY="554.0" onAction="#openRegisterForm" text="Create account" textFill="#ffc107" underline="true" AnchorPane.bottomAnchor="125.0" AnchorPane.leftAnchor="85.0">
+               <font>
+                  <Font size="16.0" />
+               </font>
+            </Hyperlink>
+            <Hyperlink contentDisplay="CENTER" layoutX="254.0" layoutY="554.0" text="Guess login" textFill="#ffc107" underline="true" AnchorPane.bottomAnchor="125.0" AnchorPane.rightAnchor="85.0">
+               <font>
+                  <Font size="16.0" />
+               </font>
+            </Hyperlink>
+            <Line endX="145.79998779296875" layoutX="192.0" layoutY="84.0" startX="-100.0" stroke="#ffc107" strokeLineCap="ROUND" strokeWidth="3.0" AnchorPane.leftAnchor="90.5" AnchorPane.rightAnchor="90.70001220703125" />
+            <JFXTextField fx:id="txtUsername" focusColor="#ffc107" labelFloat="true" layoutX="70.0" layoutY="212.0" promptText="Username" unFocusColor="WHITE" AnchorPane.leftAnchor="70.0" AnchorPane.rightAnchor="70.0">
+               <font>
+                  <Font size="16.0" />
+               </font>
+            </JFXTextField>
+            <JFXPasswordField fx:id="txtPassword" focusColor="#ffc107" labelFloat="true" layoutX="70.0" layoutY="312.0" promptText="Password" unFocusColor="WHITE" AnchorPane.leftAnchor="70.0" AnchorPane.rightAnchor="70.0">
+               <font>
+                  <Font size="16.0" />
+               </font>
+            </JFXPasswordField>
+            <JFXButton fx:id="btnLogin" contentDisplay="CENTER" layoutX="120.0" layoutY="419.0" onAction="#loginIn" prefHeight="39.0" prefWidth="156.0" style="-fx-background-color: #ffc107; -fx-background-radius: 90;" styleClass="Button" text="Login" AnchorPane.leftAnchor="120.0" AnchorPane.rightAnchor="120.0">
+               <font>
+                  <Font name="System Bold" size="18.0" />
+               </font>
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor>
+            </JFXButton>
+         </AnchorPane>
+         <ImageView fitHeight="357.0" fitWidth="390.0" layoutX="678.0" layoutY="182.0" opacity="0.9" preserveRatio="true" AnchorPane.bottomAnchor="181.0" AnchorPane.leftAnchor="678.0" AnchorPane.rightAnchor="245.0" AnchorPane.topAnchor="182.0">
+            <Image url="@images/bg_home_link.png" />
+         </ImageView>
+         <HBox alignment="CENTER_RIGHT" prefHeight="34.0" prefWidth="1280.0" style="-fx-background-color: rgba(0,0,0,0); -fx-opacity: 5;">
+            <children>
+               <Button fx:id="btnMinimize" mnemonicParsing="false" onAction="#minimizeWindow" prefHeight="39.0" prefWidth="32.0" style="-fx-background-color: transparent;">
+                  <HBox.margin>
+                     <Insets top="5.0" />
+                  </HBox.margin>
+               </Button>
+               <Button fx:id="btnClose" mnemonicParsing="false" onAction="#closeWindow" prefHeight="31.0" prefWidth="44.0" style="-fx-background-color: transparent;">
+                  <HBox.margin>
+                     <Insets top="5.0" />
+                  </HBox.margin>
+               </Button>
+            </children>
+         </HBox>
+      </AnchorPane>
+   </children>
+</StackPane>

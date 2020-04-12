@@ -157,10 +157,11 @@ public class PublicacionAdminGUIController implements Initializable {
 		auxPubliList = tablePubli.getSelectionModel().getSelectedItem();
 		int auxId = auxPubliList.getIdPublicacion();
 		if (HomeLink_Controller.delete_publication(auxId)) {
-			loadDataPublicaciones();
+			
 			JFXButton btnOk = new JFXButton("Ok!");
 			PopupAlert.showCustomDialog(rootStackPane, rootAnchorPane, Arrays.asList(btnOk),"Publicacion eliminada con exito.", null);
 		}
+		loadDataPublicaciones();
 	}
 
 	@FXML
