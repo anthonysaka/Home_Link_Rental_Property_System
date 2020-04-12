@@ -47,13 +47,16 @@ public class ViewPublicationGUI extends HomeGUIController implements Initializab
     	/************************* Aqui se setean los datos para mostrar en la ventana
     	 * publicacion view full.
     	 */
+    	String caracteristicas = publicacion.getCaracterisitcas();
+    	String[] caracteSplited = caracteristicas.split(", ");
+    	
     	lblTitulo.setText(publicacion.getTitulo());
     	lblDir.setText(publicacion.getDireccion());
     	lblTipo.setText(publicacion.getTipo());
     	lblFechaPubli.setText(publicacion.getFechaPublicacion());
     	lblUsuarioDue.setText(publicacion.getUsernamePublicador());
     	lblPrecio.setText(String.valueOf(publicacion.getPrecio()));
-    	lblCarac.setText(publicacion.getCaracterisitcas());
+    //	lblCarac.setText(publicacion.getCaracterisitcas());
     	
     	imgView1.setImage(publicacion.getImagePreviewHouse());
     	/*************************************************************/

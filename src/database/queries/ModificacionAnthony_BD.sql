@@ -310,6 +310,7 @@ group by t_user.id;
 select * from t_user;
 select * from t_property;	
 select * from t_publication;
+select * from t_address_property;
 select * from t_imagenes;
 select * from t_reservation;
 select * from t_country;
@@ -339,3 +340,34 @@ ON t_property.id_user_owner = t_user.id
 left join t_address_property
 ON t_address_property.id_address = t_property.id_address_property
 where id_user_admin !=0 AND t_publication.status = true ;
+
+DELIMITER $$
+CREATE DEFINER=root@localhost PROCEDURE sp_direccionesPublicadas()
+BEGIN
+
+select concat(t_address_property.country_name, ",", " ",t_address_property.city) direccion
+   from t_publication 
+   inner join t_property 
+   on t_publication.id_property = t_property.id inner join
+   t_address_property on t_property.id_address_property = t_address_property.id_address
+   where t_publication.status = 1;
+
+END$$
+DELIMITER ;
+
+DELIMITER $$
+CREATE DEFINER=root@localhost PROCEDURE sp_tablaPropiedades(in pa_idOwner int)
+BEGIN
+select t_property.type, t_property.status,t_property.rating, concat( t_address_property.country_name ,"," ," " ,t_address_property.city, " ",t_address_property.street ) Address_Property,  concat( 'Capacity' ," ",t_characteristic_property.capacity ,",", 'Room'," " ,t_characteristic_property.room ,",", 'Bed', " ", t_characteristic_property.bed, "," , 'Bathroom', " ",t_characteristic_property.bathroom , ",", 'Wifi'," ",t_characteristic_property.wifi,",", 'Air_Condicioner', " ",t_characteristic_property.air_conditioner,",", 'Kitchen'," ",t_characteristic_property.kitchen,",",'Pool'," ",t_characteristic_property.pool ) Characteristic_Property
+   from t_property
+   left join t_address_property
+   ON t_property.id_address_property = t_address_property.id_address
+   left join t_characteristic_property
+   ON t_characteristic_property.id_characteristic = t_property.id_characteristic WHERE t_property.id_user_owner = pa_idOwner;
+
+END$$
+DELIMITER ;
+
+call sp_search_publication_by_dir('Dominican Republic','Santiago de los Caballeros')
+
+

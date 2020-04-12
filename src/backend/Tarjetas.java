@@ -14,7 +14,7 @@ public class Tarjetas {
 		this.numeroTarjeta = numeroTarjeta;
 		this.representante = representante;
 		this.fechaVencimiento = fechaVencimiento;
-		this.CVV = CVV;
+		this.CVV =  CVV;
 	}
 
 	public int getIdTarjeta() {

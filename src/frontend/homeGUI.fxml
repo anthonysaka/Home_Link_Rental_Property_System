@@ -17,9 +17,9 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<AnchorPane maxHeight="720.0" maxWidth="1280.0" prefHeight="720.0" prefWidth="1280.0" stylesheets="@styleHome.css" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="frontend.HomeGUIController">
-   <HBox alignment="CENTER" layoutX="214.0" prefHeight="80.0" prefWidth="1068.0" style="-fx-background-color: #0E0F11;">
-      <AnchorPane prefHeight="100.0" prefWidth="250.0" style="-fx-background-color: #0E0F11;" HBox.hgrow="ALWAYS">
+<AnchorPane maxHeight="720.0" maxWidth="1280.0" prefHeight="720.0" prefWidth="1280.0" style="-fx-background-color: black;" stylesheets="@styleAdmin.css" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="frontend.HomeGUIController">
+   <HBox alignment="CENTER" layoutX="214.0" prefHeight="80.0" prefWidth="1068.0">
+      <AnchorPane prefHeight="100.0" prefWidth="250.0" HBox.hgrow="ALWAYS">
          <Text fill="WHITE" layoutX="91.0" layoutY="34.0" strokeType="OUTSIDE" strokeWidth="0.0" text="LUGAR">
             <font>
                <Font name="Consolas Bold" size="16.0" />
@@ -29,13 +29,13 @@
          <JFXComboBox fx:id="cbxLocation" layoutX="14.0" layoutY="40.0" prefHeight="31.0" prefWidth="200.0" promptText="Elegir lugar" />
 
       </AnchorPane>
-      <AnchorPane prefHeight="100.0" prefWidth="250.0" style="-fx-background-color: #0E0F11;" HBox.hgrow="ALWAYS">
+      <AnchorPane prefHeight="100.0" prefWidth="250.0" HBox.hgrow="ALWAYS">
          <Text fill="WHITE" layoutX="63.0" layoutY="34.0" strokeType="OUTSIDE" strokeWidth="0.0" text="FECHA ENTRADA">
             <font>
                <Font name="Consolas Bold" size="16.0" />
             </font>
          </Text>
-         <JFXDatePicker defaultColor="#ffc107" layoutX="10.0" layoutY="39.0" nodeOrientation="LEFT_TO_RIGHT" prefHeight="30.0" prefWidth="230.0" promptText="MM/DD/YYYY">
+         <JFXDatePicker fx:id="datapickeCheckIn" defaultColor="#ffc107" editable="false" layoutX="10.0" layoutY="39.0" nodeOrientation="LEFT_TO_RIGHT" prefHeight="30.0" prefWidth="230.0" promptText="MM/DD/YYYY">
             <padding>
                <Insets left="5.0" right="5.0" />
             </padding>
@@ -44,17 +44,17 @@
             <Insets />
          </HBox.margin>
       </AnchorPane>
-      <AnchorPane prefHeight="73.0" prefWidth="250.0" style="-fx-background-color: #0E0F11;" HBox.hgrow="ALWAYS">
+      <AnchorPane prefHeight="73.0" prefWidth="250.0" HBox.hgrow="ALWAYS">
          <Text fill="WHITE" layoutX="67.0" layoutY="34.0" strokeType="OUTSIDE" strokeWidth="0.0" text="FECHA SALIDA">
             <font>
                <Font name="Consolas Bold" size="16.0" />
             </font>
          </Text>
-         <JFXDatePicker defaultColor="#ffc107" layoutX="5.0" layoutY="39.0" nodeOrientation="LEFT_TO_RIGHT" prefHeight="30.0" prefWidth="230.0" promptText="MM/DD/YYYY" />
+         <JFXDatePicker fx:id="datapickeCheckOut" defaultColor="#ffc107" layoutX="5.0" layoutY="39.0" nodeOrientation="LEFT_TO_RIGHT" prefHeight="30.0" prefWidth="230.0" promptText="MM/DD/YYYY" />
       </AnchorPane>
-      <AnchorPane prefHeight="100.0" prefWidth="250.0" style="-fx-background-color: #0E0F11;" HBox.hgrow="ALWAYS">
-         <Spinner fx:id="spinnerGuest" layoutX="113.0" layoutY="44.0" nodeOrientation="LEFT_TO_RIGHT" prefHeight="25.0" prefWidth="79.0" AnchorPane.topAnchor="42.0" />
-         <Text fill="WHITE" layoutX="34.0" layoutY="65.0" strokeType="OUTSIDE" strokeWidth="0.0" text="PERSONAS">
+      <AnchorPane prefHeight="100.0" prefWidth="250.0" HBox.hgrow="ALWAYS">
+         <Spinner fx:id="spinnerGuest" layoutX="100.0" layoutY="41.0" nodeOrientation="LEFT_TO_RIGHT" prefHeight="37.0" prefWidth="106.0" AnchorPane.topAnchor="41.0" />
+         <Text fill="WHITE" layoutX="21.0" layoutY="64.0" strokeType="OUTSIDE" strokeWidth="0.0" text="PERSONAS">
             <font>
                <Font name="Consolas Bold" size="16.0" />
             </font>
@@ -65,7 +65,7 @@
             </font>
          </Text>
       </AnchorPane>
-      <JFXButton fx:id="btnSearch" contentDisplay="CENTER" onAction="#searchPublication" prefHeight="39.0" prefWidth="156.0" style="-fx-background-color: transparent;" styleClass="Button" text="Search">
+      <JFXButton fx:id="btnSearch" contentDisplay="CENTER" onAction="#searchPublication" prefHeight="39.0" prefWidth="105.0" text="Search">
          <font>
             <Font name="System Bold" size="18.0" />
          </font>
@@ -73,7 +73,7 @@
             <Cursor fx:constant="HAND" />
          </cursor>
          <HBox.margin>
-            <Insets right="10.0" />
+            <Insets right="10.0" top="35.0" />
          </HBox.margin>
       </JFXButton>
    </HBox>
@@ -134,7 +134,7 @@
                   <Cursor fx:constant="HAND" />
                </cursor>
             </JFXButton>
-            <JFXButton fx:id="btnAdmin" onAction="#openAdminView" prefHeight="40.0" prefWidth="200.0" styleClass="Button" text="ADMIN" textFill="#ddd9d9">
+            <JFXButton fx:id="btnAdmin" onAction="#openAdminView" prefHeight="40.0" prefWidth="200.0" text="ADMIN" textFill="#ddd9d9">
                <font>
                   <Font name="Consolas Bold" size="16.0" />
                </font>
@@ -143,6 +143,17 @@
                </cursor>
                <VBox.margin>
                   <Insets top="150.0" />
+               </VBox.margin>
+            </JFXButton>
+            <JFXButton fx:id="btnExit" onAction="#closeApp" prefHeight="60.0" prefWidth="200.0" styleClass="Button" text="Exit" textFill="#ddd9d9">
+               <font>
+                  <Font name="Consolas Bold" size="16.0" />
+               </font>
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor>
+               <VBox.margin>
+                  <Insets top="100.0" />
                </VBox.margin>
             </JFXButton>
          </VBox>
@@ -155,10 +166,10 @@
       <children>
          <ScrollPane layoutX="1.0" layoutY="1.0" prefHeight="610.0" prefWidth="1062.0">
             <content>
-               <JFXListView fx:id="publicationListView" onMouseClicked="#clickToViewPublication" prefHeight="604.0" prefWidth="1042.0" stylesheets="@styleListViewPublication.css" />
+               <JFXListView fx:id="publicationListView" onMouseClicked="#clickToViewPublication" prefHeight="614.0" prefWidth="1042.0" stylesheets="@styleListViewPublication.css" />
             </content>
          </ScrollPane>
       </children>
    </Pane>
-   <AnchorPane layoutX="212.0" layoutY="82.0" prefHeight="23.0" prefWidth="1070.0" style="-fx-background-color: black;" AnchorPane.leftAnchor="212.0" />
+   <AnchorPane layoutX="212.0" layoutY="82.0" prefHeight="23.0" prefWidth="1070.0" AnchorPane.leftAnchor="212.0" />
 </AnchorPane>
