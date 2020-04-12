@@ -368,6 +368,8 @@ select t_property.type, t_property.status,t_property.rating, concat( t_address_p
 END$$
 DELIMITER ;
 
-call sp_search_publication_by_dir('Dominican Republic','Santiago de los Caballeros')
+call sp_search_publication_by_dir('Dominican Republic','Santiago de los Caballeros');
 
-
+select * from t_bill;
+select * from t_reservation;
+select num_reservation from t_reservation order by num_reservation desc limit 1;
