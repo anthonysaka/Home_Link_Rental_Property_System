@@ -1,5 +1,4 @@
 <?xml version="1.0" encoding="UTF-8"?>
-
 <?import com.jfoenix.controls.JFXButton?>
 <?import com.jfoenix.controls.JFXComboBox?>
 <?import com.jfoenix.controls.JFXDatePicker?>
@@ -18,15 +17,12 @@
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
 
-<<<<<<< HEAD
 <StackPane fx:id="rootStackPane" stylesheets="@styleAdmin.css" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="frontend.HomeGUIController">
    <children>
       <AnchorPane fx:id="rootAnchorPane" maxHeight="720.0" maxWidth="1280.0" prefHeight="720.0" prefWidth="1280.0" style="-fx-background-color: black;">
          <HBox alignment="CENTER" layoutX="214.0" prefHeight="80.0" prefWidth="1068.0">
             <AnchorPane prefHeight="100.0" prefWidth="250.0" HBox.hgrow="ALWAYS">
-      
                <JFXComboBox fx:id="cbxLocation" layoutX="14.0" layoutY="40.0" prefHeight="31.0" prefWidth="200.0" promptText="Elegir lugar" />
-      
             </AnchorPane>
             <AnchorPane prefHeight="100.0" prefWidth="250.0" HBox.hgrow="ALWAYS">
                <Text fill="WHITE" layoutX="48.0" layoutY="34.0" strokeType="OUTSIDE" strokeWidth="0.0" text="FECHA ENTRADA">
@@ -123,7 +119,6 @@
                   </JFXButton>
       
                   <JFXButton fx:id="btnaddPublication" layoutX="10.0" layoutY="109.0" onAction="#publish" prefHeight="40.0" prefWidth="200.0" styleClass="Button" text="My Publications" textFill="#ddd9d9">
-      
                      <VBox.margin>
                         <Insets top="6.0" />
                      </VBox.margin>
@@ -157,151 +152,11 @@
                      </VBox.margin>
                   </JFXButton>
                </VBox>
-=======
-<AnchorPane maxHeight="720.0" maxWidth="1280.0" prefHeight="720.0" prefWidth="1280.0" style="-fx-background-color: black;" stylesheets="@styleAdmin.css" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="frontend.HomeGUIController">
-   <HBox alignment="CENTER" layoutX="214.0" prefHeight="80.0" prefWidth="1068.0">
-      <AnchorPane prefHeight="100.0" prefWidth="250.0" HBox.hgrow="ALWAYS">
-         <Text fill="WHITE" layoutX="91.0" layoutY="34.0" strokeType="OUTSIDE" strokeWidth="0.0" text="LUGAR">
-            <font>
-               <Font name="Consolas Bold" size="16.0" />
-            </font>
-         </Text>
 
-         <JFXComboBox fx:id="cbxLocation" layoutX="14.0" layoutY="40.0" prefHeight="31.0" prefWidth="200.0" promptText="Elegir lugar" />
-
-      </AnchorPane>
-      <AnchorPane prefHeight="100.0" prefWidth="250.0" HBox.hgrow="ALWAYS">
-         <Text fill="WHITE" layoutX="63.0" layoutY="34.0" strokeType="OUTSIDE" strokeWidth="0.0" text="FECHA ENTRADA">
-            <font>
-               <Font name="Consolas Bold" size="16.0" />
-            </font>
-         </Text>
-         <JFXDatePicker fx:id="datapickeCheckIn" defaultColor="#ffc107" editable="false" layoutX="10.0" layoutY="39.0" nodeOrientation="LEFT_TO_RIGHT" prefHeight="30.0" prefWidth="230.0" promptText="MM/DD/YYYY">
-            <padding>
-               <Insets left="5.0" right="5.0" />
-            </padding>
-         </JFXDatePicker>
-         <HBox.margin>
-            <Insets />
-         </HBox.margin>
-      </AnchorPane>
-      <AnchorPane prefHeight="73.0" prefWidth="250.0" HBox.hgrow="ALWAYS">
-         <Text fill="WHITE" layoutX="67.0" layoutY="34.0" strokeType="OUTSIDE" strokeWidth="0.0" text="FECHA SALIDA">
-            <font>
-               <Font name="Consolas Bold" size="16.0" />
-            </font>
-         </Text>
-         <JFXDatePicker fx:id="datapickeCheckOut" defaultColor="#ffc107" layoutX="5.0" layoutY="39.0" nodeOrientation="LEFT_TO_RIGHT" prefHeight="30.0" prefWidth="230.0" promptText="MM/DD/YYYY" />
-      </AnchorPane>
-      <AnchorPane prefHeight="100.0" prefWidth="250.0" HBox.hgrow="ALWAYS">
-         <Spinner fx:id="spinnerGuest" layoutX="100.0" layoutY="41.0" nodeOrientation="LEFT_TO_RIGHT" prefHeight="37.0" prefWidth="106.0" AnchorPane.topAnchor="41.0" />
-         <Text fill="WHITE" layoutX="21.0" layoutY="64.0" strokeType="OUTSIDE" strokeWidth="0.0" text="PERSONAS">
-            <font>
-               <Font name="Consolas Bold" size="16.0" />
-            </font>
-         </Text>
-         <Text fill="WHITE" layoutX="32.0" layoutY="63.0" strokeType="OUTSIDE" strokeWidth="0.0">
-            <font>
-               <Font name="Consolas Bold" size="16.0" />
-            </font>
-         </Text>
-      </AnchorPane>
-      <JFXButton fx:id="btnSearch" contentDisplay="CENTER" onAction="#searchPublication" prefHeight="39.0" prefWidth="105.0" text="Search">
-         <font>
-            <Font name="System Bold" size="18.0" />
-         </font>
-         <cursor>
-            <Cursor fx:constant="HAND" />
-         </cursor>
-         <HBox.margin>
-            <Insets right="10.0" top="35.0" />
-         </HBox.margin>
-      </JFXButton>
-   </HBox>
-   <VBox layoutY="-1.0" prefHeight="720.0" prefWidth="200.0" style="-fx-background-color: black;">
-      <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0" style="-fx-background-color: black;">
-         <children>
-            <ImageView fitHeight="208.0" fitWidth="215.0">
-               <image>
-                  <Image url="@images/bg_home_link.png" />
-               </image>
-            </ImageView>
-         </children></HBox>
-      <AnchorPane prefHeight="620.0" prefWidth="200.0" VBox.vgrow="ALWAYS">
-         <VBox alignment="CENTER" layoutX="8.0" layoutY="5.0" prefHeight="370.0" prefWidth="200.0">
-            <JFXButton prefHeight="40.0" prefWidth="200.0" styleClass="Button" text="My Reservations" textFill="#ddd9d9">
->>>>>>> branch 'master' of https://github.com/anthonysaka/Home_Link_Rental_Property_System.git
                <VBox.margin>
                   <Insets />
                </VBox.margin>
-<<<<<<< HEAD
             </AnchorPane>
-=======
-               <font>
-                  <Font name="Consolas Bold" size="16.0" />
-               </font>
-               <cursor>
-                  <Cursor fx:constant="HAND" />
-               </cursor>
-            </JFXButton>
-            <JFXButton fx:id="btnaddCard" onAction="#addCard" prefHeight="40.0" prefWidth="200.0" styleClass="Button" text="My Cards" textFill="#ddd9d9">
-               <VBox.margin>
-                  <Insets top="6.0" />
-               </VBox.margin>
-               <font>
-                  <Font name="Consolas Bold" size="16.0" />
-               </font>
-               <cursor>
-                  <Cursor fx:constant="HAND" />
-               </cursor>
-            </JFXButton>
-            <JFXButton fx:id="btnaddProperty" onAction="#addProperty" prefHeight="40.0" prefWidth="200.0" styleClass="Button" text="My Properties" textFill="#ddd9d9">
-               <VBox.margin>
-                  <Insets top="6.0" />
-               </VBox.margin>
-               <font>
-                  <Font name="Consolas Bold" size="16.0" />
-               </font>
-               <cursor>
-                  <Cursor fx:constant="HAND" />
-               </cursor>
-            </JFXButton>
-
-            <JFXButton fx:id="btnaddPublication" layoutX="10.0" layoutY="109.0" onAction="#publish" prefHeight="40.0" prefWidth="200.0" styleClass="Button" text="My Publications" textFill="#ddd9d9">
-
-               <VBox.margin>
-                  <Insets top="6.0" />
-               </VBox.margin>
-               <font>
-                  <Font name="Consolas Bold" size="16.0" />
-               </font>
-               <cursor>
-                  <Cursor fx:constant="HAND" />
-               </cursor>
-            </JFXButton>
-            <JFXButton fx:id="btnAdmin" onAction="#openAdminView" prefHeight="40.0" prefWidth="200.0" text="ADMIN" textFill="#ddd9d9">
-               <font>
-                  <Font name="Consolas Bold" size="16.0" />
-               </font>
-               <cursor>
-                  <Cursor fx:constant="HAND" />
-               </cursor>
-               <VBox.margin>
-                  <Insets top="150.0" />
-               </VBox.margin>
-            </JFXButton>
-            <JFXButton fx:id="btnExit" onAction="#closeApp" prefHeight="60.0" prefWidth="200.0" styleClass="Button" text="Exit" textFill="#ddd9d9">
-               <font>
-                  <Font name="Consolas Bold" size="16.0" />
-               </font>
-               <cursor>
-                  <Cursor fx:constant="HAND" />
-               </cursor>
-               <VBox.margin>
-                  <Insets top="100.0" />
-               </VBox.margin>
-            </JFXButton>
->>>>>>> branch 'master' of https://github.com/anthonysaka/Home_Link_Rental_Property_System.git
          </VBox>
          <Pane layoutX="218.0" layoutY="110.0" prefHeight="610.0" prefWidth="1062.0" style="-fx-background-color: black;">
             <children>

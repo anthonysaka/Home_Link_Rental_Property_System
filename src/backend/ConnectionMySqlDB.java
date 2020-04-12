@@ -27,8 +27,8 @@ public class ConnectionMySqlDB {
 	private final static String name_db = "home_link_db";
 	private final static String user_db = "root";
 	//private final static String password_db = "soloyo123";
-	private final static String password_db = "gilcia8099126262";
-	//private final static String password_db = "nose@MySql99";
+	//private final static String password_db = "gilcia8099126262";
+	private final static String password_db = "nose@MySql99";
 
 
 	private final static String url_db = "jdbc:mysql://localhost:3306/" + name_db;
