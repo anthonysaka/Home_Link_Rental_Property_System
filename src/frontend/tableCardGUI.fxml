@@ -8,11 +8,11 @@
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="460.0" prefWidth="712.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="frontend.TableCardGUIController">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="460.0" prefWidth="712.0" stylesheets="@styleAdmin.css" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="frontend.TableCardGUIController">
    <children>
       <HBox prefHeight="64.0" prefWidth="712.0" style="-fx-background-color: black;">
          <children>
-            <AnchorPane prefHeight="64.0" prefWidth="716.0">
+            <AnchorPane prefHeight="64.0" prefWidth="701.0">
                <children>
                   <JFXButton fx:id="btnAddCard" layoutX="246.0" layoutY="17.0" onAction="#insertCard" prefHeight="30.0" prefWidth="93.0" text="Add" textAlignment="CENTER" textFill="WHITE">
                      <font>
@@ -24,7 +24,7 @@
                         <Font name="Consolas Bold" size="16.0" />
                      </font>
                   </JFXButton>
-                  <Button fx:id="btnClose" layoutX="649.0" layoutY="19.0" mnemonicParsing="false" onAction="#closeWindow" text="close" />
+                  <Button fx:id="btnClose" layoutX="613.0" layoutY="19.0" mnemonicParsing="false" onAction="#closeWindow" text="close" />
                   <JFXButton fx:id="btnDeleteCard" layoutX="494.0" layoutY="19.0" text="Delete" textFill="WHITE">
                      <font>
                         <Font name="Consolas Bold" size="16.0" />

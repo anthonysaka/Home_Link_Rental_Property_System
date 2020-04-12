@@ -102,13 +102,14 @@ public class PublicacionesParaVisualizar extends ConnectionMySqlDB {
 	}
 
 	/********************************************/
-	public static ResultSet loadPublication(String address_to_search)
+	public static ResultSet loadPublication(String city, String country)
 	{
 		CallableStatement mySqlStatement = null ; // call stored procedure
 		try {
 			Connection myConnection = getConnectionMySqlDB();
-			mySqlStatement = (CallableStatement) myConnection.prepareCall("{CALL sp_search_publication_by_dir(?)}");
-			mySqlStatement.setString("pa_direccion", address_to_search);
+			mySqlStatement = (CallableStatement) myConnection.prepareCall("{CALL sp_search_publication_by_dir(?, ?)}");
+			mySqlStatement.setString("pa_country", country);
+			mySqlStatement.setString("pa_city", city);
 			ResultSet rs = mySqlStatement.executeQuery();
 			System.out.println("Busquedad con exito!");
 			return rs;
