@@ -1,17 +1,15 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import com.jfoenix.controls.JFXButton?>
+<?import com.jfoenix.controls.JFXComboBox?>
+<?import com.jfoenix.controls.JFXTextField?>
 <?import javafx.scene.Cursor?>
-<?import javafx.scene.control.Button?>
 <?import javafx.scene.control.Label?>
-<?import javafx.scene.image.Image?>
-<?import javafx.scene.image.ImageView?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.Pane?>
 <?import javafx.scene.layout.StackPane?>
 <?import javafx.scene.shape.Line?>
 <?import javafx.scene.text.Font?>
-
 
 <StackPane fx:id="rootStackPane" stylesheets="@styleAdmin.css" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="frontend.ViewPublicationGUI">
    <children>
@@ -19,32 +17,34 @@
          <children>
             <AnchorPane layoutY="-3.0" nodeOrientation="RIGHT_TO_LEFT" prefHeight="34.0" prefWidth="1180.0" style="-fx-background-color: #0E0F11;">
                <children>
-                  <Button fx:id="btnClose" layoutX="4.0" layoutY="3.0" mnemonicParsing="false" onAction="#close_app" prefHeight="31.0" prefWidth="44.0" style="-fx-background-color: transparent;" />
+                  <Label fx:id="lblTitulo" layoutX="538.0" layoutY="1.0" text="FACTURA" />
                </children>
             </AnchorPane>
-            <AnchorPane layoutY="31.0" prefHeight="660.0" prefWidth="605.0">
+            <AnchorPane layoutY="31.0" prefHeight="660.0" prefWidth="581.0">
                <children>
-                  <ImageView fx:id="imgView1" fitHeight="395.0" fitWidth="606.0" layoutX="5.0" layoutY="49.0" pickOnBounds="true" preserveRatio="true">
-                     <image>
-                        <Image url="@../../../../../Desktop/japan.jpg" />
-                     </image>
-                  </ImageView>
-                  <ImageView fx:id="imgView2" fitHeight="193.0" fitWidth="298.0" layoutX="5.0" layoutY="452.0" pickOnBounds="true" preserveRatio="true">
-                     <image>
-                        <Image url="@../../../../../Desktop/punta%20cana.jpg" />
-                     </image>
-                  </ImageView>
-                  <ImageView fx:id="imgView2" fitHeight="203.0" fitWidth="290.0" layoutX="311.0" layoutY="452.0" pickOnBounds="true" preserveRatio="true">
-                     <image>
-                        <Image url="@../../../../../Desktop/punta%20cana.jpg" />
-                     </image>
-                  </ImageView>
-                  <Label fx:id="lblTitulo" layoutX="152.0" layoutY="14.0" text="TITULO DE LA PUBLICACION" />
-               </children>
-            </AnchorPane>
-            <Pane layoutX="656.0" layoutY="50.0" prefHeight="637.0" prefWidth="484.0">
-               <children>
-                  <JFXButton fx:id="btnReservar" contentDisplay="CENTER" layoutX="180.0" layoutY="584.0" prefHeight="39.0" prefWidth="125.0" style="-fx-background-color: #ffc107; -fx-background-radius: 10;" styleClass="Button" text="Reservar">
+                  <Line endX="355.0" layoutX="163.0" layoutY="54.0" startX="-100.0" stroke="GREY" />
+                  <Label fx:id="lblTitulo11" layoutX="179.0" layoutY="27.0" text="INFORMACION USUARIO" />
+                  <Label fx:id="lblFullName" alignment="CENTER" contentDisplay="CENTER" layoutX="162.0" layoutY="65.0" prefHeight="34.0" prefWidth="238.0" text="FULL NAME" />
+                  <Label layoutX="58.0" layoutY="144.0" text="Username:" />
+                  <Label layoutX="58.0" layoutY="106.0" text="ID:" />
+                  <Label fx:id="lblInditificacion" alignment="CENTER" layoutX="103.0" layoutY="106.0" prefHeight="27.0" prefWidth="178.0" text="ID" />
+                  <Label fx:id="lblUsername" alignment="CENTER" layoutX="162.0" layoutY="144.0" prefHeight="27.0" prefWidth="121.0" text="Username" />
+                  <Label layoutX="58.0" layoutY="179.0" text="E-mail:" />
+                  <Label fx:id="lblEmail" alignment="CENTER" layoutX="132.0" layoutY="179.0" prefHeight="27.0" prefWidth="275.0" text="Username" />
+                  <Line endX="355.0" layoutX="142.0" layoutY="280.0" startX="-100.0" stroke="GREY" />
+                  <Label fx:id="lblTitulo121" layoutX="182.0" layoutY="254.0" text="INFORMACION PAGO" />
+                  <Label fx:id="lblTitulo1211" layoutX="45.0" layoutY="303.0" text="&quot;Eliga una tarjeta registrada o digite los datos de la tarjeta.&quot;" />
+                  <Label fx:id="lblTitulo12111" layoutX="97.0" layoutY="350.0" text="Tarjeta:" />
+                  <JFXComboBox layoutX="179.0" layoutY="348.0" prefHeight="33.0" prefWidth="257.0" />
+                  <JFXTextField fx:id="txtNumTarjeta" layoutX="200.0" layoutY="449.0" prefHeight="39.0" prefWidth="275.0" />
+                  <JFXTextField fx:id="txtCardholder" layoutX="213.0" layoutY="403.0" prefHeight="39.0" prefWidth="263.0" />
+                  <JFXTextField layoutX="400.0" layoutY="496.0" prefHeight="39.0" prefWidth="58.0" />
+                  <JFXTextField fx:id="txt" layoutX="183.0" layoutY="496.0" prefHeight="39.0" prefWidth="63.0" />
+                  <Label fx:id="lblTitulo121111" layoutX="42.0" layoutY="455.0" text="Número tarjeta:" />
+                  <Label fx:id="lblTitulo1211111" layoutX="42.0" layoutY="409.0" text="Cardholder nombre:" />
+                  <Label fx:id="lblTitulo12111111" layoutX="357.0" layoutY="502.0" text="CVV:" />
+                  <Label fx:id="lblTitulo121111111" layoutX="42.0" layoutY="502.0" text="Fecha expiración:" />
+                  <JFXButton fx:id="btnPagar" contentDisplay="CENTER" layoutX="186.0" layoutY="583.0" onAction="#Pay" prefHeight="39.0" prefWidth="210.0" style="-fx-background-color: #ffc107; -fx-background-radius: 10;" styleClass="Button" text="Realizar Pago">
                      <font>
                         <Font name="System Bold" size="18.0" />
                      </font>
@@ -52,13 +52,19 @@
                         <Cursor fx:constant="HAND" />
                      </cursor>
                   </JFXButton>
+                  <JFXTextField fx:id="txt1" layoutX="266.0" layoutY="496.0" prefHeight="39.0" prefWidth="63.0" />
+                  <Line endX="-92.0" endY="-27.0" layoutX="351.0" layoutY="530.0" startX="-100.0" stroke="GREY" />
+               </children>
+            </AnchorPane>
+            <Pane layoutX="656.0" layoutY="50.0" prefHeight="637.0" prefWidth="484.0">
+               <children>
                   <Line endX="355.0" layoutX="115.0" layoutY="41.0" startX="-100.0" stroke="GREY" />
-                  <Line endX="355.0" layoutX="110.0" layoutY="379.0" startX="-100.0" stroke="GREY" />
+                  <Line endX="355.0" layoutX="110.0" layoutY="415.0" startX="-100.0" stroke="GREY" />
                   <Label fx:id="lblDir" layoutX="113.0" layoutY="49.0" prefHeight="27.0" prefWidth="358.0" />
                   <Label fx:id="lblCarac1" layoutX="31.0" layoutY="195.0" prefWidth="200.0" text="Caracteristicas" />
                   <Label fx:id="lblTipo" layoutX="77.0" layoutY="77.0" />
                   <Label fx:id="lblFechaPubli" layoutX="171.0" layoutY="105.0" />
-                  <Label fx:id="lblPrecio" layoutX="294.0" layoutY="396.0" nodeOrientation="RIGHT_TO_LEFT" text="PRECIO">
+                  <Label fx:id="lblPrecio" layoutX="294.0" layoutY="432.0" nodeOrientation="RIGHT_TO_LEFT" text="PRECIO">
                      <font>
                         <Font name="System Bold" size="15.0" />
                      </font>
@@ -73,7 +79,7 @@
                         <Font name="System Bold" size="15.0" />
                      </font>
                   </Label>
-                  <Label fx:id="lblTotal12" layoutX="379.0" layoutY="396.0" nodeOrientation="LEFT_TO_RIGHT" text="por noche.">
+                  <Label fx:id="lblTotal12" layoutX="379.0" layoutY="432.0" nodeOrientation="LEFT_TO_RIGHT" text="por noche.">
                      <font>
                         <Font name="System Bold" size="15.0" />
                      </font>
@@ -84,7 +90,7 @@
                   <Label fx:id="lblTipo1" layoutX="16.0" layoutY="77.0" text="- Tipo:" />
                   <Label fx:id="lblFechaPubli1" layoutX="16.0" layoutY="105.0" text="- Fecha publicación:" />
                   <Label fx:id="lblUsuarioDue1" layoutX="14.0" layoutY="131.0" text="- Usuario dueño:" />
-                  <Label fx:id="lblTitulo1" layoutX="177.0" layoutY="14.0" text="INFORMACION" />
+                  <Label fx:id="lblTitulo1" layoutX="131.0" layoutY="14.0" text="INFORMACION PROPIEDAD" />
                   <Label fx:id="lblCarac11" layoutX="31.0" layoutY="227.0" prefWidth="200.0" text="Caracteristicas" />
                   <Label fx:id="lblCarac111" alignment="CENTER_RIGHT" layoutX="238.0" layoutY="195.0" prefWidth="200.0" text="Caracteristicas" />
                   <Label fx:id="lblCarac112" layoutX="28.0" layoutY="262.0" prefWidth="200.0" text="Caracteristicas" />
@@ -93,22 +99,22 @@
                   <Label fx:id="lblCarac11212" layoutX="28.0" layoutY="295.0" prefWidth="200.0" text="Caracteristicas" />
                   <Label fx:id="lblCarac112121" alignment="CENTER_RIGHT" layoutX="238.0" layoutY="302.0" prefWidth="200.0" text="Caracteristicas" />
                   <Label fx:id="lblCarac112122" layoutX="10.0" layoutY="329.0" prefHeight="27.0" prefWidth="456.0" text="Caracteristicas" />
-                  <Label fx:id="lblTotal111" layoutX="15.0" layoutY="396.0" nodeOrientation="LEFT_TO_RIGHT" text="Fechas:">
+                  <Label fx:id="lblTotal111" layoutX="15.0" layoutY="432.0" nodeOrientation="LEFT_TO_RIGHT" text="Fechas:">
                      <font>
                         <Font name="System Bold" size="15.0" />
                      </font>
                   </Label>
-                  <Label fx:id="lblFechaEstadia" layoutX="81.0" layoutY="396.0" nodeOrientation="LEFT_TO_RIGHT" prefHeight="27.0" prefWidth="191.0" text="Fechas estadia">
+                  <Label fx:id="lblFechaEstadia" layoutX="81.0" layoutY="432.0" nodeOrientation="LEFT_TO_RIGHT" prefHeight="27.0" prefWidth="191.0" text="Fechas estadia">
                      <font>
                         <Font name="System Bold" size="15.0" />
                      </font>
                   </Label>
-                  <Label fx:id="lblTotal1111" layoutX="16.0" layoutY="436.0" nodeOrientation="LEFT_TO_RIGHT" text="Cant. personas:">
+                  <Label fx:id="lblTotal1111" layoutX="16.0" layoutY="472.0" nodeOrientation="LEFT_TO_RIGHT" text="Cant. personas:">
                      <font>
                         <Font name="System Bold" size="15.0" />
                      </font>
                   </Label>
-                  <Label fx:id="lblCantPersona" layoutX="138.0" layoutY="436.0" nodeOrientation="RIGHT_TO_LEFT" prefHeight="27.0" prefWidth="43.0" text="#">
+                  <Label fx:id="lblCantPersona" layoutX="138.0" layoutY="472.0" nodeOrientation="RIGHT_TO_LEFT" prefHeight="27.0" prefWidth="43.0" text="#">
                      <font>
                         <Font name="System Bold" size="15.0" />
                      </font>
@@ -123,9 +129,10 @@
                         <Font name="System Bold" size="15.0" />
                      </font>
                   </Label>
+                  <Label fx:id="lblTitulo12" layoutX="131.0" layoutY="389.0" text="INFORMACION RESERVACION" />
                </children>
             </Pane>
-            <Line endX="-4.0" endY="630.0" layoutX="643.0" layoutY="41.0" startX="-4.0" startY="29.0" stroke="GREY" />
+            <Line endX="-4.0" endY="630.0" layoutX="594.0" layoutY="39.0" startX="-4.0" startY="29.0" stroke="GREY" />
          </children>
       </AnchorPane>
    </children>

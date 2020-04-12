@@ -1,16 +1,54 @@
 
+
+
+* {
+    -fx-primary : #000000;
+    -fx-secondary : #FFC107;
+    -fx-primarytext : #ffffff;
+    -fx-blue: #1976D2;
+    -fx-red: #FF0000;
+    -fx-color-1:#1976D2;
+}
+
+.root{
+    -fx-background-color: derive(-fx-primary, 10%);
+    -fx-font-family: Franklin Gothic Medium; 
+}
+#lblTotal {
+-fx-font-family: Franklin Gothic Medium; 
+-fx-font-weight: bold;
+-fx-font-size: 1.4em; 
+-fx-text-fill: -fx-primarytext;
+}
+#lblPrecioTotal {
+-fx-font-family: Franklin Gothic Medium; 
+-fx-font-weight: bold;
+-fx-font-size: 1.4em; 
+-fx-text-fill: -fx-primarytext;
+}
 #lblTitulo {
 	-fx-font-family: Franklin Gothic Medium; 
 	-fx-font-weight: bold;
 	-fx-font-size: 1.5em; 
- 	-fx-text-fill: BLACK;
+ 	-fx-text-fill:-fx-primarytext ;
 }
-
+#lblFechaEstadia {
+-fx-font-family: Franklin Gothic Medium; 
+-fx-font-weight: bold;
+-fx-font-size: 1.2em; 
+-fx-text-fill: -fx-primarytext;
+}
+#lblCantPersona {
+-fx-font-family: Franklin Gothic Medium; 
+-fx-font-weight: bold;
+-fx-font-size: 1.2em; 
+-fx-text-fill: -fx-primarytext;
+}
 #lblPrecio {
 -fx-font-family: Franklin Gothic Medium; 
 -fx-font-weight: bold;
 -fx-font-size: 1.2em; 
--fx-text-fill: BLACK;
+-fx-text-fill: -fx-primarytext;
 }
 
 .label {

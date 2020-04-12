@@ -9,11 +9,14 @@ import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
+import java.time.DayOfWeek;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.ResourceBundle;
 import javax.imageio.ImageIO;
 import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXComboBox;
+import com.jfoenix.controls.JFXDatePicker;
 import com.jfoenix.controls.JFXListView;
 import com.mysql.cj.jdbc.CallableStatement;
 import backend.ConnectionMySqlDB;
@@ -32,6 +35,8 @@ import javafx.geometry.Insets;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.ContentDisplay;
+import javafx.scene.control.DateCell;
+import javafx.scene.control.DatePicker;
 import javafx.scene.control.Label;
 import javafx.scene.control.ListCell;
 import javafx.scene.control.ListView;
@@ -41,8 +46,12 @@ import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.Background;
+import javafx.scene.layout.BackgroundFill;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.Priority;
+import javafx.scene.paint.Color;
+import javafx.scene.paint.Paint;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 
@@ -59,6 +68,12 @@ public class HomeGUIController extends ListView<PublicacionesParaVisualizar> imp
 	private JFXListView<PublicacionesParaVisualizar> publicationListView;
 	@FXML
 	private JFXComboBox<String> cbxLocation;
+	@FXML
+	private JFXDatePicker datapickeCheckIn;
+	@FXML
+	private JFXButton btnAdmin;
+	@FXML
+	private JFXDatePicker datapickeCheckOut;
 
 	private double xoffset = 0;
 	private double yoffset = 0;
@@ -77,6 +92,8 @@ public class HomeGUIController extends ListView<PublicacionesParaVisualizar> imp
 		spinnerGuest.setValueFactory(valueSpinGuest);
 		spinnerGuest.getStyleClass().add(Spinner.STYLE_CLASS_SPLIT_ARROWS_HORIZONTAL);
 		cbxLocation.setItems(list);
+		initControlInDatapicker();
+		initControlOutDatapicker();
 		publicationListView.setCellFactory(new Callback<ListView<PublicacionesParaVisualizar>, ListCell<PublicacionesParaVisualizar>>() {
 			@Override
 			public ListCell<PublicacionesParaVisualizar> call(ListView<PublicacionesParaVisualizar> panListView) {
@@ -84,30 +101,30 @@ public class HomeGUIController extends ListView<PublicacionesParaVisualizar> imp
 			}
 		});
 	}
-	
-    @FXML
-    public void clickToViewPublication(MouseEvent event) throws IOException {
-    	auxlist = publicationListView.getSelectionModel().getSelectedItem();
-    	//ViewPublicationGUI ax = new ViewPublicationGUI(auxlist);
-    	if (auxlist != null) {
-    		Parent rootPubli= FXMLLoader.load(getClass().getResource("../frontend/viewPublicacionesGUI.fxml"));
-    		Stage stagePubli= new Stage();
-    		Scene scenePubli= new Scene(rootPubli);
 
-    		stagePubli.setScene(scenePubli);
-    		stagePubli.setResizable(false);
-    		//stageRegister.setAlwaysOnTop(true);
-    		stagePubli.initStyle(StageStyle.TRANSPARENT);
-    		//	stageRegister.initModality(Modality.APPLICATION_MODAL);
-    		stagePubli.show();
+	@FXML
+	public void clickToViewPublication(MouseEvent event) throws IOException {
+		auxlist = publicationListView.getSelectionModel().getSelectedItem();
+		//ViewPublicationGUI ax = new ViewPublicationGUI(auxlist);
+		if (auxlist != null) {
+			Parent rootPubli= FXMLLoader.load(getClass().getResource("../frontend/viewPublicacionesGUI.fxml"));
+			Stage stagePubli= new Stage();
+			Scene scenePubli= new Scene(rootPubli);
+
+			stagePubli.setScene(scenePubli);
+			stagePubli.setResizable(false);
+			//stageRegister.setAlwaysOnTop(true);
+			stagePubli.initStyle(StageStyle.TRANSPARENT);
+			//	stageRegister.initModality(Modality.APPLICATION_MODAL);
+			stagePubli.show();
 		}
-    
 
-    }
-    
-    @FXML
-    public void openAdminView(ActionEvent event) throws IOException {
-    	Parent rootAdmin = FXMLLoader.load(getClass().getResource("../frontend/admin1GUI.fxml"));
+
+	}
+
+	@FXML
+	public void openAdminView(ActionEvent event) throws IOException {
+		Parent rootAdmin = FXMLLoader.load(getClass().getResource("../frontend/admin1GUI.fxml"));
 		Stage stageAdmin = new Stage();
 		Scene sceneAdmin = new Scene(rootAdmin);
 
@@ -132,18 +149,19 @@ public class HomeGUIController extends ListView<PublicacionesParaVisualizar> imp
 			}
 		});
 		/***************************************************************/
-    }
+	}
 
 	/******* @throws SQLException 
 	 * @throws IOException ***************************************************************/
 	@FXML
 	public void searchPublication(ActionEvent event) throws SQLException, IOException {
 		String ubicacionPropiedadABuscar = cbxLocation.getSelectionModel().getSelectedItem().toString();
+		String [] ubicacionsplitted = ubicacionPropiedadABuscar.split(", ");
 		ResultSet resultBD;
 
 		if (!ubicacionPropiedadABuscar.isEmpty()) {
 			publicationListView.getItems().clear();
-			resultBD = PublicacionesParaVisualizar.loadPublication(ubicacionPropiedadABuscar);
+			resultBD = PublicacionesParaVisualizar.loadPublication(ubicacionsplitted[0], ubicacionsplitted[1] );
 			// Esto llena als publicaciones para visualizar.
 			while (resultBD.next()) {
 				byte[]  f51=resultBD.getBytes("image");
@@ -182,7 +200,7 @@ public class HomeGUIController extends ListView<PublicacionesParaVisualizar> imp
 	void addProperty(ActionEvent event) throws IOException {
 		Parent rootRegister = FXMLLoader.load(getClass().getResource("../frontend/tablePropertyGUI.fxml"));
 
-	
+
 		Stage stageRegister = new Stage();
 		Scene sceneRegister = new Scene(rootRegister);
 
@@ -252,16 +270,16 @@ public class HomeGUIController extends ListView<PublicacionesParaVisualizar> imp
 	public static ArrayList<String> llenarCombo()
 	{
 		ArrayList<String> lista = new ArrayList<String>();
-		
+
 		ResultSet rs = null;
 
-    	CallableStatement mySqlStatement = null ; // call stored procedure
+		CallableStatement mySqlStatement = null ; // call stored procedure
 		try {
 			Connection myConnection = ConnectionMySqlDB.getConnectionMySqlDB();	
 			mySqlStatement = (CallableStatement) myConnection.prepareCall("{CALL sp_direccionesPublicadas()}");
 			rs = mySqlStatement.executeQuery();
 			System.out.println("Direcciones cargadas en el rs");
-		
+
 		} catch (SQLException e) {
 			System.out.println("Error al cargar sus propiedades!");
 			e.printStackTrace();
@@ -269,11 +287,11 @@ public class HomeGUIController extends ListView<PublicacionesParaVisualizar> imp
 		try { /* RECORDAR LIMPIAR EL CODIGO DE TODO EL PROYECTO [Mucho codigo repetido]*/
 			while(rs.next()){
 				lista.add(rs.getString("direccion"));
-				
+
 			}
 		} catch (Exception e) {
 		}
-		
+
 		return lista;
 	}
 
@@ -347,10 +365,10 @@ public class HomeGUIController extends ListView<PublicacionesParaVisualizar> imp
 			}
 		}
 	}
-	
+
 	@FXML
-    public void publish(ActionEvent event) throws IOException {
-		
+	public void publish(ActionEvent event) throws IOException {
+
 		Parent rootRegister = FXMLLoader.load(getClass().getResource("../frontend/tablePublicationGUI.fxml"));
 		Stage stageRegister = new Stage();
 		Scene sceneRegister = new Scene(rootRegister);
@@ -380,11 +398,84 @@ public class HomeGUIController extends ListView<PublicacionesParaVisualizar> imp
 			}
 		});
 
-    }
+	}
 
+	public void initControlInDatapicker () {
+		datapickeCheckIn.setValue(LocalDate.now());
+		datapickeCheckIn.setEditable(false);
+		Callback<DatePicker, DateCell> dayCellFactory = dp -> new DateCell() {
+			@Override
+			public void updateItem(LocalDate item, boolean empty) {
+				super.updateItem(item, empty);
+				this.setDisable(false);
+				this.setBackground(null);
+				this.setTextFill(Color.BLACK);
 
+				if (item.isBefore(LocalDate.now())) {
+					this.setDisable(true);
+				}
 
+				// marcar los dias de quincena
+				/*      int day = item.getDayOfMonth();
+		        if(day == 15 || day == 30) {
 
+		            Paint color = Color.RED;
+		            BackgroundFill fill = new BackgroundFill(color, null, null);
+
+		            this.setBackground(new Background(fill));
+		            this.setTextFill(Color.WHITESMOKE);
+		        }*/
+
+				/*    // fines de semana en color verde
+		        DayOfWeek dayweek = item.getDayOfWeek();
+		        if (dayweek == DayOfWeek.SATURDAY || dayweek == DayOfWeek.SUNDAY) {
+		            this.setTextFill(Color.GREEN);
+		        }*/
+			}
+		};
+
+		datapickeCheckIn.setDayCellFactory(dayCellFactory);
+	}
+
+	public void initControlOutDatapicker () {
+		datapickeCheckOut.setEditable(false);
+		Callback<DatePicker, DateCell> dayCellFactory = dp -> new DateCell() {
+			@Override
+			public void updateItem(LocalDate item, boolean empty) {
+				super.updateItem(item, empty);
+				this.setDisable(false);
+				this.setBackground(null);
+				this.setTextFill(Color.BLACK);
+
+				if (item.isBefore(datapickeCheckIn.getValue())) {
+					this.setDisable(true);
+				}
+
+				// marcar los dias de quincena
+				/*      int day = item.getDayOfMonth();
+		        if(day == 15 || day == 30) {
+
+		            Paint color = Color.RED;
+		            BackgroundFill fill = new BackgroundFill(color, null, null);
+
+		            this.setBackground(new Background(fill));
+		            this.setTextFill(Color.WHITESMOKE);
+		        }*/
+
+				/*    // fines de semana en color verde
+		        DayOfWeek dayweek = item.getDayOfWeek();
+		        if (dayweek == DayOfWeek.SATURDAY || dayweek == DayOfWeek.SUNDAY) {
+		            this.setTextFill(Color.GREEN);
+		        }*/
+			}
+		};
+		datapickeCheckOut.setDayCellFactory(dayCellFactory);
+	}
+
+	@FXML
+	void closeApp(ActionEvent event) {
+		System.exit(0);
+	}
 
 
 	/************************* FIN *******************/

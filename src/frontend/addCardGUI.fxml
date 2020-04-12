@@ -5,19 +5,18 @@
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.layout.Pane?>
 
-
-<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="407.0" prefWidth="299.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="frontend.AddcardGUIController">
+<Pane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="407.0" prefWidth="299.0" stylesheets="@styleAdmin.css" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="frontend.AddcardGUIController">
    <children>
-      <Label layoutX="106.0" layoutY="14.0" text="ADD A CARD" />
+      <Label layoutX="97.0" layoutY="8.0" text="ADD A CARD" />
       <Label layoutX="29.0" layoutY="47.0" text="Card Number" />
-      <JFXTextField fx:id="txtcardNumber" layoutX="25.0" layoutY="68.0" promptText="####-####-####-####" style="-fx-background-color: gray;" />
+      <JFXTextField fx:id="txtcardNumber" layoutX="25.0" layoutY="74.0" prefHeight="39.0" prefWidth="250.0" promptText="####-####-####-####" />
       <Label layoutX="29.0" layoutY="136.0" text="Cardholder name" />
-      <JFXTextField fx:id="txtcardName" layoutX="25.0" layoutY="169.0" style="-fx-background-color: gray;" />
-      <Label layoutX="29.0" layoutY="248.0" text="Expiry date" />
-      <JFXTextField fx:id="txtcardDate" layoutX="25.0" layoutY="282.0" maxWidth="98.0" minWidth="98.0" prefHeight="37.0" prefWidth="98.0" promptText="YYYY/MM" style="-fx-background-color: gray;" />
-      <Label layoutX="153.0" layoutY="247.0" text="CVV" />
-      <JFXTextField fx:id="txtcardCvv" layoutX="150.0" layoutY="282.0" maxWidth="98.0" minWidth="50.0" prefHeight="37.0" prefWidth="61.0" promptText="###" style="-fx-background-color: gray;" />
-      <Button fx:id="btnSave" layoutX="221.0" layoutY="364.0" mnemonicParsing="false" onAction="#saveCard" text="Save" />
-      <Button fx:id="btnCancel" layoutX="33.0" layoutY="364.0" mnemonicParsing="false" text="Cancel" />
+      <JFXTextField fx:id="txtcardName" layoutX="25.0" layoutY="169.0" prefWidth="250.0" promptText="Jhan Almonte" />
+      <Label layoutX="63.0" layoutY="230.0" text="Expiry date" />
+      <JFXTextField fx:id="txtcardDate" layoutX="53.0" layoutY="264.0" maxWidth="104.0" minWidth="98.0" prefHeight="39.0" prefWidth="104.0" promptText="YYYY/MM" />
+      <Label layoutX="198.0" layoutY="230.0" text="CVV" />
+      <JFXTextField fx:id="txtcardCvv" layoutX="184.0" layoutY="264.0" maxWidth="98.0" minWidth="50.0" prefHeight="37.0" prefWidth="61.0" promptText="###" />
+      <Button fx:id="btnSave" layoutX="216.0" layoutY="356.0" mnemonicParsing="false" onAction="#saveCard" prefWidth="72.0" text="Save" />
+      <Button fx:id="btnCancel" layoutX="28.0" layoutY="356.0" mnemonicParsing="false" prefWidth="72.0" text="Cancel" />
    </children>
 </Pane>
