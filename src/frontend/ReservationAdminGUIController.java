@@ -83,16 +83,12 @@ public class ReservationAdminGUIController implements Initializable {
 	private JFXTextField txtDatFilter;
 	@FXML
 	private JFXRadioButton rbTipo;
-
 	@FXML
 	private JFXRadioButton rbCiudad;
-
 	@FXML
 	private JFXRadioButton rbMes;
-
 	@FXML
 	private JFXRadioButton rbAno;
-
 
 	@FXML
 	private ToggleGroup tgFilter;
