@@ -1,20 +1,24 @@
 package frontend;
 
-import java.sql.SQLException;
-import java.util.ArrayList;
+import java.io.IOException;
+import java.util.Arrays;
 
-import javax.swing.JOptionPane;
-
+import com.jfoenix.controls.JFXButton;
 import com.jfoenix.controls.JFXTextField;
-import com.mysql.cj.jdbc.CallableStatement;
-
 import backend.ConnectionMySqlDB;
 import backend.Tarjetas;
 import backend.User;
 import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.StackPane;
 import javafx.stage.Stage;
+import javafx.stage.StageStyle;
 
 public class AddcardGUIController extends ConnectionMySqlDB{
 
@@ -35,9 +39,14 @@ public class AddcardGUIController extends ConnectionMySqlDB{
 
 	@FXML
 	private Button btnCancel;
+    @FXML
+    private StackPane rootStackPane;
 
+    @FXML
+    private AnchorPane rootAnchorPane;
+
+    
 	@FXML
-
 	void saveCard(ActionEvent event) {
 
 		String cardNumber = txtcardNumber.getText();
@@ -46,11 +55,36 @@ public class AddcardGUIController extends ConnectionMySqlDB{
 		String cardCvvTexto = txtcardCvv.getText();
 		int cardCvv =  Integer.valueOf(cardCvvTexto);
 		Tarjetas card = new Tarjetas(cardNumber, cardName, cardDate, cardCvv);	
-		User.insertarTarjetas(card);	
-		
-		pagoReversaGUIController.llenarComboTarjeta();
-		Stage stage = (Stage) btnCancel.getScene().getWindow();
-		stage.close();
+		JFXButton btnOk = new JFXButton("Ok!");
+		btnOk.setOnAction(new EventHandler<ActionEvent>() {
+			@Override
+			public void handle(ActionEvent event) {
+				pagoReversaGUIController.llenarComboTarjeta();
+				Stage stage = (Stage) btnCancel.getScene().getWindow();
+				stage.close();
+				Parent rootRegister;
+				try {
+					rootRegister = FXMLLoader.load(getClass().getResource("../frontend/tableCardGUI.fxml"));
+					Stage stageRegister = new Stage();
+					Scene sceneRegister = new Scene(rootRegister);
+					stageRegister.setScene(sceneRegister);
+					stageRegister.setResizable(false);
+					stageRegister.initStyle(StageStyle.TRANSPARENT);
+					stageRegister.show();
+				} catch (IOException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				} 						
+			}
+		});
+		if(User.insertarTarjetas(card)) {
+			
+			PopupAlert.showCustomDialog(rootStackPane, rootAnchorPane, Arrays.asList(btnOk),
+					"Tarjeta insertada con exito!", null);	
+		} else {
+			PopupAlert.showCustomDialog(rootStackPane, rootAnchorPane, Arrays.asList(btnOk),"Error!\n" 
+					+ "Hubo un error!", null);
+		}
 
 		/*
 		if(cardNumber.length() == 16 && cardName.length() <=20 && cardDate.length() ==6 && cardCvv ==3)

@@ -159,7 +159,6 @@ public class LoginGUIController extends Application {
 				stageRegister.setResizable(false);
 				stageRegister.initStyle(StageStyle.TRANSPARENT);
 				stageRegister.show();
-
 				/*******
 				 * EventHandler to Move Undecorated Window (Stage) Adapted from: StackOverflow
 				 ******/

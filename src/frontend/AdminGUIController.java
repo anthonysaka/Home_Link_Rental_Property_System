@@ -280,9 +280,9 @@ public class AdminGUIController implements Initializable {
 			myConnection = ConnectionMySqlDB.getConnectionMySqlDB();
 			sentencia = myConnection.createStatement();
 			rs = sentencia.executeQuery(Query);
-			System.out.println("TABLA BIEN");
+		//	System.out.println("TABLA BIEN");
 		} catch (Exception e) {
-			System.out.println("No Correcto");
+		//	System.out.println("No Correcto");
 		}
 		try { /* RECORDAR LIMPIAR EL CODIGO DE TODO EL PROYECTO [Mucho codigo repetido]*/
 			while(rs.next()){
@@ -365,9 +365,9 @@ public class AdminGUIController implements Initializable {
 			myConnection = ConnectionMySqlDB.getConnectionMySqlDB();
 			sentencia = myConnection.createStatement();
 			rs = sentencia.executeQuery(Query);
-			System.out.println("TABLA BIEN");
+		//	System.out.println("TABLA BIEN");
 		} catch (Exception e) {
-			System.out.println("No Correcto");
+		//	System.out.println("No Correcto");
 		}
 		try { /* RECORDAR LIMPIAR EL CODIGO DE TODO EL PROYECTO [Mucho codigo repetido]*/
 			while(rs.next()){
@@ -406,9 +406,9 @@ public class AdminGUIController implements Initializable {
 			myConnection = ConnectionMySqlDB.getConnectionMySqlDB();
 			sentencia = myConnection.createStatement();
 			rs = sentencia.executeQuery(Query);
-			System.out.println("TABLA BIEN");
+		//	System.out.println("TABLA BIEN");
 		} catch (Exception e) {
-			System.out.println("No Correcto");
+		//	System.out.println("No Correcto");
 		}
 		try { /* RECORDAR LIMPIAR EL CODIGO DE TODO EL PROYECTO [Mucho codigo repetido]*/
 			while(rs.next()){
@@ -432,9 +432,7 @@ public class AdminGUIController implements Initializable {
 				auxUser.setAmountReservation(amount_reservation);
 				auxUser.setAmountPublication(amount_publication);
 				auxUser.setStatus(status);
-
 				listUser.add(auxUser);
-
 			}
 			myConnection.close();
 		} catch (Exception e) {
@@ -452,7 +450,6 @@ public class AdminGUIController implements Initializable {
 				if (newValue == null || newValue.isEmpty()) {
 					return true;
 				}
-
 				String upperCaseFilter = newValue.toUpperCase();
 				if (String.valueOf(pro.getIdPropiedad()).toUpperCase().indexOf(upperCaseFilter) != -1) {
 					return true;
@@ -509,7 +506,6 @@ public class AdminGUIController implements Initializable {
 				if (newValue == null || newValue.isEmpty()) {
 					return true;
 				}
-
 				String upperCaseFilter = newValue.toUpperCase();
 				if (String.valueOf(auPu.getIdPublicacion()).toUpperCase().indexOf(upperCaseFilter) != -1) {
 					return true;
@@ -640,12 +636,14 @@ public class AdminGUIController implements Initializable {
 				mySqlStatement.setInt("pa_iduseradmin", HomeGUIController.usuarioActual.getId());
 				mySqlStatement.executeQuery();
 				myConnection.close();
-				System.out.println("autorizado con exito!");
+			//	System.out.println("autorizado con exito!");
 				JFXButton btnOk = new JFXButton("Ok!");
 				PopupAlert.showCustomDialog(rootStackPane, rootAnchorPane, Arrays.asList(btnOk),"Publicación autorizada con exito.", null);
 				myConnection.close();
 			} catch (SQLException e) {
-				System.out.println("autorizado sin exito!");
+			//	System.out.println("autorizado sin exito!");
+				JFXButton btnOk = new JFXButton("Ok!");
+				PopupAlert.showCustomDialog(rootStackPane, rootAnchorPane, Arrays.asList(btnOk),"Hubo un problema!.", null);
 				e.printStackTrace();
 			}
 		}

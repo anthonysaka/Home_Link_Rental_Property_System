@@ -216,10 +216,10 @@ public class User extends ConnectionMySqlDB {
 			mySqlStatement.setInt("pa_cvv",tarjeta.getCVV());
 			mySqlStatement.executeQuery();
 			myConnection.close();
-			System.out.println("Su tarjeta ha sido guardada!");
+		//	System.out.println("Su tarjeta ha sido guardada!");
 			return true;
 		} catch (SQLException e) {
-			System.out.println("Error al guardar su tarjeta!");
+		//	System.out.println("Error al guardar su tarjeta!");
 			e.printStackTrace();
 			return false;
 		}
@@ -238,10 +238,10 @@ public class User extends ConnectionMySqlDB {
 			mySqlStatement.setInt("pa_userID", LoginGUIController.x);
 			mySqlStatement.executeQuery();
 			myConnection.close();
-			System.out.println("Su propiedad ha sido guardada!");
+		//	System.out.println("Su propiedad ha sido guardada!");
 			return true;
 		} catch (SQLException e) {
-			System.out.println("Error al guardar su propiedad!");
+		//	System.out.println("Error al guardar su propiedad!");
 			e.printStackTrace();
 			return false;
 		}

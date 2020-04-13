@@ -115,11 +115,11 @@ public class PublicacionesParaVisualizar extends ConnectionMySqlDB {
 			mySqlStatement.setString("pa_start_date", iniDate);
 			mySqlStatement.setString("pa_end_date", finDate);
 			ResultSet rs = mySqlStatement.executeQuery();
-			System.out.println("Busqueda con exito!");
+		//	System.out.println("Busqueda con exito!");
 			return rs;
 			
 		} catch (SQLException e) {
-			System.out.println("Busqueda sin exito!");
+		//	System.out.println("Busqueda sin exito!");
 			e.printStackTrace();
 			return null;
 		}

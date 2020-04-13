@@ -79,11 +79,11 @@ public class HomeLink_Controller extends ConnectionMySqlDB {
 				mySqlStatement.setString("pa_location", pUser.getCountry_location());
 				mySqlStatement.executeQuery();
 				myConnection.close();
-				System.out.println("User creado con exito!");
+			//	System.out.println("User creado con exito!");
 				return true;
 
 			} catch (SQLException e) {
-				System.out.println("User no creado con exito!");
+			//	System.out.println("User no creado con exito!");
 				e.printStackTrace();
 				return false;
 			}
@@ -99,10 +99,10 @@ public class HomeLink_Controller extends ConnectionMySqlDB {
 				mySqlStatement.setInt("pa_id",pId );
 				mySqlStatement.executeQuery();
 				myConnection.close();
-				System.out.println("User eliminado con exito!");
+			//	System.out.println("User eliminado con exito!");
 				return true;
 			} catch (SQLException e) {
-				System.out.println("User no eliminado con exito!");
+			//	System.out.println("User no eliminado con exito!");
 				e.printStackTrace();
 				return false;
 			}
@@ -116,10 +116,10 @@ public class HomeLink_Controller extends ConnectionMySqlDB {
 				mySqlStatement.setInt("pa_id",pId );
 				mySqlStatement.executeQuery();
 				myConnection.close();
-				System.out.println("Publicacion eliminado con exito!");
+			//	System.out.println("Publicacion eliminado con exito!");
 				return true;
 			} catch (SQLException e) {
-				System.out.println("Publicacion no eliminado con exito!");
+			//	System.out.println("Publicacion no eliminado con exito!");
 				e.printStackTrace();
 				return false;
 			}

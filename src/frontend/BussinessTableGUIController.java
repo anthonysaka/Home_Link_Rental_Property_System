@@ -83,10 +83,10 @@ public class BussinessTableGUIController implements Initializable{
 			mySqlStatement = (CallableStatement) myConnection.prepareCall("{CALL sp_tablaNegocios(?)}");
 			mySqlStatement.setInt("pa_userid", HomeGUIController.usuarioActual.getId());
 			rs = mySqlStatement.executeQuery();
-			System.out.println("Los datos de sus Reservas han sido cargados");
+		//	System.out.println("Los datos de sus Reservas han sido cargados");
 
 		} catch (SQLException e) {
-			System.out.println("Error al cargar sus Reservas!");
+		//	System.out.println("Error al cargar sus Reservas!");
 			e.printStackTrace();
 		}
 		try { /* RECORDAR LIMPIAR EL CODIGO DE TODO EL PROYECTO [Mucho codigo repetido]*/
@@ -113,14 +113,6 @@ public class BussinessTableGUIController implements Initializable{
 		}
 		tableBussiness.getItems().setAll(listReservas);
 	}
-
-
-
-
-
-
-
-
 
 
 	@FXML
