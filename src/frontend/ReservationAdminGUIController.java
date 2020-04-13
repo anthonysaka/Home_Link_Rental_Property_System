@@ -191,6 +191,7 @@ public class ReservationAdminGUIController implements Initializable {
 		tableReserva.setItems(sortedDataUser);
 	}
 
+	//Do Filter.
 	@FXML
 	public void doFilter(ActionEvent event) {
 		ResultSet rs = null;
@@ -207,7 +208,28 @@ public class ReservationAdminGUIController implements Initializable {
 				} catch (SQLException e) {
 					e.printStackTrace();
 				}
-
+				listReservas.clear();
+				try {
+					while(rs.next()){
+						int num = rs.getInt("num_reservation");
+						int cantguest = rs.getInt("amount_guest");
+						String checkIn = rs.getString("start_date");
+						String checkOut = rs.getString("end_date");
+						String username = rs.getString("username");
+						int idPu = rs.getInt("id_publication");
+						String tipo = rs.getString("type");
+						String dir = rs.getString("Address_Property");
+						String cardNum = rs.getString("num_card");
+						Float price = rs.getFloat("price_reservation");
+						Reserva auxRe = new Reserva(num, idPu, 0, cantguest, checkIn, checkOut,cardNum,price);
+						auxRe.setUsername(username);
+						auxRe.setTipo(tipo);
+						auxRe.setDir(dir);
+						listReservas.add(auxRe);
+					}
+					myConnection.close();
+				} catch (SQLException e) {
+				}
 				tableReserva.getItems().setAll(listReservas);	
 			} else if (rbCiudad.isSelected()) {
 
@@ -250,7 +272,6 @@ public class ReservationAdminGUIController implements Initializable {
 				} catch (SQLException e) {
 					e.printStackTrace();
 				}
-			
 						listReservas.clear();
 				try {
 					while(rs.next()){
@@ -323,7 +344,6 @@ public class ReservationAdminGUIController implements Initializable {
 		}
 
 
-		
 
 			
 	}

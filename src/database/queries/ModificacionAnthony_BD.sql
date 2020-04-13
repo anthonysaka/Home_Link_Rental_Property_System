@@ -375,3 +375,5 @@ select * from t_reservation;
 select num_reservation from t_reservation order by num_reservation desc limit 1;
 
 call sp_query_propiedad_mas_rentada("2019-05-11","2021-05-30")
+
+
