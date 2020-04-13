@@ -344,7 +344,6 @@ public class ReservationAdminGUIController implements Initializable {
 		}
 
 
-		
 
 			
 	}

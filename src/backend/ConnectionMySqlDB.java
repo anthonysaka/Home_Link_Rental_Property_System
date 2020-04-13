@@ -34,6 +34,8 @@ public class ConnectionMySqlDB {
 
 
 
+
+
 	private final static String url_db = "jdbc:mysql://localhost:3306/" + name_db;
 	private static Connection connect = null;
 
