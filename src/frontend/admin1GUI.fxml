@@ -53,6 +53,11 @@
                                           <Insets top="10.0" />
                                        </VBox.margin>
                                     </JFXButton>
+                                    <JFXButton fx:id="btnnewAdmin" onAction="#newAdmin" prefHeight="85.0" prefWidth="150.0" text="New Admin">
+                                       <VBox.margin>
+                                          <Insets top="10.0" />
+                                       </VBox.margin>
+                                    </JFXButton>
                                  </children>
                               </VBox>
                               <JFXDatePicker fx:id="datapickeCheckIn" defaultColor="#ffc107" editable="false" layoutX="429.0" layoutY="76.0" nodeOrientation="LEFT_TO_RIGHT" prefHeight="30.0" prefWidth="230.0" promptText="MM/DD/YYYY">

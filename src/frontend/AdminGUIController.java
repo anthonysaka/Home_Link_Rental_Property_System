@@ -45,6 +45,7 @@ import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.StackPane;
 import javafx.scene.text.Text;
 import javafx.stage.Stage;
+import javafx.stage.StageStyle;
 
 public class AdminGUIController implements Initializable {
 
@@ -169,6 +170,12 @@ public class AdminGUIController implements Initializable {
 	private JFXDatePicker datapickeCheckIn;
 	@FXML
 	private JFXDatePicker datapickeCheckOut;
+	
+	@FXML
+    private JFXButton btnnewAdmin;
+	
+	public static int admin = 0;
+	
 	@FXML
 	private Label lbl_hm_id;
 	@FXML
@@ -194,6 +201,40 @@ public class AdminGUIController implements Initializable {
 		searchDataPropiedad();
 		searchDataAuPubli();
 	}
+	
+	@FXML
+    void newAdmin(ActionEvent event) throws IOException {
+		
+		admin = 1;
+		
+		Parent rootRegister = FXMLLoader.load(getClass().getResource("../frontend/registerGUI.fxml"));
+		Stage stageRegister = new Stage();
+		Scene sceneRegister = new Scene(rootRegister);
+
+		stageRegister.setScene(sceneRegister);
+		stageRegister.setResizable(false);
+		stageRegister.initStyle(StageStyle.TRANSPARENT);
+		stageRegister.show();
+
+		/*******
+		 * EventHandler to Move Undecorated Window (Stage) Adapted from: StackOverflow
+		 ******/
+		rootRegister.setOnMousePressed(new EventHandler<MouseEvent>() {
+			@Override
+			public void handle(MouseEvent event) {
+				xoffset = stageRegister.getX() - event.getScreenX();
+				yoffset = stageRegister.getY() - event.getScreenY();
+			}
+		});
+		rootRegister.setOnMouseDragged(new EventHandler<MouseEvent>() {
+			@Override
+			public void handle(MouseEvent event) {
+				stageRegister.setX(event.getScreenX() + xoffset);
+				stageRegister.setY(event.getScreenY() + yoffset);
+			}
+		});
+		
+    }
 
 	public void initColumns() {
 		

@@ -17,6 +17,7 @@ import com.jfoenix.controls.JFXTextField;
 import backend.ConnectionMySqlDB;
 import backend.HomeLink_Controller;
 import backend.User;
+import de.jensd.fx.glyphs.materialdesignicons.MaterialDesignIconView;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -36,6 +37,9 @@ public class RegisterGUIController implements Initializable {
 	@FXML
 	private StackPane rootStackPane;
 
+	@FXML
+    private MaterialDesignIconView iconoCategory;
+	
 	@FXML
 	private AnchorPane rootAnchorPane;
 	@FXML
@@ -103,43 +107,101 @@ public class RegisterGUIController implements Initializable {
 	@FXML
 	void setRegister(ActionEvent event) {
 		//User_sql_query userQuery = new User_sql_query();
-		String name = txtName.getText();
-		String lastname = txtLastname.getText();
-		String gender = cbxGender.getSelectionModel().getSelectedItem().toString();
-		String typeAccount = cbxCategoryAccount.getSelectionModel().getSelectedItem().toString();
-		String username = txtUsername.getText();
-		String email = txtEmail.getText();
-		String password = txtPassword.getText();
-		String confiPass = txtConfirmPass.getText();
-		LocalDate today = LocalDate.now();
-		String location = cbxLocation.getSelectionModel().getSelectedItem().toString();
-		String telephone = txtnumber.getText();
-
-		if (confiPass.equals(password)) {
-			User nUser = new User(name, lastname, gender, typeAccount, username, email, password, today.toString());
-			nUser.setTelephone_number(telephone);
-			nUser.setCountry_location(location);
-			if (HomeLink_Controller.create_add_user(nUser)) {
-				System.out.println("con exito");
-				JFXButton btnOk = new JFXButton("Ok!");
-				PopupAlert.showCustomDialog(rootStackPane, rootAnchorPane, Arrays.asList(btnOk),"Usuario registrado con exito.", null);
-			}else {
-				System.out.println("sin exito");
-			}
-		}
-		else {
+		
+		if (AdminGUIController.admin != 1) {
 			
-			JFXButton btnOk = new JFXButton("Ok!");
-			PopupAlert.showCustomDialog(rootStackPane, rootAnchorPane, Arrays.asList(btnOk),"Contraseñas no coinciden", null);
-			System.out.println("contranse no coinciden");
+			String name = txtName.getText();
+			String lastname = txtLastname.getText();
+			String gender = cbxGender.getSelectionModel().getSelectedItem().toString();
+			String typeAccount = cbxCategoryAccount.getSelectionModel().getSelectedItem().toString();
+			String username = txtUsername.getText();
+			String email = txtEmail.getText();
+			String password = txtPassword.getText();
+			String confiPass = txtConfirmPass.getText();
+			LocalDate today = LocalDate.now();
+			String location = cbxLocation.getSelectionModel().getSelectedItem().toString();
+			String telephone = txtnumber.getText();
+
+			if (confiPass.equals(password)) {
+				User nUser = new User(name, lastname, gender, typeAccount, username, email, password, today.toString());
+				nUser.setTelephone_number(telephone);
+				nUser.setCountry_location(location);
+				if (HomeLink_Controller.create_add_user(nUser)) {
+					System.out.println("con exito");
+					JFXButton btnOk = new JFXButton("Ok!");
+					PopupAlert.showCustomDialog(rootStackPane, rootAnchorPane, Arrays.asList(btnOk),"Usuario registrado con exito.", null);
+				}else {
+					System.out.println("sin exito");
+				}
+			}
+			else {
+				
+				JFXButton btnOk = new JFXButton("Ok!");
+				PopupAlert.showCustomDialog(rootStackPane, rootAnchorPane, Arrays.asList(btnOk),"Contraseñas no coinciden", null);
+				System.out.println("contranse no coinciden");
+			}
+			
+		}else {
+			
+			
+			String name = txtName.getText();
+			String lastname = txtLastname.getText();
+			String gender = cbxGender.getSelectionModel().getSelectedItem().toString();
+			String typeAccount = "Admin";
+			String username = txtUsername.getText();
+			String email = txtEmail.getText();
+			String password = txtPassword.getText();
+			String confiPass = txtConfirmPass.getText();
+			LocalDate today = LocalDate.now();
+			String location = cbxLocation.getSelectionModel().getSelectedItem().toString();
+			String telephone = txtnumber.getText();
+
+			if (confiPass.equals(password)) {
+				User nUser = new User(name, lastname, gender, typeAccount, username, email, password, today.toString());
+				nUser.setTelephone_number(telephone);
+				nUser.setCountry_location(location);
+				if (HomeLink_Controller.create_add_user(nUser)) {
+					System.out.println("con exito");
+					JFXButton btnOk = new JFXButton("Ok!");
+					PopupAlert.showCustomDialog(rootStackPane, rootAnchorPane, Arrays.asList(btnOk),"Usuario registrado con exito.", null);
+				}else {
+					System.out.println("sin exito");
+				}
+			}
+			else {
+				
+				JFXButton btnOk = new JFXButton("Ok!");
+				PopupAlert.showCustomDialog(rootStackPane, rootAnchorPane, Arrays.asList(btnOk),"Contraseñas no coinciden", null);
+				System.out.println("contranse no coinciden");
+			}
+			
+			
+			
+			
+			
+			
 		}
+		
 	}
 
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
-		cbxGender.setItems(listGender);
-		cbxCategoryAccount.setItems(listTypeAccount);
-		cbxLocation.setItems(list);
+		
+		if (AdminGUIController.admin != 1) {
+			cbxGender.setItems(listGender);
+			cbxCategoryAccount.setItems(listTypeAccount);
+			cbxLocation.setItems(list);
+		} else {
+			cbxGender.setItems(listGender);
+			cbxLocation.setItems(list);
+			cbxCategoryAccount.setVisible(false);
+			iconoCategory.setVisible(false);
+		}
+		
+		
+		
+		
+		
 	}
 
 }
