@@ -13,16 +13,20 @@ public class Reserva {
 	private String tipoPropiedad;
 	private String titulo;
 	
+	private String username;
+	private String num_card;
 	
 	
-	public Reserva(int idReserva, int idPropiedad, int idUsuario, int huespedes, String fechaInicio, String fechaFin) {
+	public Reserva(int idReserva, int idPublicacion, int idUsuario, int huespedes, String fechaInicio, String fechaFin, String num_card, Float price) {
 		super();
 		this.idReserva = idReserva;
-		this.idPublicacion = idPropiedad;
+		this.setIdPublicacion(idPublicacion);
 		this.idUsuario = idUsuario;
 		this.huespedes = huespedes;
 		this.fechaInicio = fechaInicio;
 		this.fechaFin = fechaFin;
+		this.setNum_card(num_card);
+		this.precio = price;
 	}
 
 
@@ -36,14 +40,7 @@ public class Reserva {
 	}
 
 
-	public int getIdPropiedad() {
-		return idPublicacion;
-	}
 
-
-	public void setIdPropiedad(int idPropiedad) {
-		this.idPublicacion = idPropiedad;
-	}
 
 
 	public int getIdUsuario() {
@@ -123,6 +120,36 @@ public class Reserva {
 
 	public void setTitulo(String titulo) {
 		this.titulo = titulo;
+	}
+
+
+	public String getUsername() {
+		return username;
+	}
+
+
+	public void setUsername(String username) {
+		this.username = username;
+	}
+
+
+	public String getNum_card() {
+		return num_card;
+	}
+
+
+	public void setNum_card(String num_card) {
+		this.num_card = num_card;
+	}
+
+
+	public int getIdPublicacion() {
+		return idPublicacion;
+	}
+
+
+	public void setIdPublicacion(int idPublicacion) {
+		this.idPublicacion = idPublicacion;
 	}
 	
 

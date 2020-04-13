@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import com.jfoenix.controls.JFXButton?>
+<?import com.jfoenix.controls.JFXRadioButton?>
+<?import com.jfoenix.controls.JFXTextField?>
+<?import javafx.scene.Cursor?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.ToggleGroup?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.StackPane?>
+<?import javafx.scene.shape.Line?>
+<?import javafx.scene.text.Font?>
+<?import javafx.scene.text.Text?>
+
+<StackPane fx:id="rootStackPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="720.0" prefWidth="1280.0" stylesheets="@styleAdmin.css" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="frontend.ReservationAdminGUIController">
+   <children>
+      <AnchorPane fx:id="rootAnchorPane" minHeight="0.0" minWidth="0.0" prefHeight="696.0" prefWidth="1280.0">
+         <children>
+            <TableView fx:id="tableReserva" layoutX="10.0" layoutY="117.0" prefHeight="602.0" prefWidth="1270.0" AnchorPane.bottomAnchor="5.0" AnchorPane.leftAnchor="5.0" AnchorPane.rightAnchor="5.0" AnchorPane.topAnchor="117.0">
+               <columns>
+                  <TableColumn fx:id="tb_reser_col_num_reser" prefWidth="123.0" text="# Reservación" />
+                  <TableColumn fx:id="tb_reser_col_guest" prefWidth="187.0" text="Cant. Guest" />
+                  <TableColumn fx:id="tb_reser_col_checkIn" prefWidth="131.0" text="Check-In" />
+                  <TableColumn fx:id="tb_reser_col_checkOut" prefWidth="127.0" text="Check-Out" />
+                  <TableColumn fx:id="tb_reser_col_username" prefWidth="108.0" text="Username" />
+                  <TableColumn fx:id="tb_reser_col_idPubli" prefWidth="90.0" text="ID publicación" />
+                  <TableColumn fx:id="tb_reser_col_tarjeta" prefWidth="233.0" text="Tarjeta" />
+                  <TableColumn fx:id="tb_reser_col_price" prefWidth="233.0" text="Precio" />
+               </columns>
+               <columnResizePolicy>
+                  <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
+               </columnResizePolicy>
+            </TableView>
+            <Text fx:id="textAdminUserLogged" fill="WHITE" layoutX="122.0" layoutY="26.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Usuario loggged">
+               <font>
+                  <Font name="System Bold Italic" size="15.0" />
+               </font>
+            </Text>
+            <Text fill="WHITE" layoutX="14.0" layoutY="27.0" strokeType="OUTSIDE" strokeWidth="0.0" text="ADMIN Panel">
+               <font>
+                  <Font name="System Bold" size="15.0" />
+               </font>
+            </Text>
+            <Button fx:id="btnMinimize" layoutX="1188.0" mnemonicParsing="false" onAction="#minimizeWindow" prefHeight="39.0" prefWidth="32.0" style="-fx-background-color: transparent;" />
+            <Button fx:id="btnClose" layoutX="1234.0" layoutY="2.0" mnemonicParsing="false" onAction="#closeWindow" prefHeight="23.0" prefWidth="28.0" style="-fx-background-color: transparent;" />
+            <JFXTextField fx:id="txtSearchTabReservation" layoutX="22.0" layoutY="69.0" maxHeight="39.0" prefHeight="39.0" prefWidth="343.0" promptText="Hi ADMIN, Search!" />
+            <JFXButton fx:id="btnFiltrar" layoutX="1135.0" layoutY="70.0" onAction="#doFilter" prefHeight="29.0" prefWidth="115.0" style="-fx-background-color: #ffc107; -fx-background-radius: 10;" styleClass="Button" text="Filtrar">
+               <font>
+                  <Font name="System Bold" size="14.0" />
+               </font>
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor>
+            </JFXButton>
+            <Text fill="WHITE" layoutX="460.0" layoutY="45.0" strokeType="OUTSIDE" strokeWidth="0.0" text="FILTRAR POR:">
+               <font>
+                  <Font name="System Bold" size="15.0" />
+               </font>
+            </Text>
+            <Line endX="35.0" endY="55.0" layoutX="364.0" layoutY="51.0" startX="35.0" startY="18.0" stroke="GREY" />
+            <JFXRadioButton fx:id="rbTipo" layoutX="422.0" layoutY="60.0" text="Tipo">
+               <toggleGroup>
+                  <ToggleGroup fx:id="tgFilter" />
+               </toggleGroup>
+            </JFXRadioButton>
+            <JFXRadioButton fx:id="rbCiudad" layoutX="422.0" layoutY="88.0" text="Ciudad" toggleGroup="$tgFilter" />
+            <JFXRadioButton fx:id="rbMes" layoutX="557.0" layoutY="60.0" text="Mes" toggleGroup="$tgFilter" />
+            <JFXRadioButton fx:id="rbAno" layoutX="557.0" layoutY="88.0" text="Año" toggleGroup="$tgFilter" />
+            <JFXTextField fx:id="txtDatFilter" layoutX="671.0" layoutY="69.0" prefHeight="39.0" prefWidth="230.0" promptText="Digite data para el filtrado!" />
+         </children>
+      </AnchorPane>
+   </children>
+</StackPane>

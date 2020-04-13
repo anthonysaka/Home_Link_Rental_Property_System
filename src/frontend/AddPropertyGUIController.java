@@ -80,7 +80,7 @@ public class AddPropertyGUIController implements Initializable{
 
 	private ObservableList<String> list = FXCollections.observableArrayList(llenarCombobox2());
 
-	private ObservableList<String> listTypeProperty= FXCollections.observableArrayList("Apartamento", "Villa", "Pent-House", "Hacienda", "Finca");
+	public static ObservableList<String> listTypeProperty= FXCollections.observableArrayList("Apartamento", "Villa", "Pent-House", "Hacienda", "Finca");
 
 
 	String tipoPropiedad = null;
