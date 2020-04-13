@@ -152,7 +152,7 @@ public class LoginGUIController extends Application {
 				HomeGUIController.usuarioActual = loggedUser;			
 				Stage stage = (Stage) btnClose.getScene().getWindow();
 				stage.close();
-				Parent rootRegister = FXMLLoader.load(getClass().getResource("../frontend/splasScreenGUI.fxml")); 
+				Parent rootRegister = FXMLLoader.load(getClass().getResource("../frontend/splashScreen_login_home.fxml")); 
 				Stage stageRegister = new Stage();
 				Scene sceneRegister = new Scene(rootRegister);			
 				stageRegister.setScene(sceneRegister);

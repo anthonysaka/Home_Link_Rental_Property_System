@@ -142,8 +142,7 @@ public class RegisterGUIController implements Initializable {
 			}
 			
 		}else {
-			
-			
+
 			String name = txtName.getText();
 			String lastname = txtLastname.getText();
 			String gender = cbxGender.getSelectionModel().getSelectedItem().toString();
@@ -161,22 +160,19 @@ public class RegisterGUIController implements Initializable {
 				nUser.setTelephone_number(telephone);
 				nUser.setCountry_location(location);
 				if (HomeLink_Controller.create_add_user(nUser)) {
-					System.out.println("con exito");
+				//	System.out.println("con exito");
 					JFXButton btnOk = new JFXButton("Ok!");
 					PopupAlert.showCustomDialog(rootStackPane, rootAnchorPane, Arrays.asList(btnOk),"Usuario registrado con exito.", null);
 				}else {
-					System.out.println("sin exito");
+					//System.out.println("sin exito");
 				}
 			}
-			else {
-				
+			else {	
 				JFXButton btnOk = new JFXButton("Ok!");
 				PopupAlert.showCustomDialog(rootStackPane, rootAnchorPane, Arrays.asList(btnOk),"Contraseñas no coinciden", null);
 				System.out.println("contranse no coinciden");
-			}
-					
-		}
-		
+			}				
+		}	
 	}
 
 	@Override
