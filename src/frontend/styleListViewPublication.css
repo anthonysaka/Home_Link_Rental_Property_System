@@ -16,13 +16,13 @@
 }
 
 .list-cell:selected {
-	-fx-background-color: #e53935;
+	-fx-background-color: #FFC107;
 }
 
 .list-cell:hover {
-	-fx-background-color: #e53935;
+	-fx-background-color: #FFC107;
 }
 
 .list-cell .jfx-rippler {
-	-fx-rippler-fill: #ef5350;
+	-fx-rippler-fill: #FFC107;
 }

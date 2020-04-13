@@ -155,7 +155,7 @@ public class LoginGUIController extends Application {
 				Stage stage = (Stage) btnClose.getScene().getWindow();
 				stage.close();
 
-				Parent rootRegister = FXMLLoader.load(getClass().getResource("../frontend/homeGUI.fxml")); /* cambie temporalmente el loading */
+				Parent rootRegister = FXMLLoader.load(getClass().getResource("../frontend/homeGUI.fxml")); 
 				Stage stageRegister = new Stage();
 				Scene sceneRegister = new Scene(rootRegister);
 				
