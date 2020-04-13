@@ -568,7 +568,7 @@ public class AdminGUIController implements Initializable {
 
 	@FXML
 	public void refreshTbUser(ActionEvent event) {
-		listUser.clear();
+		listUser.clear(); //UN COMENTARIO
 		loadDataUser();
 	}
 
