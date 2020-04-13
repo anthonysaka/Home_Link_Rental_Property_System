@@ -65,14 +65,14 @@ public class LoginGUIController extends Application {
 	@Override
 	public void start(Stage stageLogin) throws Exception {
 
-		Parent rootLogin = FXMLLoader.load(LoginGUIController.class.getResource("../frontend/loginGUI.fxml")); /** cambie temporal*/
+		Parent rootLogin = FXMLLoader.load(LoginGUIController.class.getResource("../frontend/loginGUI.fxml")); 
 		Scene sceneLogin = new Scene(rootLogin);
 		stageLogin.getIcons().add(new Image(LoginGUIController.class.getResourceAsStream("../frontend/images/bg_home_link.png")));
 		stageLogin.setScene(sceneLogin);
 		stageLogin.setResizable(false);
 		stageLogin.initStyle(StageStyle.TRANSPARENT);
 		stageLogin.show();
-
+		
 		/*******
 		 * EventHandler to Move Undecorated Window (Stage) Adapted from: StackOverflow
 		 ******/
@@ -147,19 +147,14 @@ public class LoginGUIController extends Application {
 				loggedUser.setTelephone_number(resulter.getString("telephone_number"));
 				loggedUser.setStatus(resulter.getBoolean("status"));
 				loggedUser.setId(Integer.valueOf(resulter.getString("id")));
-				loggedUser.setType(resulter.getString("type"));
-				
-				System.out.println("Iniciando sesion... Sesion iniciada con Exito!");
-				
-				HomeGUIController.usuarioActual = loggedUser;
-				
+				loggedUser.setType(resulter.getString("type"));	
+				//System.out.println("Iniciando sesion... Sesion iniciada con Exito!");			
+				HomeGUIController.usuarioActual = loggedUser;			
 				Stage stage = (Stage) btnClose.getScene().getWindow();
 				stage.close();
-
-				Parent rootRegister = FXMLLoader.load(getClass().getResource("../frontend/homeGUI.fxml")); 
+				Parent rootRegister = FXMLLoader.load(getClass().getResource("../frontend/splasScreenGUI.fxml")); 
 				Stage stageRegister = new Stage();
-				Scene sceneRegister = new Scene(rootRegister);
-				
+				Scene sceneRegister = new Scene(rootRegister);			
 				stageRegister.setScene(sceneRegister);
 				stageRegister.setResizable(false);
 				stageRegister.initStyle(StageStyle.TRANSPARENT);
@@ -192,7 +187,10 @@ public class LoginGUIController extends Application {
 			}
 			
 		} catch (SQLException e) {
-			System.out.println("Hubo un error con la base de datos");
+			//System.out.println("Hubo un error con la base de datos");
+			JFXButton btnOk = new JFXButton("Ok!");
+			PopupAlert.showCustomDialog(rootStackPane, rootAnchorPane, Arrays.asList(btnOk),"Error!\n" 
+					+ "Hubo un error con la base de datos!.", null);
 			e.printStackTrace();		
 		}
 		return x;
