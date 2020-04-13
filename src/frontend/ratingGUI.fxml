@@ -6,69 +6,77 @@
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.control.Tab?>
 <?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.layout.StackPane?>
 <?import javafx.scene.text.Font?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="293.0" prefWidth="426.0" style="-fx-background-color: white;" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="frontend.RatingGUIController">
+
+<StackPane fx:id="rootStackPane" stylesheets="@styleAdmin.css" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="frontend.RatingGUIController">
    <children>
-      <JFXTabPane prefHeight="293.0" prefWidth="426.0" style="-fx-background-color: white;">
-         <tabs>
-            <Tab text="Comodidad">
-               <content>
-                  <AnchorPane prefHeight="200.0" prefWidth="200.0">
-                     <children>
-                        <Label layoutX="9.0" layoutY="8.0" prefHeight="36.0" prefWidth="409.0" text="Disfrutó comodamente de su estadía en este Inmueble?" textAlignment="CENTER">
-                           <font>
-                              <Font name="Gill Sans MT" size="18.0" />
-                           </font>
-                        </Label>
-                        <JFXSlider fx:id="slider1" layoutX="53.0" layoutY="44.0" orientation="VERTICAL" showTickMarks="true" />
-                     </children>
-                  </AnchorPane>
-               </content>
-            </Tab>
-            <Tab fx:id="excelente2" text="Seguridad">
-              <content>
-                <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="20.0" prefWidth="243.0">
-                     <children>
-                        <Label layoutX="-3.0" prefHeight="44.0" prefWidth="433.0" text="    Que tal estuvo la seguridad del Inmueble hospedado?" textAlignment="RIGHT">
-                           <font>
-                              <Font name="Gill Sans MT" size="18.0" />
-                           </font>
-                        </Label>
-                        <JFXSlider fx:id="slider2" layoutX="45.0" layoutY="44.0" orientation="VERTICAL" showTickMarks="true" />
-                     </children>
-                  </AnchorPane>
-              </content>
-            </Tab>
-            <Tab fx:id="excelente3" text="Calidad/Precio">
-              <content>
-                <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
-                     <children>
-                        <Label layoutX="34.0" prefHeight="45.0" prefWidth="359.0" text="La relación calidad/precio del Inmueble fue justa?">
-                           <font>
-                              <Font name="Gill Sans MT" size="18.0" />
-                           </font>
-                        </Label>
-                        <JFXSlider fx:id="slider3" layoutX="43.0" layoutY="45.0" orientation="VERTICAL" showTickMarks="true" />
-                     </children></AnchorPane>
-              </content>
-            </Tab>
-            <Tab text="Estadía">
-              <content>
-                <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="426.0">
-                     <children>
-                        <Label layoutX="38.0" layoutY="7.0" prefHeight="35.0" prefWidth="351.0" text="Honestamente, volvería usted a este Inmueble?">
-                           <font>
-                              <Font name="Gill Sans MT" size="18.0" />
-                           </font>
-                        </Label>
-                        <JFXButton fx:id="btnrate" layoutX="347.0" layoutY="160.0" onAction="#rateReservation" style="-fx-background-color: Gold;" text="Rate!" />
-                        <JFXButton fx:id="btnclose" layoutX="347.0" layoutY="213.0" onAction="#close" style="-fx-background-color: red;" text="Close" />
-                        <JFXSlider fx:id="slider4" blockIncrement="1.0" layoutX="49.0" layoutY="51.0" orientation="VERTICAL" showTickMarks="true" />
-                     </children></AnchorPane>
-              </content>
-            </Tab>
-         </tabs>
-      </JFXTabPane>
+      <AnchorPane fx:id="rootAnchorPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="293.0" prefWidth="426.0" style="-fx-background-color: white;">
+         <children>
+            <JFXTabPane prefHeight="293.0" prefWidth="426.0" style="-fx-background-color: white;">
+               <tabs>
+                  <Tab text="Comodidad">
+                     <content>
+                        <AnchorPane prefHeight="200.0" prefWidth="200.0">
+                           <children>
+                              <Label layoutX="9.0" layoutY="8.0" prefHeight="36.0" prefWidth="409.0" text="Disfrutó comodamente de su estadía en este Inmueble?" textAlignment="CENTER">
+                                 <font>
+                                    <Font name="Gill Sans MT" size="18.0" />
+                                 </font>
+                              </Label>
+                              <JFXSlider fx:id="slider1" layoutX="53.0" layoutY="44.0" orientation="VERTICAL" showTickMarks="true" />
+                           </children>
+                        </AnchorPane>
+                     </content>
+                  </Tab>
+                  <Tab fx:id="excelente2" text="Seguridad">
+                    <content>
+                      <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="20.0" prefWidth="243.0">
+                           <children>
+                              <Label layoutX="-3.0" prefHeight="44.0" prefWidth="433.0" text="    Que tal estuvo la seguridad del Inmueble hospedado?" textAlignment="RIGHT">
+                                 <font>
+                                    <Font name="Gill Sans MT" size="18.0" />
+                                 </font>
+                              </Label>
+                              <JFXSlider fx:id="slider2" layoutX="45.0" layoutY="44.0" orientation="VERTICAL" showTickMarks="true" />
+                           </children>
+                        </AnchorPane>
+                    </content>
+                  </Tab>
+                  <Tab fx:id="excelente3" text="Calidad/Precio">
+                    <content>
+                      <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                           <children>
+                              <Label layoutX="34.0" prefHeight="45.0" prefWidth="359.0" text="La relación calidad/precio del Inmueble fue justa?">
+                                 <font>
+                                    <Font name="Gill Sans MT" size="18.0" />
+                                 </font>
+                              </Label>
+                              <JFXSlider fx:id="slider3" layoutX="43.0" layoutY="45.0" orientation="VERTICAL" showTickMarks="true" />
+                           </children>
+                        </AnchorPane>
+                    </content>
+                  </Tab>
+                  <Tab text="Estadía">
+                    <content>
+                      <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="426.0">
+                           <children>
+                              <Label layoutX="38.0" layoutY="7.0" prefHeight="35.0" prefWidth="351.0" text="Honestamente, volvería usted a este Inmueble?">
+                                 <font>
+                                    <Font name="Gill Sans MT" size="18.0" />
+                                 </font>
+                              </Label>
+                              <JFXButton fx:id="btnrate" layoutX="347.0" layoutY="160.0" onAction="#rateReservation" style="-fx-background-color: Gold;" text="Rate!" />
+                              <JFXButton fx:id="btnclose" layoutX="347.0" layoutY="213.0" onAction="#close" style="-fx-background-color: red;" text="Close" />
+                              <JFXSlider fx:id="slider4" blockIncrement="1.0" layoutX="49.0" layoutY="51.0" orientation="VERTICAL" showTickMarks="true" />
+                           </children>
+                        </AnchorPane>
+                    </content>
+                  </Tab>
+               </tabs>
+            </JFXTabPane>
+         </children>
+      </AnchorPane>
    </children>
-</AnchorPane>
+</StackPane>

@@ -5,6 +5,7 @@ import java.net.URL;
 import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.Arrays;
 import java.util.ResourceBundle;
 
 import com.jfoenix.controls.JFXButton;
@@ -18,6 +19,8 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Tab;
+import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.StackPane;
 import javafx.stage.Stage;
 
 public class RatingGUIController extends TableReservationsGUIController implements Initializable{
@@ -47,7 +50,11 @@ public class RatingGUIController extends TableReservationsGUIController implemen
 
     @FXML
     private JFXSlider slider4;
+    @FXML
+    private StackPane rootStackPane;
 
+    @FXML
+    private AnchorPane rootAnchorPane;
 	@FXML
 	void close(ActionEvent event) {
 
@@ -78,7 +85,9 @@ public class RatingGUIController extends TableReservationsGUIController implemen
 			mySqlStatement.setDouble("pa_rate", x);
 			mySqlStatement.executeQuery();
 			System.out.println("FEEDBACK ENVIADO");
-
+			JFXButton btn = new JFXButton("Ok!");
+			PopupAlert.showCustomDialog(rootStackPane, rootAnchorPane, Arrays.asList(btn),"Gracias por su calificación!.", null);
+			
 		} catch (SQLException e) {
 			System.out.println("Error al ENVIAR SU FEEDBACK");
 			e.printStackTrace();

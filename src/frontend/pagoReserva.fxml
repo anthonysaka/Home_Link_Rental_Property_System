@@ -34,7 +34,7 @@
                   <Label layoutX="182.0" layoutY="254.0" text="INFORMACION PAGO" />
                   <Label layoutX="45.0" layoutY="303.0" text="&quot;Eliga una tarjeta registrada o digite los datos de la tarjeta.&quot;" />
                   <Label layoutX="97.0" layoutY="350.0" text="Tarjeta:" />
-                  <JFXComboBox fx:id="cbxTarjeta" layoutX="179.0" layoutY="348.0" onAction="#fillDataCard" prefHeight="33.0" prefWidth="257.0" />
+                  <JFXComboBox fx:id="cbxTarjeta" layoutX="179.0" layoutY="348.0" prefHeight="33.0" prefWidth="257.0" />
                   <JFXButton fx:id="btnPagar" contentDisplay="CENTER" layoutX="122.0" layoutY="583.0" onAction="#Pay" prefHeight="39.0" prefWidth="210.0" style="-fx-background-color: #ffc107; -fx-background-radius: 10;" styleClass="Button" text="Realizar Pago">
                      <font>
                         <Font name="System Bold" size="18.0" />

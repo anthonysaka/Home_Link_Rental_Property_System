@@ -174,12 +174,7 @@ public class RegisterGUIController implements Initializable {
 				PopupAlert.showCustomDialog(rootStackPane, rootAnchorPane, Arrays.asList(btnOk),"Contraseñas no coinciden", null);
 				System.out.println("contranse no coinciden");
 			}
-			
-			
-			
-			
-			
-			
+					
 		}
 		
 	}
@@ -195,7 +190,7 @@ public class RegisterGUIController implements Initializable {
 			cbxGender.setItems(listGender);
 			cbxLocation.setItems(list);
 			cbxCategoryAccount.setVisible(false);
-			iconoCategory.setVisible(false);
+		//	iconoCategory.setVisible(false);
 		}
 		
 		

@@ -47,6 +47,8 @@ public class AddcardGUIController extends ConnectionMySqlDB{
 		int cardCvv =  Integer.valueOf(cardCvvTexto);
 		Tarjetas card = new Tarjetas(cardNumber, cardName, cardDate, cardCvv);	
 		User.insertarTarjetas(card);	
+		
+		pagoReversaGUIController.llenarComboTarjeta();
 		Stage stage = (Stage) btnCancel.getScene().getWindow();
 		stage.close();
 

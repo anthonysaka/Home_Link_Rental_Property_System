@@ -5,11 +5,11 @@
 <?import javafx.scene.control.TableView?>
 <?import javafx.scene.layout.AnchorPane?>
 
-<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="822.0" prefWidth="1254.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="frontend.BussinessTableGUIController">
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="822.0" prefWidth="1254.0" stylesheets="@styleAdmin.css" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="frontend.BussinessTableGUIController">
    <children>
       <AnchorPane prefHeight="84.0" prefWidth="1254.0" style="-fx-background-color: Black;">
          <children>
-            <JFXButton fx:id="btnClose" layoutX="1184.0" layoutY="18.0" onAction="#close" style="-fx-background-color: Red;" text="Close" />
+            <JFXButton fx:id="btnClose" layoutX="1147.0" layoutY="24.0" onAction="#close" style="-fx-background-color: Red;" text="Close" />
          </children>
       </AnchorPane>
       <TableView fx:id="tableBussiness" layoutY="69.0" prefHeight="755.0" prefWidth="1254.0">

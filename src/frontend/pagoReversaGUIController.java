@@ -103,10 +103,10 @@ public class pagoReversaGUIController extends ViewPublicationGUI implements Init
 	private Label lblPrecioTotal;
 	@FXML
 	private Label lblCantNoche;
-    @FXML
-    private JFXButton btnCancel;
-    @FXML
-    private JFXButton btnCrearCard;
+	@FXML
+	private JFXButton btnCancel;
+	@FXML
+	private JFXButton btnCrearCard;
 
 	PublicacionesParaVisualizar publicacion = auxlist;
 	ObservableList<Tarjetas> listCard = FXCollections.observableArrayList(llenarComboTarjeta());
@@ -158,7 +158,7 @@ public class pagoReversaGUIController extends ViewPublicationGUI implements Init
 
 		cbxTarjeta.setItems(listNumCard);
 	}
-  
+
 
 	public static ArrayList<Tarjetas> llenarComboTarjeta()
 	{
@@ -192,13 +192,6 @@ public class pagoReversaGUIController extends ViewPublicationGUI implements Init
 
 		return listaTarjeta;
 	}
-	
-    @FXML
-    void fillDataCard(ActionEvent event) {
-    	cbxTarjeta.getSelectionModel().clearSelection();
-    	llenarComboTarjeta();
-    }
-
 
 	public int searchIdCard(String numCard) {
 		int aux = 0;
@@ -216,18 +209,18 @@ public class pagoReversaGUIController extends ViewPublicationGUI implements Init
 
 	}
 
-    @FXML
-    public void addCardENF(ActionEvent event) throws IOException {
-    	Parent rootLogin = FXMLLoader.load(getClass().getResource("../frontend/addCardGUI.fxml")); 
+	@FXML
+	public void addCardENF(ActionEvent event) throws IOException {
+		Parent rootLogin = FXMLLoader.load(getClass().getResource("../frontend/addCardGUI.fxml")); 
 		Stage stageLogin = new Stage();
 		Scene sceneLogin = new Scene(rootLogin);
-		
+
 		stageLogin.setScene(sceneLogin);
 		stageLogin.setResizable(false);
 		stageLogin.initStyle(StageStyle.TRANSPARENT);
 		stageLogin.show();
-    }
-    
+	}
+
 	@FXML
 	void Pay(ActionEvent event) throws SQLException {
 		/********************/
@@ -254,42 +247,57 @@ public class pagoReversaGUIController extends ViewPublicationGUI implements Init
 			System.out.println("factura insertada");
 		}
 		myConnection.close();
-		
-		JFXButton btnHome = new JFXButton("Go back to home.");
-		JFXButton btnPrint = new JFXButton("Print Invoice");
-		PopupAlert.showCustomDialog(rootStackPane, rootAnchorPane, Arrays.asList(btnHome, btnPrint),"Reservación y Factura realizada con exito!.", null);
-		
 
-		
+		JFXButton btnHome = new JFXButton("Go back to home.");
+		PopupAlert.showCustomDialog(rootStackPane, rootAnchorPane, Arrays.asList(btnHome),"Reservación y Factura realizada con exito!.", null);
+		btnHome.setOnAction(new EventHandler<ActionEvent>() {
+			@Override
+			public void handle(ActionEvent event) {
+				Stage stage = (Stage) btnCancel.getScene().getWindow();
+				stage.close();
+				Parent rootRegister;
+				try {
+					rootRegister = FXMLLoader.load(getClass().getResource("../frontend/homeGUI.fxml"));
+					Stage stageRegister = new Stage();
+					Scene sceneRegister = new Scene(rootRegister);
+					stageRegister.setScene(sceneRegister);
+					stageRegister.setResizable(false);
+					stageRegister.initStyle(StageStyle.TRANSPARENT);
+					stageRegister.show();
+				} catch (IOException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				} 						
+			}
+		});	
 		/***********************/
 	}
-	
-	  @FXML
-	    void cancelarPago(ActionEvent event) {
-	    	JFXButton btnHome = new JFXButton("Si");
-			PopupAlert.showCustomDialog(rootStackPane, rootAnchorPane, Arrays.asList(btnHome),"Seguro que desea cancelar?.", null);
-			btnHome.setOnAction(new EventHandler<ActionEvent>() {
-	            @Override
-	            public void handle(ActionEvent event) {
-	            	Stage stage = (Stage) btnCancel.getScene().getWindow();
-	        		stage.close();
-	        		Parent rootRegister;
-					try {
-						rootRegister = FXMLLoader.load(getClass().getResource("../frontend/homeGUI.fxml"));
-						Stage stageRegister = new Stage();
-						Scene sceneRegister = new Scene(rootRegister);
-						stageRegister.setScene(sceneRegister);
-						stageRegister.setResizable(false);
-						stageRegister.initStyle(StageStyle.TRANSPARENT);
-						stageRegister.show();
-					} catch (IOException e) {
-						// TODO Auto-generated catch block
-						e.printStackTrace();
-					} 
-								
-	            }
-	        });
-	    }
+	@FXML
+	void cancelarPago(ActionEvent event) {
+		JFXButton btnHome = new JFXButton("Si");
+		PopupAlert.showCustomDialog(rootStackPane, rootAnchorPane, Arrays.asList(btnHome),"Seguro que desea cancelar?.", null);
+		btnHome.setOnAction(new EventHandler<ActionEvent>() {
+			@Override
+			public void handle(ActionEvent event) {
+				Stage stage = (Stage) btnCancel.getScene().getWindow();
+				stage.close();
+				Parent rootRegister;
+				try {
+					rootRegister = FXMLLoader.load(getClass().getResource("../frontend/homeGUI.fxml"));
+					Stage stageRegister = new Stage();
+					Scene sceneRegister = new Scene(rootRegister);
+					stageRegister.setScene(sceneRegister);
+					stageRegister.setResizable(false);
+					stageRegister.initStyle(StageStyle.TRANSPARENT);
+					stageRegister.show();
+				} catch (IOException e) {
+					// TODO Auto-generated catch block
+					e.printStackTrace();
+				} 
+
+			}
+		});
+	}
 
 	public int getIdReservationFromDB() {
 
