@@ -19,7 +19,7 @@
    <children>
       <AnchorPane fx:id="rootAnchorPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="687.0" prefWidth="882.0" style="-fx-background-color: F5F5F5;" stylesheets="@styleRegister.css">
          <children>
-            <Text layoutX="198.0" layoutY="82.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Create your Home Link Account" AnchorPane.leftAnchor="198.0" AnchorPane.rightAnchor="175.5439453125" AnchorPane.topAnchor="45.310546875">
+            <Text fx:id="titulo" layoutX="198.0" layoutY="82.0" strokeType="OUTSIDE" strokeWidth="0.0" text="Create your Home Link Account" AnchorPane.leftAnchor="198.0" AnchorPane.rightAnchor="175.5439453125" AnchorPane.topAnchor="45.310546875">
                <font>
                   <Font name="System Bold" size="34.0" />
                </font>

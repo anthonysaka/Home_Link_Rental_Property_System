@@ -10,8 +10,6 @@
       <AnchorPane prefHeight="63.0" prefWidth="1322.0" style="-fx-background-color: black;">
          <children>
             <JFXButton fx:id="btnclose" layoutX="1243.0" layoutY="16.0" onAction="#close" style="-fx-background-color: red;" text="Close" />
-            <JFXButton fx:id="btnupdate" layoutX="1155.0" layoutY="16.0" style="-fx-background-color: yellow;" text="Update" />
-            <JFXButton fx:id="btnrefresh" layoutX="14.0" layoutY="16.0" style="-fx-background-color: yellow;" text="Refresh" />
          </children>
       </AnchorPane>
       <TableView fx:id="tableprofile" layoutY="56.0" prefHeight="86.0" prefWidth="1322.0">

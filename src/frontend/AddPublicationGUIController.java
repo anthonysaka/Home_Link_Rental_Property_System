@@ -83,7 +83,7 @@ public class AddPublicationGUIController implements Initializable{
 
 		FileChooser fc = new FileChooser();
 
-		fc.setInitialDirectory(new File("C:\\Users\\jhan_"));
+		fc.setInitialDirectory(new File("C:\\Users\\Anthony\\Desktop"));
 
 		File selectedFile = fc.showOpenDialog(null);
 

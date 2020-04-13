@@ -27,7 +27,7 @@
             </TableView>
             <AnchorPane layoutY="574.0" prefHeight="52.0" prefWidth="1119.0" style="-fx-background-color: Black;">
                <children>
-                  <JFXButton fx:id="btnRate" layoutX="532.0" layoutY="11.0" onAction="#rating" style="-fx-background-color: Gold;" text="Rate!" />
+                  <JFXButton fx:id="btnRate" layoutX="532.0" layoutY="11.0" onAction="#rating" text="Rate!" />
                </children>
             </AnchorPane>
          </children>

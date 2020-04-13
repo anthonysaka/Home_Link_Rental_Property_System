@@ -26,6 +26,7 @@ import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.StackPane;
+import javafx.scene.text.Text;
 import javafx.stage.Stage;
 
 /**
@@ -39,7 +40,8 @@ public class RegisterGUIController implements Initializable {
 
 	@FXML
     private MaterialDesignIconView iconoCategory;
-	
+    @FXML
+    public static Text titulo;
 	@FXML
 	private AnchorPane rootAnchorPane;
 	@FXML
@@ -75,6 +77,19 @@ public class RegisterGUIController implements Initializable {
 	ObservableList<String> listTypeAccount = FXCollections.observableArrayList("Personal","Empresa");
 
 	/*** METHODS ***/
+	
+	@Override
+	public void initialize(URL location, ResourceBundle resources) {
+		if (AdminGUIController.admin != 1) {
+			cbxGender.setItems(listGender);
+			cbxCategoryAccount.setItems(listTypeAccount);
+			cbxLocation.setItems(list);
+		} else {
+			cbxGender.setItems(listGender);
+			cbxLocation.setItems(list);
+			cbxCategoryAccount.setVisible(false);
+		}	
+	}
 
 	@FXML
 	void closeWindow(ActionEvent event) {
@@ -175,18 +190,6 @@ public class RegisterGUIController implements Initializable {
 		}	
 	}
 
-	@Override
-	public void initialize(URL location, ResourceBundle resources) {
-		
-		if (AdminGUIController.admin != 1) {
-			cbxGender.setItems(listGender);
-			cbxCategoryAccount.setItems(listTypeAccount);
-			cbxLocation.setItems(list);
-		} else {
-			cbxGender.setItems(listGender);
-			cbxLocation.setItems(list);
-			cbxCategoryAccount.setVisible(false);
-		}	
-	}
+	
 
 }
