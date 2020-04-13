@@ -73,7 +73,7 @@ public class TablePropertyGUIController implements Initializable {
     	
     	columnatipo.setCellValueFactory(new PropertyValueFactory<>("tipo"));
 		columnastatus.setCellValueFactory(new PropertyValueFactory<>("estatus"));
-		columnarating.setCellValueFactory(new PropertyValueFactory<>("feedbacks"));
+		columnarating.setCellValueFactory(new PropertyValueFactory<>("rating"));
 		columnadireccion.setCellValueFactory(new PropertyValueFactory<>("direccion"));
 		columnacaracteristicas.setCellValueFactory(new PropertyValueFactory<>("caracteristicas"));
 		
@@ -136,19 +136,20 @@ public class TablePropertyGUIController implements Initializable {
 				String tipo = rs.getString("type");
 				String dir = rs.getString("Address_Property");
 				String caract = rs.getString("Characteristic_Property");
-				String feedback= rs.getString("rating");
+				Float feedback= rs.getFloat("rating");
 				boolean status = rs.getBoolean("status");
 				System.out.println("EL ESTATUS ES:"+status);
 				
 				if (status == true) {
 					Propiedad auxPro = new Propiedad(tipo, dir, "Publicada", caract);
-				//	auxPro.setFeedbacks(feedback);
+					auxPro.setRating(feedback);
 					listPropiedad.removeAll(auxPro);
 					listPropiedad.add(auxPro);	
 					
+					
 				}else {
 					Propiedad auxPro = new Propiedad(tipo, dir, "Inactiva", caract);
-			//		auxPro.setFeedbacks(feedback);
+					auxPro.setRating(feedback);
 					
 					listPropiedad.add(auxPro);	
 				}

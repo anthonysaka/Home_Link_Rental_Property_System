@@ -138,8 +138,6 @@ public class TableReservationsGUIController implements Initializable {
 	@FXML
     void rating(ActionEvent event) throws IOException {
 		
-		if (auxReserva.isIsrated()) {
-			
 			index = tablereservations.getSelectionModel().getSelectedItem().getIdPropiedad();
 			System.out.println("ESTE INDEX ES: "+index);
 			
@@ -171,12 +169,6 @@ public class TableReservationsGUIController implements Initializable {
 					stageRegister.setY(event.getScreenY() + yoffset);
 				}
 			});
-			
-			
-		} else {
-			JFXButton btnOk = new JFXButton("Ok!");
-			PopupAlert.showCustomDialog(rootStackPane, rootAnchorPane, Arrays.asList(btnOk),"Ya haz valorado este inmueble!", null);
-		}
 		
     }
 	
