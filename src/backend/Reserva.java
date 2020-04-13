@@ -12,7 +12,7 @@ public class Reserva {
 	private float precio;
 	private String tipoPropiedad;
 	private String titulo;
-	
+	private boolean israted;
 	private String username;
 	private String num_card;
 	
@@ -150,6 +150,16 @@ public class Reserva {
 
 	public void setIdPropiedad(int idPropiedad) {
 		this.idPropiedad = idPropiedad;
+	}
+
+
+	public boolean isIsrated() {
+		return israted;
+	}
+
+
+	public void setIsrated(boolean israted) {
+		this.israted = israted;
 	}
 	
 

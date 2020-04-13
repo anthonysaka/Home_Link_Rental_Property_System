@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import com.jfoenix.controls.JFXButton?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.layout.AnchorPane?>
+
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="142.0" prefWidth="1322.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="frontend.TableProfileGUIController">
+   <children>
+      <AnchorPane prefHeight="63.0" prefWidth="1322.0" style="-fx-background-color: black;">
+         <children>
+            <JFXButton fx:id="btnclose" layoutX="1243.0" layoutY="16.0" onAction="#close" style="-fx-background-color: red;" text="Close" />
+            <JFXButton fx:id="btnupdate" layoutX="1155.0" layoutY="16.0" style="-fx-background-color: yellow;" text="Update" />
+            <JFXButton fx:id="btnrefresh" layoutX="14.0" layoutY="16.0" style="-fx-background-color: yellow;" text="Refresh" />
+         </children>
+      </AnchorPane>
+      <TableView fx:id="tableprofile" layoutY="56.0" prefHeight="86.0" prefWidth="1322.0">
+        <columns>
+          <TableColumn fx:id="columnnuser" prefWidth="111.99996948242188" text="Username" />
+          <TableColumn fx:id="columnmail" prefWidth="232.0" text="Email" />
+            <TableColumn fx:id="columnpass" minWidth="0.0" prefWidth="118.0" text="Password" />
+            <TableColumn fx:id="columnname" prefWidth="179.0" text="Name" />
+            <TableColumn fx:id="columnlastname" prefWidth="181.0" text="Lastname" />
+            <TableColumn fx:id="columngender" prefWidth="120.0" text="Gender" />
+            <TableColumn fx:id="columntelephone" prefWidth="173.0" text="Telephone Number" />
+            <TableColumn fx:id="columncountry" prefWidth="207.0" text="Country" />
+        </columns>
+      </TableView>
+   </children>
+</AnchorPane>

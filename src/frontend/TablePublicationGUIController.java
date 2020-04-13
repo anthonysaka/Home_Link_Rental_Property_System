@@ -203,6 +203,7 @@ public class TablePublicationGUIController implements Initializable {
     void CloseWindow(ActionEvent event) {
     	Stage x = (Stage) btnClose.getScene().getWindow();
     	x.close();
+    	HomeGUIController.llenarCombo();
     }
 
 	

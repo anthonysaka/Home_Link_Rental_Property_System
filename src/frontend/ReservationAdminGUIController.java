@@ -211,7 +211,7 @@ public class ReservationAdminGUIController implements Initializable {
 					listReservas.add(auxRe);
 				}
 				tableReserva.getItems().setAll(listReservas);
-				myConnection.close();
+				
 				
 			} else if (rbCiudad.isSelected()) {
 				mySqlStatement = (CallableStatement) myConnection.prepareCall("{CALL sp_query_reservation_city(?)}");
@@ -231,7 +231,7 @@ public class ReservationAdminGUIController implements Initializable {
 					listReservas.add(auxRe);
 				}
 				tableReserva.getItems().setAll(listReservas);	
-				myConnection.close();
+				
 				
 			} else if (rbMes.isSelected()) {
 				mySqlStatement = (CallableStatement) myConnection.prepareCall("{CALL sp_query_reservation_month(?)}");
@@ -251,7 +251,7 @@ public class ReservationAdminGUIController implements Initializable {
 					listReservas.add(auxRe);
 				}
 				tableReserva.getItems().setAll(listReservas);
-				myConnection.close();
+				
 				
 			} else if (rbAno.isSelected()) {
 				mySqlStatement = (CallableStatement) myConnection.prepareCall("{CALL sp_query_reservation_year(?)}");
@@ -271,7 +271,7 @@ public class ReservationAdminGUIController implements Initializable {
 					listReservas.add(auxRe);
 				}
 				tableReserva.getItems().setAll(listReservas);
-				myConnection.close();
+				
 			} else {
 				JFXButton btnOk = new JFXButton("Ok!");
 				PopupAlert.showCustomDialog(rootStackPane, rootAnchorPane, Arrays.asList(btnOk),"Error!\n" 
@@ -287,7 +287,7 @@ public class ReservationAdminGUIController implements Initializable {
 		}
 		
 		
-		
+		myConnection.close();
 	}
 
 	@FXML

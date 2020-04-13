@@ -17,6 +17,6 @@
       <Label layoutX="198.0" layoutY="230.0" text="CVV" />
       <JFXTextField fx:id="txtcardCvv" layoutX="184.0" layoutY="264.0" maxWidth="98.0" minWidth="50.0" prefHeight="37.0" prefWidth="61.0" promptText="###" />
       <Button fx:id="btnSave" layoutX="216.0" layoutY="356.0" mnemonicParsing="false" onAction="#saveCard" prefWidth="72.0" text="Save" />
-      <Button fx:id="btnCancel" layoutX="28.0" layoutY="356.0" mnemonicParsing="false" prefWidth="72.0" text="Cancel" />
+      <Button fx:id="btnCancel" layoutX="28.0" layoutY="356.0" mnemonicParsing="false" onAction="#close" prefWidth="72.0" text="Cancel" />
    </children>
 </Pane>

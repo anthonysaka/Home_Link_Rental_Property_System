@@ -436,6 +436,7 @@ public class AdminGUIController implements Initializable {
 	public void closeWindow(ActionEvent event) {
 		Stage stage = (Stage) btnMinimize.getScene().getWindow();
 		stage.close();
+		HomeGUIController.llenarCombo();
 	}
 
 	@FXML

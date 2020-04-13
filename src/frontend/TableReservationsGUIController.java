@@ -1,9 +1,11 @@
 package frontend;
 
+import java.io.IOException;
 import java.net.URL;
 import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.Arrays;
 import java.util.ResourceBundle;
 
 import com.jfoenix.controls.JFXButton;
@@ -14,21 +16,38 @@ import backend.Reserva;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.input.MouseEvent;
+import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.StackPane;
 import javafx.stage.Stage;
+import javafx.stage.StageStyle;
 
 public class TableReservationsGUIController implements Initializable {
+	
+	@FXML
+    private StackPane rootStackPane;
+
+    @FXML
+    private AnchorPane rootAnchorPane;
 
     @FXML
     private JFXButton btnClose;
 
     @FXML
     private TableView<Reserva> tablereservations;
-
+    
+    @FXML
+    private JFXButton btnRate;
+    
     @FXML
     private TableColumn<Reserva, String> columnreservationId;
 
@@ -47,7 +66,16 @@ public class TableReservationsGUIController implements Initializable {
     @FXML
     private TableColumn<Reserva, String> columnprice;
     
+    private double xoffset = 0;
+	private double yoffset = 0;
+    
+	public static int index = 0;
+	public  Reserva auxReserva;
+    
     ObservableList<Reserva> listMyReservas = FXCollections.observableArrayList();
+   
+    
+    public  int idpropiedad = 0;
     
     /*******************************************************METHODS**********************************************************************************/
 
@@ -92,11 +120,12 @@ public class TableReservationsGUIController implements Initializable {
 				int huespedes= rs.getInt("huespedes");
 				float precio = rs.getFloat("precio");
 				System.out.println("datos: "+ reservaid + "  "+ titulo+ " "+ inicio);
-				
-				Reserva auxReserva = new Reserva(reservaid, 0, 0, huespedes, inicio, fin, "", precio);
+				idpropiedad = rs.getInt("id_property");
+				auxReserva = new Reserva(reservaid, 0, 0, huespedes, inicio, fin, "", precio);
+				auxReserva.setIdPropiedad(idpropiedad);
 				auxReserva.setTitulo(titulo);
 				auxReserva.setPrecio(precio);
-
+				
 				listMyReservas.add(auxReserva);
 
 
@@ -105,6 +134,51 @@ public class TableReservationsGUIController implements Initializable {
 		}
 		tablereservations.getItems().setAll(listMyReservas);
 	}
+	
+	@FXML
+    void rating(ActionEvent event) throws IOException {
+		
+		if (auxReserva.isIsrated()) {
+			
+			index = tablereservations.getSelectionModel().getSelectedItem().getIdPropiedad();
+			System.out.println("ESTE INDEX ES: "+index);
+			
+			Parent rootRegister = FXMLLoader.load(getClass().getResource("../frontend/ratingGUI.fxml"));
+			Stage stageRegister = new Stage();
+			Scene sceneRegister = new Scene(rootRegister);
+
+			stageRegister.setScene(sceneRegister);
+			stageRegister.setResizable(false);
+			//stageRegister.setAlwaysOnTop(true);
+			stageRegister.initStyle(StageStyle.TRANSPARENT);
+			//	stageRegister.initModality(Modality.APPLICATION_MODAL);
+			stageRegister.show();
+
+			/*******
+			 * EventHandler to Move Undecorated Window (Stage) Adapted from: StackOverflow
+			 ******/
+			rootRegister.setOnMousePressed(new EventHandler<MouseEvent>() {
+				@Override
+				public void handle(MouseEvent event) {
+					xoffset = stageRegister.getX() - event.getScreenX();
+					yoffset = stageRegister.getY() - event.getScreenY();
+				}
+			});
+			rootRegister.setOnMouseDragged(new EventHandler<MouseEvent>() {
+				@Override
+				public void handle(MouseEvent event) {
+					stageRegister.setX(event.getScreenX() + xoffset);
+					stageRegister.setY(event.getScreenY() + yoffset);
+				}
+			});
+			
+			
+		} else {
+			JFXButton btnOk = new JFXButton("Ok!");
+			PopupAlert.showCustomDialog(rootStackPane, rootAnchorPane, Arrays.asList(btnOk),"Ya haz valorado este inmueble!", null);
+		}
+		
+    }
 	
 	@FXML
     void close(ActionEvent event) {

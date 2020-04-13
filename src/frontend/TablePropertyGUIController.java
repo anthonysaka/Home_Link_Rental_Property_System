@@ -175,6 +175,7 @@ public class TablePropertyGUIController implements Initializable {
     	
     	Stage x = (Stage) btnClose.getScene().getWindow();
     	x.close();
+    	HomeGUIController.llenarCombo();
 
     }
 
