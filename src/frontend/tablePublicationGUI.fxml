@@ -14,12 +14,12 @@
          <children>
             <AnchorPane prefHeight="64.0" prefWidth="1166.0">
                <children>
-                  <JFXButton fx:id="btnAddPublication" layoutX="782.0" layoutY="19.0" onAction="#insertPublication" text="Add" textFill="WHITE">
+                  <JFXButton fx:id="btnAddPublication" layoutX="897.0" layoutY="19.0" onAction="#insertPublication" text="Add" textFill="WHITE">
                      <font>
                         <Font name="Consolas Bold" size="16.0" />
                      </font>
                   </JFXButton>
-                  <JFXButton fx:id="btnModifyPublication" layoutX="878.0" layoutY="19.0" text="Modify" textFill="WHITE">
+                  <JFXButton fx:id="btnModifyPublication" layoutX="14.0" layoutY="19.0" text="Refresh" textFill="WHITE">
                      <font>
                         <Font name="Consolas Bold" size="16.0" />
                      </font>
@@ -30,7 +30,7 @@
                      </font>
                   </JFXButton>
                   <Button fx:id="btnClose" layoutX="1052.0" layoutY="19.0" mnemonicParsing="false" onAction="#CloseWindow" text="Close" />
-                  <JFXButton fx:id="btnModifyPublication1" layoutX="544.0" layoutY="19.0" onAction="#openBussiness" prefHeight="37.0" prefWidth="194.0" text="Bussiness Information" textFill="WHITE">
+                  <JFXButton fx:id="btnModifyPublication1" layoutX="687.0" layoutY="19.0" onAction="#openBussiness" prefHeight="37.0" prefWidth="194.0" text="Bussiness Information" textFill="WHITE">
                      <font>
                         <Font name="Consolas Bold" size="16.0" />
                      </font>

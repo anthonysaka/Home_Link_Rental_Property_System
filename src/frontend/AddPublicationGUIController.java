@@ -29,6 +29,7 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
+import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.AnchorPane;
@@ -42,7 +43,7 @@ import sun.swing.FilePane.FileChooserUIAccessor;
 public class AddPublicationGUIController implements Initializable{
 
 
-
+	 
 	@FXML
 	private AnchorPane primaryPane;
 	@FXML
@@ -174,7 +175,7 @@ public class AddPublicationGUIController implements Initializable{
 		
 		System.out.println("SE ENVIARON LAS IMAGENES");
 
-
+		cancel(event);
 	}
 
 	public static ArrayList<String> llenarCombobox() {

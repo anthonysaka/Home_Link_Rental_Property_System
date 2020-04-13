@@ -5,7 +5,7 @@ public class Reserva {
 	private int idReserva; 
 	private int idPublicacion;
 	private int idUsuario;
-	private int idFactura;
+	private int idPropiedad;
 	private int huespedes;
 	private String fechaInicio;
 	private String fechaFin;
@@ -23,6 +23,7 @@ public class Reserva {
 		this.huespedes = huespedes;
 		this.fechaInicio = fechaInicio;
 		this.fechaFin = fechaFin;
+		this.idPropiedad = idPropiedad;
 	}
 
 
@@ -33,6 +34,16 @@ public class Reserva {
 
 	public void setIdReserva(int idReserva) {
 		this.idReserva = idReserva;
+	}
+
+
+	public int getIdPublicacion() {
+		return idPublicacion;
+	}
+
+
+	public void setIdPublicacion(int idPublicacion) {
+		this.idPublicacion = idPublicacion;
 	}
 
 
@@ -96,14 +107,7 @@ public class Reserva {
 	}
 
 
-	public int getIdFactura() {
-		return idFactura;
-	}
-
-
-	public void setIdFactura(int idFactura) {
-		this.idFactura = idFactura;
-	}
+	
 
 
 	public String getTipoPropiedad() {

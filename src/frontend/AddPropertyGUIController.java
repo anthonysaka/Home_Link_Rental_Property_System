@@ -21,6 +21,7 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
+import javafx.scene.control.Label;
 
 import com.jfoenix.controls.JFXCheckBox;
 import com.jfoenix.controls.JFXComboBox;
@@ -32,7 +33,10 @@ import javafx.scene.control.SpinnerValueFactory;
 import javafx.stage.Stage;
 
 public class AddPropertyGUIController implements Initializable{
-
+	
+	@FXML
+	private Label labelnname;
+	
 	@FXML
 	private JFXTextField txtCity;
 
@@ -126,9 +130,11 @@ public class AddPropertyGUIController implements Initializable{
 		AirCond = chkAirCond.isSelected();
 		pool = chkPool.isSelected();
 		others = txtOthers.getText();
-
 		insertarDireccion(pais, ciudad, calle);
 		insertarCaracteristica(capacidad, habitaciones, camas, bathroom, wifi, kitchen, AirCond, pool, others);
+		//TablePropertyGUIController.initColumns();
+		//TablePropertyGUIController.loadDataPropiedad();
+		
 
 		CallableStatement mySqlStatement1 = null ; // call stored procedure
 		try {
@@ -148,10 +154,13 @@ public class AddPropertyGUIController implements Initializable{
 			e.printStackTrace();
 
 		}
+		close(event);
+		
 	}
 
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
+		labelnname.setText(HomeGUIController.usuarioActual.getUsername());
 		cbxpropertyType.setItems(listTypeProperty);
 		cbxCountry.setItems(list);
 		spnBathroom.setValueFactory(valuebathroom);

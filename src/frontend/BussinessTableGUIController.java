@@ -13,7 +13,7 @@ import com.sun.org.apache.bcel.internal.generic.CPInstruction;
 
 import backend.ConnectionMySqlDB;
 import backend.Propiedad;
-import backend.Publicacion;
+import backend.Reserva;
 import backend.Reserva;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -27,131 +27,104 @@ import javafx.stage.Stage;
 
 public class BussinessTableGUIController implements Initializable{
 
-    @FXML
-    private JFXButton btnClose;
+	@FXML
+	private JFXButton btnClose;
 
-    @FXML
-    private TableView<Reserva> tableBussiness;
+	@FXML
+	private TableView<Reserva> tableBussiness;
 
-    @FXML
-    private TableColumn<Reserva, String> columnPropertyId;
+	@FXML
+	private TableColumn<Reserva, String> columntype;
 
-    @FXML
-    private TableColumn<Reserva, String> columnPublicationId;
+	@FXML
+	private TableColumn<Reserva, String> columnPropertyId;
 
-    @FXML
-    private TableColumn<Reserva, String> columBillId;
+	@FXML
+	private TableColumn<Reserva, String> columnPublicationId;
 
-    @FXML
-    private TableColumn<Reserva, String> columnStartD;
 
-    @FXML
-    private TableColumn<Reserva, String> columnEndD;
+	@FXML
+	private TableColumn<Reserva, String> columnStartD;
 
-    @FXML
-    private TableColumn<Reserva, String> columnIncome;
-    
-    ObservableList<Reserva> listReservas = FXCollections.observableArrayList();
-    
-    /******************************************************METHODS*******************************************************************************/
+	@FXML
+	private TableColumn<Reserva, String> columnEndD;
 
-       
+	@FXML
+	private TableColumn<Reserva, String> columnIncome;
+
+	ObservableList<Reserva> listReservas = FXCollections.observableArrayList();
+
+	/******************************************************METHODS*******************************************************************************/
+
+
 	@Override
 	public void initialize(URL location, ResourceBundle resources) {
-		
+		initColumns();
+		loadDataBussiness();
 	}
-	
-	
+
+
 	public void initColumns() {
 		columnPropertyId.setCellValueFactory(new PropertyValueFactory<>("idPropiedad"));
-		columnPublicationId.setCellValueFactory(new PropertyValueFactory<>("idPublicacion"));
-		columBillId.setCellValueFactory(new PropertyValueFactory<>("idFactura"));
+		columnPublicationId.setCellValueFactory(new PropertyValueFactory<>("titulo"));
+		columntype.setCellValueFactory(new PropertyValueFactory<>("tipoPropiedad"));
 		columnStartD.setCellValueFactory(new PropertyValueFactory<>("fechaInicio"));
 		columnEndD.setCellValueFactory(new PropertyValueFactory<>("fechaFin"));
 		columnIncome.setCellValueFactory(new PropertyValueFactory<>("precio"));
 	}
-	
-	public void loadDataAutorizarPublicaciones() {
-		
+
+	public void loadDataBussiness() {
+
 		ResultSet rs = null;
 
-    	CallableStatement mySqlStatement = null ; // call stored procedure
+		CallableStatement mySqlStatement = null ; // call stored procedure
 		try {
 			Connection myConnection = ConnectionMySqlDB.getConnectionMySqlDB();	
 			mySqlStatement = (CallableStatement) myConnection.prepareCall("{CALL sp_tablaNegocios(?)}");
 			mySqlStatement.setInt("pa_userid", HomeGUIController.usuarioActual.getId());
 			rs = mySqlStatement.executeQuery();
-			System.out.println("Los datos de sus publicaciones han sido cargados");
-		
+			System.out.println("Los datos de sus Reservas han sido cargados");
+
 		} catch (SQLException e) {
-			System.out.println("Error al cargar sus publicaciones!");
+			System.out.println("Error al cargar sus Reservas!");
 			e.printStackTrace();
 		}
 		try { /* RECORDAR LIMPIAR EL CODIGO DE TODO EL PROYECTO [Mucho codigo repetido]*/
 			while(rs.next()){
-				String tipo = rs.getString("type");
-				String dir = rs.getString("Address_Property");
-				String caract = rs.getString("Characteristic_Property");
-				String feedback= rs.getString("rating");
-				boolean status = rs.getBoolean("status");
-				System.out.println("EL ESTATUS ES:"+status);
-				
-				if (status == true) {
-					Propiedad auxPro = new Propiedad(tipo, dir, "Publicada", caract);
-					auxPro.setFeedbacks(feedback);
-				//	listPropiedad.add(auxPro);	
-				}else {
-					Propiedad auxPro = new Propiedad(tipo, dir, "Inactiva", caract);
-					auxPro.setFeedbacks(feedback);
-					//listPropiedad.add(auxPro);	
-				}
-				
-				
+				int propiedadid = rs.getInt("idpropiedad");//
+				String titulo = rs.getString("titulo");
+				String inicio = rs.getString("inicio");//
+				String fin= rs.getString("fin");//
+				String tipo= rs.getString("tipo");
+				float precio = rs.getFloat("precio");
+
+				Reserva auxReserva = new Reserva(0, propiedadid, 0, 0, inicio, fin);
+				auxReserva.setTitulo(titulo);
+				auxReserva.setTipoPropiedad(tipo);
+				auxReserva.setPrecio(precio);
+
+				listReservas.add(auxReserva);
+
+
 			}
 		} catch (Exception e) {
 		}
-
-		//tablapropiedades.getItems().setAll(listPropiedad);
-		
-		/* RECORDAR CAMBIAr NOMBRES DE LAS TABLAS, ya que la BD se va a crear 
-		 * completa de nuevo, por mal convencion de nombre y logistica
-		 
-		Statement sentencia = null;
-		ResultSet rs = null;
-		String Query = "SELECT id, titulo, date, id_property, price, status FROM t_publication WHERE id_owner = "+HomeGUIController.usuarioActual.getId();
-		try {
-			Connection myConnection = ConnectionMySqlDB.getConnectionMySqlDB();
-			sentencia = myConnection.createStatement();
-			rs = sentencia.executeQuery(Query);
-			System.out.println("TABLA PUBLICACIONES BIEN");
-		} catch (Exception e) {
-			System.out.println("TABLA PUBLICACIONES NO BIEN");
-		}
-		try { /* RECORDAR LIMPIAR EL CODIGO DE TODO EL PROYECTO [Mucho codigo repetido]
-			while(rs.next()){
-				
-
-				listReservas.addAll();
-			}
-		} catch (Exception e) {
-		}
-
-		tableBussiness.getItems().setAll(listReservas);*/
+		tableBussiness.getItems().setAll(listReservas);
 	}
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
+
+
+
+
+
+
+
+
+
+
 	@FXML
-    void close(ActionEvent event) {
-    	Stage x = (Stage) btnClose.getScene().getWindow();
-    	x.close();
-    }
+	void close(ActionEvent event) {
+		Stage x = (Stage) btnClose.getScene().getWindow();
+		x.close();
+	}
 
 }

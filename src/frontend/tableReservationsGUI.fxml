@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import com.jfoenix.controls.JFXButton?>
+<?import javafx.scene.control.TableColumn?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.layout.AnchorPane?>
+
+
+<AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="780.0" prefWidth="1119.0" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="frontend.TableReservationsGUIController">
+   <children>
+      <AnchorPane prefHeight="77.0" prefWidth="1119.0" style="-fx-background-color: black;">
+         <children>
+            <JFXButton fx:id="btnClose" layoutX="1040.0" layoutY="23.0" onAction="#close" style="-fx-background-color: Red;" text="Close" />
+         </children>
+      </AnchorPane>
+      <TableView fx:id="tablereservations" layoutY="77.0" prefHeight="703.0" prefWidth="1119.0">
+        <columns>
+          <TableColumn fx:id="columnreservationId" prefWidth="109.0" text="Reservation Id" />
+          <TableColumn fx:id="columntitle" prefWidth="489.0" text="Publication Title" />
+            <TableColumn fx:id="columnstart" prefWidth="163.0" text="Start Date" />
+            <TableColumn fx:id="columnend" prefWidth="158.0" text="End Date" />
+            <TableColumn fx:id="columnguest" prefWidth="77.0" text="Guests" />
+            <TableColumn fx:id="columnprice" prefWidth="122.0" text="Price" />
+        </columns>
+      </TableView>
+   </children>
+</AnchorPane>

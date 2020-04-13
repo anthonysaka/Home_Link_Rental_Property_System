@@ -10,7 +10,6 @@
 <?import javafx.scene.layout.StackPane?>
 <?import javafx.scene.text.Font?>
 
-
 <StackPane stylesheets="@styleAdmin.css" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="frontend.AddPropertyGUIController">
    <children>
       <AnchorPane maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="629.0" prefWidth="824.0">
@@ -27,7 +26,7 @@
                </font>
             </Label>
             <JFXTextField fx:id="txtOthers" layoutX="29.0" layoutY="513.0" maxWidth="771.0" minWidth="165.0" prefHeight="39.0" prefWidth="771.0" />
-            <Label layoutX="468.0" layoutY="28.0" text="Owner name">
+            <Label fx:id="labelnname" layoutX="675.0" layoutY="24.0" text="Owner name">
                <font>
                   <Font name="Franklin Gothic Medium Italic" size="15.0" />
                </font>
@@ -37,10 +36,10 @@
                   <Font name="Franklin Gothic Medium" size="15.0" />
                </font>
             </Label>
-            <JFXComboBox fx:id="cbxpropertyType" layoutX="152.0" layoutY="31.0" prefHeight="31.0" prefWidth="132.0" promptText="Select" />
+            <JFXComboBox fx:id="cbxpropertyType" layoutX="152.0" layoutY="31.0" prefHeight="33.0" prefWidth="212.0" promptText="Select" />
             <Button fx:id="btnSave" layoutX="711.0" layoutY="578.0" mnemonicParsing="false" onAction="#saveProperty" prefWidth="75.0" text="Save" />
             <Button fx:id="btnCancel" layoutX="611.0" layoutY="578.0" mnemonicParsing="false" onAction="#close" prefHeight="37.0" prefWidth="75.0" text="Cancel" />
-            <JFXComboBox fx:id="cbxCountry" layoutX="32.0" layoutY="166.0" prefHeight="31.0" prefWidth="132.0" promptText="Select" />
+            <JFXComboBox fx:id="cbxCountry" layoutX="32.0" layoutY="166.0" prefHeight="33.0" prefWidth="282.0" promptText="Select" />
             <Label layoutX="32.0" layoutY="127.0" text="Country">
                <font>
                   <Font name="Franklin Gothic Medium" size="15.0" />

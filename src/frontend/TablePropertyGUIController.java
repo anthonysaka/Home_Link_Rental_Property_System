@@ -44,7 +44,7 @@ public class TablePropertyGUIController implements Initializable {
     private Button btnClose;
 
     @FXML
-    private TableView<Propiedad> tablapropiedades;
+    public TableView<Propiedad> tablapropiedades;
 
     @FXML
     private TableColumn<Propiedad, String> columnatipo;
@@ -72,7 +72,7 @@ public class TablePropertyGUIController implements Initializable {
     	
     	
     	columnatipo.setCellValueFactory(new PropertyValueFactory<>("tipo"));
-		columnastatus.setCellValueFactory(new PropertyValueFactory<>("status"));
+		columnastatus.setCellValueFactory(new PropertyValueFactory<>("estatus"));
 		columnarating.setCellValueFactory(new PropertyValueFactory<>("feedbacks"));
 		columnadireccion.setCellValueFactory(new PropertyValueFactory<>("direccion"));
 		columnacaracteristicas.setCellValueFactory(new PropertyValueFactory<>("caracteristicas"));
@@ -114,6 +114,9 @@ public class TablePropertyGUIController implements Initializable {
     
     public void loadDataPropiedad() {
     	
+    	tablapropiedades.getItems().clear();
+    	
+    	
     	ResultSet rs = null;
 
     	CallableStatement mySqlStatement = null ; // call stored procedure
@@ -140,10 +143,13 @@ public class TablePropertyGUIController implements Initializable {
 				if (status == true) {
 					Propiedad auxPro = new Propiedad(tipo, dir, "Publicada", caract);
 					auxPro.setFeedbacks(feedback);
+					listPropiedad.removeAll(auxPro);
 					listPropiedad.add(auxPro);	
+					
 				}else {
 					Propiedad auxPro = new Propiedad(tipo, dir, "Inactiva", caract);
 					auxPro.setFeedbacks(feedback);
+					listPropiedad.removeAll(auxPro);
 					listPropiedad.add(auxPro);	
 				}
 				
@@ -151,22 +157,17 @@ public class TablePropertyGUIController implements Initializable {
 			}
 		} catch (Exception e) {
 		}
-
 		tablapropiedades.getItems().setAll(listPropiedad);
+		
 	}
     
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
+    @FXML
+    void refresh(ActionEvent event) {
+    	
+    	loadDataPropiedad();
+    	
+    	
+    }
     
     
     @FXML
