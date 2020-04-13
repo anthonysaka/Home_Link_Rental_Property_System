@@ -15,6 +15,8 @@ import backend.Publicacion;
 import backend.User;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.collections.transformation.FilteredList;
+import javafx.collections.transformation.SortedList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -161,11 +163,33 @@ public class PublicacionAdminGUIController implements Initializable {
 		}
 	}
 
-	@FXML
-	void closeWindow(ActionEvent event) {
-		Stage stage = (Stage) btnMinimize.getScene().getWindow();
-		stage.close();
+	public void searchDataPubli ( ) {
+		FilteredList<Publicacion> filterDataAuPub= new FilteredList<>(listPublicaciones, b -> true);
+
+		txtSearchTabPublicacion.textProperty().addListener((observable, oldValue, newValue) -> {
+			filterDataAuPub.setPredicate(auPu -> {
+				if (newValue == null || newValue.isEmpty()) {
+					return true;
+				}
+
+				String upperCaseFilter = newValue.toUpperCase();
+				if (String.valueOf(auPu.getIdPublicacion()).toUpperCase().indexOf(upperCaseFilter) != -1) {
+					return true;
+				} else if (auPu.getTitulo().toUpperCase().indexOf(upperCaseFilter) != -1) {
+					return true; 
+				} else if(auPu.getUsernameOwner().toUpperCase().indexOf(upperCaseFilter) != -1) {
+					return true; 
+				}else {
+					return false; // Not matches
+				}
+			});
+		});
+
+		SortedList<Publicacion> sortedDataauP = new SortedList<>(filterDataAuPub);
+		sortedDataauP.comparatorProperty().bind(tablePubli.comparatorProperty());
+		tablePubli.setItems(sortedDataauP);
 	}
+
 
 	@FXML
 	public void deletePublicacionByAdmin(ActionEvent event) {
@@ -183,6 +207,11 @@ public class PublicacionAdminGUIController implements Initializable {
 	public void minimizeWindow(ActionEvent event) {
 		Stage stage = (Stage) btnMinimize.getScene().getWindow();
 		stage.setIconified(true);
+	}
+	@FXML
+	void closeWindow(ActionEvent event) {
+		Stage stage = (Stage) btnMinimize.getScene().getWindow();
+		stage.close();
 	}
 
 	@FXML

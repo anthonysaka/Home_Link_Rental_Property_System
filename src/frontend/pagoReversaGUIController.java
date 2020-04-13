@@ -1,5 +1,6 @@
 package frontend;
 
+import java.io.IOException;
 import java.net.URL;
 import java.sql.Connection;
 import java.sql.ResultSet;
@@ -24,10 +25,15 @@ import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.fxml.FXML;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.Label;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.StackPane;
+import javafx.stage.Stage;
+import javafx.stage.StageStyle;
 
 public class pagoReversaGUIController extends ViewPublicationGUI implements Initializable{
 
@@ -97,6 +103,9 @@ public class pagoReversaGUIController extends ViewPublicationGUI implements Init
 	private Label lblPrecioTotal;
 	@FXML
 	private Label lblCantNoche;
+    @FXML
+    private JFXButton btnCancel;
+
 
 	PublicacionesParaVisualizar publicacion = auxlist;
 	ObservableList<Tarjetas> listCard = FXCollections.observableArrayList(llenarComboTarjeta());
@@ -148,7 +157,7 @@ public class pagoReversaGUIController extends ViewPublicationGUI implements Init
 
 		cbxTarjeta.setItems(listNumCard);
 	}
-
+  
 
 	public static ArrayList<Tarjetas> llenarComboTarjeta()
 	{
@@ -245,6 +254,33 @@ public class pagoReversaGUIController extends ViewPublicationGUI implements Init
 		
 		/***********************/
 	}
+	
+	  @FXML
+	    void cancelarPago(ActionEvent event) {
+	    	JFXButton btnHome = new JFXButton("Si");
+			PopupAlert.showCustomDialog(rootStackPane, rootAnchorPane, Arrays.asList(btnHome),"Seguro que desea cancelar?.", null);
+			btnHome.setOnAction(new EventHandler<ActionEvent>() {
+	            @Override
+	            public void handle(ActionEvent event) {
+	            	Stage stage = (Stage) btnCancel.getScene().getWindow();
+	        		stage.close();
+	        		Parent rootRegister;
+					try {
+						rootRegister = FXMLLoader.load(getClass().getResource("../frontend/homeGUI.fxml"));
+						Stage stageRegister = new Stage();
+						Scene sceneRegister = new Scene(rootRegister);
+						stageRegister.setScene(sceneRegister);
+						stageRegister.setResizable(false);
+						stageRegister.initStyle(StageStyle.TRANSPARENT);
+						stageRegister.show();
+					} catch (IOException e) {
+						// TODO Auto-generated catch block
+						e.printStackTrace();
+					} 
+								
+	            }
+	        });
+	    }
 
 	public int getIdReservationFromDB() {
 

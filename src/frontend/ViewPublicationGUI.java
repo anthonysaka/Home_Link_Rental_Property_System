@@ -135,7 +135,7 @@ public class ViewPublicationGUI extends HomeGUIController implements Initializab
     	Statement sentencia = null;
 		ResultSet rs = null;
 		String id = String.valueOf(idPublication);
-		String Query = "SELECT image FROM t_imagenes WHERE id_publication = "+"'"+ id +"' " + "AND descripcion NOT LIKE '%Preview%';";
+		String Query = "SELECT image FROM t_imagenes WHERE id_publicacion = "+"'"+ id +"' " + "AND descripcion NOT LIKE '%Preview%';";
 		try {
 			Connection myConnection = ConnectionMySqlDB.getConnectionMySqlDB();
 			sentencia = myConnection.createStatement();

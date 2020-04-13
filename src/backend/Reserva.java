@@ -15,6 +15,8 @@ public class Reserva {
 	private boolean israted;
 	private String username;
 	private String num_card;
+	private String tipo;
+	private String dir;
 	
 	
 	public Reserva(int idReserva, int idPublicacion, int idUsuario, int huespedes, String fechaInicio, String fechaFin, String num_card, Float price) {
@@ -153,6 +155,7 @@ public class Reserva {
 	}
 
 
+
 	public boolean isIsrated() {
 		return israted;
 	}
@@ -160,6 +163,26 @@ public class Reserva {
 
 	public void setIsrated(boolean israted) {
 		this.israted = israted;
+	}
+
+	public String getTipo() {
+		return tipo;
+	}
+
+
+	public void setTipo(String tipo) {
+		this.tipo = tipo;
+	}
+
+
+	public String getDir() {
+		return dir;
+	}
+
+
+	public void setDir(String dir) {
+		this.dir = dir;
+
 	}
 	
 

@@ -9,8 +9,6 @@ import java.util.Arrays;
 import java.util.ResourceBundle;
 
 import com.jfoenix.controls.JFXButton;
-import com.jfoenix.controls.JFXCheckBox;
-import com.jfoenix.controls.JFXChipView;
 import com.jfoenix.controls.JFXComboBox;
 import com.jfoenix.controls.JFXRadioButton;
 import com.jfoenix.controls.JFXTextField;
@@ -18,11 +16,7 @@ import com.mysql.cj.jdbc.CallableStatement;
 
 import backend.ConnectionMySqlDB;
 import backend.HomeLink_Controller;
-import backend.Propiedad;
-import backend.Publicacion;
 import backend.Reserva;
-import backend.User;
-import javafx.beans.value.WritableBooleanValue;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.collections.transformation.FilteredList;
@@ -33,10 +27,8 @@ import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
-import javafx.scene.control.TextField;
 import javafx.scene.control.ToggleGroup;
 import javafx.scene.control.cell.PropertyValueFactory;
-import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.StackPane;
 import javafx.scene.text.Text;
@@ -62,6 +54,10 @@ public class ReservationAdminGUIController implements Initializable {
 	private TableColumn<Reserva, String> tb_reser_col_username;
 	@FXML
 	private TableColumn<Reserva, Integer> tb_reser_col_idPubli;
+	@FXML
+	private TableColumn<Reserva, String> tb_reser_col_tipo;
+	@FXML
+	private TableColumn<Reserva, String> tb_reser_col_dir;
 	@FXML
 	private TableColumn<Reserva, String> tb_reser_col_tarjeta;
 	@FXML
@@ -89,7 +85,8 @@ public class ReservationAdminGUIController implements Initializable {
 	private JFXRadioButton rbMes;
 	@FXML
 	private JFXRadioButton rbAno;
-
+	@FXML
+	private JFXRadioButton rbNinguno;
 	@FXML
 	private ToggleGroup tgFilter;
 
@@ -111,6 +108,8 @@ public class ReservationAdminGUIController implements Initializable {
 		tb_reser_col_checkOut.setCellValueFactory(new PropertyValueFactory<>("fechaFin"));
 		tb_reser_col_username.setCellValueFactory(new PropertyValueFactory<>("username"));
 		tb_reser_col_idPubli.setCellValueFactory(new PropertyValueFactory<>("idPublicacion"));
+		tb_reser_col_tipo.setCellValueFactory(new PropertyValueFactory<>("tipo"));
+		tb_reser_col_dir.setCellValueFactory(new PropertyValueFactory<>("dir"));
 		tb_reser_col_tarjeta.setCellValueFactory(new PropertyValueFactory<>("num_card"));
 		tb_reser_col_price.setCellValueFactory(new PropertyValueFactory<>("precio"));
 
@@ -139,12 +138,16 @@ public class ReservationAdminGUIController implements Initializable {
 				String checkOut = rs.getString("end_date");
 				String username = rs.getString("username");
 				int idPu = rs.getInt("id_publication");
+				String tipo = rs.getString("type");
+				String dir = rs.getString("Address_Property");
 				String cardNum = rs.getString("num_card");
 				Float price = rs.getFloat("price_reservation");
 
 				Reserva auxRe = new Reserva(num, idPu, 0, cantguest, checkIn, checkOut,cardNum,price);
 				auxRe.setUsername(username);
-				
+				auxRe.setTipo(tipo);
+				auxRe.setDir(dir);
+
 				listReservas.add(auxRe);
 			}
 			myConnection.close();
@@ -161,7 +164,7 @@ public class ReservationAdminGUIController implements Initializable {
 				if (newValue == null || newValue.isEmpty()) {
 					return true;
 				}
-				
+
 				String upperCaseFilter = newValue.toUpperCase();
 				if (String.valueOf(re.getIdReserva()).toUpperCase().indexOf(upperCaseFilter) != -1) {
 					return true; 
@@ -172,6 +175,10 @@ public class ReservationAdminGUIController implements Initializable {
 				} else if(re.getUsername().toUpperCase().indexOf(upperCaseFilter) != -1) {
 					return true; 
 				} else if(re.getNum_card().toUpperCase().indexOf(upperCaseFilter) != -1) {
+					return true; 
+				} else if(re.getDir().toUpperCase().indexOf(upperCaseFilter) != -1) {
+					return true; 
+				} else if(re.getTipo().toUpperCase().indexOf(upperCaseFilter) != -1) {
 					return true; 
 				}else {
 					return false; // Not matches
@@ -185,109 +192,140 @@ public class ReservationAdminGUIController implements Initializable {
 	}
 
 	@FXML
-	void doFilter(ActionEvent event) throws SQLException {
+	public void doFilter(ActionEvent event) {
 		ResultSet rs = null;
 		Connection myConnection = HomeLink_Controller.getConnectionMySqlDB();
 		CallableStatement mySqlStatement = null ; // call stored procedure
-		
+
 		if (!txtDatFilter.getText().isEmpty()) {
-			String data = txtDatFilter.getSelectedText().toLowerCase();
-			
+			String data = txtDatFilter.getText();
 			if (rbTipo.isSelected()) {
-				mySqlStatement = (CallableStatement) myConnection.prepareCall("{CALL sp_query_reservation_typeProperty(?)}");
-				mySqlStatement.setString(1, data);
-				 rs=mySqlStatement.executeQuery();
-				while(rs.next()){
-					int num = rs.getInt("num_reservation");
-					int cantguest = rs.getInt("amount_guest");
-					String checkIn = rs.getString("start_date");
-					String checkOut = rs.getString("end_date");
-					String username = rs.getString("username");
-					int idPu = rs.getInt("id_publication");
-					String cardNum = rs.getString("num_card");
-					Float price = rs.getFloat("price_reservation");
-					Reserva auxRe = new Reserva(num, idPu, 0, cantguest, checkIn, checkOut,cardNum,price);
-					auxRe.setUsername(username);	
-					listReservas.add(auxRe);
+				try {
+					mySqlStatement = (CallableStatement) myConnection.prepareCall("{CALL sp_query_reservation_typeProperty(?)}");
+					mySqlStatement.setString(1, data);
+					rs=mySqlStatement.executeQuery();
+				} catch (SQLException e) {
+					e.printStackTrace();
 				}
-				tableReserva.getItems().setAll(listReservas);
-				
-				
-			} else if (rbCiudad.isSelected()) {
-				mySqlStatement = (CallableStatement) myConnection.prepareCall("{CALL sp_query_reservation_city(?)}");
-				mySqlStatement.setString(1, data);
-				rs=mySqlStatement.executeQuery();
-				while(rs.next()){
-					int num = rs.getInt("num_reservation");
-					int cantguest = rs.getInt("amount_guest");
-					String checkIn = rs.getString("start_date");
-					String checkOut = rs.getString("end_date");
-					String username = rs.getString("username");
-					int idPu = rs.getInt("id_publication");
-					String cardNum = rs.getString("num_card");
-					Float price = rs.getFloat("price_reservation");
-					Reserva auxRe = new Reserva(num, idPu, 0, cantguest, checkIn, checkOut,cardNum,price);
-					auxRe.setUsername(username);	
-					listReservas.add(auxRe);
-				}
+
 				tableReserva.getItems().setAll(listReservas);	
-				
-				
-			} else if (rbMes.isSelected()) {
-				mySqlStatement = (CallableStatement) myConnection.prepareCall("{CALL sp_query_reservation_month(?)}");
-				mySqlStatement.setString(1, data);
-				rs=mySqlStatement.executeQuery();
-				while(rs.next()){
-					int num = rs.getInt("num_reservation");
-					int cantguest = rs.getInt("amount_guest");
-					String checkIn = rs.getString("start_date");
-					String checkOut = rs.getString("end_date");
-					String username = rs.getString("username");
-					int idPu = rs.getInt("id_publication");
-					String cardNum = rs.getString("num_card");
-					Float price = rs.getFloat("price_reservation");
-					Reserva auxRe = new Reserva(num, idPu, 0, cantguest, checkIn, checkOut,cardNum,price);
-					auxRe.setUsername(username);	
-					listReservas.add(auxRe);
+			} else if (rbCiudad.isSelected()) {
+
+				try {
+					mySqlStatement = (CallableStatement) myConnection.prepareCall("{CALL sp_query_reservation_city(?)}");
+					mySqlStatement.setString(1, data);
+					rs=mySqlStatement.executeQuery();
+				} catch (SQLException e) {
+					e.printStackTrace();
 				}
-				tableReserva.getItems().setAll(listReservas);
-				
+				listReservas.clear();
+				try {
+					while(rs.next()){
+						int num = rs.getInt("num_reservation");
+						int cantguest = rs.getInt("amount_guest");
+						String checkIn = rs.getString("start_date");
+						String checkOut = rs.getString("end_date");
+						String username = rs.getString("username");
+						int idPu = rs.getInt("id_publication");
+						String tipo = rs.getString("type");
+						String dir = rs.getString("Address_Property");
+						String cardNum = rs.getString("num_card");
+						Float price = rs.getFloat("price_reservation");
+						Reserva auxRe = new Reserva(num, idPu, 0, cantguest, checkIn, checkOut,cardNum,price);
+						auxRe.setUsername(username);
+						auxRe.setTipo(tipo);
+						auxRe.setDir(dir);
+						listReservas.add(auxRe);
+					}
+					myConnection.close();
+				} catch (SQLException e) {
+				}
+				tableReserva.getItems().setAll(listReservas);		
+			
+			} else if (rbMes.isSelected()) {
+				try {
+					mySqlStatement = (CallableStatement) myConnection.prepareCall("{CALL sp_query_reservation_month(?)}");
+					mySqlStatement.setString(1, data);
+					rs=mySqlStatement.executeQuery();
+				} catch (SQLException e) {
+					e.printStackTrace();
+				}
+			
+						listReservas.clear();
+				try {
+					while(rs.next()){
+						int num = rs.getInt("num_reservation");
+						int cantguest = rs.getInt("amount_guest");
+						String checkIn = rs.getString("start_date");
+						String checkOut = rs.getString("end_date");
+						String username = rs.getString("username");
+						int idPu = rs.getInt("id_publication");
+						String tipo = rs.getString("type");
+						String dir = rs.getString("Address_Property");
+						String cardNum = rs.getString("num_card");
+						Float price = rs.getFloat("price_reservation");
+						Reserva auxRe = new Reserva(num, idPu, 0, cantguest, checkIn, checkOut,cardNum,price);
+						auxRe.setUsername(username);
+						auxRe.setTipo(tipo);
+						auxRe.setDir(dir);
+						listReservas.add(auxRe);
+					}
+					myConnection.close();
+				} catch (SQLException e) {
+				}
+				tableReserva.getItems().setAll(listReservas);		
 				
 			} else if (rbAno.isSelected()) {
-				mySqlStatement = (CallableStatement) myConnection.prepareCall("{CALL sp_query_reservation_year(?)}");
-				mySqlStatement.setString(1, data);
-				rs=mySqlStatement.executeQuery();
-				while(rs.next()){
-					int num = rs.getInt("num_reservation");
-					int cantguest = rs.getInt("amount_guest");
-					String checkIn = rs.getString("start_date");
-					String checkOut = rs.getString("end_date");
-					String username = rs.getString("username");
-					int idPu = rs.getInt("id_publication");
-					String cardNum = rs.getString("num_card");
-					Float price = rs.getFloat("price_reservation");
-					Reserva auxRe = new Reserva(num, idPu, 0, cantguest, checkIn, checkOut,cardNum,price);
-					auxRe.setUsername(username);	
-					listReservas.add(auxRe);
+				try {
+					mySqlStatement = (CallableStatement) myConnection.prepareCall("{CALL sp_query_reservation_year(?)}");
+					mySqlStatement.setString(1, data);
+					rs=mySqlStatement.executeQuery();
+				} catch (SQLException e) {
+					e.printStackTrace();
+				}
+				listReservas.clear();
+				try {
+					while(rs.next()){
+						int num = rs.getInt("num_reservation");
+						int cantguest = rs.getInt("amount_guest");
+						String checkIn = rs.getString("start_date");
+						String checkOut = rs.getString("end_date");
+						String username = rs.getString("username");
+						int idPu = rs.getInt("id_publication");
+						String tipo = rs.getString("type");
+						String dir = rs.getString("Address_Property");
+						String cardNum = rs.getString("num_card");
+						Float price = rs.getFloat("price_reservation");
+						Reserva auxRe = new Reserva(num, idPu, 0, cantguest, checkIn, checkOut,cardNum,price);
+						auxRe.setUsername(username);
+						auxRe.setTipo(tipo);
+						auxRe.setDir(dir);
+						listReservas.add(auxRe);
+					}
+					myConnection.close();
+				} catch (SQLException e) {
 				}
 				tableReserva.getItems().setAll(listReservas);
+		
 				
 			} else {
 				JFXButton btnOk = new JFXButton("Ok!");
 				PopupAlert.showCustomDialog(rootStackPane, rootAnchorPane, Arrays.asList(btnOk),"Error!\n" 
 						+ "Debe seleccionar una opcion de filtrado.", null);
 			}
-
-		} else if (txtDatFilter.getText().isEmpty() & !rbTipo.isSelected() & !rbCiudad.isSelected() &!rbMes.isSelected() & !rbAno.isSelected()) {
+		} else if (txtDatFilter.getText().isEmpty() & rbNinguno.isSelected()) {
+			listReservas.clear();
 			loadDataReservationOrderByFecha();
 		}else {
 			JFXButton btnOk = new JFXButton("Ok!");
 			PopupAlert.showCustomDialog(rootStackPane, rootAnchorPane, Arrays.asList(btnOk),"Error!\n" 
 					+ "Debe introducir los datos del filtrado.", null);
 		}
+
+
 		
-		
-		myConnection.close();
+
+			
 	}
 
 	@FXML

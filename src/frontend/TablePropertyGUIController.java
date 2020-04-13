@@ -142,13 +142,13 @@ public class TablePropertyGUIController implements Initializable {
 				
 				if (status == true) {
 					Propiedad auxPro = new Propiedad(tipo, dir, "Publicada", caract);
-					auxPro.setFeedbacks(feedback);
+				//	auxPro.setFeedbacks(feedback);
 					listPropiedad.removeAll(auxPro);
 					listPropiedad.add(auxPro);	
 					
 				}else {
 					Propiedad auxPro = new Propiedad(tipo, dir, "Inactiva", caract);
-					auxPro.setFeedbacks(feedback);
+			//		auxPro.setFeedbacks(feedback);
 					listPropiedad.removeAll(auxPro);
 					listPropiedad.add(auxPro);	
 				}
