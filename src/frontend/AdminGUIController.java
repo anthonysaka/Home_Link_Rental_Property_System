@@ -10,12 +10,17 @@ import java.util.Arrays;
 import java.util.ResourceBundle;
 
 import com.jfoenix.controls.JFXButton;
+import com.jfoenix.controls.JFXDatePicker;
+import com.jfoenix.controls.JFXRadioButton;
 import com.jfoenix.controls.JFXTextField;
 import com.mysql.cj.jdbc.CallableStatement;
+import com.mysql.cj.protocol.Resultset;
+
 import backend.ConnectionMySqlDB;
 import backend.HomeLink_Controller;
 import backend.Propiedad;
 import backend.Publicacion;
+import backend.Reserva;
 import backend.User;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -33,6 +38,7 @@ import javafx.scene.control.Label;
 import javafx.scene.control.TabPane;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
+import javafx.scene.control.ToggleGroup;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.AnchorPane;
@@ -70,7 +76,7 @@ public class AdminGUIController implements Initializable {
 	@FXML
 	private TableColumn<Propiedad, String> tb_prop_col_caract;
 	@FXML
-	private TableColumn<Propiedad, String> tb_prop_col_feed;
+	private TableColumn<Propiedad, Float> tb_prop_col_rating;
 	@FXML
 	private TableColumn<Propiedad, Integer> tb_prop_col_owner;
 	@FXML
@@ -130,9 +136,22 @@ public class AdminGUIController implements Initializable {
 	private Button btnMinimize;
 	@FXML
 	private JFXButton btnAutorizar;
-    @FXML
-    private JFXButton btnOptReservaciones;
+	@FXML
+	private JFXButton btnOptReservaciones;
+	@FXML
+	private JFXRadioButton rbTipoPro;
+	@FXML
+	private JFXRadioButton rbNinguno;
+	@FXML
+	private ToggleGroup tgFilter;
 
+	@FXML
+	private JFXButton btnFiltrarProp;
+	@FXML
+	private JFXTextField txtDatFilterProp;
+
+	@FXML
+	private JFXTextField txtSearchTabPropie;
 	/**********************************/
 	public static User auxUserList;
 	public static Publicacion auxPubliList;
@@ -144,6 +163,23 @@ public class AdminGUIController implements Initializable {
 	private AnchorPane rootAnchorPane;
 	@FXML
 	private JFXTextField txtSearchTabUsuario;
+	@FXML
+	private JFXTextField txtSearchTabAuPub;
+	@FXML
+	private JFXDatePicker datapickeCheckIn;
+	@FXML
+	private JFXDatePicker datapickeCheckOut;
+	@FXML
+	private Label lbl_hm_id;
+	@FXML
+	private Label lbl_hm_tipo;
+	@FXML
+	private Label lbl_hm_status;
+	@FXML
+	private Label lbl_hm_user;
+	@FXML
+	private Label lbl_hm_cantReservadas;
+
 	private double xoffset = 0;
 	private double yoffset = 0;
 
@@ -155,15 +191,19 @@ public class AdminGUIController implements Initializable {
 		loadDataAutorizarPublicaciones();
 		loadDataUser();
 		searchDataUser();	
+		searchDataPropiedad();
+		searchDataAuPubli();
 	}
 
 	public void initColumns() {
+		
+		//Init column propiedadas.
 		tb_prop_col_id.setCellValueFactory(new PropertyValueFactory<>("idPropiedad"));
-		tb_prop_col_type.setCellValueFactory(new PropertyValueFactory<>("Tipo"));
+		tb_prop_col_type.setCellValueFactory(new PropertyValueFactory<>("tipo"));
 		tb_prop_col_address.setCellValueFactory(new PropertyValueFactory<>("direccion"));
 		tb_prop_col_caract.setCellValueFactory(new PropertyValueFactory<>("caracteristicas"));
-		tb_prop_col_feed.setCellValueFactory(new PropertyValueFactory<>("feedbacks"));
-		tb_prop_col_owner.setCellValueFactory(new PropertyValueFactory<>("idUserOwner"));
+		tb_prop_col_rating.setCellValueFactory(new PropertyValueFactory<>("rating"));
+		tb_prop_col_owner.setCellValueFactory(new PropertyValueFactory<>("username"));
 		tb_prop_col_status.setCellValueFactory(new PropertyValueFactory<>("estatus"));
 
 		//Init Column Autorizar Publicaciones.
@@ -193,9 +233,10 @@ public class AdminGUIController implements Initializable {
 
 		Statement sentencia = null;
 		ResultSet rs = null;
-		String Query = "SELECT * FROM t_property";
+		Connection myConnection = null;
+		String Query = "SELECT * FROM vista_general_propiedad;";
 		try {
-			Connection myConnection = ConnectionMySqlDB.getConnectionMySqlDB();
+			myConnection = ConnectionMySqlDB.getConnectionMySqlDB();
 			sentencia = myConnection.createStatement();
 			rs = sentencia.executeQuery(Query);
 			System.out.println("TABLA BIEN");
@@ -206,22 +247,67 @@ public class AdminGUIController implements Initializable {
 			while(rs.next()){
 				Integer id = rs.getInt("id");
 				String tipo = rs.getString("type");
-				String dir = rs.getString("address");
-				String caract = rs.getString("characteristic");
-				String feedback= rs.getString("rating");
-				Integer dueno = rs.getInt("id_user_owner");
+				String dir = rs.getString("Address_Property");
+				String caract = rs.getString("Characteristic_Property");
+				Float rating = rs.getFloat("rating");
+				String dueno = rs.getString("username");
 				String status = rs.getString("status");		
 				Propiedad auxPro = new Propiedad(tipo, dir, status, caract);
 				auxPro.setIdPropiedad(id);
-				auxPro.setIdUserOwner(dueno);
-				auxPro.setFeedbacks(feedback);
+				auxPro.setUsername(dueno);
+				auxPro.setRating(rating);
 				listPropiedad.add(auxPro);	
 			}
+			myConnection.close();
 		} catch (Exception e) {
 		}
 
 		tableViewProperty.getItems().setAll(listPropiedad);
 	}
+
+
+	public ResultSet loadDataPropiedadMasRentada(String checkIn, String checkOut) {
+		ResultSet rs = null;
+		CallableStatement mySqlStatement = null ; // call stored procedure
+		try {
+			Connection myConnection = HomeLink_Controller.getConnectionMySqlDB();
+			mySqlStatement = (CallableStatement) myConnection.prepareCall("{CALL sp_query_propiedad_mas_rentada(?,?)}");
+			mySqlStatement.setString("pa_start_date", checkIn);
+			mySqlStatement.setString("pa_end_date", checkOut);
+			rs = mySqlStatement.executeQuery();
+			return rs;
+		} catch (SQLException e) {
+			e.printStackTrace();
+			return null;
+		}
+	}
+
+	@FXML
+	void searchMasRentada(ActionEvent event) throws SQLException {
+		if (datapickeCheckIn.getValue() != null & datapickeCheckOut.getValue() != null) {
+			String in = datapickeCheckIn.getValue().toString();
+			String out = datapickeCheckOut.getValue().toString();
+			ResultSet rs = loadDataPropiedadMasRentada(in, out);
+			if (rs.next()) {
+				String id = rs.getString(1);
+				String tipo = rs.getString(2);
+				String user = rs.getString(3);
+				String st = String.valueOf(rs.getBoolean(4));
+				String cant = String.valueOf(rs.getInt(5));
+				lbl_hm_id.setText(id);
+				lbl_hm_tipo.setText(tipo);
+				lbl_hm_user.setText(user);
+				lbl_hm_status.setText(st);
+				lbl_hm_cantReservadas.setText(cant);
+			}else {
+				JFXButton btnOk = new JFXButton("Ok!");
+				PopupAlert.showCustomDialog(rootStackPane, rootAnchorPane, Arrays.asList(btnOk),"No hay reservaciones para estas fechas!.", null);
+			}
+			
+		}
+
+	}
+
 
 	public void loadDataAutorizarPublicaciones() {
 		Statement sentencia = null;
@@ -234,40 +320,40 @@ public class AdminGUIController implements Initializable {
 				"		FROM t_publication \r\n" + 
 				"		INNER JOIN t_user ON t_publication.id_owner = t_user.id\r\n" + 
 				"		WHERE t_publication.`status` = 0 AND t_publication.id_user_admin = 0";
-				try {
-					myConnection = ConnectionMySqlDB.getConnectionMySqlDB();
-					sentencia = myConnection.createStatement();
-					rs = sentencia.executeQuery(Query);
-					System.out.println("TABLA BIEN");
-				} catch (Exception e) {
-					System.out.println("No Correcto");
-				}
-				try { /* RECORDAR LIMPIAR EL CODIGO DE TODO EL PROYECTO [Mucho codigo repetido]*/
-					while(rs.next()){
-						Integer id = rs.getInt("id");
-						String titulo = rs.getString("titulo");
-						String fecha = rs.getString("date");
-						Integer idpropiedad = rs.getInt("id_property");
-						Float precio = rs.getFloat("price");
-						Boolean status = rs.getBoolean("status");
-						String usernameOwner = rs.getString("username");
-						
-						System.out.println("ADMIN STATUS ES: "+status);
-						
-						if (status == true) {
-							Publicacion auxPubli = new Publicacion(id, fecha, titulo, "Autorizada", idpropiedad, precio, usernameOwner);
-							listAutoriPublicaciones.add(auxPubli);
-						} else {
-							Publicacion auxPubli = new Publicacion(id, fecha, titulo, "No Autorizada", idpropiedad, precio, usernameOwner);
-							listAutoriPublicaciones.add(auxPubli);
-						}
-						
-					}
-					myConnection.close();
-				} catch (Exception e) {
+		try {
+			myConnection = ConnectionMySqlDB.getConnectionMySqlDB();
+			sentencia = myConnection.createStatement();
+			rs = sentencia.executeQuery(Query);
+			System.out.println("TABLA BIEN");
+		} catch (Exception e) {
+			System.out.println("No Correcto");
+		}
+		try { /* RECORDAR LIMPIAR EL CODIGO DE TODO EL PROYECTO [Mucho codigo repetido]*/
+			while(rs.next()){
+				Integer id = rs.getInt("id");
+				String titulo = rs.getString("titulo");
+				String fecha = rs.getString("date");
+				Integer idpropiedad = rs.getInt("id_property");
+				Float precio = rs.getFloat("price");
+				Boolean status = rs.getBoolean("status");
+				String usernameOwner = rs.getString("username");
+
+				System.out.println("ADMIN STATUS ES: "+status);
+
+				if (status == true) {
+					Publicacion auxPubli = new Publicacion(id, fecha, titulo, "Autorizada", idpropiedad, precio, usernameOwner);
+					listAutoriPublicaciones.add(auxPubli);
+				} else {
+					Publicacion auxPubli = new Publicacion(id, fecha, titulo, "No Autorizada", idpropiedad, precio, usernameOwner);
+					listAutoriPublicaciones.add(auxPubli);
 				}
 
-				tableAutoriPubli.getItems().setAll(listAutoriPublicaciones);
+			}
+			myConnection.close();
+		} catch (Exception e) {
+		}
+
+		tableAutoriPubli.getItems().setAll(listAutoriPublicaciones);
 	}
 
 	public void loadDataUser() {
@@ -297,12 +383,14 @@ public class AdminGUIController implements Initializable {
 				String fecha_crea = rs.getString("Created_Date");
 				Integer amount_publication = rs.getInt("Publication_Number");
 				Integer amount_reservation = rs.getInt("Reservation_Number");
+				Boolean status = rs.getBoolean("status");
 				User auxUser = new User(name, lastname, gender, user_type, username, email, null, fecha_crea);
 				auxUser.setId(id);
 				auxUser.setCountry_location(country);
 				auxUser.setTelephone_number(tel_num);
 				auxUser.setAmountReservation(amount_reservation);
 				auxUser.setAmountPublication(amount_publication);
+				auxUser.setStatus(status);
 
 				listUser.add(auxUser);
 
@@ -315,6 +403,35 @@ public class AdminGUIController implements Initializable {
 
 	}
 
+	public void searchDataPropiedad() {
+		FilteredList<Propiedad> filterDataPro = new FilteredList<>(listPropiedad, b -> true);
+
+		txtSearchTabPropie.textProperty().addListener((observable, oldValue, newValue) -> {
+			filterDataPro.setPredicate(pro -> {
+				if (newValue == null || newValue.isEmpty()) {
+					return true;
+				}
+
+				String upperCaseFilter = newValue.toUpperCase();
+				if (String.valueOf(pro.getIdPropiedad()).toUpperCase().indexOf(upperCaseFilter) != -1) {
+					return true;
+				} else if (pro.getTipo().toUpperCase().indexOf(upperCaseFilter) != -1) {
+					return true; 
+				} else if(pro.getUsername().toUpperCase().indexOf(upperCaseFilter) != -1) {
+					return true; 
+				}else if(pro.getDireccion().toUpperCase().indexOf(upperCaseFilter) != -1) {
+					return true; 
+				}else {
+					return false; // Not matches
+				}
+			});
+		});
+
+		SortedList<Propiedad> sortedDataPro = new SortedList<>(filterDataPro);
+		sortedDataPro.comparatorProperty().bind(tableViewProperty.comparatorProperty());
+		tableViewProperty.setItems(sortedDataPro);
+
+	}
 	public void searchDataUser() {
 		FilteredList<User> filterDataUser = new FilteredList<>(listUser, b -> true);
 
@@ -342,6 +459,34 @@ public class AdminGUIController implements Initializable {
 		tableUser.setItems(sortedDataUser);
 
 	}
+
+	public void searchDataAuPubli ( ) {
+		FilteredList<Publicacion> filterDataAuPub= new FilteredList<>(listAutoriPublicaciones, b -> true);
+
+		txtSearchTabPropie.textProperty().addListener((observable, oldValue, newValue) -> {
+			filterDataAuPub.setPredicate(auPu -> {
+				if (newValue == null || newValue.isEmpty()) {
+					return true;
+				}
+
+				String upperCaseFilter = newValue.toUpperCase();
+				if (String.valueOf(auPu.getIdPublicacion()).toUpperCase().indexOf(upperCaseFilter) != -1) {
+					return true;
+				} else if (auPu.getTitulo().toUpperCase().indexOf(upperCaseFilter) != -1) {
+					return true; 
+				} else if(auPu.getUsernameOwner().toUpperCase().indexOf(upperCaseFilter) != -1) {
+					return true; 
+				}else {
+					return false; // Not matches
+				}
+			});
+		});
+
+		SortedList<Publicacion> sortedDataauP = new SortedList<>(filterDataAuPub);
+		sortedDataauP.comparatorProperty().bind(tableAutoriPubli.comparatorProperty());
+		tableAutoriPubli.setItems(sortedDataauP);
+	}
+
 
 	@FXML
 	public void clickOnUserTable(MouseEvent event) {
@@ -393,9 +538,9 @@ public class AdminGUIController implements Initializable {
 		});
 		/***************************************************************/
 	}
-    @FXML
-    void openOptionReservaciones(ActionEvent event) throws IOException {
-    	Parent rootAdminPu = FXMLLoader.load(getClass().getResource("../frontend/reservationAdmin.fxml"));
+	@FXML
+	void openOptionReservaciones(ActionEvent event) throws IOException {
+		Parent rootAdminPu = FXMLLoader.load(getClass().getResource("../frontend/reservationAdmin.fxml"));
 		Stage stageAdminPu = new Stage();
 		Scene sceneAdminPu = new Scene(rootAdminPu);
 		stageAdminPu.setScene(sceneAdminPu);
@@ -418,7 +563,7 @@ public class AdminGUIController implements Initializable {
 			}
 		});
 		/***************************************************************/
-    }
+	}
 
 	@FXML
 	public void refreshTbUser(ActionEvent event) {
@@ -464,6 +609,57 @@ public class AdminGUIController implements Initializable {
 
 		listAutoriPublicaciones.clear();
 		loadDataAutorizarPublicaciones();
+	}
+
+	@FXML
+	public void doFilter(ActionEvent event) {
+		ResultSet rs = null;
+		Connection myConnection = HomeLink_Controller.getConnectionMySqlDB();
+		CallableStatement mySqlStatement = null ; // call stored procedure
+
+		if (!txtDatFilterProp.getText().isEmpty()) {
+			String data = txtDatFilterProp.getText();
+			if (rbTipoPro.isSelected()) {
+				try {
+					mySqlStatement = (CallableStatement) myConnection.prepareCall("{CALL sp_query_property_by_type(?)}");
+					mySqlStatement.setString(1, data);
+					rs=mySqlStatement.executeQuery();
+				} catch (SQLException e) {
+					e.printStackTrace();
+				}
+				listPropiedad.clear();
+				try {
+					while(rs.next()){
+						Integer id = rs.getInt("id");
+						String tipo = rs.getString("type");
+						String dir = rs.getString("Address_Property");
+						String caract = rs.getString("Characteristic_Property");
+						Float rating = rs.getFloat("rating");
+						String dueno = rs.getString("username");
+						String status = rs.getString("status");		
+						Propiedad auxPro = new Propiedad(tipo, dir, status, caract);
+						auxPro.setIdPropiedad(id);
+						auxPro.setUsername(dueno);
+						auxPro.setRating(rating);
+						listPropiedad.add(auxPro);	
+					}
+					myConnection.close();
+				} catch (SQLException e) {
+				}
+				tableViewProperty.getItems().setAll(listPropiedad);
+			}else {
+				JFXButton btnOk = new JFXButton("Ok!");
+				PopupAlert.showCustomDialog(rootStackPane, rootAnchorPane, Arrays.asList(btnOk),"Error!\n" 
+						+ "Debe seleccionar una opcion de filtrado.", null);
+			}
+		}else if (txtDatFilterProp.getText().isEmpty() & rbNinguno.isSelected()) {
+			listPropiedad.clear();
+			loadDataPropiedad();
+		}else {
+			JFXButton btnOk = new JFXButton("Ok!");
+			PopupAlert.showCustomDialog(rootStackPane, rootAnchorPane, Arrays.asList(btnOk),"Error!\n" 
+					+ "Debe introducir los datos del filtrado.", null);
+		}
 	}
 
 	/************* FIN *****************/

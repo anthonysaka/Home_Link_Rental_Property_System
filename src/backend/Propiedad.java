@@ -6,9 +6,12 @@ public class Propiedad extends ConnectionMySqlDB {
 		private String tipo;
 		private String direccion;
 		private String estatus;
-		private String feedbacks;
+		private float rating;
 		private String caracteristicas;
 		private int idUserOwner;
+		private String username;
+		private String numRe;
+		private int cantReservaciones;
 	
 	public Propiedad( String tipo, String direccion, String estatus, String caracteristicas) {
 		super();
@@ -53,13 +56,7 @@ public class Propiedad extends ConnectionMySqlDB {
 		this.estatus = estatus;
 	}
 
-	public String getFeedbacks() {
-		return feedbacks;
-	}
-
-	public void setFeedbacks(String feedbacks) {
-		this.feedbacks = feedbacks;
-	}
+	
 
 	public String getCaracteristicas() {
 		return caracteristicas;
@@ -75,6 +72,38 @@ public class Propiedad extends ConnectionMySqlDB {
 
 	public void setIdUserOwner(int idUserOwner) {
 		this.idUserOwner = idUserOwner;
+	}
+
+	public float getRating() {
+		return rating;
+	}
+
+	public void setRating(float rating) {
+		this.rating = rating;
+	}
+
+	public String getUsername() {
+		return username;
+	}
+
+	public void setUsername(String username) {
+		this.username = username;
+	}
+
+	public String getNumRe() {
+		return numRe;
+	}
+
+	public void setNumRe(String numRe) {
+		this.numRe = numRe;
+	}
+
+	public int getCantReservaciones() {
+		return cantReservaciones;
+	}
+
+	public void setCantReservaciones(int cantReservaciones) {
+		this.cantReservaciones = cantReservaciones;
 	}
 	
 

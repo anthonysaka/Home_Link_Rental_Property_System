@@ -20,7 +20,9 @@
 #btnCancel {
 	 -fx-background-color: derive(-fx-red, 10%);
 }
-
+#btnDelUser{
+	 -fx-background-color: derive(-fx-red, 10%);
+}
 #btnClose {
 	 -fx-background-color: derive(-fx-red, 10%);
 }

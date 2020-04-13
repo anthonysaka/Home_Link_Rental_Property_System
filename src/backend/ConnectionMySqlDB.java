@@ -29,6 +29,7 @@ public class ConnectionMySqlDB {
 
 
 	//private final static String password_db = "soloyo123";
+
 	private final static String password_db = "gilcia8099126262";
 	//private final static String password_db = "nose@MySql99";
 

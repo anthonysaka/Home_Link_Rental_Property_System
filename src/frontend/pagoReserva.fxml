@@ -44,7 +44,7 @@
                   <Label layoutX="42.0" layoutY="409.0" text="Cardholder nombre:" />
                   <Label layoutX="357.0" layoutY="502.0" text="CVV:" />
                   <Label layoutX="42.0" layoutY="502.0" text="Fecha expiración:" />
-                  <JFXButton fx:id="btnPagar" contentDisplay="CENTER" layoutX="186.0" layoutY="583.0" onAction="#Pay" prefHeight="39.0" prefWidth="210.0" style="-fx-background-color: #ffc107; -fx-background-radius: 10;" styleClass="Button" text="Realizar Pago">
+                  <JFXButton fx:id="btnPagar" contentDisplay="CENTER" layoutX="122.0" layoutY="583.0" onAction="#Pay" prefHeight="39.0" prefWidth="210.0" style="-fx-background-color: #ffc107; -fx-background-radius: 10;" styleClass="Button" text="Realizar Pago">
                      <font>
                         <Font name="System Bold" size="18.0" />
                      </font>
@@ -54,6 +54,14 @@
                   </JFXButton>
                   <JFXTextField fx:id="txtYearCard" layoutX="266.0" layoutY="496.0" prefHeight="39.0" prefWidth="63.0" />
                   <Line endX="-92.0" endY="-27.0" layoutX="351.0" layoutY="530.0" startX="-100.0" stroke="GREY" />
+                  <JFXButton fx:id="btnCancel" contentDisplay="CENTER" layoutX="353.0" layoutY="583.0" onAction="#cancelarPago" prefHeight="39.0" prefWidth="106.0" styleClass="Button" text="Cancelar">
+                     <font>
+                        <Font name="System Bold" size="18.0" />
+                     </font>
+                     <cursor>
+                        <Cursor fx:constant="HAND" />
+                     </cursor>
+                  </JFXButton>
                </children>
             </AnchorPane>
             <Pane layoutX="603.0" layoutY="50.0" prefHeight="637.0" prefWidth="596.0">

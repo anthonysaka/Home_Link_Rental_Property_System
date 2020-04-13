@@ -1,6 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
 <?import com.jfoenix.controls.JFXButton?>
+<?import com.jfoenix.controls.JFXDatePicker?>
+<?import com.jfoenix.controls.JFXRadioButton?>
 <?import com.jfoenix.controls.JFXTabPane?>
 <?import com.jfoenix.controls.JFXTextField?>
 <?import javafx.geometry.Insets?>
@@ -10,6 +12,7 @@
 <?import javafx.scene.control.Tab?>
 <?import javafx.scene.control.TableColumn?>
 <?import javafx.scene.control.TableView?>
+<?import javafx.scene.control.ToggleGroup?>
 <?import javafx.scene.layout.AnchorPane?>
 <?import javafx.scene.layout.StackPane?>
 <?import javafx.scene.layout.VBox?>
@@ -39,7 +42,7 @@
                      <content>
                         <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
                            <children>
-                              <JFXTextField fx:id="txtSearchTabHome" layoutX="420.0" layoutY="19.0" prefHeight="40.0" prefWidth="440.0" promptText="Hi ADMIN!" />
+                              <JFXTextField layoutX="82.0" layoutY="14.0" prefHeight="114.0" prefWidth="116.0" promptText="Hi ADMIN!" style="-fx-background-color: transparent; -fx-border-color: transparent;" />
                               <Line endX="150.0" layoutX="95.0" layoutY="157.0" startX="-60.0" stroke="GREY" />
                               <Label layoutX="69.0" layoutY="130.0" text="MENU OPCIONES" />
                               <VBox layoutX="65.0" layoutY="171.0" prefHeight="424.0" prefWidth="150.0">
@@ -50,18 +53,45 @@
                                           <Insets top="10.0" />
                                        </VBox.margin>
                                     </JFXButton>
-                                    <JFXButton fx:id="btnOptPublicaciones2" prefHeight="85.0" prefWidth="150.0" text="N/A">
-                                       <VBox.margin>
-                                          <Insets top="10.0" />
-                                       </VBox.margin>
-                                    </JFXButton>
-                                    <JFXButton fx:id="btnOptPublicaciones3" prefHeight="85.0" prefWidth="150.0" text="N/A">
-                                       <VBox.margin>
-                                          <Insets top="10.0" />
-                                       </VBox.margin>
-                                    </JFXButton>
                                  </children>
                               </VBox>
+                              <JFXDatePicker fx:id="datapickeCheckIn" defaultColor="#ffc107" editable="false" layoutX="429.0" layoutY="76.0" nodeOrientation="LEFT_TO_RIGHT" prefHeight="30.0" prefWidth="230.0" promptText="MM/DD/YYYY">
+                                 <padding>
+                                    <Insets left="5.0" right="5.0" />
+                                 </padding>
+                              </JFXDatePicker>
+                              <JFXDatePicker fx:id="datapickeCheckOut" defaultColor="#ffc107" layoutX="747.0" layoutY="76.0" nodeOrientation="LEFT_TO_RIGHT" prefHeight="30.0" prefWidth="230.0" promptText="MM/DD/YYYY" />
+                              <Text fill="WHITE" layoutX="627.0" layoutY="71.0" strokeType="OUTSIDE" strokeWidth="0.0" text="RANGO DE FECHA:">
+                                 <font>
+                                    <Font name="Consolas Bold" size="16.0" />
+                                 </font>
+                              </Text>
+                              <Text fill="WHITE" layoutX="689.0" layoutY="99.0" strokeType="OUTSIDE" strokeWidth="0.0" text="A">
+                                 <font>
+                                    <Font name="Consolas Bold" size="16.0" />
+                                 </font>
+                              </Text>
+                              <JFXButton fx:id="btnBuscaHome" layoutX="1008.0" layoutY="77.0" onAction="#searchMasRentada" prefHeight="29.0" prefWidth="115.0" style="-fx-background-color: #ffc107; -fx-background-radius: 10;" styleClass="Button" text="Buscar">
+                                 <font>
+                                    <Font name="System Bold" size="14.0" />
+                                 </font>
+                                 <cursor>
+                                    <Cursor fx:constant="HAND" />
+                                 </cursor>
+                              </JFXButton>
+                              <Label layoutX="473.0" layoutY="27.0" text="Buscar la propiedad mas rentada dentro de un rango de fecha." />
+                              <Line endX="196.0" layoutX="647.0" layoutY="172.0" startX="-109.0" stroke="GREY" />
+                              <Label layoutX="545.0" layoutY="212.0" text="Tipo:" />
+                              <Label layoutX="544.0" layoutY="269.0" text="Username dueño:" />
+                              <Label layoutX="548.0" layoutY="185.0" text="ID:" />
+                              <Label layoutX="631.0" layoutY="143.0" text="INFORMACION" />
+                              <Label alignment="CENTER" layoutX="546.0" layoutY="242.0" text="Status:" />
+                              <Label alignment="CENTER" layoutX="544.0" layoutY="296.0" text="Cantidad de veces reservada:" />
+                              <Label fx:id="lbl_hm_id" layoutX="579.0" layoutY="185.0" prefHeight="27.0" prefWidth="84.0" />
+                              <Label fx:id="lbl_hm_tipo" layoutX="596.0" layoutY="212.0" prefHeight="27.0" prefWidth="116.0" />
+                              <Label fx:id="lbl_hm_status" layoutX="607.0" layoutY="242.0" prefHeight="27.0" prefWidth="95.0" />
+                              <Label fx:id="lbl_hm_user" layoutX="698.0" layoutY="269.0" prefHeight="27.0" prefWidth="139.0" />
+                              <Label fx:id="lbl_hm_cantReservadas" layoutX="788.0" layoutY="296.0" prefHeight="27.0" prefWidth="81.0" />
                            </children>
                         </AnchorPane>
                      </content>
@@ -70,7 +100,7 @@
                      <content>
                         <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
                            <children>
-                              <TableView fx:id="tableAutoriPubli" layoutX="2.0" prefHeight="595.0" prefWidth="1280.0" AnchorPane.bottomAnchor="50.0" AnchorPane.leftAnchor="2.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                              <TableView fx:id="tableAutoriPubli" layoutX="2.0" layoutY="50.0" prefHeight="592.0" prefWidth="1280.0" AnchorPane.bottomAnchor="3.0" AnchorPane.leftAnchor="2.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="50.0">
                                  <columns>
                                     <TableColumn fx:id="tb_au_publi_col_id" prefWidth="75.0" text="ID" />
                                     <TableColumn fx:id="tb_au_publi_col_titulo" prefWidth="75.0" text="Titulo" />
@@ -84,7 +114,7 @@
                                     <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
                                  </columnResizePolicy>
                               </TableView>
-                              <JFXButton fx:id="btnAutorizar" layoutX="585.0" layoutY="601.0" onAction="#autorizarPublicacion" prefHeight="29.0" prefWidth="115.0" style="-fx-background-color: #ffc107; -fx-background-radius: 10;" styleClass="Button" text="Autorizar">
+                              <JFXButton fx:id="btnAutorizar" layoutX="412.0" layoutY="7.0" onAction="#autorizarPublicacion" prefHeight="29.0" prefWidth="115.0" style="-fx-background-color: #ffc107; -fx-background-radius: 10;" styleClass="Button" text="Autorizar">
                                  <font>
                                     <Font name="System Bold" size="14.0" />
                                  </font>
@@ -92,6 +122,7 @@
                                     <Cursor fx:constant="HAND" />
                                  </cursor>
                               </JFXButton>
+                              <JFXTextField fx:id="txtSearchTabAuPub" layoutX="34.0" layoutY="6.0" maxHeight="39.0" prefHeight="39.0" prefWidth="343.0" promptText="Hi ADMIN, Search!" />
                            </children>
                         </AnchorPane>
                      </content>
@@ -128,7 +159,7 @@
                               <Label fx:id="lblUsername" alignment="CENTER" layoutX="160.0" layoutY="270.0" text="Username" />
                               <Label fx:id="lblAmountReserva" alignment="CENTER" layoutX="122.0" layoutY="373.0" prefHeight="34.0" prefWidth="26.0" text="#" />
                               <Label fx:id="lblAmountPubli" alignment="CENTER" layoutX="121.0" layoutY="449.0" prefHeight="34.0" prefWidth="27.0" text="#" />
-                              <JFXButton fx:id="btnDelUser" layoutX="19.0" layoutY="594.0" onAction="#deleteUser" prefHeight="29.0" prefWidth="115.0" style="-fx-background-color: #ffc107; -fx-background-radius: 10;" styleClass="Button" text="Eliminar">
+                              <JFXButton fx:id="btnDelUser" layoutX="19.0" layoutY="594.0" onAction="#deleteUser" prefHeight="29.0" prefWidth="115.0" styleClass="Button" text="Eliminar">
                                  <font>
                                     <Font name="System Bold" size="14.0" />
                                  </font>
@@ -137,22 +168,6 @@
                                  </cursor>
                               </JFXButton>
                               <JFXButton fx:id="btnRefreshTbUser" layoutX="145.0" layoutY="594.0" onAction="#refreshTbUser" prefHeight="29.0" prefWidth="115.0" style="-fx-background-color: #ffc107; -fx-background-radius: 10;" styleClass="Button" text="Actualizar">
-                                 <font>
-                                    <Font name="System Bold" size="14.0" />
-                                 </font>
-                                 <cursor>
-                                    <Cursor fx:constant="HAND" />
-                                 </cursor>
-                              </JFXButton>
-                              <JFXButton layoutX="19.0" layoutY="552.0" prefHeight="29.0" prefWidth="115.0" style="-fx-background-color: #ffc107; -fx-background-radius: 10;" styleClass="Button" text="n/a">
-                                 <font>
-                                    <Font name="System Bold" size="14.0" />
-                                 </font>
-                                 <cursor>
-                                    <Cursor fx:constant="HAND" />
-                                 </cursor>
-                              </JFXButton>
-                              <JFXButton layoutX="145.0" layoutY="552.0" prefHeight="29.0" prefWidth="115.0" style="-fx-background-color: #ffc107; -fx-background-radius: 10;" styleClass="Button" text="n/a">
                                  <font>
                                     <Font name="System Bold" size="14.0" />
                                  </font>
@@ -169,13 +184,13 @@
                      <content>
                         <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
                            <children>
-                              <TableView fx:id="tableViewProperty" prefHeight="681.0" prefWidth="1280.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="0.0">
+                              <TableView fx:id="tableViewProperty" layoutY="68.0" prefHeight="577.0" prefWidth="1282.0" AnchorPane.bottomAnchor="0.0" AnchorPane.leftAnchor="0.0" AnchorPane.rightAnchor="0.0" AnchorPane.topAnchor="68.0">
                                  <columns>
                                     <TableColumn fx:id="tb_prop_col_id" prefWidth="75.0" text="ID" />
                                     <TableColumn fx:id="tb_prop_col_type" prefWidth="75.0" text="Tipo" />
                                     <TableColumn fx:id="tb_prop_col_address" prefWidth="75.0" text="Dirección" />
                                     <TableColumn fx:id="tb_prop_col_caract" prefWidth="75.0" text="Características" />
-                                    <TableColumn fx:id="tb_prop_col_feed" prefWidth="75.0" text="Feedback" />
+                                    <TableColumn fx:id="tb_prop_col_rating" prefWidth="75.0" text="Rating" />
                                     <TableColumn fx:id="tb_prop_col_owner" prefWidth="75.0" text="Dueño" />
                                     <TableColumn fx:id="tb_prop_col_status" prefWidth="75.0" text="Status" />
                                  </columns>
@@ -183,6 +198,28 @@
                                     <TableView fx:constant="CONSTRAINED_RESIZE_POLICY" />
                                  </columnResizePolicy>
                               </TableView>
+                              <JFXButton fx:id="btnFiltrarProp" layoutX="1120.0" layoutY="17.0" onAction="#doFilter" prefHeight="29.0" prefWidth="115.0" style="-fx-background-color: #ffc107; -fx-background-radius: 10;" styleClass="Button" text="Filtrar">
+                                 <font>
+                                    <Font name="System Bold" size="14.0" />
+                                 </font>
+                                 <cursor>
+                                    <Cursor fx:constant="HAND" />
+                                 </cursor>
+                              </JFXButton>
+                              <Text fill="WHITE" layoutX="413.0" layoutY="20.0" strokeType="OUTSIDE" strokeWidth="0.0" text="FILTRAR POR:">
+                                 <font>
+                                    <Font name="System Bold" size="15.0" />
+                                 </font>
+                              </Text>
+                              <Line endX="35.0" endY="55.0" layoutX="356.0" layoutY="-1.0" startX="35.0" startY="18.0" stroke="GREY" />
+                              <JFXRadioButton fx:id="rbTipoPro" layoutX="413.0" layoutY="30.0" text="Tipo">
+                                 <toggleGroup>
+                                    <ToggleGroup fx:id="tgFilter" />
+                                 </toggleGroup>
+                              </JFXRadioButton>
+                              <JFXTextField fx:id="txtDatFilterProp" layoutX="598.0" layoutY="16.0" prefHeight="39.0" prefWidth="230.0" promptText="Digite data para el filtrado!" />
+                              <JFXTextField fx:id="txtSearchTabPropie" layoutX="14.0" layoutY="16.0" maxHeight="39.0" prefHeight="39.0" prefWidth="343.0" promptText="Hi ADMIN, Search!" />
+                              <JFXRadioButton fx:id="rbNinguno" layoutX="486.0" layoutY="30.0" text="Ninguno" toggleGroup="$tgFilter" />
                            </children>
                         </AnchorPane>
                      </content>
