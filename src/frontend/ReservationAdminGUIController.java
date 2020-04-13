@@ -62,11 +62,17 @@ public class ReservationAdminGUIController implements Initializable {
 	private TableColumn<Reserva, String> tb_reser_col_tarjeta;
 	@FXML
 	private TableColumn<Reserva, Float> tb_reser_col_price;
+	
+	public int reservationID = 0;
 
 	@FXML
 	private Text textAdminUserLogged;
 	@FXML
 	private Button btnMinimize;
+	
+	@FXML
+    private JFXButton btndelete;
+	
 	@FXML
 	private Button btnClose;
 	@FXML
@@ -100,6 +106,29 @@ public class ReservationAdminGUIController implements Initializable {
 
 
 	}
+	
+	@FXML
+    void deleteReservation(ActionEvent event) {
+		
+		reservationID = tableReserva.getSelectionModel().getSelectedItem().getIdReserva();
+		
+		CallableStatement mySqlStatement = null ; // call stored procedure
+		try {
+			Connection myConnection = ConnectionMySqlDB.getConnectionMySqlDB();	
+			mySqlStatement = (CallableStatement) myConnection.prepareCall("{CALL sp_delete_reservation(?)}");
+			mySqlStatement.setInt("pa_num_reservation", reservationID);
+			mySqlStatement.executeQuery();
+			System.out.println("RESERVA BORRADA EXITOSAMENTE");
+
+		} catch (SQLException e) {
+			System.out.println("HUBO UN ERROR AL BORRAR LA RESERVA");
+			e.printStackTrace();
+		}
+		
+		listReservas.clear();
+		loadDataReservationOrderByFecha();
+
+    }
 
 	public void initColumns() {
 		tb_reser_col_num_reser.setCellValueFactory(new PropertyValueFactory<>("idReserva"));
