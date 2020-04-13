@@ -52,7 +52,6 @@ public class LoginGUIController extends Application {
 	private Button btnClose;
     @FXML
     private StackPane rootStackPane;
-
     @FXML
     private AnchorPane rootAnchorPane;
 	

@@ -7,6 +7,7 @@ import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.List;
 import java.util.ResourceBundle;
 
 import com.jfoenix.controls.JFXButton;
@@ -21,6 +22,7 @@ import backend.Tarjetas;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Label;
@@ -233,10 +235,14 @@ public class pagoReversaGUIController extends ViewPublicationGUI implements Init
 		if (mySqlStatement1.executeQuery() != null) {
 			System.out.println("factura insertada");
 		}
-		JFXButton btnOk = new JFXButton("Ok!");
-		PopupAlert.showCustomDialog(rootStackPane, rootAnchorPane, Arrays.asList(btnOk),"Reservación y Factura realizada con exito!.", null);
-		
 		myConnection.close();
+		
+		JFXButton btnHome = new JFXButton("Go back to home.");
+		JFXButton btnPrint = new JFXButton("Print Invoice");
+		PopupAlert.showCustomDialog(rootStackPane, rootAnchorPane, Arrays.asList(btnHome, btnPrint),"Reservación y Factura realizada con exito!.", null);
+		
+
+		
 		/***********************/
 	}
 
