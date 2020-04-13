@@ -63,7 +63,6 @@ public class BussinessTableGUIController implements Initializable{
 		loadDataBussiness();
 	}
 
-
 	public void initColumns() {
 		columnPropertyId.setCellValueFactory(new PropertyValueFactory<>("idPropiedad"));
 		columnPublicationId.setCellValueFactory(new PropertyValueFactory<>("titulo"));

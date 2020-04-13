@@ -10,7 +10,6 @@ import com.jfoenix.controls.JFXButton;
 import com.mysql.cj.jdbc.CallableStatement;
 
 import backend.ConnectionMySqlDB;
-import backend.Reserva;
 import backend.User;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
@@ -62,6 +61,14 @@ public class TableProfileGUIController implements Initializable {
 
     ObservableList<User> listprofile = FXCollections.observableArrayList();
     
+
+	@Override
+	public void initialize(URL location, ResourceBundle resources) {
+		initColumns();
+		loadDataProfile();
+		
+	}
+	
     @FXML
     void close(ActionEvent event) {
     	Stage x = (Stage) btnclose.getScene().getWindow();
@@ -120,15 +127,9 @@ public class TableProfileGUIController implements Initializable {
 		tableprofile.getItems().setAll(listprofile);
 	}
     
-    
 
 
 
-	@Override
-	public void initialize(URL location, ResourceBundle resources) {
-		initColumns();
-		loadDataProfile();
-		
-	}
+
 
 }

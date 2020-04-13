@@ -360,7 +360,9 @@ public class AdminGUIController implements Initializable {
 				"       			 t_user.username\r\n" + 
 				"		FROM t_publication \r\n" + 
 				"		INNER JOIN t_user ON t_publication.id_owner = t_user.id\r\n" + 
-				"		WHERE t_publication.`status` = 0 AND t_publication.id_user_admin is null";
+
+				"		WHERE t_publication.`status` = 0 AND t_publication.id_user_admin IS NULL;";
+
 		try {
 			myConnection = ConnectionMySqlDB.getConnectionMySqlDB();
 			sentencia = myConnection.createStatement();
