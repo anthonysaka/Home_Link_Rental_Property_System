@@ -12,7 +12,7 @@ public class Reserva {
 	private float precio;
 	private String tipoPropiedad;
 	private String titulo;
-	
+	private boolean israted;
 	private String username;
 	private String num_card;
 	private String tipo;
@@ -155,6 +155,16 @@ public class Reserva {
 	}
 
 
+
+	public boolean isIsrated() {
+		return israted;
+	}
+
+
+	public void setIsrated(boolean israted) {
+		this.israted = israted;
+	}
+
 	public String getTipo() {
 		return tipo;
 	}
@@ -172,6 +182,7 @@ public class Reserva {
 
 	public void setDir(String dir) {
 		this.dir = dir;
+
 	}
 	
 

@@ -18,38 +18,38 @@ import javafx.stage.Stage;
 
 public class AddcardGUIController extends ConnectionMySqlDB{
 
-    @FXML
-    private JFXTextField txtcardNumber;
+	@FXML
+	private JFXTextField txtcardNumber;
 
-    @FXML
-    private JFXTextField txtcardName;
+	@FXML
+	private JFXTextField txtcardName;
 
-    @FXML
-    private JFXTextField txtcardDate;
+	@FXML
+	private JFXTextField txtcardDate;
 
-    @FXML
-    private JFXTextField txtcardCvv;
+	@FXML
+	private JFXTextField txtcardCvv;
 
-    @FXML
-    private Button btnSave;
+	@FXML
+	private Button btnSave;
 
-    @FXML
-    private Button btnCancel;
+	@FXML
+	private Button btnCancel;
 
-    @FXML
-    
-    void saveCard(ActionEvent event) {
-    	
-    	String cardNumber = txtcardNumber.getText();
+	@FXML
+
+	void saveCard(ActionEvent event) {
+
+		String cardNumber = txtcardNumber.getText();
 		String cardName = txtcardName.getText();
 		String cardDate = txtcardDate.getText() + "00";
 		String cardCvvTexto = txtcardCvv.getText();
 		int cardCvv =  Integer.valueOf(cardCvvTexto);
 		Tarjetas card = new Tarjetas(cardNumber, cardName, cardDate, cardCvv);	
 		User.insertarTarjetas(card);	
-		 Stage stage = (Stage) btnCancel.getScene().getWindow();
-		 stage.close();
-		
+		Stage stage = (Stage) btnCancel.getScene().getWindow();
+		stage.close();
+
 		/*
 		if(cardNumber.length() == 16 && cardName.length() <=20 && cardDate.length() ==6 && cardCvv ==3)
 		{
@@ -58,13 +58,13 @@ public class AddcardGUIController extends ConnectionMySqlDB{
 			 Stage stage = (Stage) btnCancel.getScene().getWindow();
 			 stage.close();
 		}
-		
+
 		else if(cardNumber.isEmpty() || cardName.isEmpty() || cardDate.isEmpty() || cardCvvTexto.isEmpty()) {
 			JOptionPane.showMessageDialog(null,"Advertencia","Complete todos los campos",JOptionPane.WARNING_MESSAGE);
 			 Stage stage = (Stage) btnCancel.getScene().getWindow();
 			 stage.close();
 		}
-		
+
 		else {
 			txtcardNumber.setText("");
 			txtcardName.setText("");
@@ -74,19 +74,20 @@ public class AddcardGUIController extends ConnectionMySqlDB{
 			Stage stage = (Stage) btnCancel.getScene().getWindow();
 
 		}*/
-		
-    }
 
-    @FXML
-    void close(ActionEvent event) {
-    	Stage stage = (Stage) btnCancel.getScene().getWindow();
-		 stage.close();
+	}
 
-    }
-    
-    
-    
-    
+	@FXML
+	void close(ActionEvent event) {
+		Stage stage = (Stage) btnCancel.getScene().getWindow();
+		stage.close();
+		HomeGUIController.llenarCombo();
+
+	}
+
+
+
+
 }
 
 

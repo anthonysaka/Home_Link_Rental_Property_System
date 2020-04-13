@@ -208,30 +208,9 @@ public class ReservationAdminGUIController implements Initializable {
 					e.printStackTrace();
 				}
 
-				listReservas.clear();
-				try {
-					while(rs.next()){
-						int num = rs.getInt("num_reservation");
-						int cantguest = rs.getInt("amount_guest");
-						String checkIn = rs.getString("start_date");
-						String checkOut = rs.getString("end_date");
-						String username = rs.getString("username");
-						int idPu = rs.getInt("id_publication");
-						String tipo = rs.getString("type");
-						String dir = rs.getString("Address_Property");
-						String cardNum = rs.getString("num_card");
-						Float price = rs.getFloat("price_reservation");
-						Reserva auxRe = new Reserva(num, idPu, 0, cantguest, checkIn, checkOut,cardNum,price);
-						auxRe.setUsername(username);	
-						auxRe.setTipo(tipo);
-						auxRe.setDir(dir);
-						listReservas.add(auxRe);
-					}
-					myConnection.close();
-				} catch (SQLException e) {
 
-				}		
 
+				tableReserva.getItems().setAll(listReservas);	
 			} else if (rbCiudad.isSelected()) {
 
 				try {
@@ -264,6 +243,7 @@ public class ReservationAdminGUIController implements Initializable {
 				} catch (SQLException e) {
 				}
 				tableReserva.getItems().setAll(listReservas);		
+			
 			} else if (rbMes.isSelected()) {
 				try {
 					mySqlStatement = (CallableStatement) myConnection.prepareCall("{CALL sp_query_reservation_month(?)}");
@@ -272,8 +252,9 @@ public class ReservationAdminGUIController implements Initializable {
 				} catch (SQLException e) {
 					e.printStackTrace();
 				}
-				
-				listReservas.clear();
+
+			
+						listReservas.clear();
 				try {
 					while(rs.next()){
 						int num = rs.getInt("num_reservation");
@@ -296,6 +277,7 @@ public class ReservationAdminGUIController implements Initializable {
 				} catch (SQLException e) {
 				}
 				tableReserva.getItems().setAll(listReservas);		
+				
 			} else if (rbAno.isSelected()) {
 				try {
 					mySqlStatement = (CallableStatement) myConnection.prepareCall("{CALL sp_query_reservation_year(?)}");
@@ -327,6 +309,8 @@ public class ReservationAdminGUIController implements Initializable {
 				} catch (SQLException e) {
 				}
 				tableReserva.getItems().setAll(listReservas);
+		
+				
 			} else {
 				JFXButton btnOk = new JFXButton("Ok!");
 				PopupAlert.showCustomDialog(rootStackPane, rootAnchorPane, Arrays.asList(btnOk),"Error!\n" 
@@ -343,6 +327,7 @@ public class ReservationAdminGUIController implements Initializable {
 
 
 
+			
 	}
 
 	@FXML

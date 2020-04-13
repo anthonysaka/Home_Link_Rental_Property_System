@@ -83,6 +83,9 @@ public class HomeGUIController extends ListView<PublicacionesParaVisualizar> imp
 	@FXML
     private JFXButton btnReservations;
 	
+	@FXML
+    private JFXButton btnProfile;
+	
 	private double xoffset = 0;
 	private double yoffset = 0;
 	public static PublicacionesParaVisualizar auxlist;
@@ -105,6 +108,37 @@ public class HomeGUIController extends ListView<PublicacionesParaVisualizar> imp
 
 	/** Initialization of Home Stage Here. Add all that you want start on begin. 
 	 * @throws IOException **/
+	
+	@FXML
+    void openProfile(ActionEvent event) throws IOException {
+		
+		Parent rootAdmin = FXMLLoader.load(getClass().getResource("../frontend/tableProfileGUI.fxml"));
+		Stage stageAdmin = new Stage();
+		Scene sceneAdmin = new Scene(rootAdmin);
+
+		stageAdmin.setScene(sceneAdmin);
+		stageAdmin.show();
+
+		/*******
+		 * EventHandler to Move Undecorated Window (Stage) Adapted from: StackOverflow
+		 ******/
+		rootAdmin.setOnMousePressed(new EventHandler<MouseEvent>() {
+			@Override
+			public void handle(MouseEvent event) {
+				xoffset = stageAdmin.getX() - event.getScreenX();
+				yoffset = stageAdmin.getY() - event.getScreenY();
+			}
+		});
+		rootAdmin.setOnMouseDragged(new EventHandler<MouseEvent>() {
+			@Override
+			public void handle(MouseEvent event) {
+				stageAdmin.setX(event.getScreenX() + xoffset);
+				stageAdmin.setY(event.getScreenY() + yoffset);
+			}
+		});
+    }
+
+	
 	
 	
 	@FXML
@@ -147,6 +181,7 @@ public class HomeGUIController extends ListView<PublicacionesParaVisualizar> imp
 				return new CustomListCell();
 			}
 		});
+		
 	}
 	
 	@FXML

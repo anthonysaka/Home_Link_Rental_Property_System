@@ -72,15 +72,6 @@
             <Cursor fx:constant="HAND" />
          </cursor>
       </JFXButton>
-      <HBox layoutX="662.0" layoutY="306.0" prefHeight="145.0" prefWidth="175.0" style="-fx-background-color: black;">
-         <children>
-            <ImageView fx:id="imgview2" fitHeight="145.0" fitWidth="175.0" pickOnBounds="true" preserveRatio="true">
-               <HBox.margin>
-                  <Insets right="5.0" />
-               </HBox.margin>
-            </ImageView>
-         </children>
-      </HBox>
       <JFXButton fx:id="btnPublicar" contentDisplay="CENTER" layoutX="277.0" layoutY="401.0" onAction="#savePublication" prefHeight="39.0" prefWidth="210.0" style="-fx-background-color: #ffc107; -fx-background-radius: 10;" styleClass="Button" text="Publicar" textFill="WHITE">
          <font>
             <Font name="System Bold" size="18.0" />
@@ -94,9 +85,9 @@
             <ImageView fx:id="imgview1" fitHeight="225.0" fitWidth="363.0" pickOnBounds="true" />
          </children>
       </HBox>
-      <HBox layoutX="848.0" layoutY="306.0" prefHeight="145.0" prefWidth="175.0" style="-fx-background-color: black;">
+      <HBox layoutX="846.0" layoutY="299.0" prefHeight="160.0" prefWidth="175.0" style="-fx-background-color: black;">
          <children>
-            <ImageView fx:id="imgview3" fitHeight="145.0" fitWidth="175.0" pickOnBounds="true" preserveRatio="true">
+            <ImageView fx:id="imgview3" fitHeight="160.0" fitWidth="175.0" pickOnBounds="true">
                <HBox.margin>
                   <Insets left="5.0" />
                </HBox.margin>
@@ -111,5 +102,14 @@
             <Cursor fx:constant="HAND" />
          </cursor>
       </JFXButton>
+      <HBox layoutX="662.0" layoutY="299.0" prefHeight="160.0" prefWidth="175.0" style="-fx-background-color: black;">
+         <children>
+            <ImageView fx:id="imgview2" fitHeight="160.0" fitWidth="175.0" pickOnBounds="true">
+               <HBox.margin>
+                  <Insets right="5.0" />
+               </HBox.margin>
+            </ImageView>
+         </children>
+      </HBox>
    </children>
 </AnchorPane>

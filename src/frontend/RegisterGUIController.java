@@ -1,7 +1,11 @@
 package frontend;
 
 import java.net.URL;
+import java.sql.Connection;
+import java.sql.ResultSet;
+import java.sql.Statement;
 import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.ResourceBundle;
 
@@ -10,6 +14,7 @@ import com.jfoenix.controls.JFXComboBox;
 import com.jfoenix.controls.JFXPasswordField;
 import com.jfoenix.controls.JFXTextField;
 
+import backend.ConnectionMySqlDB;
 import backend.HomeLink_Controller;
 import backend.User;
 import javafx.collections.FXCollections;
@@ -53,7 +58,15 @@ public class RegisterGUIController implements Initializable {
 	private JFXComboBox<String> cbxGender;
 	@FXML
 	private JFXComboBox<String> cbxCategoryAccount;
+	
+	@FXML
+    private JFXComboBox<String> cbxLocation;
 
+    @FXML
+    private JFXTextField txtnumber;
+    
+    private ObservableList<String> list = FXCollections.observableArrayList(llenarCombobox2());
+    
 	ObservableList<String> listGender = FXCollections.observableArrayList("Masculino","Femenino","Prefiero no decirlo");
 	ObservableList<String> listTypeAccount = FXCollections.observableArrayList("Personal","Empresa");
 
@@ -63,6 +76,28 @@ public class RegisterGUIController implements Initializable {
 	void closeWindow(ActionEvent event) {
 		Stage stage = (Stage) btnClose.getScene().getWindow();
 		stage.close();
+	}
+	
+	public static ArrayList<String> llenarCombobox2() {
+		Statement sentencia = null;
+		ResultSet resultado = null;
+		ArrayList<String> lista = new ArrayList<String>();
+		String Query = "SELECT name nombres FROM t_country";
+		try {
+			Connection myConnection = ConnectionMySqlDB.getConnectionMySqlDB();
+			sentencia = myConnection.createStatement();
+			resultado = sentencia.executeQuery(Query);
+			System.out.println("Paises cargados");
+		} catch (Exception e) {
+			System.out.println("Paises no cargados");
+		}
+		try {
+			while(resultado.next()){
+				lista.add(resultado.getString("nombres"));
+			}
+		} catch (Exception e) {
+		}
+		return lista;
 	}
 
 	@FXML
@@ -77,9 +112,13 @@ public class RegisterGUIController implements Initializable {
 		String password = txtPassword.getText();
 		String confiPass = txtConfirmPass.getText();
 		LocalDate today = LocalDate.now();
+		String location = cbxLocation.getSelectionModel().getSelectedItem().toString();
+		String telephone = txtnumber.getText();
 
 		if (confiPass.equals(password)) {
 			User nUser = new User(name, lastname, gender, typeAccount, username, email, password, today.toString());
+			nUser.setTelephone_number(telephone);
+			nUser.setCountry_location(location);
 			if (HomeLink_Controller.create_add_user(nUser)) {
 				System.out.println("con exito");
 				JFXButton btnOk = new JFXButton("Ok!");
@@ -89,6 +128,7 @@ public class RegisterGUIController implements Initializable {
 			}
 		}
 		else {
+			
 			JFXButton btnOk = new JFXButton("Ok!");
 			PopupAlert.showCustomDialog(rootStackPane, rootAnchorPane, Arrays.asList(btnOk),"Contraseñas no coinciden", null);
 			System.out.println("contranse no coinciden");
@@ -99,7 +139,7 @@ public class RegisterGUIController implements Initializable {
 	public void initialize(URL location, ResourceBundle resources) {
 		cbxGender.setItems(listGender);
 		cbxCategoryAccount.setItems(listTypeAccount);
-
+		cbxLocation.setItems(list);
 	}
 
 }

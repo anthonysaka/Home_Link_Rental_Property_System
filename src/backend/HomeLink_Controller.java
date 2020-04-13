@@ -64,7 +64,7 @@ public class HomeLink_Controller extends ConnectionMySqlDB {
 			CallableStatement mySqlStatement = null ; // call stored procedure
 			try {
 				Connection myConnection = getConnectionMySqlDB();
-				mySqlStatement = (CallableStatement) myConnection.prepareCall("{CALL sp_createUser(?,?,?,?,?,?,?,?,?)}");
+				mySqlStatement = (CallableStatement) myConnection.prepareCall("{CALL sp_createUser(?,?,?,?,?,?,?,?,?,?,?)}");
 
 				mySqlStatement.setString("pa_username", pUser.getUsername());
 				mySqlStatement.setString("pa_email", pUser.getEmail());
@@ -75,6 +75,8 @@ public class HomeLink_Controller extends ConnectionMySqlDB {
 				mySqlStatement.setString("pa_type", pUser.getType());
 				mySqlStatement.setBoolean("pa_status", true);
 				mySqlStatement.setString("pa_created_date", pUser.getCreated_date());
+				mySqlStatement.setString("pa_telephone", pUser.getTelephone_number());
+				mySqlStatement.setString("pa_location", pUser.getCountry_location());
 				mySqlStatement.executeQuery();
 				myConnection.close();
 				System.out.println("User creado con exito!");

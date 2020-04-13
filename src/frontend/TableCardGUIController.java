@@ -71,16 +71,15 @@ public class TableCardGUIController implements Initializable {
 	void closeWindow(ActionEvent event) {
 		Stage stage = (Stage) btnClose.getScene().getWindow();
 		stage.close();  
+		HomeGUIController.llenarCombo();
 	}
 
-	
 	@FXML
 	void AddNewCard(ActionEvent event) {
 
 	}
 
 	public void getcardData(){
-
 
 		Statement sentencia = null;
 		ResultSet resultado = null;

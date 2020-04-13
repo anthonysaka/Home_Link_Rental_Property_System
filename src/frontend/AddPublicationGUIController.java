@@ -100,7 +100,7 @@ public class AddPublicationGUIController implements Initializable{
 
 
 			imagen = new Image(selectedFile.toURI().toString(), imgview2.getFitWidth(), imgview2.getFitHeight(), true, true);//path, PrefWidth, PrefHeight, PreserveRatio, Smooth
-
+			
 			imgview2.setImage(imagen);
 
 			y = 1;
@@ -112,7 +112,7 @@ public class AddPublicationGUIController implements Initializable{
 
 
 			imagen = new Image(selectedFile.toURI().toString(), imgview3.getFitWidth(), imgview3.getFitHeight(), true, true);//path, PrefWidth, PrefHeight, PreserveRatio, Smooth
-
+			
 			imgview3.setImage(imagen);
 			z = 1;
 
