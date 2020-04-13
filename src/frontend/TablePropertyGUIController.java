@@ -149,7 +149,7 @@ public class TablePropertyGUIController implements Initializable {
 				}else {
 					Propiedad auxPro = new Propiedad(tipo, dir, "Inactiva", caract);
 			//		auxPro.setFeedbacks(feedback);
-					listPropiedad.removeAll(auxPro);
+					
 					listPropiedad.add(auxPro);	
 				}
 				
@@ -163,7 +163,7 @@ public class TablePropertyGUIController implements Initializable {
     
     @FXML
     void refresh(ActionEvent event) {
-    	
+    	listPropiedad.clear();
     	loadDataPropiedad();
     	
     	

@@ -147,6 +147,7 @@ public class LoginGUIController extends Application {
 				loggedUser.setTelephone_number(resulter.getString("telephone_number"));
 				loggedUser.setStatus(resulter.getBoolean("status"));
 				loggedUser.setId(Integer.valueOf(resulter.getString("id")));
+				loggedUser.setType(resulter.getString("type"));
 				
 				System.out.println("Iniciando sesion... Sesion iniciada con Exito!");
 				

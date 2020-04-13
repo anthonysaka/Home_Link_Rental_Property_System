@@ -507,6 +507,7 @@ public class AdminGUIController implements Initializable {
 		int auxId = auxUserList.getId();
 		String auxUsername = auxUserList.getUsername();
 		if (HomeLink_Controller.delete_user(auxId, auxUsername)) {
+			listUser.clear();
 			loadDataUser();
 			JFXButton btnOk = new JFXButton("Ok!");
 			PopupAlert.showCustomDialog(rootStackPane, rootAnchorPane, Arrays.asList(btnOk),"Usuario eliminado con exito.", null);

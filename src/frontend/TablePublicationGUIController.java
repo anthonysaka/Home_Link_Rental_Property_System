@@ -200,6 +200,12 @@ public class TablePublicationGUIController implements Initializable {
     }
     
     @FXML
+    void refresh(ActionEvent event) {
+    	listPublicaciones.clear();
+    	loadDataAutorizarPublicaciones();
+    }
+    
+    @FXML
     void CloseWindow(ActionEvent event) {
     	Stage x = (Stage) btnClose.getScene().getWindow();
     	x.close();

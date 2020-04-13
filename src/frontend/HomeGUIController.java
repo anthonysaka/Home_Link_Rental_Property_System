@@ -182,6 +182,11 @@ public class HomeGUIController extends ListView<PublicacionesParaVisualizar> imp
 			}
 		});
 		
+		if (!usuarioActual.getType().equalsIgnoreCase("Admin")) {
+			
+			btnAdmin.setVisible(false);
+		}
+		
 	}
 	
 	@FXML
