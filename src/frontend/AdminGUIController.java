@@ -65,7 +65,7 @@ public class AdminGUIController implements Initializable {
 	@FXML
 	private TableColumn<Publicacion, Boolean> tb_au_publi_col_status;
 
-	/*************************************************/
+	/**********************************************/
 	@FXML
 	private TableView<Propiedad> tableViewProperty;
 	@FXML
