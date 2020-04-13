@@ -2,7 +2,6 @@
 
 <?import com.jfoenix.controls.JFXButton?>
 <?import com.jfoenix.controls.JFXComboBox?>
-<?import com.jfoenix.controls.JFXTextField?>
 <?import javafx.scene.Cursor?>
 <?import javafx.scene.control.Label?>
 <?import javafx.scene.layout.AnchorPane?>
@@ -36,14 +35,6 @@
                   <Label layoutX="45.0" layoutY="303.0" text="&quot;Eliga una tarjeta registrada o digite los datos de la tarjeta.&quot;" />
                   <Label layoutX="97.0" layoutY="350.0" text="Tarjeta:" />
                   <JFXComboBox fx:id="cbxTarjeta" layoutX="179.0" layoutY="348.0" onAction="#fillDataCard" prefHeight="33.0" prefWidth="257.0" />
-                  <JFXTextField fx:id="txtNumTarjeta" layoutX="200.0" layoutY="449.0" prefHeight="39.0" prefWidth="275.0" />
-                  <JFXTextField fx:id="txtCardholder" layoutX="213.0" layoutY="403.0" prefHeight="39.0" prefWidth="263.0" />
-                  <JFXTextField fx:id="txtCVV" layoutX="400.0" layoutY="496.0" prefHeight="39.0" prefWidth="58.0" />
-                  <JFXTextField fx:id="txtMonthCard" layoutX="183.0" layoutY="496.0" prefHeight="39.0" prefWidth="63.0" />
-                  <Label layoutX="42.0" layoutY="455.0" text="Número tarjeta:" />
-                  <Label layoutX="42.0" layoutY="409.0" text="Cardholder nombre:" />
-                  <Label layoutX="357.0" layoutY="502.0" text="CVV:" />
-                  <Label layoutX="42.0" layoutY="502.0" text="Fecha expiración:" />
                   <JFXButton fx:id="btnPagar" contentDisplay="CENTER" layoutX="122.0" layoutY="583.0" onAction="#Pay" prefHeight="39.0" prefWidth="210.0" style="-fx-background-color: #ffc107; -fx-background-radius: 10;" styleClass="Button" text="Realizar Pago">
                      <font>
                         <Font name="System Bold" size="18.0" />
@@ -52,9 +43,15 @@
                         <Cursor fx:constant="HAND" />
                      </cursor>
                   </JFXButton>
-                  <JFXTextField fx:id="txtYearCard" layoutX="266.0" layoutY="496.0" prefHeight="39.0" prefWidth="63.0" />
-                  <Line endX="-92.0" endY="-27.0" layoutX="351.0" layoutY="530.0" startX="-100.0" stroke="GREY" />
                   <JFXButton fx:id="btnCancel" contentDisplay="CENTER" layoutX="353.0" layoutY="583.0" onAction="#cancelarPago" prefHeight="39.0" prefWidth="106.0" styleClass="Button" text="Cancelar">
+                     <font>
+                        <Font name="System Bold" size="18.0" />
+                     </font>
+                     <cursor>
+                        <Cursor fx:constant="HAND" />
+                     </cursor>
+                  </JFXButton>
+                  <JFXButton fx:id="btnCrearCard" contentDisplay="CENTER" layoutX="192.0" layoutY="428.0" onAction="#addCardENF" prefHeight="39.0" prefWidth="210.0" style="-fx-background-color: #ffc107; -fx-background-radius: 10;" styleClass="Button" text="Agregar Tarjeta">
                      <font>
                         <Font name="System Bold" size="18.0" />
                      </font>

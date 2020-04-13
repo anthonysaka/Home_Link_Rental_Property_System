@@ -548,8 +548,18 @@ public class HomeGUIController extends ListView<PublicacionesParaVisualizar> imp
 	}
 
 	@FXML
-	void closeApp(ActionEvent event) {
-		System.exit(0);
+	void closeApp(ActionEvent event) throws IOException {
+		Stage stage = (Stage) btnExit.getScene().getWindow();
+		stage.close();
+
+		Parent rootLogin = FXMLLoader.load(getClass().getResource("../frontend/loginGUI.fxml")); 
+		Stage stageLogin = new Stage();
+		Scene sceneLogin = new Scene(rootLogin);
+		
+		stageLogin.setScene(sceneLogin);
+		stageLogin.setResizable(false);
+		stageLogin.initStyle(StageStyle.TRANSPARENT);
+		stageLogin.show();
 	}
 
 

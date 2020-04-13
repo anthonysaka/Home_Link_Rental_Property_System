@@ -105,7 +105,8 @@ public class pagoReversaGUIController extends ViewPublicationGUI implements Init
 	private Label lblCantNoche;
     @FXML
     private JFXButton btnCancel;
-
+    @FXML
+    private JFXButton btnCrearCard;
 
 	PublicacionesParaVisualizar publicacion = auxlist;
 	ObservableList<Tarjetas> listCard = FXCollections.observableArrayList(llenarComboTarjeta());
@@ -191,17 +192,13 @@ public class pagoReversaGUIController extends ViewPublicationGUI implements Init
 
 		return listaTarjeta;
 	}
+	
+    @FXML
+    void fillDataCard(ActionEvent event) {
+    	cbxTarjeta.getSelectionModel().clearSelection();
+    	llenarComboTarjeta();
+    }
 
-	@FXML
-	void fillDataCard(ActionEvent event) {
-		if (cbxTarjeta.getSelectionModel().getSelectedIndex() < 0) {
-			txtCardholder.setDisable(false);
-			txtMonthCard.setDisable(false);
-			txtYearCard.setDisable(false);
-			txtNumTarjeta.setDisable(false);
-			txtCVV.setDisable(false);
-		}
-	}
 
 	public int searchIdCard(String numCard) {
 		int aux = 0;
@@ -219,6 +216,18 @@ public class pagoReversaGUIController extends ViewPublicationGUI implements Init
 
 	}
 
+    @FXML
+    public void addCardENF(ActionEvent event) throws IOException {
+    	Parent rootLogin = FXMLLoader.load(getClass().getResource("../frontend/addCardGUI.fxml")); 
+		Stage stageLogin = new Stage();
+		Scene sceneLogin = new Scene(rootLogin);
+		
+		stageLogin.setScene(sceneLogin);
+		stageLogin.setResizable(false);
+		stageLogin.initStyle(StageStyle.TRANSPARENT);
+		stageLogin.show();
+    }
+    
 	@FXML
 	void Pay(ActionEvent event) throws SQLException {
 		/********************/
