@@ -98,12 +98,14 @@ public class BussinessTableGUIController implements Initializable{
 				String tipo= rs.getString("tipo");
 				float precio = rs.getFloat("precio");
 
-				Reserva auxReserva = new Reserva(0, propiedadid, 0, 0, inicio, fin);
-				auxReserva.setTitulo(titulo);
-				auxReserva.setTipoPropiedad(tipo);
-				auxReserva.setPrecio(precio);
+				//Reserva auxReserva = new Reserva(0, 0, 0, 0, inicio, fin,null,0);
+				Reserva aux = new Reserva(0, 0, 0, 0, inicio, fin,null, precio);
+				
+				aux.setTitulo(titulo);
+				aux.setTipoPropiedad(tipo);
+				aux.setPrecio(precio);
 
-				listReservas.add(auxReserva);
+				listReservas.add(aux);
 
 
 			}

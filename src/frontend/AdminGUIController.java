@@ -130,6 +130,8 @@ public class AdminGUIController implements Initializable {
 	private Button btnMinimize;
 	@FXML
 	private JFXButton btnAutorizar;
+    @FXML
+    private JFXButton btnOptReservaciones;
 
 	/**********************************/
 	public static User auxUserList;
@@ -224,6 +226,7 @@ public class AdminGUIController implements Initializable {
 	public void loadDataAutorizarPublicaciones() {
 		Statement sentencia = null;
 		ResultSet rs = null;
+		Connection myConnection = null;
 		String Query = "SELECT t_publication.id, t_publication.titulo, t_publication.`date`,\r\n" + 
 				"				t_publication.id_property,\r\n" + 
 				"      			  t_publication.price, t_publication.`status`,\r\n" + 
@@ -232,7 +235,7 @@ public class AdminGUIController implements Initializable {
 				"		INNER JOIN t_user ON t_publication.id_owner = t_user.id\r\n" + 
 				"		WHERE t_publication.`status` = 0 AND t_publication.id_user_admin = 0";
 				try {
-					Connection myConnection = ConnectionMySqlDB.getConnectionMySqlDB();
+					myConnection = ConnectionMySqlDB.getConnectionMySqlDB();
 					sentencia = myConnection.createStatement();
 					rs = sentencia.executeQuery(Query);
 					System.out.println("TABLA BIEN");
@@ -260,6 +263,7 @@ public class AdminGUIController implements Initializable {
 						}
 						
 					}
+					myConnection.close();
 				} catch (Exception e) {
 				}
 
@@ -269,9 +273,10 @@ public class AdminGUIController implements Initializable {
 	public void loadDataUser() {
 		Statement sentencia = null;
 		ResultSet rs = null;
+		Connection myConnection = null;
 		String Query = "SELECT * FROM vista_general_clientes";
 		try {
-			Connection myConnection = ConnectionMySqlDB.getConnectionMySqlDB();
+			myConnection = ConnectionMySqlDB.getConnectionMySqlDB();
 			sentencia = myConnection.createStatement();
 			rs = sentencia.executeQuery(Query);
 			System.out.println("TABLA BIEN");
@@ -302,6 +307,7 @@ public class AdminGUIController implements Initializable {
 				listUser.add(auxUser);
 
 			}
+			myConnection.close();
 		} catch (Exception e) {
 		}
 
@@ -353,10 +359,8 @@ public class AdminGUIController implements Initializable {
 	@FXML
 	public void deleteUser(ActionEvent event) {
 		auxUserList = tableUser.getSelectionModel().getSelectedItem();
-
 		int auxId = auxUserList.getId();
 		String auxUsername = auxUserList.getUsername();
-
 		if (HomeLink_Controller.delete_user(auxId, auxUsername)) {
 			loadDataUser();
 			JFXButton btnOk = new JFXButton("Ok!");
@@ -389,6 +393,32 @@ public class AdminGUIController implements Initializable {
 		});
 		/***************************************************************/
 	}
+    @FXML
+    void openOptionReservaciones(ActionEvent event) throws IOException {
+    	Parent rootAdminPu = FXMLLoader.load(getClass().getResource("../frontend/reservationAdmin.fxml"));
+		Stage stageAdminPu = new Stage();
+		Scene sceneAdminPu = new Scene(rootAdminPu);
+		stageAdminPu.setScene(sceneAdminPu);
+		stageAdminPu.show();
+		/*******
+		 * EventHandler to Move Undecorated Window (Stage) Adapted from: StackOverflow
+		 ******/
+		rootAdminPu.setOnMousePressed(new EventHandler<MouseEvent>() {
+			@Override
+			public void handle(MouseEvent event) {
+				xoffset = stageAdminPu.getX() - event.getScreenX();
+				yoffset = stageAdminPu.getY() - event.getScreenY();
+			}
+		});
+		rootAdminPu.setOnMouseDragged(new EventHandler<MouseEvent>() {
+			@Override
+			public void handle(MouseEvent event) {
+				stageAdminPu.setX(event.getScreenX() + xoffset);
+				stageAdminPu.setY(event.getScreenY() + yoffset);
+			}
+		});
+		/***************************************************************/
+    }
 
 	@FXML
 	public void refreshTbUser(ActionEvent event) {
@@ -425,7 +455,7 @@ public class AdminGUIController implements Initializable {
 				System.out.println("autorizado con exito!");
 				JFXButton btnOk = new JFXButton("Ok!");
 				PopupAlert.showCustomDialog(rootStackPane, rootAnchorPane, Arrays.asList(btnOk),"Publicación autorizada con exito.", null);
-
+				myConnection.close();
 			} catch (SQLException e) {
 				System.out.println("autorizado sin exito!");
 				e.printStackTrace();

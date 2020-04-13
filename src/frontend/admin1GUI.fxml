@@ -45,7 +45,7 @@
                               <VBox layoutX="65.0" layoutY="171.0" prefHeight="424.0" prefWidth="150.0">
                                  <children>
                                     <JFXButton fx:id="btnOptPublicaciones" onAction="#openOptionPublicaciones" prefHeight="85.0" prefWidth="150.0" text="Publicaciones" />
-                                    <JFXButton fx:id="btnOptPublicaciones1" prefHeight="85.0" prefWidth="150.0" text="N/A">
+                                    <JFXButton fx:id="btnOptReservaciones" onAction="#openOptionReservaciones" prefHeight="85.0" prefWidth="150.0" text="Reservaciones">
                                        <VBox.margin>
                                           <Insets top="10.0" />
                                        </VBox.margin>

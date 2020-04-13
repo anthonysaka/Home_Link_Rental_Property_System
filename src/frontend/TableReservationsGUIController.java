@@ -93,7 +93,7 @@ public class TableReservationsGUIController implements Initializable {
 				float precio = rs.getFloat("precio");
 				System.out.println("datos: "+ reservaid + "  "+ titulo+ " "+ inicio);
 				
-				Reserva auxReserva = new Reserva(reservaid, 0, 0, huespedes, inicio, fin);
+				Reserva auxReserva = new Reserva(reservaid, 0, 0, huespedes, inicio, fin, "", precio);
 				auxReserva.setTitulo(titulo);
 				auxReserva.setPrecio(precio);
 

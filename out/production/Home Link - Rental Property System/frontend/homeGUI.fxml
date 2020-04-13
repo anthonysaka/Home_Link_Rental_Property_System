@@ -1,5 +1,6 @@
-<?xml version="1.0" encoding="UTF-8"?>
+<<<<<<< HEAD
 
+<?xml version="1.0" encoding="UTF-8"?>
 <?import com.jfoenix.controls.JFXButton?>
 <?import com.jfoenix.controls.JFXComboBox?>
 <?import com.jfoenix.controls.JFXDatePicker?>
@@ -17,6 +18,7 @@
 <?import javafx.scene.layout.VBox?>
 <?import javafx.scene.text.Font?>
 <?import javafx.scene.text.Text?>
+
 
 <StackPane fx:id="rootStackPane" stylesheets="@styleAdmin.css" xmlns="http://javafx.com/javafx/8.0.171" xmlns:fx="http://javafx.com/fxml/1" fx:controller="frontend.HomeGUIController">
    <children>
@@ -85,7 +87,7 @@
             </HBox>
             <AnchorPane prefHeight="620.0" prefWidth="200.0" VBox.vgrow="ALWAYS">
                <VBox alignment="CENTER" layoutX="8.0" layoutY="5.0" prefHeight="370.0" prefWidth="200.0">
-                  <JFXButton fx:id="btnReservations" onAction="#OpenTableReservations" prefHeight="40.0" prefWidth="200.0" styleClass="Button" text="My Reservations" textFill="#ddd9d9">
+                  <JFXButton prefHeight="40.0" prefWidth="200.0" styleClass="Button" text="My Reservations" textFill="#ddd9d9">
                      <VBox.margin>
                         <Insets />
                      </VBox.margin>
@@ -141,7 +143,7 @@
                         <Insets top="150.0" />
                      </VBox.margin>
                   </JFXButton>
-                  <JFXButton fx:id="btnExit" onAction="#closeApp" prefHeight="60.0" prefWidth="200.0" styleClass="Button" text="Cerrar Sesión" textFill="#ddd9d9">
+                  <JFXButton fx:id="btnExit" onAction="#closeApp" prefHeight="60.0" prefWidth="200.0" styleClass="Button" text="Cerrar Sesi�n" textFill="#ddd9d9">
                      <font>
                         <Font name="Consolas Bold" size="16.0" />
                      </font>
