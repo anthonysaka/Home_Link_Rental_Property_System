@@ -190,13 +190,7 @@ public class RegisterGUIController implements Initializable {
 			cbxGender.setItems(listGender);
 			cbxLocation.setItems(list);
 			cbxCategoryAccount.setVisible(false);
-		//	iconoCategory.setVisible(false);
-		}
-		
-		
-		
-		
-		
+		}	
 	}
 
 }

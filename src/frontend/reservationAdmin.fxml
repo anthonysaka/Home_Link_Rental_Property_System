@@ -69,6 +69,14 @@
             <JFXRadioButton fx:id="rbAno" layoutX="516.0" layoutY="85.0" text="Año" toggleGroup="$tgFilter" />
             <JFXTextField fx:id="txtDatFilter" layoutX="725.0" layoutY="69.0" prefHeight="39.0" prefWidth="230.0" promptText="Digite data para el filtrado!" />
             <JFXRadioButton fx:id="rbNinguno" layoutX="597.0" layoutY="57.0" text="Ninguno" toggleGroup="$tgFilter" />
+            <JFXButton fx:id="btndelete" layoutX="1008.0" layoutY="70.0" onAction="#deleteReservation" prefHeight="29.0" prefWidth="115.0" style="-fx-background-color: red; -fx-background-radius: 10;" styleClass="Button" text="Eliminar">
+               <font>
+                  <Font name="System Bold" size="14.0" />
+               </font>
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor>
+            </JFXButton>
          </children>
       </AnchorPane>
    </children>
