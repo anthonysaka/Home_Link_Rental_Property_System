@@ -55,7 +55,7 @@
                   <HBox alignment="CENTER_LEFT" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="100.0" prefWidth="705.0">
                      <children>
                         <MaterialDesignIconView glyphName="GENDER_MALE_FEMALE" size="2.5em" />
-                        <JFXComboBox fx:id="cbxGender" labelFloat="true" prefHeight="31.0" prefWidth="195.0" promptText="Gender">
+                        <JFXComboBox fx:id="cbxGender" prefHeight="31.0" prefWidth="195.0" promptText="Gender">
                            <HBox.margin>
                               <Insets left="5.0" />
                            </HBox.margin>
@@ -65,7 +65,7 @@
                               <Insets left="60.0" />
                            </HBox.margin>
                         </MaterialDesignIconView>
-                        <JFXComboBox fx:id="cbxCategoryAccount" labelFloat="true" prefHeight="31.0" prefWidth="195.0" promptText="Category">
+                        <JFXComboBox fx:id="cbxCategoryAccount" prefHeight="31.0" prefWidth="195.0" promptText="Category">
                            <HBox.margin>
                               <Insets left="5.0" />
                            </HBox.margin>
@@ -155,7 +155,7 @@
                   <HBox layoutX="16.0" layoutY="23.0" prefHeight="45.0" prefWidth="294.0">
                      <children>
                         <MaterialDesignIconView glyphName="ACCOUNT_LOCATION" size="2.5em" />
-                        <JFXComboBox fx:id="cbxLocation" labelFloat="true" prefHeight="31.0" prefWidth="263.0" promptText="Location" />
+                        <JFXComboBox fx:id="cbxLocation" prefHeight="31.0" prefWidth="263.0" promptText="Location" />
                      </children>
                   </HBox>
                   <HBox layoutX="320.0" layoutY="23.0" prefHeight="45.0" prefWidth="246.0">
